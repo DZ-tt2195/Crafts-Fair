@@ -29,7 +29,7 @@ public class Player : PhotonCompatible
         this.bottomType = this.GetType();
         resignButton = GameObject.Find("Resign Button").GetComponent<Button>();
 
-        List<string> toAdd = new() { ConstantStrings.MyHand, ConstantStrings.MyDiscard, ConstantStrings.MyTroops, ConstantStrings.Resources };
+        List<string> toAdd = new() { ConstantStrings.MyHand, ConstantStrings.MyDiscard, ConstantStrings.Resources };
         foreach (string next in toAdd)
             uiDictionary.Add(next, true);
 
@@ -150,13 +150,7 @@ public class Player : PhotonCompatible
 
 #region Resources
 
-    public int GetSword() => TurnManager.inst.GetInt(ConstantStrings.Sword, this);
-
-    public int GetShield() => TurnManager.inst.GetInt(ConstantStrings.Shield, this);
-
-    public int GetAction() => TurnManager.inst.GetInt(ConstantStrings.Action, this);
-
-    public int GetHealth() => TurnManager.inst.GetInt(ConstantStrings.MyHealth, this);
+    public int GetScore() => TurnManager.inst.GetInt(ConstantStrings.MyScore, this);
 
     void ChangeResource(int num, string property)
     {
@@ -165,40 +159,7 @@ public class Player : PhotonCompatible
         TurnManager.inst.WillChangePlayerProperty(this, property, total); uiDictionary[ConstantStrings.Resources] = true;
     }
 
-    public void ShieldRPC(int num, int logged = 0)
-    {
-        if (num == 0)
-            return;
-        if (num > 0)
-            Log.inst.AddMyText(false, "Add_Shield", this.name, "", num.ToString(), logged);
-        else
-            Log.inst.AddMyText(false, "Lose_Shield", this.name, "", Mathf.Abs(num).ToString(), logged);
-        Log.inst.NewRollback(() => ChangeResource(num, ConstantStrings.Shield));
-    }
-
-    public void SwordRPC(int num, int logged = 0)
-    {
-        if (num == 0)
-            return;
-        if (num > 0)
-            Log.inst.AddMyText(false, "Add_Sword", this.name, "", num.ToString(), logged);
-        else
-            Log.inst.AddMyText(false, "Lose_Sword", this.name, "", Mathf.Abs(num).ToString(), logged);
-        Log.inst.NewRollback(() => ChangeResource(num, ConstantStrings.Sword));
-    }
-
-    public void ActionRPC(int num, int logged = 0)
-    {
-        if (num == 0)
-            return;
-        if (num > 0)
-            Log.inst.AddMyText(false, "Add_Action", this.name, "", num.ToString(), logged);
-        else
-            Log.inst.AddMyText(false, "Lose_Action", this.name, "", Mathf.Abs(num).ToString(), logged);
-        Log.inst.NewRollback(() => ChangeResource(num, ConstantStrings.Action));
-    }
-
-    public void HealthRPC(int num, int logged = 0)
+    public void ScoreRPC(int num, int logged = 0)
     {
         if (num == 0)
             return;
@@ -206,14 +167,8 @@ public class Player : PhotonCompatible
             Log.inst.AddMyText(false, "Add_Health_Player", this.name, "", num.ToString(), logged);
         else
             Log.inst.AddMyText(false, "Lose_Health_Player", this.name, "", Mathf.Abs(num).ToString(), logged);
-        Log.inst.NewRollback(() => ChangeResource(num, ConstantStrings.MyHealth));
+        //Log.inst.NewRollback(() => ChangeResource(num, ConstantStrings.MyHealth));
     }
-
-    public void NextRoundShield(int num) => Log.inst.NewRollback(() => ChangeResource(num, ConstantStrings.NextRoundShield));
-
-    public void NextRoundAction(int num) => Log.inst.NewRollback(() => ChangeResource(num, ConstantStrings.NextRoundAction));
-
-    public void NextRoundSword(int num) => Log.inst.NewRollback(() => ChangeResource(num, ConstantStrings.NextRoundSword));
 
     #endregion
 
@@ -236,8 +191,8 @@ public class Player : PhotonCompatible
         InstantChangePlayerProp(this, ConstantStrings.Waiting, false);
         endPause = true;
 
-        (int phase, Action action) = TurnManager.inst.GetTurnAction(this);
-        if (phase >= 1)
+        (string phase, Action action) = TurnManager.inst.GetTurnAction(this);
+        if (phase != nameof(SetupWait))
             Log.inst.AddMyText(true, "Blank", "", "", "");
 
         Log.inst.NewDecisionContainer(() => action(), 0);
@@ -265,7 +220,7 @@ public class Player : PhotonCompatible
 
 #region UI
 
-    public List<Card> GetTroops() => TurnManager.inst.GetCardList(ConstantStrings.MyTroops, this);
+    //public List<Card> GetTroops() => TurnManager.inst.GetCardList(ConstantStrings.MyTroops, this);
 
     public void UpdateUI(bool forcedUpdate)
     {
@@ -311,15 +266,8 @@ public class Player : PhotonCompatible
 
         if (uiDictionary[ConstantStrings.Resources] || uiDictionary[ConstantStrings.MyHand])
         {
-            myUI.infoText.text = KeywordTooltip.instance.EditText
-            ($"{this.name}: {GetHealth()} {AutoTranslate.Health()}\n\n" +
-            $"{myHand.Count} {AutoTranslate.Card()} " +
-            $"{GetAction()} {AutoTranslate.Action()}\n" +
-            $"{GetShield()} {AutoTranslate.Shield()} " +
-            $"{GetSword()} {AutoTranslate.Sword()}");
+            myUI.infoText.text = KeywordTooltip.instance.EditText("");
         }
-
-        AliveTroops();
 
         foreach (var key in uiKeys)
             uiDictionary[key] = false;
@@ -342,40 +290,6 @@ public class Player : PhotonCompatible
             else
                 toReturn.Add(new(fixedPosition, starting + difference * i));
         }
-        return toReturn;
-    }
-
-    public List<MiniCardDisplay> AliveTroops()
-    {
-        List<MiniCardDisplay> toReturn = new();
-        List<Card> myTroops = GetTroops();
-
-        if (uiDictionary[ConstantStrings.MyTroops])
-        {
-            foreach (Card card in myTroops)
-            {
-                card.transform.SetParent(null);
-            }
-        }
-
-        for (int i = 0; i < myUI.cardDisplays.Count; i++)
-        {
-            if (i < myTroops.Count)
-            {
-                if (uiDictionary[ConstantStrings.MyTroops])
-                {
-                    myUI.cardDisplays[i].gameObject.SetActive(true);
-                    myUI.cardDisplays[i].NewCard(myTroops[i]);
-                }
-                if (myTroops[i].GetHealth() >= 1)
-                    toReturn.Add(myUI.cardDisplays[i]);
-            }
-            else
-            {
-                myUI.cardDisplays[i].gameObject.SetActive(false);
-            }
-        }
-
         return toReturn;
     }
 

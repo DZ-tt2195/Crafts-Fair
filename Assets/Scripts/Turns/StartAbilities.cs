@@ -1,9 +1,9 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "StartAbilities", menuName = "ScriptableObjects/StartAbilities")]
 public class StartAbilities : Turn
 {
+    /*
     public override void MasterStart()
     {
         int currentRound = (int)PhotonCompatible.GetRoomProperty(ConstantStrings.CurrentRound);
@@ -31,4 +31,5 @@ public class StartAbilities : Turn
         player.SwordRPC(nextRoundSword, 1);
         TurnManager.inst.WillChangePlayerProperty(player, ConstantStrings.NextRoundSword, 0);
     }
+    */
 }

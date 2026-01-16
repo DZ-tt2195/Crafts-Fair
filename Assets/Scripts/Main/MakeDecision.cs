@@ -21,11 +21,6 @@ public class CardButtonInfo
         this.alpha = alpha;
         this.clickable = clickable;
     }
-
-    public CardData GetFile()
-    {
-        return this.card.thisCard.dataFile;
-    }
 }
 
 public class TextButtonInfo

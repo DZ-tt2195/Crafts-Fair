@@ -26,6 +26,7 @@ public class Card : PhotonCompatible
         selectMe = GetComponent<ButtonSelect>();
         layout = GetComponent<CardLayout>();
 
+        /*
         if (PhotonNetwork.IsConnected && !PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey(HealthString()))
         {
             ExitGames.Client.Photon.Hashtable initialProps = new()
@@ -36,16 +37,18 @@ public class Card : PhotonCompatible
             };
             PhotonNetwork.CurrentRoom.SetCustomProperties(initialProps);
         }
+        */
     }
 
-    public string HealthString() => $"{this.photonView.ViewID}_Health";
+    /*public string HealthString() => $"{this.photonView.ViewID}_Health";
 
     public string StunString() => $"{this.photonView.ViewID}_Stun";
 
     public string ProtectString() => $"{this.photonView.ViewID}_Protect";
-
+    */
     public void AssignCard(CardData dataFile, float startingAlpha)
     {
+        /*
         string noSpaces = dataFile.cardName.Replace(" ", "");
         try
         {
@@ -59,6 +62,7 @@ public class Card : PhotonCompatible
         {
             Debug.Log($"{noSpaces} failed");
         }
+        */
     }
 
     #endregion
@@ -127,6 +131,7 @@ public class Card : PhotonCompatible
 
 #region Properties
 
+/*
     public void StunRPC(Player player, int increment, int logged = 0)
     {
         int roundNumber = (int)GetRoomProperty(ConstantStrings.CurrentRound) + increment;
@@ -186,7 +191,7 @@ public class Card : PhotonCompatible
         total += (!Log.inst.forward) ? -num : num;
         TurnManager.inst.WillChangeMasterProperty(property, total); player.uiDictionary[ConstantStrings.MyTroops] = true;
     }
-
+*/
     #endregion
 
 }

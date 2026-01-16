@@ -1,7 +1,11 @@
 using UnityEngine;
 
-public class Turn : ScriptableObject
+public class Turn
 {
+    public Turn()
+    {
+        
+    }
     public virtual void MasterStart()
     {
 
@@ -16,5 +20,4 @@ public class Turn : ScriptableObject
     {
 
     }
-
 }

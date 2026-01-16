@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "RedAbilities", menuName = "ScriptableObjects/RedAbilities")]
 public class RedAbilities : Turn
 {
+    /*
     public override void MasterStart()
     {
         int currentRound = (int)PhotonCompatible.GetRoomProperty(ConstantStrings.CurrentRound);
@@ -48,4 +48,5 @@ public class RedAbilities : Turn
             }
         }
     }
+    */
 }

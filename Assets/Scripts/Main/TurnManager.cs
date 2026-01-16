@@ -12,10 +12,9 @@ public class TurnManager : PhotonCompatible
 #region Setup
 
     public static TurnManager inst;
-    [SerializeField] List<Turn> turnsInOrder = new();
     Dictionary<Player, ExitGames.Client.Photon.Hashtable> playerPropertyToChange;
     ExitGames.Client.Photon.Hashtable masterPropertyToChange;
-
+    Dictionary<string, Turn> storedTurns = new();
     [SerializeField] Transform endScreen;
     [SerializeField] TMP_Text summaryText;
 
@@ -33,23 +32,25 @@ public class TurnManager : PhotonCompatible
 
 #region Turns
 
-    int GetCurrentPhase()
+    string GetCurrentPhase()
     {
         try
         {
-            return (int)GetRoomProperty(ConstantStrings.CurrentPhase);
+            string toReturn = (string)GetRoomProperty(ConstantStrings.CurrentPhase);
+            if (!storedTurns.ContainsKey(toReturn))
+                storedTurns.Add(toReturn, (Turn)Activator.CreateInstance(Type.GetType(toReturn)));
+            return toReturn;
         }
         catch
         {
-            return 0;
+            return nameof(SetupWait);
         }
     }
 
-    public (int, Action) GetTurnAction(Player player)
+    public (string, Action) GetTurnAction(Player player)
     {
-        int phase = GetCurrentPhase();
-        //Debug.Log($"phase {phase}");
-        return (phase, () => turnsInOrder[phase].ForPlayer(player));
+        string currentPhase = GetCurrentPhase();
+        return (currentPhase, () => storedTurns[currentPhase].ForPlayer(player));
     }
 
     public override void OnPlayerPropertiesUpdate(Photon.Realtime.Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
@@ -88,7 +89,7 @@ public class TurnManager : PhotonCompatible
                     DoFunction(() => SharePropertyChanges(), nextPlayer);
                 }
 
-                turnsInOrder[GetCurrentPhase()].MasterEnd();
+                storedTurns[GetCurrentPhase()].MasterEnd();
                 UpdateWaitingText(spectators, players.Count);
 
                 Invoke(nameof(NextPhase), 0.5f);
@@ -104,70 +105,40 @@ public class TurnManager : PhotonCompatible
 
     void NextPhase()
     {
-        //Debug.Log("next phase");
-        PutInDiscard();
-        void PutInDiscard()
-        {
-            foreach (Player player in CreateGame.inst.listOfPlayers)
-            {
-                List<Card> playerDiscard = GetCardList(ConstantStrings.MyDiscard, player);
-                List<Card> myTroops = player.GetTroops();
-                for (int i = myTroops.Count - 1; i >= 0; i--)
-                {
-                    Card card = myTroops[i];
-                    if (card.GetHealth() <= 0)
-                    {
-                        InstantChangeRoomProp(card.HealthString(), 0);
-                        myTroops.RemoveAt(i);
-                        playerDiscard.Add(card);
-                    }
-                }
-                InstantChangePlayerProp(player, ConstantStrings.MyTroops, ConvertCardList(myTroops));
-                InstantChangePlayerProp(player, ConstantStrings.MyDiscard, ConvertCardList(playerDiscard));
-            }
-        }
-
-        (Player, int) leastHealth = (null, 1000);
+        (Player, int) mostScore = (null, 1000);
         foreach (Player player in CreateGame.inst.listOfPlayers)
         {
-            int health = player.GetHealth();
-            if (health < leastHealth.Item2)
-                leastHealth = (player, health);
-            else if (health == leastHealth.Item2)
-                leastHealth = (null, health);
+            int health = player.GetScore();
+            if (health > mostScore.Item2)
+                mostScore = (player, health);
+            else if (health == mostScore.Item2)
+                mostScore = (null, health);
         }
 
-        if (leastHealth.Item2 <= 0)
+        if (mostScore.Item2 >= 20 && mostScore.Item1 != null)
         {
-            if (leastHealth.Item1 != null)
-                TextForEnding("Player_Lost", leastHealth.Item1.name, "", "", -1);
-            else
-                TextForEnding("Tie_Game", "", "", "", -1);
-            InstantChangeRoomProp(ConstantStrings.CurrentPhase, turnsInOrder.Count - 1);
+            TextForEnding("Player_Lost", mostScore.Item1.name, "", "", -1);
+            InstantChangeRoomProp(ConstantStrings.CurrentPhase, nameof(Ending));
         }
         else
         {
-            int phaseTracker = (int)GetRoomProperty(ConstantStrings.CurrentPhase);
-            int roundTracker = (int)GetRoomProperty(ConstantStrings.CurrentRound);
+            string nextPhase = (string)GetRoomProperty(ConstantStrings.NextPhase);
+            if (nextPhase.Equals(nameof(ResolveCard)) && GetCardList(ConstantStrings.ProgressDeck).Count == 0)
+            {
+                //shuffle progress discard
+            }
 
-            if (phaseTracker == turnsInOrder.Count - 2 || phaseTracker == 0)
-            {
-                InstantChangeRoomProp(ConstantStrings.CurrentRound, roundTracker + 1, roundTracker);
-                InstantChangeRoomProp(ConstantStrings.CurrentPhase, 1, phaseTracker);
-            }
-            else
-            {
-                InstantChangeRoomProp(ConstantStrings.CurrentPhase, phaseTracker + 1, phaseTracker);
-            }
+            InstantChangeRoomProp(ConstantStrings.NextPhase, nameof(ResolveCard));
+            InstantChangeRoomProp(ConstantStrings.CurrentPhase, nextPhase);
         }
     }
 
     public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
     {
-        if (propertiesThatChanged.ContainsKey(ConstantStrings.CurrentPhase.ToString()))
+        if (propertiesThatChanged.ContainsKey(ConstantStrings.CurrentPhase))
         {
             if (PhotonNetwork.IsMasterClient)
-                turnsInOrder[GetCurrentPhase()].MasterStart();
+                storedTurns[GetCurrentPhase()].MasterStart();
 
             CreateGame.inst.RefreshUI(true);
             foreach (Player player in CreateGame.inst.listOfPlayers)
@@ -289,11 +260,12 @@ public class TurnManager : PhotonCompatible
 
         foreach (Player player in CreateGame.inst.listOfPlayers)
         {
-            text += $"{player.name} - {player.GetHealth()} {AutoTranslate.Health()} ";
+            text += $"{player.name}";
             if (player.myPosition == resignPosition)
                 text += AutoTranslate.Resigned();
             text += "\n";
 
+/*
             List<string> cardsPlayed = GetStringList(ConstantStrings.AllCardsPlayed, player);
             for (int i = 0; i<cardsPlayed.Count; i++)
             {
@@ -303,6 +275,7 @@ public class TurnManager : PhotonCompatible
                 text += ",";
             }
             text += "\n\n";
+            */
         }
         summaryText.text = KeywordTooltip.instance.EditText(text);
     }

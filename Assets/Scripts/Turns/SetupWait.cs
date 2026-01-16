@@ -1,7 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Wait", menuName = "ScriptableObjects/Wait")]
-public class Wait : Turn
+public class SetupWait : Turn
 {
     public override void ForPlayer(Player player)
     {

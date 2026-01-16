@@ -1,9 +1,9 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-[CreateAssetMenu(fileName = "GreenAbilities", menuName = "ScriptableObjects/GreenAbilities")]
 public class GreenAbilities : Turn
 {
+    /*
     public override void MasterEnd()
     {
         Log.inst.MasterText(true, "Blank", "", "", "");
@@ -91,4 +91,5 @@ public class GreenAbilities : Turn
         TurnManager.inst.WillChangePlayerProperty(player, ConstantStrings.MyTroops, TurnManager.inst.ConvertCardList(myTroops)); player.uiDictionary[ConstantStrings.MyTroops] = true;
         TurnManager.inst.WillChangePlayerProperty(player, ConstantStrings.AllCardsPlayed, myCardsPlayed.ToArray());
     }
+    */
 }

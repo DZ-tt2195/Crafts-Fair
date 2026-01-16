@@ -50,11 +50,12 @@ public class CardLayout : MonoBehaviour, IPointerClickHandler
 
         if (newCard)
         {
-            cardName.text = KeywordTooltip.instance.EditText($"{Translator.inst.Translate(dataFile.cardName)} {dataFile.startingHealth} {AutoTranslate.Health()}");
+            cardName.text = KeywordTooltip.instance.EditText($"{Translator.inst.Translate(dataFile.cardName)} {dataFile.startingHealth}");
             cardArt.sprite = dataFile.sprite;
             string textOne = Translator.inst.Translate($"{dataFile.cardName}_TextOne");
             string textTwo = Translator.inst.Translate($"{dataFile.cardName}_TextTwo");
 
+/*
             if (dataFile.typeTwo == AbilityType.None)
             {
                 UseBigBox(true);
@@ -67,9 +68,10 @@ public class CardLayout : MonoBehaviour, IPointerClickHandler
                 ApplyText(smallTextOne, textOne, dataFile.typeOne);
                 ApplyText(smallTextTwo, textTwo, dataFile.typeTwo);
             }
+        */
         }
     }
-
+/*
     void ApplyText(TextPairing pairing, string text, AbilityType type)
     {
         pairing.textBox.text = KeywordTooltip.instance.EditText(text);
@@ -86,7 +88,7 @@ public class CardLayout : MonoBehaviour, IPointerClickHandler
                 break;
         }
     }
-
+*/
     void UseBigBox(bool yes)
     {
         bigText.image.gameObject.SetActive(yes);

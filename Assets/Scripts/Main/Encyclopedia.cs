@@ -45,7 +45,7 @@ public class Encyclopedia : MonoBehaviour
         foreach (Card card in allCards)
         {
             bool include = true;
-
+/*
             if (!Matches(dropdownOne))
                 include = false;
             else if (!Matches(dropdownTwo))
@@ -61,7 +61,7 @@ public class Encyclopedia : MonoBehaviour
                     _ => true  // no filter
                 };
             }
-
+*/
             card.transform.SetParent(include ? groupUI : null);
         }
 

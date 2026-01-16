@@ -12,18 +12,10 @@ public static class ConstantStrings
     //player properties
     public const string MyPosition = nameof(MyPosition);
     public const string Waiting = nameof(Waiting);
-    public const string MyHealth = nameof(MyHealth);
+    public const string MyScore = nameof(MyScore);
     public const string MyHand = nameof(MyHand);
     public const string MyDeck = nameof(MyDeck);
     public const string MyDiscard = nameof(MyDiscard);
-    public const string MyTroops = nameof(MyTroops);
-    public const string Shield = nameof(Shield);
-    public const string Sword = nameof(Sword);
-    public const string Action = nameof(Action);
-    public const string NextRoundShield = nameof(NextRoundShield);
-    public const string NextRoundSword = nameof(NextRoundSword);
-    public const string NextRoundAction = nameof(NextRoundAction);
-    public const string AllCardsPlayed = nameof(AllCardsPlayed);
 
     //room properties
     public const string GameName = nameof(GameName);
@@ -31,6 +23,8 @@ public static class ConstantStrings
     public const string GameOver = nameof(GameOver);
     public const string JoinAsSpec = nameof(JoinAsSpec);
     public const string CurrentPhase = nameof(CurrentPhase);
-    public const string CurrentRound = nameof(CurrentRound);
+    public const string NextPhase = nameof(NextPhase);
     public const string NextPlayerPosition = nameof(NextPlayerPosition);
+    public const string ProgressDeck = nameof(ProgressDeck);
+    public const string ProgressDiscard = nameof(ProgressDiscard);
 }

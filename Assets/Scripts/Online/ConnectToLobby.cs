@@ -118,7 +118,7 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
                 MaxPlayers = 1,
                 PlayerTtl = 0,
                 EmptyRoomTtl = 0,
-                CustomRoomProperties = InitialRoomProps(),
+                CustomRoomProperties = InitialRoomProps(1),
             };
             PhotonNetwork.CreateRoom(PlayerPrefs.GetString(ConstantStrings.MyUserName), options);
             //PhotonNetwork.LoadLevel("2. Game");
@@ -197,21 +197,23 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
             MaxPlayers = 10,
             PlayerTtl = Application.isEditor ? 15000 : 120000,
             EmptyRoomTtl = 10000,
-            CustomRoomProperties = InitialRoomProps(),
+            //CustomRoomProperties = InitialRoomProps(),
             CustomRoomPropertiesForLobby = new string[] { ConstantStrings.GameName, ConstantStrings.CanPlay, ConstantStrings.JoinAsSpec, ConstantStrings.GameOver }
         };
         PhotonNetwork.CreateRoom(PlayerPrefs.GetString(ConstantStrings.MyUserName), options);
     }
 
-    ExitGames.Client.Photon.Hashtable InitialRoomProps()
+    ExitGames.Client.Photon.Hashtable InitialRoomProps(int numPlayers)
     {
         Debug.Log("assigned room props");
         ExitGames.Client.Photon.Hashtable roomProps = new()
         {
             { ConstantStrings.GameName, Application.productName },
-            { ConstantStrings.CurrentPhase, 0 },
-            { ConstantStrings.CurrentRound, 0 },
-            { ConstantStrings.CanPlay, 2 },
+            { ConstantStrings.CurrentPhase, nameof(SetupWait) },
+            { ConstantStrings.NextPhase, nameof(ResolveCard) },
+            { ConstantStrings.ProgressDeck, new int[0] },
+            { ConstantStrings.ProgressDiscard, new int[0] },
+            { ConstantStrings.CanPlay, numPlayers },
             { ConstantStrings.JoinAsSpec, false },
             { ConstantStrings.GameOver, false },
             { ConstantStrings.NextPlayerPosition, 0 },
@@ -225,22 +227,12 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
         ExitGames.Client.Photon.Hashtable playerProps = new()
         {
             [ConstantStrings.Waiting] = false,
-            [ConstantStrings.MyHealth] = 20,
+            [ConstantStrings.MyScore] = 0,
             [ConstantStrings.MyPosition] = -1,
-
-            [ConstantStrings.Shield] = 0,
-            [ConstantStrings.Sword] = 0,
-            [ConstantStrings.Action] = 0,
-
-            [ConstantStrings.NextRoundSword] = 0,
-            [ConstantStrings.NextRoundShield] = 0,
-            [ConstantStrings.NextRoundAction] = 0,
 
             [ConstantStrings.MyHand] = new int[0],
             [ConstantStrings.MyDeck] = new int[0],
             [ConstantStrings.MyDiscard] = new int[0],
-            [ConstantStrings.MyTroops] = new int[0],
-            [ConstantStrings.AllCardsPlayed] = new string[0],
         };
         return playerProps;
     }

@@ -12,8 +12,6 @@ public class CardData
 {
     public string cardName;
     public int startingHealth;
-    public AbilityType typeOne;
-    public AbilityType typeTwo;
     public string artCredit;
     public Sprite sprite;
 }
@@ -56,8 +54,6 @@ public class GameFiles : MonoBehaviour
                         field.SetValue(nextData, StringToBool(sheetValue));
                     else if (field.FieldType == typeof(string))
                         field.SetValue(nextData, sheetValue);
-                    else if (field.FieldType == typeof(AbilityType[]))
-                        field.SetValue(nextData, StringToAbilityType(sheetValue));
 
                     int StringToInt(string line)
                     {
@@ -69,16 +65,6 @@ public class GameFiles : MonoBehaviour
                         {
                             return 0;
                         }
-                    }
-
-                    AbilityType[] StringToAbilityType(string line)
-                    {
-                        string[] divided = line.Split('/');
-                        AbilityType[] toReturn = new AbilityType[divided.Length];
-
-                        for (int i = 0; i<divided.Length; i++)
-                            toReturn[i] = (AbilityType)Enum.Parse(typeof(AbilityType), divided[i]);
-                        return toReturn;
                     }
 
                     bool StringToBool(string line)
