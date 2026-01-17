@@ -321,33 +321,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4b49805f8d0bf47db8cba016e7572ea2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  linkedKeywords:
-  - original: Stunned
-    translated: 
-    description: 
-    color: {r: 0, g: 0, b: 0, a: 0}
-  - original: Protected
-    translated: 
-    description: 
-    color: {r: 0, g: 0, b: 0, a: 0}
+  linkedKeywords: []
   spriteKeywords:
   - original: Card
     translated: 
     description: 
     color: {r: 0, g: 0, b: 0, a: 0}
-  - original: Sword
+  - original: Coin
     translated: 
     description: 
     color: {r: 0, g: 0, b: 0, a: 0}
-  - original: Shield
+  - original: Bone
     translated: 
     description: 
     color: {r: 0, g: 0, b: 0, a: 0}
-  - original: Action
+  - original: Weapon
     translated: 
     description: 
     color: {r: 0, g: 0, b: 0, a: 0}
-  - original: Health
+  - original: Text
     translated: 
     description: 
     color: {r: 0, g: 0, b: 0, a: 0}
@@ -451,23 +443,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99c623fb6b6e74e26bbe122ffce4485b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameFiles
---- !u!1 &375275011 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 582953607664488025, guid: d50eb448d0731474ebebdd3627d1ec5a, type: 3}
-  m_PrefabInstance: {fileID: 390494223}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &375275016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 375275011}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd447db666c474fceaf9cfb6b4bdb9ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::KeywordLinkHover
 --- !u!1 &377426094
 GameObject:
   m_ObjectHideFlags: 0
@@ -563,7 +538,7 @@ PrefabInstance:
       objectReference: {fileID: -3852492252101762229, guid: 31e79ddad7b2d41c395ada76a18cbcdd, type: 2}
     - target: {fileID: 541214238893525850, guid: d50eb448d0731474ebebdd3627d1ec5a, type: 3}
       propertyPath: m_fontSize
-      value: 44.75
+      value: 62.7
       objectReference: {fileID: 0}
     - target: {fileID: 541214238893525850, guid: d50eb448d0731474ebebdd3627d1ec5a, type: 3}
       propertyPath: m_fontAsset
@@ -700,12 +675,6 @@ PrefabInstance:
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5663905271825330652, guid: d50eb448d0731474ebebdd3627d1ec5a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1456478576}
-    - targetCorrespondingSourceObject: {fileID: 582953607664488025, guid: d50eb448d0731474ebebdd3627d1ec5a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 375275016}
     - targetCorrespondingSourceObject: {fileID: 8131750164463628565, guid: d50eb448d0731474ebebdd3627d1ec5a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1000817807}
@@ -1059,23 +1028,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
---- !u!1 &1456478571 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5663905271825330652, guid: d50eb448d0731474ebebdd3627d1ec5a, type: 3}
-  m_PrefabInstance: {fileID: 390494223}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1456478576
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1456478571}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd447db666c474fceaf9cfb6b4bdb9ad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::KeywordLinkHover
 --- !u!1 &1693348572
 GameObject:
   m_ObjectHideFlags: 0
@@ -1384,8 +1336,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2000, y: 0}
-  m_SizeDelta: {x: 400, y: 200}
+  m_AnchoredPosition: {x: -1909.7268, y: 0}
+  m_SizeDelta: {x: 580.5463, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2052897885
 MonoBehaviour:
@@ -1407,9 +1359,9 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: <link="Card"><sprite="Card" name="Card"><link="Action"><sprite="Action"
-    name="Action"></link><sprite="Sword" name="Sword"><link="Health"><sprite="Health"
-    name="Health"><link="Shield"><sprite="Shield" name="Shield"><link="Sword">
+  m_text: Hello <link="Card"><sprite="Card" name="Card"><link="Coin"><sprite="Coin"
+    name="Coin"></link><sprite="Bone" name="Bone"><link="Bone"><sprite="Weapon" name="Weapon"><link="Weapon"><sprite="Text"
+    name="Text"><link="Text">
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 31e79ddad7b2d41c395ada76a18cbcdd, type: 2}
   m_sharedMaterial: {fileID: -3852492252101762229, guid: 31e79ddad7b2d41c395ada76a18cbcdd, type: 2}

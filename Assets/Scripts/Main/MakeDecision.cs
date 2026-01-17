@@ -163,11 +163,11 @@ public class MakeDecision : PhotonCompatible
         }
     }
 
-    public void ChooseDisplayOnScreen(List<MiniCardDisplay> listOfDisplays, string toFind, string playerName, string cardName, string number, Action<Card> action = null, bool autoResolve = true)
+    public void ChooseDisplayOnScreen(List<TokenDisplay> listOfDisplays, string toFind, string playerName, string cardName, string number, Action<(int, TokenType)> action = null, bool autoResolve = true)
     {
         if (listOfDisplays.Count == 1 && autoResolve)
         {
-            Log.inst.inReaction.Add(() => action?.Invoke(listOfDisplays[0].card));
+            Log.inst.inReaction.Add(() => action?.Invoke(listOfDisplays[0].myInfo));
         }
         else if (listOfDisplays.Count >= 1 || !autoResolve)
         {
@@ -176,7 +176,7 @@ public class MakeDecision : PhotonCompatible
 
             for (int j = 0; j < listOfDisplays.Count; j++)
             {
-                MiniCardDisplay nextDisplay = listOfDisplays[j];
+                TokenDisplay nextDisplay = listOfDisplays[j];
                 availableUI.Add(nextDisplay.selectMe);
                 Button cardButton = nextDisplay.selectMe.button;
 
@@ -186,14 +186,13 @@ public class MakeDecision : PhotonCompatible
 
                 void ClickedThis()
                 {
-                    Log.inst.inReaction.Add(() => action?.Invoke(nextDisplay.card));
+                    Log.inst.inReaction.Add(() => action?.Invoke(nextDisplay.myInfo));
                     Log.inst.PopStack();
                 }
             }
         }
 
     }
-
     public void ChooseFromSlider(int min, int max, string toFind, string playerName, string cardName, string number, Action<int> action = null, bool autoResolve = true)
     {
         if (min == max && autoResolve)
@@ -278,7 +277,6 @@ public class MakeDecision : PhotonCompatible
         }
         availableUI.Clear();
         slider.gameObject.SetActive(false);
-
         instructionsText.text = "";
     }
 

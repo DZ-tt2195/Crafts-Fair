@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84a92b25f83d49b9bc132d206b370281, type: 3}
-  m_Name: Shield
+  m_Name: Bone
   m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TMP_SpriteAsset
   m_Version: 1.1.0
   m_FaceInfo:
@@ -35,41 +35,41 @@ MonoBehaviour:
     m_StrikethroughOffset: 0
     m_StrikethroughThickness: 0
     m_TabWidth: 0
-  m_Material: {fileID: 1482865454157214655}
-  spriteSheet: {fileID: 2800000, guid: d14366e12b0b043f6b778346d8fe74de, type: 3}
+  m_Material: {fileID: 4570959713288236688}
+  spriteSheet: {fileID: 2800000, guid: f1cfb4eb7baf540919a47918b74e2c8e, type: 3}
   m_SpriteCharacterTable:
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 0
     m_Scale: 1
-    m_Name: Shield
+    m_Name: Bone
   m_GlyphTable:
   - m_Index: 0
     m_Metrics:
-      m_Width: 515
-      m_Height: 550
-      m_HorizontalBearingX: 0
-      m_HorizontalBearingY: 500
-      m_HorizontalAdvance: 500
+      m_Width: 357
+      m_Height: 427
+      m_HorizontalBearingX: 10
+      m_HorizontalBearingY: 415
+      m_HorizontalAdvance: 357
     m_GlyphRect:
       m_X: 0
       m_Y: 0
-      m_Width: 511
-      m_Height: 512
+      m_Width: 357
+      m_Height: 427
     m_Scale: 1
     m_AtlasIndex: 0
     m_ClassDefinitionType: 0
-    sprite: {fileID: 21300000, guid: d14366e12b0b043f6b778346d8fe74de, type: 3}
+    sprite: {fileID: 21300000, guid: f1cfb4eb7baf540919a47918b74e2c8e, type: 3}
   spriteInfoList: []
   fallbackSpriteAssets: []
---- !u!21 &1482865454157214655
+--- !u!21 &4570959713288236688
 Material:
   serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Shield Material
+  m_Name: Bone Material
   m_Shader: {fileID: 4800000, guid: cf81c85f95fe47e1a27f6ae460cf182c, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -86,7 +86,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 2800000, guid: d14366e12b0b043f6b778346d8fe74de, type: 3}
+        m_Texture: {fileID: 2800000, guid: f1cfb4eb7baf540919a47918b74e2c8e, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []

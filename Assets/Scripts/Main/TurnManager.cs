@@ -172,6 +172,8 @@ public class TurnManager : PhotonCompatible
     public int GetInt(string property, Player player) => (int)FindThisProperty(property, player);
 
     public int GetInt(string property) => (int)FindThisProperty(property, null);
+    public int[] GetIntArray(string property, Player player) => (int[])FindThisProperty(property, player);
+    public int[] GetIntArray(string property) => (int[])FindThisProperty(property, null);
 
     public List<string> GetStringList(string property, Player player)
     {

@@ -3,7 +3,7 @@ using UnityEngine;
 public static class ConstantStrings
 {
     //misc
-    public const string Resources = nameof(Resources);
+    public const string Tokens = nameof(Tokens);
 
     //player prefs
     public const string MyUserName = nameof(MyUserName);
@@ -13,9 +13,13 @@ public static class ConstantStrings
     public const string MyPosition = nameof(MyPosition);
     public const string Waiting = nameof(Waiting);
     public const string MyScore = nameof(MyScore);
-    public const string MyHand = nameof(MyHand);
+    public const string MyPlacards = nameof(MyPlacards);
     public const string MyDeck = nameof(MyDeck);
     public const string MyDiscard = nameof(MyDiscard);
+    public const string MyCoins = nameof(MyCoins);
+    public const string MyBones = nameof(MyBones);
+    public const string MyWeapons = nameof(MyWeapons);
+    public const string MyTexts = nameof(MyTexts);
 
     //room properties
     public const string GameName = nameof(GameName);

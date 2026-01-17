@@ -224,13 +224,20 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
     ExitGames.Client.Photon.Hashtable InitialPlayerProps()
     {
         Debug.Log("assigned player props");
+        int numRanks = 6;
+
         ExitGames.Client.Photon.Hashtable playerProps = new()
         {
             [ConstantStrings.Waiting] = false,
             [ConstantStrings.MyScore] = 0,
             [ConstantStrings.MyPosition] = -1,
 
-            [ConstantStrings.MyHand] = new int[0],
+            [ConstantStrings.MyCoins] = new int[numRanks],
+            [ConstantStrings.MyBones] = new int[numRanks],
+            [ConstantStrings.MyWeapons] = new int[numRanks],
+            [ConstantStrings.MyTexts] = new int[numRanks],
+
+            [ConstantStrings.MyPlacards] = new int[0],
             [ConstantStrings.MyDeck] = new int[0],
             [ConstantStrings.MyDiscard] = new int[0],
         };

@@ -9,14 +9,6 @@ using MyBox;
 using UnityEngine.UI;
 using TMPro;
 
-[Serializable]
-public class PlayerUI
-{
-    public Image image;
-    public TMP_Text infoText;
-    public List<MiniCardDisplay> cardDisplays = new();
-}
-
 public class CreateGame : PhotonCompatible
 {
 
@@ -33,7 +25,6 @@ public class CreateGame : PhotonCompatible
     public float opacity { get; private set; }
     bool decrease = true;
     public Canvas canvas { get; private set; }
-    [SerializeField] List<PlayerUI> allUI = new();
 
     protected override void Awake()
     {
@@ -42,11 +33,6 @@ public class CreateGame : PhotonCompatible
         inst = this;
         PhotonNetwork.AutomaticallySyncScene = true;
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
-        foreach (PlayerUI ui in allUI)
-        {
-            foreach (MiniCardDisplay display in ui.cardDisplays)
-                display.gameObject.SetActive(false);
-        }
 
         if (!PhotonNetwork.OfflineMode)
         {
@@ -93,12 +79,13 @@ public class CreateGame : PhotonCompatible
         void MakePlayerAndCards()
         {
             int nextPlayerPosition = (int)GetRoomProperty(ConstantStrings.NextPlayerPosition);
+            InstantChangeRoomProp(ConstantStrings.NextPlayerPosition, nextPlayerPosition + 1);
+
             ExitGames.Client.Photon.Hashtable playerProps = new()
             {
                 [ConstantStrings.Waiting] = false,
                 [ConstantStrings.MyPosition] = nextPlayerPosition,
             };
-            InstantChangeRoomProp(ConstantStrings.NextPlayerPosition, nextPlayerPosition + 1);
 
             List<int> startingDeck = new();
             List<int> cardID = new();
@@ -131,13 +118,6 @@ public class CreateGame : PhotonCompatible
             GameObject obj = PhotonView.Find(arrayOfPVs[i]).gameObject;
             obj.GetComponent<Card>().AssignCard(GameFiles.inst.playerCardFiles[cardNames[i]], 0f);
         }
-    }
-
-    public void RefreshUI(bool forced)
-    {
-        Log.inst.ChangeScrolling();
-        foreach (Player player in listOfPlayers)
-            player.UpdateUI(forced);
     }
 
     #endregion
@@ -174,23 +154,11 @@ public class CreateGame : PhotonCompatible
             decrease = !decrease;
     }
 
-    public Player OtherPlayer(int playerPosition)
+    public void RefreshUI(bool forced)
     {
-        if (playerPosition == 0)
-            return listOfPlayers[1];
-        else
-            return listOfPlayers[0];
-    }
-
-    public PlayerUI GetUI(int playerPosition)
-    {
-        int myPosition = (int)GetPlayerProperty(PhotonNetwork.LocalPlayer, ConstantStrings.MyPosition);
-        if (myPosition == playerPosition)
-            return allUI[0];
-        else if (myPosition == -1)
-            return allUI[playerPosition];
-        else
-            return allUI[1];
+        Log.inst.ChangeScrolling();
+        foreach (Player player in listOfPlayers)
+            player.UpdateUI(forced);
     }
 
     #endregion

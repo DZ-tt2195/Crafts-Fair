@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Linq;
 
+public enum FindNumber {Exact, Minimum, Maximum}
 public class Player : PhotonCompatible
 {
 
@@ -19,9 +20,11 @@ public class Player : PhotonCompatible
 
     Button resignButton;
     [SerializeField] Transform keepHand;
-    PlayerUI myUI;
-    bool onBottom;
     public Dictionary<string, bool> uiDictionary = new();
+    [SerializeField] List<TokenDisplay> allCoinDisplays = new();
+    [SerializeField] List<TokenDisplay> allBoneDisplays = new();
+    [SerializeField] List<TokenDisplay> allWeaponDisplays = new();
+    [SerializeField] List<TokenDisplay> allTextDisplays = new();
 
     protected override void Awake()
     {
@@ -29,7 +32,7 @@ public class Player : PhotonCompatible
         this.bottomType = this.GetType();
         resignButton = GameObject.Find("Resign Button").GetComponent<Button>();
 
-        List<string> toAdd = new() { ConstantStrings.MyHand, ConstantStrings.MyDiscard, ConstantStrings.Resources };
+        List<string> toAdd = new() { ConstantStrings.MyPlacards, ConstantStrings.MyDiscard, ConstantStrings.MyScore, ConstantStrings.Tokens };
         foreach (string next in toAdd)
             uiDictionary.Add(next, true);
 
@@ -66,9 +69,9 @@ public class Player : PhotonCompatible
 
 #region Hand
 
-    public List<Card> GetHand() => TurnManager.inst.GetCardList(ConstantStrings.MyHand, this);
+    public List<Card> GetPlacards() => TurnManager.inst.GetCardList(ConstantStrings.MyPlacards, this);
 
-    public void DrawCardRPC(int amount, int logged = 0)
+    public void DrawPlacardRPC(int amount, int logged = 0)
     {
         if (amount <= 0)
             return;
@@ -89,12 +92,12 @@ public class Player : PhotonCompatible
             Log.inst.AddMyText(false, "Draw_Card", this.name, card.name, "", logged);
             toDraw.Add(card);
         }
-        Log.inst.NewRollback(() => AddToHand(toDraw));
+        Log.inst.NewRollback(() => DrawPlacard(toDraw));
     }
 
-    void AddToHand(List<Card> cardsToAdd)
+    void DrawPlacard(List<Card> cardsToAdd)
     {
-        List<Card> myHand = GetHand();
+        List<Card> myPlacards = GetPlacards();
         List<Card> myDeck = TurnManager.inst.GetCardList(ConstantStrings.MyDeck, this);
 
         if (!Log.inst.forward)
@@ -103,7 +106,7 @@ public class Player : PhotonCompatible
             {
                 Card card = cardsToAdd[i];
                 card.transform.SetParent(null);
-                myHand.Remove(card);
+                myPlacards.Remove(card);
                 myDeck.Insert(0, card);
             }
         }
@@ -112,37 +115,37 @@ public class Player : PhotonCompatible
             for (int i = 0; i < cardsToAdd.Count; i++)
             {
                 Card card = cardsToAdd[i];
-                myHand.Add(card);
+                myPlacards.Add(card);
                 myDeck.Remove(card);
             }
         }
-        TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyHand, TurnManager.inst.ConvertCardList(myHand)); uiDictionary[ConstantStrings.MyHand] = true;
+        TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyPlacards, TurnManager.inst.ConvertCardList(myPlacards)); uiDictionary[ConstantStrings.MyPlacards] = true;
         TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyDeck, TurnManager.inst.ConvertCardList(myDeck));
     }
 
-    public void DiscardRPC(Card card, int logged)
+    public void DiscardPlacardRPC(Card card, int logged)
     {
-        Log.inst.NewRollback(() => DiscardFromHand(card));
+        Log.inst.NewRollback(() => DiscardPlacard(card));
         Log.inst.AddMyText(false, "Discard_Card", this.name, card.name, "", logged);
     }
 
-    void DiscardFromHand(Card card)
+    void DiscardPlacard(Card card)
     {
-        List<Card> myHand = GetHand();
+        List<Card> myPlacards = GetPlacards();
         List<Card> myDiscard = TurnManager.inst.GetCardList(ConstantStrings.MyDiscard, this);
 
         if (!Log.inst.forward)
         {
-            myHand.Add(card);
+            myPlacards.Add(card);
             myDiscard.Remove(card);
         }
         else
         {
-            myHand.Remove(card);
+            myPlacards.Remove(card);
             myDiscard.Add(card);
             card.transform.SetParent(null);
         }
-        TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyHand, TurnManager.inst.ConvertCardList(myHand)); uiDictionary[ConstantStrings.MyHand] = true;
+        TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyPlacards, TurnManager.inst.ConvertCardList(myPlacards)); uiDictionary[ConstantStrings.MyPlacards] = true;
         TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyDiscard, TurnManager.inst.ConvertCardList(myDiscard)); uiDictionary[ConstantStrings.MyDiscard] = true;
     }
 
@@ -151,14 +154,6 @@ public class Player : PhotonCompatible
 #region Resources
 
     public int GetScore() => TurnManager.inst.GetInt(ConstantStrings.MyScore, this);
-
-    void ChangeResource(int num, string property)
-    {
-        int total = TurnManager.inst.GetInt(property, this);
-        total += (!Log.inst.forward) ? -num : num;
-        TurnManager.inst.WillChangePlayerProperty(this, property, total); uiDictionary[ConstantStrings.Resources] = true;
-    }
-
     public void ScoreRPC(int num, int logged = 0)
     {
         if (num == 0)
@@ -167,7 +162,13 @@ public class Player : PhotonCompatible
             Log.inst.AddMyText(false, "Add_Health_Player", this.name, "", num.ToString(), logged);
         else
             Log.inst.AddMyText(false, "Lose_Health_Player", this.name, "", Mathf.Abs(num).ToString(), logged);
-        //Log.inst.NewRollback(() => ChangeResource(num, ConstantStrings.MyHealth));
+        Log.inst.NewRollback(() => ChangeScore(num));
+    }
+    void ChangeScore(int num)
+    {
+        int total = TurnManager.inst.GetInt(ConstantStrings.MyScore, this);
+        total += (!Log.inst.forward) ? -num : num;
+        TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyScore, total); uiDictionary[ConstantStrings.MyScore] = true;
     }
 
     #endregion
@@ -220,15 +221,14 @@ public class Player : PhotonCompatible
 
 #region UI
 
-    //public List<Card> GetTroops() => TurnManager.inst.GetCardList(ConstantStrings.MyTroops, this);
-
+    public int[] GetCoins() => TurnManager.inst.GetIntArray(ConstantStrings.MyCoins, this);
+    public int[] GetBones() => TurnManager.inst.GetIntArray(ConstantStrings.MyBones, this);
+    public int[] GetWeapons() => TurnManager.inst.GetIntArray(ConstantStrings.MyWeapons, this);
+    public int[] GetTexts() => TurnManager.inst.GetIntArray(ConstantStrings.MyTexts, this);
+    public Dictionary<TokenType, int[]> GetAllTokens() => new Dictionary<TokenType, int[]>() {{ TokenType.Coin, GetCoins() },{ TokenType.Bone, GetBones() },{ TokenType.Weapon, GetWeapons() },{ TokenType.Text, GetTexts() }};
     public void UpdateUI(bool forcedUpdate)
     {
         List<string> uiKeys = uiDictionary.Keys.ToList();
-
-        myUI = CreateGame.inst.GetUI(myPosition);
-        myUI.image.color = (myPosition == 0) ? Color.blue : Color.red;
-        onBottom = myUI.image.transform.parent.name.Equals("Bottom Player");
 
         if (forcedUpdate)
         {
@@ -236,10 +236,10 @@ public class Player : PhotonCompatible
                 uiDictionary[key] = true;
         }
 
-        List<Card> myHand = GetHand();
-        if (uiDictionary[ConstantStrings.MyHand])
+        List<Card> myHand = GetPlacards();
+        if (uiDictionary[ConstantStrings.MyPlacards])
         {
-            List<Vector2> handPositions = ObjectPositions(myHand.Count, -700, 475, 225, (onBottom ? -550 : 550), true);
+            List<Vector2> handPositions = ObjectPositions(myHand.Count, -700, 475, 225, -550, true);
 
             int thisPlayerPosition = (int)GetPlayerProperty(PhotonNetwork.LocalPlayer, ConstantStrings.MyPosition.ToString());
             for (int i = 0; i < myHand.Count; i++)
@@ -248,7 +248,7 @@ public class Player : PhotonCompatible
                 if (nextCard.transform.parent != keepHand)
                 {
                     nextCard.transform.SetParent(keepHand);
-                    nextCard.transform.localPosition = new(0, (onBottom ? -1000 : 1000));
+                    nextCard.transform.localPosition = new(0, -1000);
                 }
                 nextCard.transform.SetSiblingIndex(i);
                 nextCard.MoveCardRPC(handPositions[i], 0.25f, Vector3.one);
@@ -264,15 +264,28 @@ public class Player : PhotonCompatible
                 card.transform.SetParent(null);
         }
 
-        if (uiDictionary[ConstantStrings.Resources] || uiDictionary[ConstantStrings.MyHand])
+        if (uiDictionary[ConstantStrings.Tokens])
         {
-            myUI.infoText.text = KeywordTooltip.instance.EditText("");
+            ApplyToken(TokenType.Coin, GetCoins(), allCoinDisplays);
+            ApplyToken(TokenType.Bone, GetBones(), allBoneDisplays);
+            ApplyToken(TokenType.Weapon, GetWeapons(), allWeaponDisplays);
+            ApplyToken(TokenType.Text, GetTexts(), allTextDisplays);
+
+            void ApplyToken(TokenType type, int[] array, List<TokenDisplay> list)
+            {
+                for (int i = 0; i<array.Length; i++)
+                    list[i].ChangeInfo(i, type, array[i].ToString());
+            }
+        }
+
+        if (uiDictionary[ConstantStrings.MyScore])
+        {
+            //myUI.infoText.text = KeywordTooltip.instance.EditText("fill in information");
         }
 
         foreach (var key in uiKeys)
             uiDictionary[key] = false;
     }
-
     List<Vector2> ObjectPositions(int objectAmount, float start, float end, float gap, float fixedPosition, bool useX)
     {
         float midPoint = (start + end) / 2f;
@@ -292,7 +305,34 @@ public class Player : PhotonCompatible
         }
         return toReturn;
     }
+    
+    public List<TokenDisplay> OfNumber(FindNumber toFind, int number)
+    {
+        List<TokenDisplay> toReturn = new();
 
-    #endregion
+        ApplyToken(GetCoins(), allCoinDisplays);
+        ApplyToken(GetBones(), allBoneDisplays);
+        ApplyToken(GetWeapons(), allWeaponDisplays);
+        ApplyToken(GetTexts(), allTextDisplays);
+
+        void ApplyToken(int[] array, List<TokenDisplay> list)
+        {
+            for (int i = 0; i<array.Length; i++)
+            {
+                switch (toFind)
+                {
+                    case FindNumber.Exact:
+                        if (array[i] == number) toReturn.Add(list[i]); break;
+                    case FindNumber.Minimum:
+                        if (array[i] >= number) toReturn.Add(list[i]); break;
+                    case FindNumber.Maximum:
+                        if (array[i] <= number) toReturn.Add(list[i]); break;
+                }
+            }
+        }
+        return toReturn;
+    }
+
+#endregion
 
 }
