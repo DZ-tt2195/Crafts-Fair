@@ -25,8 +25,8 @@ public class GameFiles : MonoBehaviour
     void Awake()
     {
         inst = this;
-        placardFiles = ReadTSVFile<CardData>(Resources.Load<TextAsset>("TSVs/Placards").text);
-        twistFiles = ReadTSVFile<CardData>(Resources.Load<TextAsset>("TSVs/Twists").text);
+        placardFiles = ReadTSVFile<CardData>(Resources.Load<TextAsset>("Card Info/Placards").text);
+        twistFiles = ReadTSVFile<CardData>(Resources.Load<TextAsset>("Card Info/Twists").text);
     }
 
     List<T> ReadTSVFile<T>(string textToConvert) where T : new()

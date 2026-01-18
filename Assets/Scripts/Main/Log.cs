@@ -64,21 +64,14 @@ public class RollBack
 
 public class LogText
 {
-    public string toFind { get; private set; }
-    public string playerName { get; private set; }
-    public string cardName { get; private set; }
-    public string number { get; private set; }
-
+    public string packagedText { get; private set; }
     public int indent { get; private set; }
     public bool important { get; private set; }
     public DecisionContainer undoToThis { get; private set; }
 
-    public LogText(string toFind, string playerName, string cardName, string number, int indent, bool important)
+    public LogText(string packagedText, int indent, bool important)
     {
-        this.toFind = toFind;
-        this.playerName = playerName;
-        this.cardName = cardName;
-        this.number = number;
+        this.packagedText = packagedText;
         this.indent = indent;
         this.important = important;
     }
@@ -160,13 +153,13 @@ public class Log : PhotonCompatible
         }
     }
 
-    public void AddMyText(bool important, string toFind, string playerName, string cardName, string number, int indent = 0, bool isUndo = true)
+    public void AddMyText(bool important, string packagedText, int indent = 0, bool isUndo = true)
     {
         if (indent >= 0)
-            NewRollback(() => AddToCurrent(important, toFind, indent, isUndo, playerName, cardName, number));
+            NewRollback(() => AddToCurrent(important, packagedText, indent, isUndo));
     }
 
-    void AddToCurrent(bool important, string toFind, int indent, bool isUndo, string playerName, string cardName, string number)
+    void AddToCurrent(bool important, string packagedText, int indent, bool isUndo)
     {
         if (!forward)
         {
@@ -187,14 +180,14 @@ public class Log : PhotonCompatible
         }
         else
         {
-            LogText saveText = new(toFind, playerName, cardName, number, indent, important);
+            LogText saveText = new(packagedText, indent, important);
             currentLogTexts.Add(saveText);
 
             int currentPosition = (int)PhotonNetwork.LocalPlayer.CustomProperties[ConstantStrings.MyPosition];
             string targetText = "";
             for (int i = 0; i < indent; i++)
                 targetText += "     ";
-            targetText += $"{Translator.inst.Packaging(toFind, playerName, cardName, number, currentPosition)}\n";
+            targetText += $"{Translator.inst.UnPackage(packagedText, currentPosition)}\n";
 
             allCurrent.text += targetText;
             if (important)
@@ -212,10 +205,10 @@ public class Log : PhotonCompatible
         }
     }
 
-    public void MasterText(bool important, string toFind, string playerName, string cardName, string number, int indent = 0)
+    public void MasterText(bool important, string packagedText, int indent = 0)
     {
         if (AmMaster())
-            DoFunction(() => AddToPast(important, toFind, indent, playerName, cardName, number), RpcTarget.AllBuffered);
+            DoFunction(() => AddToPast(important, packagedText, indent), RpcTarget.AllBuffered);
     }
 
     public void DoneWithTurn()
@@ -229,7 +222,7 @@ public class Log : PhotonCompatible
     {
         int currentPosition = (int)GetPlayerProperty(PhotonNetwork.LocalPlayer, ConstantStrings.MyPosition);
         foreach (LogText nextLog in currentLogTexts)
-            DoFunction(() => AddToPast(nextLog.important, nextLog.toFind, nextLog.indent, nextLog.playerName, nextLog.cardName, nextLog.number), RpcTarget.AllBuffered);
+            DoFunction(() => AddToPast(nextLog.important, nextLog.packagedText, nextLog.indent), RpcTarget.AllBuffered);
 
         allCurrent.text = "";
         importantCurrent.text = "";
@@ -237,13 +230,13 @@ public class Log : PhotonCompatible
     }
 
     [PunRPC]
-    void AddToPast(bool important, string toFind, int indent, string playerName, string cardName, string number)
+    void AddToPast(bool important, string packagedText, int indent)
     {
         int currentPosition = (int)PhotonNetwork.LocalPlayer.CustomProperties[ConstantStrings.MyPosition];
         string targetText = "";
         for (int i = 0; i < indent; i++)
             targetText += "     ";
-        targetText += $"{Translator.inst.Packaging(toFind, playerName, cardName, number, currentPosition)}\n";
+        targetText += $"{Translator.inst.UnPackage(packagedText, currentPosition)}\n";
 
         allPast.text += targetText;
         if (important)

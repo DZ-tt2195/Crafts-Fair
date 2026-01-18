@@ -6,7 +6,6 @@ using MyBox;
 using System;
 using System.Reflection;
 using Photon.Pun;
-using UnityEngine.UIElements;
 
 public class Translator : PhotonCompatible
 {
@@ -100,8 +99,8 @@ public class Translator : PhotonCompatible
         {
             try
             {
-                answer = keyTranslate[("English")][key];
                 //Debug.Log($"{key} failed to translate in {PlayerPrefs.GetString("Language")}");
+                answer = keyTranslate[("English")][key];
             }
             catch
             {
@@ -137,44 +136,22 @@ public class Translator : PhotonCompatible
         }
     }
 
-    public string Packaging(string toFind, string playerName, string cardName, string number, int owner = -1)
+    public string UnPackage(string toSplit, int owner = -1)
     {
         string targetText;
-        if (TranslationExists($"{toFind}_Others") && (int)PhotonNetwork.LocalPlayer.CustomProperties[ConstantStrings.MyPosition] != owner)
-            targetText = $"{toFind}_Others";
+        string[] splitUp = toSplit.Split('\t');
+
+        if (TranslationExists($"{splitUp[0]}_Others") && (int)PhotonNetwork.LocalPlayer.CustomProperties[ConstantStrings.MyPosition] != owner)
+            targetText = $"{splitUp[0]}_Others";
         else
-            targetText = toFind;
+            targetText = splitUp[0];
 
-        try
-        {
-            MethodInfo method = typeof(AutoTranslate).GetMethod(targetText, BindingFlags.Static | BindingFlags.Public);
-            ParameterInfo[] parameters = method.GetParameters();
-            object[] args = new object[parameters.Length];
+        List<(string, string)> toReplace = new();
+        for (int i = 1; i<splitUp.Length; i+=2)
+            toReplace.Add((splitUp[i], splitUp[i+1]));
 
-            for (int i = 0; i<parameters.Length; i++)
-            {
-                switch (parameters[i].Name)
-                {
-                    case "Player":
-                        args[i] = playerName;
-                        break;
-                    case "Card":
-                        args[i] = Translate(cardName);
-                        break;
-                    case "Num":
-                        args[i] = number;
-                        break;
-                }
-            }
-            object result = method.Invoke(null, args);
-            //Debug.Log($"{targetText} {(string)result}");
-            return KeywordTooltip.instance.EditText((string)result);
-        }
-        catch
-        {
-            //Debug.Log($"{targetText} (no subs)");
-            return KeywordTooltip.instance.EditText(Translate(targetText, null));
-        }        
+        string translated = Translate(targetText, toReplace);
+        return KeywordTooltip.instance.EditText(translated);
     }
 
 #endregion

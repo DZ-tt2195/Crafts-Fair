@@ -14,8 +14,8 @@ public static class FileManager
     {
         Debug.Log($"starting downloads");
         EditorCoroutineUtility.StartCoroutineOwnerless(Download("TSVs/0. English", "1fzuOlF37uhcKH6x8UyMrTlfEjcDYe_ODp-tJr8uXSq0", "32263315"));
-        EditorCoroutineUtility.StartCoroutineOwnerless(Download("TSVs/Placards", "1fzuOlF37uhcKH6x8UyMrTlfEjcDYe_ODp-tJr8uXSq0", "0"));
-        EditorCoroutineUtility.StartCoroutineOwnerless(Download("TSVs/Twists", "1fzuOlF37uhcKH6x8UyMrTlfEjcDYe_ODp-tJr8uXSq0", "213828565"));
+        EditorCoroutineUtility.StartCoroutineOwnerless(Download("Card Info/Placards", "1fzuOlF37uhcKH6x8UyMrTlfEjcDYe_ODp-tJr8uXSq0", "0"));
+        EditorCoroutineUtility.StartCoroutineOwnerless(Download("Card Info/Twists", "1fzuOlF37uhcKH6x8UyMrTlfEjcDYe_ODp-tJr8uXSq0", "213828565"));
     }
     static IEnumerator Download(string fileName, string spreadsheetID, string sheetGID)
     {
@@ -44,12 +44,13 @@ public static class FileManager
         
         List<string> noConvert = new();
         List<(string, List<string>)> needConvert = new();
+        List<(string, List<string>)> online = new();
 
         foreach (var KVP in newDictionary)
         {
             string key = KVP.Key;
             string value = KVP.Value;
-            
+
             Regex regex = new(@"\$(.*?)\$");
             List<string> allMatches = new();
             foreach (Match m in regex.Matches(value).Cast<Match>())
@@ -59,10 +60,17 @@ public static class FileManager
                     allMatches.Add(match);
             }
 
-            if (allMatches.Count == 0)
-                noConvert.Add(key);
+            if (key.Contains("Online"))
+            {
+                online.Add((key, allMatches));
+            }
             else
-                needConvert.Add((key, allMatches));
+            {
+                if (allMatches.Count == 0)
+                    noConvert.Add(key);
+                else
+                    needConvert.Add((key, allMatches));
+            }
         }
 
         using (StreamWriter writer = new StreamWriter("Assets/Scripts/Translations/AutoTranslate.cs"))
@@ -113,7 +121,41 @@ public static class FileManager
             writer.WriteLine("public enum NeedSub {" + needSubEnum + "}");
         }
 
-        Debug.Log($"{noConvert.Count} enum lines, {needConvert.Count} converted lines");
+        using (StreamWriter writer = new StreamWriter("Assets/Scripts/Translations/OnlineTranslate.cs"))
+        {
+            writer.WriteLine("public static class OnlineTranslate \n{");
+            string onlineEnum = "";
+
+            for (int i = 0; i < online.Count; i++)
+            {
+                (string key, List<string> replace) = online[i];
+                onlineEnum += key;
+                if (i < online.Count - 1)
+                    onlineEnum += ",";
+
+                string nextCode = $"public static string {key} (";
+                for (int j = 0; j < replace.Count; j++)
+                {
+                    nextCode += $"string {replace[j]}";
+                    if (j < replace.Count - 1)
+                        nextCode += ",";
+                }
+                nextCode += $") => $\"{key}";
+                for (int j = 0; j<replace.Count; j++)
+                {
+                    nextCode += "\\t" + replace[j];
+                    nextCode += "\\t" + "{" + replace[j] + "}";
+                }
+
+                nextCode += $"\";";
+                writer.WriteLine(nextCode);
+            }
+
+            writer.WriteLine("}");
+            writer.WriteLine("public enum OnlinePackage {" + onlineEnum + "}");
+        }
+
+        Debug.Log($"{noConvert.Count} enum lines, {needConvert.Count} converted lines, {online.Count} online lines");
         AssetDatabase.Refresh();
     }
 }

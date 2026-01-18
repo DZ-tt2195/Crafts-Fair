@@ -60,7 +60,7 @@ public class Player : PhotonCompatible
         resignButton = GameObject.Find("Resign Button").GetComponent<Button>();
         if (photonView.AmOwner)
         {
-            resignButton.onClick.AddListener(() => TurnManager.inst.TextForEnding("Player_Resigned", this.name, "", "", myPosition));
+            resignButton.onClick.AddListener(() => TurnManager.inst.TextForEnding(OnlineTranslate.Online_Player_Resigned(this.name), myPosition));
             StartTurn();
         }
     }
@@ -89,7 +89,7 @@ public class Player : PhotonCompatible
         for (int i = 0; i < amount; i++)
         {
             Card card = myDeck[i];
-            Log.inst.AddMyText(false, "Draw_Card", this.name, card.name, "", logged);
+            //Log.inst.AddMyText(false, "Draw_Card", this.name, card.name, "", logged);
             toDraw.Add(card);
         }
         Log.inst.NewRollback(() => DrawPlacard(toDraw));
@@ -126,7 +126,7 @@ public class Player : PhotonCompatible
     public void DiscardPlacardRPC(Card card, int logged)
     {
         Log.inst.NewRollback(() => DiscardPlacard(card));
-        Log.inst.AddMyText(false, "Discard_Card", this.name, card.name, "", logged);
+        //Log.inst.AddMyText(false, "Discard_Card", this.name, card.name, "", logged);
     }
 
     void DiscardPlacard(Card card)
@@ -158,10 +158,12 @@ public class Player : PhotonCompatible
     {
         if (num == 0)
             return;
+            /*
         if (num > 0)
             Log.inst.AddMyText(false, "Add_Health_Player", this.name, "", num.ToString(), logged);
         else
             Log.inst.AddMyText(false, "Lose_Health_Player", this.name, "", Mathf.Abs(num).ToString(), logged);
+            */
         Log.inst.NewRollback(() => ChangeScore(num));
     }
     void ChangeScore(int num)
@@ -194,7 +196,7 @@ public class Player : PhotonCompatible
 
         (string phase, Action action) = TurnManager.inst.GetTurnAction(this);
         if (phase != nameof(SetupWait))
-            Log.inst.AddMyText(true, "Blank", "", "", "");
+            Log.inst.AddMyText(true, AutoTranslate.Blank());
 
         Log.inst.NewDecisionContainer(() => action(), 0);
         Log.inst.NewDecisionContainer(() => EndTurn(), -1);
@@ -206,8 +208,8 @@ public class Player : PhotonCompatible
         Log.inst.inReaction.Add(Done);
         if (endPause)
         {
-            string instructions = (Log.inst.undosInLog.Count >= 1) ? "Pause_to_Undo" : "Pause_to_Read";
-            MakeDecision.inst.ChooseTextButton(new() { new("Done", "", "", "", Color.white) }, instructions, "", "", "", false);
+            string instructions = (Log.inst.undosInLog.Count >= 1) ? AutoTranslate.Pause_to_Undo() : AutoTranslate.Pause_to_Read();
+            MakeDecision.inst.ChooseTextButton(new() { new(AutoTranslate.Done()) }, instructions,false);
         }
 
         void Done()

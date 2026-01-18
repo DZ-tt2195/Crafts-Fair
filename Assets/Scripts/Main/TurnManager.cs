@@ -100,7 +100,7 @@ public class TurnManager : PhotonCompatible
     void UpdateWaitingText(List<Photon.Realtime.Player> toSend, int playersWaiting)
     {
         foreach (Photon.Realtime.Player player in toSend)
-            MakeDecision.inst.DoFunction(() => MakeDecision.inst.Instructions("Waiting_on_Players", "", "", playersWaiting.ToString()), player);
+            MakeDecision.inst.DoFunction(() => MakeDecision.inst.Instructions(OnlineTranslate.Online_Waiting_on_Players(playersWaiting.ToString())), player);
     }
 
     void NextPhase()
@@ -117,7 +117,7 @@ public class TurnManager : PhotonCompatible
 
         if (mostScore.Item2 >= 20 && mostScore.Item1 != null)
         {
-            TextForEnding("Player_Lost", mostScore.Item1.name, "", "", -1);
+            TextForEnding(OnlineTranslate.Online_Player_Won(mostScore.Item1.name), -1);
             InstantChangeRoomProp(ConstantStrings.CurrentPhase, nameof(Ending));
         }
         else
@@ -258,10 +258,9 @@ public class TurnManager : PhotonCompatible
 
 #region Ending
 
-    public void TextForEnding(string toFind, string playerName, string cardName, string number, int resignPosition)
+    public void TextForEnding(string packagedText, int resignPosition)
     {
-        Log.inst.MasterText(true, toFind, playerName, cardName, number);
-        Log.inst.MasterText(true, toFind, playerName, cardName, number);
+        Log.inst.MasterText(true, packagedText);
         InstantChangeRoomProp(ConstantStrings.GameOver, true);
         DoFunction(() => ShowEnding(resignPosition), RpcTarget.All);
     }

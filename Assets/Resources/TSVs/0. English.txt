@@ -1,5 +1,5 @@
 Game_Designer	by Thomas Tang (DZ)
-Last_Update	Last Updated: Jan 16, 2026
+Last_Update	Last Updated: Jan 17, 2026
 Translator_Credit	Original Language
 Language	Language
 Loading	Loading
@@ -18,8 +18,8 @@ Disconnect	Disconnect
 Disconnected_from_server	Disconnected from the server.
 Failed_to_connect_to_server	Failed to connect to the server.
 Reconnect	Reconnect
-Online_Tutorial_1	To play multiplayer: Have 1 person create a room, then their room should be displayed below. Everyone also must have joined the same server region.
-Online_Tutorial_2	Click a button below to join a room, or manually type in the host's username (yellow rooms are spectator only)
+Tutorial_1	To play multiplayer: Have 1 person create a room, then their room should be displayed below. Everyone also must have joined the same server region.
+Tutorial_2	Click a button below to join a room, or manually type in the host's username (yellow rooms are spectator only)
 Create	Create
 Create_Room_with_players	Create a room with how many players?
 Enter_hostname	Enter host's username
@@ -34,12 +34,12 @@ Type_into_chat	Type into chat
 Undo	Undo
 Short	Short
 Long	Long
-Player_Playing	$Player$ is playing.
-Player_Spectating	$Player$ is spectating.
-Player_Reconnected	$Player$ reconnected.
-Player_Disconnected	$Player$ has disconnected.
-Player_Quit	$Player$ has quit the room.
-Waiting_on_Players	Waiting on players ($Num$ more)
+Online_Player_Playing	$Player$ is playing.
+Online_Player_Spectating	$Player$ is spectating.
+Online_Player_Reconnected	$Player$ reconnected.
+Online_Player_Disconnected	$Player$ has disconnected.
+Online_Player_Quit	$Player$ has quit the room.
+Online_Waiting_on_Players	Waiting on players ($Num$ more)
 Confirm	Confirm
 Decline	Decline
 Choose_One_Instruction	Choose one ($Card$).
@@ -49,14 +49,17 @@ Pick_Player	$Player$
 Blank	
 Game_Over	Game Over
 Leave	Leave
-Tie_Game	The game is a tie.
-Player_Resigned	$Player$ has resigned.
-Player_Lost	$Player$ has lost.
+Online_Tie_Game	The game is a tie.
+Online_Player_Resigned	$Player$ has resigned.
+Online_Player_Won	$Player$ has won.
 Resigned	(Resigned)
-Next_Card	Next card: $Card$
+Online_Next_Card	Next card: $Card$
 CardIcon	CardIcon
 CoinIcon	CoinIcon
 BoneIcon	BoneIcon
 WeaponIcon	WeaponIcon
 TextIcon	TextIcon
 CrownIcon	CrownIcon
+Done	Done
+Pause_to_Read	A pause to let you read things.
+Pause_to_Undo	Last chance to undo anything.
