@@ -90,7 +90,7 @@ public class CreateGame : PhotonCompatible
             List<int> startingDeck = new();
             List<int> cardID = new();
 
-            for (int i = 0; i < GameFiles.inst.playerCardFiles.Count; i++)
+            for (int i = 0; i < GameFiles.inst.placardFiles.Count; i++)
             {
                 for (int j = 0; j < 1; j++)
                 {
@@ -116,7 +116,7 @@ public class CreateGame : PhotonCompatible
         for (int i = 0; i<arrayOfPVs.Length; i++)
         {
             GameObject obj = PhotonView.Find(arrayOfPVs[i]).gameObject;
-            obj.GetComponent<Card>().AssignCard(GameFiles.inst.playerCardFiles[cardNames[i]], 0f);
+            obj.GetComponent<Card>().AssignCard(GameFiles.inst.placardFiles[cardNames[i]], 0f);
         }
     }
 

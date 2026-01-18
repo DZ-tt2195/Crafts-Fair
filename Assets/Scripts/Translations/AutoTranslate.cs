@@ -2,37 +2,21 @@ public static class AutoTranslate
 { 
 
 public static string Player_Count (string Current,string Max) => Translator.inst.Translate("Player_Count", new() {("Current", Current),("Max", Max)});
-
 public static string Attempt_to_reconnect (string Room) => Translator.inst.Translate("Attempt_to_reconnect", new() {("Room", Room)});
-
 public static string Failed_to_reconnect (string Room) => Translator.inst.Translate("Failed_to_reconnect", new() {("Room", Room)});
-
 public static string Player_Playing (string Player) => Translator.inst.Translate("Player_Playing", new() {("Player", Player)});
-
 public static string Player_Spectating (string Player) => Translator.inst.Translate("Player_Spectating", new() {("Player", Player)});
-
 public static string Player_Reconnected (string Player) => Translator.inst.Translate("Player_Reconnected", new() {("Player", Player)});
-
 public static string Player_Disconnected (string Player) => Translator.inst.Translate("Player_Disconnected", new() {("Player", Player)});
-
 public static string Player_Quit (string Player) => Translator.inst.Translate("Player_Quit", new() {("Player", Player)});
-
 public static string Waiting_on_Players (string Num) => Translator.inst.Translate("Waiting_on_Players", new() {("Num", Num)});
-
 public static string Choose_One_Instruction (string Card) => Translator.inst.Translate("Choose_One_Instruction", new() {("Card", Card)});
-
 public static string Discard_Instruction (string Card) => Translator.inst.Translate("Discard_Instruction", new() {("Card", Card)});
-
 public static string Target_Instruction (string Player,string Card) => Translator.inst.Translate("Target_Instruction", new() {("Player", Player),("Card", Card)});
-
 public static string Pick_Player (string Player) => Translator.inst.Translate("Pick_Player", new() {("Player", Player)});
-
 public static string Player_Resigned (string Player) => Translator.inst.Translate("Player_Resigned", new() {("Player", Player)});
-
 public static string Player_Lost (string Player) => Translator.inst.Translate("Player_Lost", new() {("Player", Player)});
-
 public static string Next_Card (string Card) => Translator.inst.Translate("Next_Card", new() {("Card", Card)});
-
 public static string Game_Designer() => Translator.inst.Translate("Game_Designer");
 public static string Last_Update() => Translator.inst.Translate("Last_Update");
 public static string Translator_Credit() => Translator.inst.Translate("Translator_Credit");
@@ -73,7 +57,12 @@ public static string Game_Over() => Translator.inst.Translate("Game_Over");
 public static string Leave() => Translator.inst.Translate("Leave");
 public static string Tie_Game() => Translator.inst.Translate("Tie_Game");
 public static string Resigned() => Translator.inst.Translate("Resigned");
+public static string CardIcon() => Translator.inst.Translate("CardIcon");
+public static string CoinIcon() => Translator.inst.Translate("CoinIcon");
+public static string BoneIcon() => Translator.inst.Translate("BoneIcon");
+public static string WeaponIcon() => Translator.inst.Translate("WeaponIcon");
+public static string TextIcon() => Translator.inst.Translate("TextIcon");
+public static string CrownIcon() => Translator.inst.Translate("CrownIcon");
 }
-public enum ToTranslate {
-Game_Designer,Last_Update,Translator_Credit,Language,Loading,Update_History,Upload_Translation,Download_English,Select_Region,US_West_Coast,US_East_Coast,Europe,Asia,Single_Player,Connect,Enter_username,Disconnect,Disconnected_from_server,Failed_to_connect_to_server,Reconnect,Online_Tutorial_1,Online_Tutorial_2,Create,Create_Room_with_players,Enter_hostname,Join,Type_in_username,Encyclopedia,Close,Type_into_chat,Undo,Short,Long,Confirm,Decline,Blank,Game_Over,Leave,Tie_Game,Resigned
-}
+public enum ToTranslate {Game_Designer,Last_Update,Translator_Credit,Language,Loading,Update_History,Upload_Translation,Download_English,Select_Region,US_West_Coast,US_East_Coast,Europe,Asia,Single_Player,Connect,Enter_username,Disconnect,Disconnected_from_server,Failed_to_connect_to_server,Reconnect,Online_Tutorial_1,Online_Tutorial_2,Create,Create_Room_with_players,Enter_hostname,Join,Type_in_username,Encyclopedia,Close,Type_into_chat,Undo,Short,Long,Confirm,Decline,Blank,Game_Over,Leave,Tie_Game,Resigned,CardIcon,CoinIcon,BoneIcon,WeaponIcon,TextIcon,CrownIcon}
+public enum NeedSub {Player_Count,Attempt_to_reconnect,Failed_to_reconnect,Player_Playing,Player_Spectating,Player_Reconnected,Player_Disconnected,Player_Quit,Waiting_on_Players,Choose_One_Instruction,Discard_Instruction,Target_Instruction,Pick_Player,Player_Resigned,Player_Lost,Next_Card,}

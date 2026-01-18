@@ -54,3 +54,9 @@ Player_Resigned	$Player$ has resigned.
 Player_Lost	$Player$ has lost.
 Resigned	(Resigned)
 Next_Card	Next card: $Card$
+CardIcon	CardIcon
+CoinIcon	CoinIcon
+BoneIcon	BoneIcon
+WeaponIcon	WeaponIcon
+TextIcon	TextIcon
+CrownIcon	CrownIcon

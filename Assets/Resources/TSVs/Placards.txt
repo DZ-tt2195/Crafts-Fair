@@ -1,0 +1,2 @@
+cardName	textBox	crownAmount	artCredit	notes
+Acolyte	#N/A	0	Hans Krill|Dominion: Allies|(Acolyte)	LoseShield, HealAny

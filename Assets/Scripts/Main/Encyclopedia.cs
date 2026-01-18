@@ -24,13 +24,13 @@ public class Encyclopedia : MonoBehaviour
         typeOneDropdown.dropdown.onValueChanged.AddListener(NewSort);
         typeTwoDropdown.dropdown.onValueChanged.AddListener(NewSort);
 
-        for (int i = 0; i < GameFiles.inst.playerCardFiles.Count; i++)
+        for (int i = 0; i < GameFiles.inst.placardFiles.Count; i++)
         {
             for (int j = 0; j < 1; j++)
             {
                 GameObject nextCard = Instantiate(cardPrefab.gameObject);
                 Card cardPV = nextCard.GetComponent<Card>();
-                cardPV.AssignCard(GameFiles.inst.playerCardFiles[i], 1f);
+                cardPV.AssignCard(GameFiles.inst.placardFiles[i], 1f);
                 allCards.Add(cardPV);
             }
         }

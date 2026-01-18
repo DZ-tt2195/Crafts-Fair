@@ -39,7 +39,11 @@ public class CardLayout : MonoBehaviour, IPointerClickHandler
 
         if (newCard)
         {
-            cardName.text = KeywordTooltip.instance.EditText($"{Translator.inst.Translate(dataFile.cardName)} {dataFile.startingHealth}");
+            if (dataFile.crownAmount >= 1)
+                cardName.text = KeywordTooltip.instance.EditText($"{Translator.inst.Translate(dataFile.cardName)} {dataFile.crownAmount} {AutoTranslate.CrownIcon()}");
+            else
+                cardName.text = KeywordTooltip.instance.EditText($"{Translator.inst.Translate(dataFile.cardName)}");
+            
             cardArt.sprite = dataFile.sprite;
             textBox.text = Translator.inst.Translate($"{dataFile.cardName}_Text");
         }

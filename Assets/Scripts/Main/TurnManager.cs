@@ -122,10 +122,29 @@ public class TurnManager : PhotonCompatible
         }
         else
         {
+            string currentPhase = (string)GetRoomProperty(ConstantStrings.CurrentPhase);
             string nextPhase = (string)GetRoomProperty(ConstantStrings.NextPhase);
+
+            if (currentPhase.Equals(nameof(ResolveCard)))
+            {
+                List<Card> deck = GetCardList(ConstantStrings.ProgressDeck);
+                List<Card> discard = GetCardList(ConstantStrings.ProgressDiscard);
+
+                Card top = deck[0];
+                deck.RemoveAt(0);
+                discard.Add(top);
+
+                InstantChangeRoomProp(ConstantStrings.ProgressDeck, ConvertCardList(deck));
+                InstantChangeRoomProp(ConstantStrings.ProgressDiscard, ConvertCardList(discard));
+            }
+
             if (nextPhase.Equals(nameof(ResolveCard)) && GetCardList(ConstantStrings.ProgressDeck).Count == 0)
             {
-                //shuffle progress discard
+                List<Card> discard = GetCardList(ConstantStrings.ProgressDiscard);
+                discard = discard.Shuffle();
+
+                InstantChangeRoomProp(ConstantStrings.ProgressDeck, ConvertCardList(discard));
+                InstantChangeRoomProp(ConstantStrings.ProgressDiscard, new int[0]);
             }
 
             InstantChangeRoomProp(ConstantStrings.NextPhase, nameof(ResolveCard));
@@ -168,23 +187,17 @@ public class TurnManager : PhotonCompatible
         else
             return GetPlayerProperty(player.photonView.Owner, property);
     }
-
     public int GetInt(string property, Player player) => (int)FindThisProperty(property, player);
-
     public int GetInt(string property) => (int)FindThisProperty(property, null);
     public int[] GetIntArray(string property, Player player) => (int[])FindThisProperty(property, player);
     public int[] GetIntArray(string property) => (int[])FindThisProperty(property, null);
-
     public List<string> GetStringList(string property, Player player)
     {
         string[] stringArray = (string[])FindThisProperty(property, player);
         return stringArray.ToList();
     }
-
     public List<Card> GetCardList(string property, Player player) => ConvertIntArray((int[])FindThisProperty(property, player));
-
     public List<Card> GetCardList(string property) => ConvertIntArray((int[])FindThisProperty(property, null));
-
     List<Card> ConvertIntArray(int[] arrayOfPVs)
     {
         if (arrayOfPVs == null)
@@ -195,7 +208,6 @@ public class TurnManager : PhotonCompatible
             listOfCards.Add(PhotonView.Find(nextPV).GetComponent<Card>());
         return listOfCards;
     }
-
     public int[] ConvertCardList(List<Card> listOfCards)
     {
         int[] arrayOfCards = new int[listOfCards.Count];
