@@ -48,12 +48,10 @@ public class Card : PhotonCompatible
     */
     public void AssignCard(CardData dataFile, float startingAlpha)
     {
-        /*
         string noSpaces = dataFile.cardName.Replace(" ", "");
         try
         {
             thisCard = (CardType)Activator.CreateInstance(Type.GetType(noSpaces), dataFile);
-
             this.layout.FillInCards(dataFile, startingAlpha, 0);
             this.name = dataFile.cardName;
             KeywordTooltip.instance.NewCardRC(Translator.inst.Translate(dataFile.cardName), this.layout);
@@ -62,7 +60,6 @@ public class Card : PhotonCompatible
         {
             Debug.Log($"{noSpaces} failed");
         }
-        */
     }
 
     #endregion
@@ -127,71 +124,6 @@ public class Card : PhotonCompatible
         flipping = false;
     }
 
-    #endregion
-
-#region Properties
-
-/*
-    public void StunRPC(Player player, int increment, int logged = 0)
-    {
-        int roundNumber = (int)GetRoomProperty(ConstantStrings.CurrentRound) + increment;
-        Log.inst.AddMyText(true, "Stun_Card", "", this.name, roundNumber.ToString(), logged);
-        Log.inst.NewRollback(() => AddToArray(player, roundNumber, StunString()));
-    }
-
-    public bool CanUseAbility()
-    {
-        int currentRound = (int)GetRoomProperty(ConstantStrings.CurrentRound);
-        int[] stunArray = (int[])GetRoomProperty(StunString());
-        return !(stunArray.Contains(currentRound));
-    }
-
-    public void ProtectRPC(Player player, int increment, int logged = 0)
-    {
-        int roundNumber = (int)GetRoomProperty(ConstantStrings.CurrentRound) + increment;
-        Log.inst.AddMyText(true, "Protect_Card", "", this.name, roundNumber.ToString(), logged);
-        Log.inst.NewRollback(() => AddToArray(player, roundNumber, ProtectString()));
-    }
-
-    public bool CanTakeDamage()
-    {
-        int currentRound = (int)GetRoomProperty(ConstantStrings.CurrentRound);
-        int[] protectArray = (int[])GetRoomProperty(ProtectString());
-        return !(protectArray.Contains(currentRound));
-    }
-
-    void AddToArray(Player player, int round, string list)
-    {
-        List<int> convertedList = ((int[])GetRoomProperty(list)).ToList();
-        if (Log.inst.forward)
-            convertedList.Add(round);
-        else
-            convertedList.Remove(round);
-        TurnManager.inst.WillChangeMasterProperty(list, convertedList.ToArray()); player.uiDictionary[ConstantStrings.MyTroops] = true;
-    }
-
-    public void HealthRPC(Player player, int num, int logged = 0)
-    {
-        if (num == 0)
-            return;
-        else if (num > 0)
-            Log.inst.AddMyText(false, "Add_Health_Card", player.name, this.name, num.ToString(), logged);
-        else if (num < 0 && CanTakeDamage())
-            Log.inst.AddMyText(false, "Lose_Health_Card", player.name, this.name, Mathf.Abs(num).ToString(), logged);
-        else
-            return;
-        Log.inst.NewRollback(() => ChangeInt(player, num, HealthString()));
-    }
-
-    public int GetHealth() => TurnManager.inst.GetInt(this.HealthString());
-
-    void ChangeInt(Player player, int num, string property)
-    {
-        int total = TurnManager.inst.GetInt(property);
-        total += (!Log.inst.forward) ? -num : num;
-        TurnManager.inst.WillChangeMasterProperty(property, total); player.uiDictionary[ConstantStrings.MyTroops] = true;
-    }
-*/
     #endregion
 
 }

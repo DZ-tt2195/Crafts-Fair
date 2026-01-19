@@ -1,5 +1,5 @@
 Game_Designer	by Thomas Tang (DZ)
-Last_Update	Last Updated: Jan 17, 2026
+Last_Update	Last Updated: Jan 18, 2026
 Translator_Credit	Original Language
 Language	Language
 Loading	Loading
@@ -63,3 +63,28 @@ CrownIcon	CrownIcon
 Done	Done
 Pause_to_Read	A pause to let you read things.
 Pause_to_Undo	Last chance to undo anything.
+Add_New_Token	Add $Token$
+Coin1	1-CoinIcon
+Coin2	2-CoinIcon
+Coin3	3-CoinIcon
+Coin4	4-CoinIcon
+Coin5	5-CoinIcon
+Coin6	6-CoinIcon
+Bone1	1-BoneIcon
+Bone2	2-BoneIcon
+Bone3	3-BoneIcon
+Bone4	4-BoneIcon
+Bone5	5-BoneIcon
+Bone6	6-BoneIcon
+Weapon1	1-WeaponIcon
+Weapon2	2-WeaponIcon
+Weapon3	3-WeaponIcon
+Weapon4	4-WeaponIcon
+Weapon5	5-WeaponIcon
+Weapon6	6-WeaponIcon
+Text1	1-TextIcon
+Text2	2-TextIcon
+Text3	3-TextIcon
+Text4	4-TextIcon
+Text5	5-TextIcon
+Text6	6-TextIcon

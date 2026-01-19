@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class SetupWait : Turn
+public class WaitForJoiners : Turn
 {
     public override void ForPlayer(Player player)
     {

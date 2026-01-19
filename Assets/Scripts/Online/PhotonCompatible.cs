@@ -35,7 +35,6 @@ public class PhotonCompatible : MonoBehaviourPunCallbacks
         else
             info.Invoke(this, parameters);
     }
-
     public (string instruction, object[] parameters) TranslateFunction(Expression<Action> expression)
     {
         if (expression.Body is MethodCallExpression methodCall)

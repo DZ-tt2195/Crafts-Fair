@@ -209,8 +209,8 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
         ExitGames.Client.Photon.Hashtable roomProps = new()
         {
             { ConstantStrings.GameName, Application.productName },
-            { ConstantStrings.CurrentPhase, nameof(SetupWait) },
-            { ConstantStrings.NextPhase, nameof(ResolveCard) },
+            { ConstantStrings.CurrentPhase, nameof(WaitForJoiners) },
+            { ConstantStrings.NextPhase, nameof(DisplayTwists) },
             { ConstantStrings.ProgressDeck, new int[0] },
             { ConstantStrings.ProgressDiscard, new int[0] },
             { ConstantStrings.CanPlay, numPlayers },

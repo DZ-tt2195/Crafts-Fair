@@ -11,4 +11,30 @@ public class CardType
     {
         this.dataFile = dataFile;
     }
+
+#region Progress
+
+    public virtual void MasterStart()
+    {
+    }
+
+    public virtual void ForPlayer(Player player)
+    {
+    }
+
+    public virtual void MasterEnd()
+    {
+    }
+
+#endregion
+
+#region  Placard
+
+    public virtual bool CanSubmit(Player player)
+    {
+        return false;
+    }
+
+#endregion
+
 }

@@ -32,7 +32,7 @@ public class Translator : PhotonCompatible
 
     private void Start()
     {
-        TextAsset[] languageFiles = Resources.LoadAll<TextAsset>("TSVs");
+        TextAsset[] languageFiles = Resources.LoadAll<TextAsset>("Languages");
         foreach (TextAsset language in languageFiles)
         {
             string fileName = ConvertName(language);

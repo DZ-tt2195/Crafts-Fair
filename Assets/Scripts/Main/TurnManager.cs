@@ -32,27 +32,6 @@ public class TurnManager : PhotonCompatible
 
 #region Turns
 
-    string GetCurrentPhase()
-    {
-        try
-        {
-            string toReturn = (string)GetRoomProperty(ConstantStrings.CurrentPhase);
-            if (!storedTurns.ContainsKey(toReturn))
-                storedTurns.Add(toReturn, (Turn)Activator.CreateInstance(Type.GetType(toReturn)));
-            return toReturn;
-        }
-        catch
-        {
-            return nameof(SetupWait);
-        }
-    }
-
-    public (string, Action) GetTurnAction(Player player)
-    {
-        string currentPhase = GetCurrentPhase();
-        return (currentPhase, () => storedTurns[currentPhase].ForPlayer(player));
-    }
-
     public override void OnPlayerPropertiesUpdate(Photon.Realtime.Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
     {
         bool HasPropertyAndValue(ExitGames.Client.Photon.Hashtable changedProps, string propertyName, object expected)
@@ -219,7 +198,30 @@ public class TurnManager : PhotonCompatible
     #endregion
 
 #region Change Properties
-
+    string GetCurrentPhase()
+    {
+        try
+        {
+            string toReturn = (string)GetRoomProperty(ConstantStrings.CurrentPhase);
+            if (!storedTurns.ContainsKey(toReturn))
+                storedTurns.Add(toReturn, (Turn)Activator.CreateInstance(Type.GetType(toReturn)));
+            return toReturn;
+        }
+        catch
+        {
+            return nameof(WaitForJoiners);
+        }
+    }
+    public (string, Action) GetTurnAction(Player player)
+    {
+        string currentPhase = GetCurrentPhase();
+        return (currentPhase, () => storedTurns[currentPhase].ForPlayer(player));
+    }
+    public Card TopCard()
+    {
+        List<Card> deck = GetCardList(ConstantStrings.ProgressDeck); 
+        return deck[0];       
+    }
     public void WillChangePlayerProperty(Player player, string playerProperty, object changeInto)
     {
         if (!playerPropertyToChange.ContainsKey(player))

@@ -7,6 +7,7 @@ public static string Choose_One_Instruction (string Card) => Translator.inst.Tra
 public static string Discard_Instruction (string Card) => Translator.inst.Translate("Discard_Instruction", new() {("Card", Card)});
 public static string Target_Instruction (string Player,string Card) => Translator.inst.Translate("Target_Instruction", new() {("Player", Player),("Card", Card)});
 public static string Pick_Player (string Player) => Translator.inst.Translate("Pick_Player", new() {("Player", Player)});
+public static string Add_New_Token (string Token) => Translator.inst.Translate("Add_New_Token", new() {("Token", Token)});
 public static string Game_Designer() => Translator.inst.Translate("Game_Designer");
 public static string Last_Update() => Translator.inst.Translate("Last_Update");
 public static string Translator_Credit() => Translator.inst.Translate("Translator_Credit");
@@ -55,6 +56,30 @@ public static string CrownIcon() => Translator.inst.Translate("CrownIcon");
 public static string Done() => Translator.inst.Translate("Done");
 public static string Pause_to_Read() => Translator.inst.Translate("Pause_to_Read");
 public static string Pause_to_Undo() => Translator.inst.Translate("Pause_to_Undo");
+public static string Coin1() => Translator.inst.Translate("Coin1");
+public static string Coin2() => Translator.inst.Translate("Coin2");
+public static string Coin3() => Translator.inst.Translate("Coin3");
+public static string Coin4() => Translator.inst.Translate("Coin4");
+public static string Coin5() => Translator.inst.Translate("Coin5");
+public static string Coin6() => Translator.inst.Translate("Coin6");
+public static string Bone1() => Translator.inst.Translate("Bone1");
+public static string Bone2() => Translator.inst.Translate("Bone2");
+public static string Bone3() => Translator.inst.Translate("Bone3");
+public static string Bone4() => Translator.inst.Translate("Bone4");
+public static string Bone5() => Translator.inst.Translate("Bone5");
+public static string Bone6() => Translator.inst.Translate("Bone6");
+public static string Weapon1() => Translator.inst.Translate("Weapon1");
+public static string Weapon2() => Translator.inst.Translate("Weapon2");
+public static string Weapon3() => Translator.inst.Translate("Weapon3");
+public static string Weapon4() => Translator.inst.Translate("Weapon4");
+public static string Weapon5() => Translator.inst.Translate("Weapon5");
+public static string Weapon6() => Translator.inst.Translate("Weapon6");
+public static string Text1() => Translator.inst.Translate("Text1");
+public static string Text2() => Translator.inst.Translate("Text2");
+public static string Text3() => Translator.inst.Translate("Text3");
+public static string Text4() => Translator.inst.Translate("Text4");
+public static string Text5() => Translator.inst.Translate("Text5");
+public static string Text6() => Translator.inst.Translate("Text6");
 }
-public enum ToTranslate {Game_Designer,Last_Update,Translator_Credit,Language,Loading,Update_History,Upload_Translation,Download_English,Select_Region,US_West_Coast,US_East_Coast,Europe,Asia,Single_Player,Connect,Enter_username,Disconnect,Disconnected_from_server,Failed_to_connect_to_server,Reconnect,Tutorial_1,Tutorial_2,Create,Create_Room_with_players,Enter_hostname,Join,Type_in_username,Encyclopedia,Close,Type_into_chat,Undo,Short,Long,Confirm,Decline,Blank,Game_Over,Leave,Resigned,CardIcon,CoinIcon,BoneIcon,WeaponIcon,TextIcon,CrownIcon,Done,Pause_to_Read,Pause_to_Undo}
-public enum NeedSub {Player_Count,Attempt_to_reconnect,Failed_to_reconnect,Choose_One_Instruction,Discard_Instruction,Target_Instruction,Pick_Player,}
+public enum ToTranslate {Game_Designer,Last_Update,Translator_Credit,Language,Loading,Update_History,Upload_Translation,Download_English,Select_Region,US_West_Coast,US_East_Coast,Europe,Asia,Single_Player,Connect,Enter_username,Disconnect,Disconnected_from_server,Failed_to_connect_to_server,Reconnect,Tutorial_1,Tutorial_2,Create,Create_Room_with_players,Enter_hostname,Join,Type_in_username,Encyclopedia,Close,Type_into_chat,Undo,Short,Long,Confirm,Decline,Blank,Game_Over,Leave,Resigned,CardIcon,CoinIcon,BoneIcon,WeaponIcon,TextIcon,CrownIcon,Done,Pause_to_Read,Pause_to_Undo,Coin1,Coin2,Coin3,Coin4,Coin5,Coin6,Bone1,Bone2,Bone3,Bone4,Bone5,Bone6,Weapon1,Weapon2,Weapon3,Weapon4,Weapon5,Weapon6,Text1,Text2,Text3,Text4,Text5,Text6}
+public enum NeedSub {Player_Count,Attempt_to_reconnect,Failed_to_reconnect,Choose_One_Instruction,Discard_Instruction,Target_Instruction,Pick_Player,Add_New_Token,}

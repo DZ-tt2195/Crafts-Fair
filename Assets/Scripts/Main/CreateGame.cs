@@ -87,8 +87,8 @@ public class CreateGame : PhotonCompatible
                 [ConstantStrings.MyPosition] = nextPlayerPosition,
             };
 
-            List<int> startingDeck = new();
-            List<int> cardID = new();
+            List<int> startingPlacardDeck = new();
+            List<int> placardID = new();
 
             for (int i = 0; i < GameFiles.inst.placardFiles.Count; i++)
             {
@@ -97,21 +97,20 @@ public class CreateGame : PhotonCompatible
                     GameObject nextCard = MakeObject(cardPrefab.gameObject);
                     PhotonView cardPV = nextCard.GetComponent<PhotonView>();
 
-                    startingDeck.Add(cardPV.ViewID);
-                    cardID.Add(i);
+                    startingPlacardDeck.Add(cardPV.ViewID);
+                    placardID.Add(i);
                 }
             }
-            DoFunction(() => CreateCards(startingDeck.ToArray(), cardID.ToArray()));
-            startingDeck = startingDeck.Shuffle();
-            playerProps.Add(ConstantStrings.MyDeck, startingDeck.ToArray());
+            DoFunction(() => CreatePlacards(startingPlacardDeck.ToArray(), placardID.ToArray()));
+            startingPlacardDeck = startingPlacardDeck.Shuffle();
+            playerProps.Add(ConstantStrings.MyDeck, startingPlacardDeck.ToArray());
             PhotonNetwork.LocalPlayer.SetCustomProperties(playerProps);
-
             MakeObject(playerPrefab.gameObject);
         }
     }
 
     [PunRPC]
-    void CreateCards(int[] arrayOfPVs, int[] cardNames)
+    void CreatePlacards(int[] arrayOfPVs, int[] cardNames)
     {
         for (int i = 0; i<arrayOfPVs.Length; i++)
         {
@@ -159,6 +158,47 @@ public class CreateGame : PhotonCompatible
         Log.inst.ChangeScrolling();
         foreach (Player player in listOfPlayers)
             player.UpdateUI(forced);
+    }
+
+    public void CreateStartingDeck()
+    {
+        List<int> startingProgress = new();
+        List<int> startingIDs = new();
+        int numTakeTurn = 5;
+        int numGainPlacard = 2;
+
+        for (int i = 0; i<numTakeTurn; i++)
+        {
+            GameObject nextCard = MakeObject(cardPrefab.gameObject);
+            PhotonView cardPV = nextCard.GetComponent<PhotonView>();
+
+            startingProgress.Add(cardPV.ViewID);
+            startingIDs.Add(0);                    
+        }
+        for (int i = 0; i<numGainPlacard; i++)
+        {
+            GameObject nextCard = MakeObject(cardPrefab.gameObject);
+            PhotonView cardPV = nextCard.GetComponent<PhotonView>();
+
+            startingProgress.Add(cardPV.ViewID);
+            startingIDs.Add(1);                    
+        }
+        DoFunction(() => CreateStartings(startingProgress.ToArray(), startingIDs.ToArray()));
+
+        //create twists
+
+        startingProgress = startingProgress.Shuffle();
+        InstantChangeRoomProp(ConstantStrings.ProgressDeck, startingProgress.ToArray());        
+    }
+
+    [PunRPC]
+    void CreateStartings(int[] arrayOfPVs, int[] cardNames)
+    {
+        for (int i = 0; i<arrayOfPVs.Length; i++)
+        {
+            GameObject obj = PhotonView.Find(arrayOfPVs[i]).gameObject;
+            obj.GetComponent<Card>().AssignCard(GameFiles.inst.startingFiles[cardNames[i]], 0f);
+        }
     }
 
     #endregion

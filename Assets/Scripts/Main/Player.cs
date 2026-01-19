@@ -7,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Linq;
-
 public enum FindNumber {Exact, Minimum, Maximum, Not}
 public class Player : PhotonCompatible
 {
@@ -195,7 +194,7 @@ public class Player : PhotonCompatible
         endPause = true;
 
         (string phase, Action action) = TurnManager.inst.GetTurnAction(this);
-        if (phase != nameof(SetupWait))
+        if (phase != nameof(WaitForJoiners) && phase != nameof(DisplayTwists))
             Log.inst.AddMyText(true, AutoTranslate.Blank());
 
         Log.inst.NewDecisionContainer(() => action(), 0);
@@ -222,7 +221,6 @@ public class Player : PhotonCompatible
     #endregion
 
 #region UI
-
     public int[] GetCoins() => TurnManager.inst.GetIntArray(ConstantStrings.MyCoins, this);
     public int[] GetBones() => TurnManager.inst.GetIntArray(ConstantStrings.MyBones, this);
     public int[] GetWeapons() => TurnManager.inst.GetIntArray(ConstantStrings.MyWeapons, this);
@@ -306,8 +304,7 @@ public class Player : PhotonCompatible
                 toReturn.Add(new(fixedPosition, starting + difference * i));
         }
         return toReturn;
-    }
-    
+    } 
     public List<TokenDisplay> OfNumber(FindNumber toFind, int number)
     {
         List<TokenDisplay> toReturn = new();
