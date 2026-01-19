@@ -14,10 +14,8 @@ public class Player : PhotonCompatible
 #region Setup
 
     bool initialized = false;
-    public bool endPause = true;
+    [ReadOnly] public bool endPause = true;
     public int myPosition { get; private set; }
-
-    Button resignButton;
     [SerializeField] Transform keepHand;
     public Dictionary<string, bool> uiDictionary = new();
     [SerializeField] List<TokenDisplay> allCoinDisplays = new();
@@ -29,7 +27,6 @@ public class Player : PhotonCompatible
     {
         base.Awake();
         this.bottomType = this.GetType();
-        resignButton = GameObject.Find("Resign Button").GetComponent<Button>();
 
         List<string> toAdd = new() { ConstantStrings.MyPlacards, ConstantStrings.MyDiscard, ConstantStrings.MyScore, ConstantStrings.Tokens };
         foreach (string next in toAdd)
@@ -56,7 +53,7 @@ public class Player : PhotonCompatible
         myPosition = (int)GetPlayerProperty(this, ConstantStrings.MyPosition);
         CreateGame.inst.listOfPlayers.Insert(myPosition, this);
 
-        resignButton = GameObject.Find("Resign Button").GetComponent<Button>();
+        Button resignButton = GameObject.Find("Resign Button").GetComponent<Button>();
         if (photonView.AmOwner)
         {
             resignButton.onClick.AddListener(() => TurnManager.inst.TextForEnding(OnlineTranslate.Online_Player_Resigned(this.name), myPosition));
@@ -69,7 +66,6 @@ public class Player : PhotonCompatible
 #region Hand
 
     public List<Card> GetPlacards() => TurnManager.inst.GetCardList(ConstantStrings.MyPlacards, this);
-
     public void DrawPlacardRPC(int amount, int logged = 0)
     {
         if (amount <= 0)
@@ -88,12 +84,11 @@ public class Player : PhotonCompatible
         for (int i = 0; i < amount; i++)
         {
             Card card = myDeck[i];
-            //Log.inst.AddMyText(false, "Draw_Card", this.name, card.name, "", logged);
+            Log.inst.AddMyText(false, OnlineTranslate.Online_Draw_Placard(this.name, card.name), logged);
             toDraw.Add(card);
         }
         Log.inst.NewRollback(() => DrawPlacard(toDraw));
     }
-
     void DrawPlacard(List<Card> cardsToAdd)
     {
         List<Card> myPlacards = GetPlacards();
@@ -121,13 +116,11 @@ public class Player : PhotonCompatible
         TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyPlacards, TurnManager.inst.ConvertCardList(myPlacards)); uiDictionary[ConstantStrings.MyPlacards] = true;
         TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyDeck, TurnManager.inst.ConvertCardList(myDeck));
     }
-
     public void DiscardPlacardRPC(Card card, int logged)
     {
         Log.inst.NewRollback(() => DiscardPlacard(card));
-        //Log.inst.AddMyText(false, "Discard_Card", this.name, card.name, "", logged);
+        Log.inst.AddMyText(false, OnlineTranslate.Online_Discard_Placard(this.name, card.name), logged);
     }
-
     void DiscardPlacard(Card card)
     {
         List<Card> myPlacards = GetPlacards();
@@ -157,12 +150,10 @@ public class Player : PhotonCompatible
     {
         if (num == 0)
             return;
-            /*
         if (num > 0)
-            Log.inst.AddMyText(false, "Add_Health_Player", this.name, "", num.ToString(), logged);
+            Log.inst.AddMyText(false, OnlineTranslate.Online_Add_Score(this.name, num.ToString()), logged);
         else
-            Log.inst.AddMyText(false, "Lose_Health_Player", this.name, "", Mathf.Abs(num).ToString(), logged);
-            */
+            Log.inst.AddMyText(false, OnlineTranslate.Online_Lose_Score(this.name, num.ToString()), logged);
         Log.inst.NewRollback(() => ChangeScore(num));
     }
     void ChangeScore(int num)
@@ -170,6 +161,22 @@ public class Player : PhotonCompatible
         int total = TurnManager.inst.GetInt(ConstantStrings.MyScore, this);
         total += (!Log.inst.forward) ? -num : num;
         TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyScore, total); uiDictionary[ConstantStrings.MyScore] = true;
+    }
+    public void ChangeTokenRPC(int num, (int value, TokenType token) info, int logged)
+    {
+        if (num == 0)
+            return;
+        if (num > 0)
+            Log.inst.AddMyText(false, OnlineTranslate.Online_Add_Token(this.name, num.ToString(), Translator.ConvertToken(info)), logged);
+        else
+            Log.inst.AddMyText(false, OnlineTranslate.Online_Remove_Token(this.name, num.ToString(), Translator.ConvertToken(info)), logged);
+        Log.inst.NewRollback(() => ChangeToken(num, info));
+    }
+    void ChangeToken(int num, (int value, TokenType token) info)
+    {
+        int[] tokenArray = TokenToArray(info.token);
+        tokenArray[info.value] += (Log.inst.forward) ? num : -num;
+        TurnManager.inst.WillChangePlayerProperty(this, info.token.ToString(), tokenArray); uiDictionary[ConstantStrings.Tokens] = true;
     }
 
     #endregion
@@ -186,7 +193,6 @@ public class Player : PhotonCompatible
                 PhotonNetwork.Disconnect();
         }
     }
-
     public void StartTurn()
     {
         //this.DoFunction(() => this.ChangeButtonColor(false));
@@ -201,7 +207,6 @@ public class Player : PhotonCompatible
         Log.inst.NewDecisionContainer(() => EndTurn(), -1);
         Log.inst.PopStack();
     }
-
     void EndTurn()
     {
         Log.inst.inReaction.Add(Done);
@@ -221,11 +226,19 @@ public class Player : PhotonCompatible
     #endregion
 
 #region UI
-    public int[] GetCoins() => TurnManager.inst.GetIntArray(ConstantStrings.MyCoins, this);
-    public int[] GetBones() => TurnManager.inst.GetIntArray(ConstantStrings.MyBones, this);
-    public int[] GetWeapons() => TurnManager.inst.GetIntArray(ConstantStrings.MyWeapons, this);
-    public int[] GetTexts() => TurnManager.inst.GetIntArray(ConstantStrings.MyTexts, this);
+    public int[] GetCoins() => TurnManager.inst.GetIntArray(TokenType.Coin.ToString(), this);
+    public int[] GetBones() => TurnManager.inst.GetIntArray(TokenType.Bone.ToString(), this);
+    public int[] GetWeapons() => TurnManager.inst.GetIntArray(TokenType.Weapon.ToString(), this);
+    public int[] GetTexts() => TurnManager.inst.GetIntArray(TokenType.Text.ToString(), this);
     public Dictionary<TokenType, int[]> GetAllTokens() => new Dictionary<TokenType, int[]>() {{ TokenType.Coin, GetCoins() },{ TokenType.Bone, GetBones() },{ TokenType.Weapon, GetWeapons() },{ TokenType.Text, GetTexts() }};
+    public int[] TokenToArray(TokenType token)
+    {
+        if (token == TokenType.Coin) return GetCoins();
+        else if (token == TokenType.Bone) return GetBones();
+        else if (token == TokenType.Weapon) return GetWeapons();
+        else if (token == TokenType.Text) return GetTexts();
+        return null;
+    }
     public void UpdateUI(bool forcedUpdate)
     {
         List<string> uiKeys = uiDictionary.Keys.ToList();
@@ -266,15 +279,15 @@ public class Player : PhotonCompatible
 
         if (uiDictionary[ConstantStrings.Tokens])
         {
-            ApplyToken(TokenType.Coin, GetCoins(), allCoinDisplays);
-            ApplyToken(TokenType.Bone, GetBones(), allBoneDisplays);
-            ApplyToken(TokenType.Weapon, GetWeapons(), allWeaponDisplays);
-            ApplyToken(TokenType.Text, GetTexts(), allTextDisplays);
+            ApplyToken((TokenType.Coin, GetCoins()), allCoinDisplays);
+            ApplyToken((TokenType.Bone, GetBones()), allBoneDisplays);
+            ApplyToken((TokenType.Weapon, GetWeapons()), allWeaponDisplays);
+            ApplyToken((TokenType.Text, GetTexts()), allTextDisplays);
 
-            void ApplyToken(TokenType type, int[] array, List<TokenDisplay> list)
+            void ApplyToken((TokenType type, int[] array) combo, List<TokenDisplay> list)
             {
-                for (int i = 0; i<array.Length; i++)
-                    list[i].ChangeInfo(i, type, array[i].ToString());
+                for (int i = 1; i<combo.array.Length; i++)
+                    list[i].ChangeInfo(i, combo.type, combo.array[i].ToString());
             }
         }
 
@@ -305,6 +318,10 @@ public class Player : PhotonCompatible
         }
         return toReturn;
     } 
+
+#endregion
+
+#region  Helpers
     public List<TokenDisplay> OfNumber(FindNumber toFind, int number)
     {
         List<TokenDisplay> toReturn = new();
@@ -316,7 +333,7 @@ public class Player : PhotonCompatible
 
         void ApplyToken(int[] array, List<TokenDisplay> list)
         {
-            for (int i = 0; i<array.Length; i++)
+            for (int i = 1; i<array.Length; i++)
             {
                 switch (toFind)
                 {

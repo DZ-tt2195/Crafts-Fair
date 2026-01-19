@@ -157,7 +157,7 @@ public class MakeDecision : PhotonCompatible
     {
         if (listOfDisplays.Count == 1 && autoResolve)
         {
-            Log.inst.inReaction.Add(() => action?.Invoke(listOfDisplays[0].myInfo));
+            Log.inst.inReaction.Add(() => action?.Invoke(listOfDisplays[0].info));
         }
         else if (listOfDisplays.Count >= 1 || !autoResolve)
         {
@@ -176,7 +176,7 @@ public class MakeDecision : PhotonCompatible
 
                 void ClickedThis()
                 {
-                    Log.inst.inReaction.Add(() => action?.Invoke(nextDisplay.myInfo));
+                    Log.inst.inReaction.Add(() => action?.Invoke(nextDisplay.info));
                     Log.inst.PopStack();
                 }
             }

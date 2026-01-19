@@ -224,7 +224,7 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
     ExitGames.Client.Photon.Hashtable InitialPlayerProps()
     {
         Debug.Log("assigned player props");
-        int numRanks = 6;
+        int numRanks = 6+1; //index 0 is ignored in the code
 
         ExitGames.Client.Photon.Hashtable playerProps = new()
         {
@@ -232,10 +232,10 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
             [ConstantStrings.MyScore] = 0,
             [ConstantStrings.MyPosition] = -1,
 
-            [ConstantStrings.MyCoins] = new int[numRanks],
-            [ConstantStrings.MyBones] = new int[numRanks],
-            [ConstantStrings.MyWeapons] = new int[numRanks],
-            [ConstantStrings.MyTexts] = new int[numRanks],
+            [TokenType.Coin.ToString()] = new int[numRanks],
+            [TokenType.Bone.ToString()] = new int[numRanks],
+            [TokenType.Weapon.ToString()] = new int[numRanks],
+            [TokenType.Text.ToString()] = new int[numRanks],
 
             [ConstantStrings.MyPlacards] = new int[0],
             [ConstantStrings.MyDeck] = new int[0],

@@ -187,8 +187,7 @@ public class PhotonCompatible : MonoBehaviourPunCallbacks
         }
     }
 
-    public static object GetRoomProperty(string propertyName)
-        => PhotonNetwork.CurrentRoom.CustomProperties[propertyName];
+    public static object GetRoomProperty(string propertyName) => PhotonNetwork.CurrentRoom.CustomProperties[propertyName];
 
     #endregion
 

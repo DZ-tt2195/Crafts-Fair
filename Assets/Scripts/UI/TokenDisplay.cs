@@ -9,7 +9,7 @@ public class TokenDisplay : MonoBehaviour
 {
     public ButtonSelect selectMe { get; private set; }
     [SerializeField] TMP_Text description;
-    public (int,TokenType) myInfo {get; private set;}
+    public (int,TokenType) info {get; private set;}
 
     private void Awake()
     {
@@ -19,6 +19,6 @@ public class TokenDisplay : MonoBehaviour
     public void ChangeInfo(int value, TokenType token, string text)
     {
         description.text = text;
-        myInfo = (value, token);
+        info = (value, token);
     }
 }

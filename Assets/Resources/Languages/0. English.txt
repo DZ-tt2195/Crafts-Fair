@@ -88,3 +88,11 @@ Text3	3-TextIcon
 Text4	4-TextIcon
 Text5	5-TextIcon
 Text6	6-TextIcon
+Online_Add_Score	$Player$ gets +$Num$ CrownIcon.
+Online_Lose_Score	$Player$ loses $Num$ CrownIcon.
+Online_Add_Token	$Player$ adds $Num$ $Token$.
+Online_Remove_Token	$Player$ removes $Num$ $Token$.
+Online_Draw_Placard	$Player$ draws $Card$.
+Online_Draw_Placard_Others	$Player$ draws 1 CardIcon.
+Online_Discard_Placard	$Player$ discards $Card$.
+Online_Make_Submission	$Player$ submits $Num1$ tokens and $Num2$ placards.
