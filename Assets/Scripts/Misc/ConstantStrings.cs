@@ -27,4 +27,5 @@ public static class ConstantStrings
     public const string NextPlayerPosition = nameof(NextPlayerPosition);
     public const string ProgressDeck = nameof(ProgressDeck);
     public const string ProgressDiscard = nameof(ProgressDiscard);
+    public const string CardsToDisplay = nameof(CardsToDisplay);
 }

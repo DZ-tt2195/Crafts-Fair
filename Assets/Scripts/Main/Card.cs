@@ -15,6 +15,7 @@ public class Card : PhotonCompatible
     bool flipping;
     public CardType thisCard { get; private set; }
     public ButtonSelect selectMe { get; private set; }
+    public CardData dataFile {get; private set;}
 
     protected override void Awake()
     {
@@ -51,6 +52,7 @@ public class Card : PhotonCompatible
         string noSpaces = dataFile.cardName.Replace(" ", "");
         try
         {
+            this.dataFile = dataFile;
             thisCard = (CardType)Activator.CreateInstance(Type.GetType(noSpaces), dataFile);
             this.layout.FillInCards(dataFile, startingAlpha, 0);
             this.name = dataFile.cardName;

@@ -54,7 +54,7 @@ public class MakeDecision : PhotonCompatible
     [SerializeField] Transform findTextButtons;
     List<Button> textButtons = new();
     HashSet<ButtonSelect> availableUI = new();
-
+    [SerializeField] List<CardLayout> visualCards = new();
     [SerializeField] Button sliderConfirm;
     [SerializeField] Slider slider;
     [SerializeField] TMP_Text minimumText;
@@ -67,6 +67,7 @@ public class MakeDecision : PhotonCompatible
         inst = this;
         this.bottomType = this.GetType();
         slider.onValueChanged.AddListener(UpdateText);
+        VisualCards((int[])GetRoomProperty(ConstantStrings.CardsToDisplay));
 
         foreach (Transform child in findTextButtons)
         {
@@ -276,6 +277,31 @@ public class MakeDecision : PhotonCompatible
         string answer = Translator.inst.UnPackage(packagedText);
         instructionsText.text = answer;
         return answer;
+    }
+
+    void VisualCards(int[] cardIDs)
+    {
+        for (int i = 0; i<cardIDs.Length; i++)
+        {
+            Card card = PhotonView.Find(cardIDs[i]).GetComponent<Card>();
+            visualCards[i].FillInCards(card.dataFile, 1, 0);
+            visualCards[i].gameObject.SetActive(true);
+        }
+        for (int i = cardIDs.Length; i<visualCards.Count; i++)
+        {
+            visualCards[i].gameObject.SetActive(false);
+        }
+    }
+
+    public void ChangeDisplayedCards(int[] cardIDs)
+    {
+        InstantChangeRoomProp(ConstantStrings.CardsToDisplay, cardIDs);
+    }
+
+    public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
+    {
+        if (propertiesThatChanged.ContainsKey(ConstantStrings.CardsToDisplay))
+            VisualCards((int[])GetRoomProperty(ConstantStrings.CardsToDisplay));
     }
 
 #endregion

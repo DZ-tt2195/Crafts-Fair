@@ -217,6 +217,7 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
             { ConstantStrings.JoinAsSpec, false },
             { ConstantStrings.GameOver, false },
             { ConstantStrings.NextPlayerPosition, 0 },
+            { ConstantStrings.CardsToDisplay, new int[0]}
         };
         return roomProps;
     }

@@ -10,8 +10,6 @@ public class Encyclopedia : MonoBehaviour
     public static Encyclopedia inst;
     [SerializeField] Card cardPrefab;
     [SerializeField] RectTransform groupUI;
-    [SerializeField] TranslateDropdown typeOneDropdown;
-    [SerializeField] TranslateDropdown typeTwoDropdown;
     List<Card> allCards = new();
 
     private void Awake()
@@ -21,8 +19,8 @@ public class Encyclopedia : MonoBehaviour
 
     private void Start()
     {
-        typeOneDropdown.dropdown.onValueChanged.AddListener(NewSort);
-        typeTwoDropdown.dropdown.onValueChanged.AddListener(NewSort);
+        //typeOneDropdown.dropdown.onValueChanged.AddListener(NewSort);
+        //typeTwoDropdown.dropdown.onValueChanged.AddListener(NewSort);
 
         for (int i = 0; i < GameFiles.inst.placardFiles.Count; i++)
         {
@@ -39,8 +37,8 @@ public class Encyclopedia : MonoBehaviour
 
     void NewSort(int n)
     {
-        string dropdownOne = typeOneDropdown.GetOriginal();
-        string dropdownTwo = typeTwoDropdown.GetOriginal();
+        //string dropdownOne = typeOneDropdown.GetOriginal();
+        //string dropdownTwo = typeTwoDropdown.GetOriginal();
 
         foreach (Card card in allCards)
         {

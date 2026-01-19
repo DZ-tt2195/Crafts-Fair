@@ -8,6 +8,7 @@ using System.Collections;
 using MyBox;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 
 public class CreateGame : PhotonCompatible
 {
@@ -57,8 +58,8 @@ public class CreateGame : PhotonCompatible
             {
                 CommHub.inst.ShareMessageRPC(OnlineTranslate.Online_Player_Playing(playerName), true);
                 PlayerPrefs.SetString(ConstantStrings.LastRoom, PhotonNetwork.CurrentRoom.Name);
-                MakePlayerAndCards();
-
+                StartCoroutine(MakePlayerAndCards());
+                
                 if (PhotonNetwork.CurrentRoom.Players.Count == (int)GetRoomProperty(ConstantStrings.CanPlay))
                     InstantChangeRoomProp(ConstantStrings.JoinAsSpec, true, false);
             }
@@ -67,7 +68,7 @@ public class CreateGame : PhotonCompatible
         {
             PlayerPrefs.DeleteKey(ConstantStrings.LastRoom);
             InstantChangeRoomProp(ConstantStrings.CanPlay, 1);
-            MakePlayerAndCards();
+            StartCoroutine(MakePlayerAndCards());
         }
 
         IEnumerator Wait()
@@ -76,10 +77,16 @@ public class CreateGame : PhotonCompatible
             RefreshUI(true);
         }
 
-        void MakePlayerAndCards()
+        IEnumerator MakePlayerAndCards()
         {
             int nextPlayerPosition = (int)GetRoomProperty(ConstantStrings.NextPlayerPosition);
             InstantChangeRoomProp(ConstantStrings.NextPlayerPosition, nextPlayerPosition + 1);
+
+            yield return new WaitForSeconds(1f);
+            while (CardMenu.instance.gameObject.activeSelf)
+            {
+                yield return null;
+            }
 
             ExitGames.Client.Photon.Hashtable playerProps = new()
             {
@@ -164,10 +171,7 @@ public class CreateGame : PhotonCompatible
     {
         List<int> startingProgress = new();
         List<int> startingIDs = new();
-        int numTakeTurn = 5;
-        int numGainPlacard = 2;
-
-        for (int i = 0; i<numTakeTurn; i++)
+        for (int i = 0; i<5; i++)
         {
             GameObject nextCard = MakeObject(cardPrefab.gameObject);
             PhotonView cardPV = nextCard.GetComponent<PhotonView>();
@@ -175,7 +179,7 @@ public class CreateGame : PhotonCompatible
             startingProgress.Add(cardPV.ViewID);
             startingIDs.Add(0);                    
         }
-        for (int i = 0; i<numGainPlacard; i++)
+        for (int i = 0; i<2; i++)
         {
             GameObject nextCard = MakeObject(cardPrefab.gameObject);
             PhotonView cardPV = nextCard.GetComponent<PhotonView>();
@@ -185,7 +189,28 @@ public class CreateGame : PhotonCompatible
         }
         DoFunction(() => CreateStartings(startingProgress.ToArray(), startingIDs.ToArray()));
 
-        //create twists
+        HashSet<int> forcedTwists = new();
+        List<int> twistIDs = new();
+        int numTwists = 3;
+        for (int i = 1; i<=numTwists; i++)
+        {
+            GameObject nextCard = MakeObject(cardPrefab.gameObject);
+            PhotonView cardPV = nextCard.GetComponent<PhotonView>();
+            startingProgress.Add(cardPV.ViewID);
+            twistIDs.Add(cardPV.ViewID);
+
+            int chosenNumber = PlayerPrefs.GetInt($"Twist {i}");
+            if (chosenNumber >= 0)
+                forcedTwists.Add(chosenNumber);
+        }
+        while (forcedTwists.Count < numTwists)
+        {
+            int randomNum = UnityEngine.Random.Range(0, GameFiles.inst.twistFiles.Count);
+            if (!forcedTwists.Contains(randomNum))
+                forcedTwists.Add(randomNum);
+        }
+        DoFunction(() => CreateTwists(twistIDs.ToArray(), forcedTwists.ToArray()));
+        MakeDecision.inst.ChangeDisplayedCards(twistIDs.ToArray());
 
         startingProgress = startingProgress.Shuffle();
         InstantChangeRoomProp(ConstantStrings.ProgressDeck, startingProgress.ToArray());        
@@ -198,6 +223,15 @@ public class CreateGame : PhotonCompatible
         {
             GameObject obj = PhotonView.Find(arrayOfPVs[i]).gameObject;
             obj.GetComponent<Card>().AssignCard(GameFiles.inst.startingFiles[cardNames[i]], 0f);
+        }
+    }
+    [PunRPC]
+    void CreateTwists(int[] arrayOfPVs, int[] cardNames)
+    {
+        for (int i = 0; i<arrayOfPVs.Length; i++)
+        {
+            GameObject obj = PhotonView.Find(arrayOfPVs[i]).gameObject;
+            obj.GetComponent<Card>().AssignCard(GameFiles.inst.twistFiles[cardNames[i]], 0f);
         }
     }
 

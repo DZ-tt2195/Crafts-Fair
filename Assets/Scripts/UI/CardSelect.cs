@@ -6,38 +6,37 @@ using System.Text.RegularExpressions;
 
 public class CardSelect : MonoBehaviour
 {
-    RectTransform rectTrans;
-    CardLayout layout;
-    Button randomButton;
-    Button chooseButton;
-
-    List<string> cardNames;
+    [SerializeField] RectTransform rectTrans;
+    [SerializeField]CardLayout layout;
+    [SerializeField]Button randomButton;
+    [SerializeField]Button chooseButton;
+    List<CardData> allData;
     bool vertical;
+    enum CardList {Placard, Twist}
+    [SerializeField] CardList toFind;
 
     private void Awake()
     {
-        rectTrans = GetComponent<RectTransform>();
-        layout = GetComponent<CardLayout>();
+        switch (toFind)
+        {
+            case CardList.Placard:
+                allData = GameFiles.inst.placardFiles;
+                break;
+            case CardList.Twist:
+                allData = GameFiles.inst.twistFiles;
+                break;
+        }
 
-        randomButton = transform.Find("Random").GetComponent<Button>();
         randomButton.onClick.AddListener(() => SetCardImage(-1));
-        chooseButton = transform.Find("Choose").GetComponent<Button>();
-
-        //cardNames = CarryVariables.inst.cardNames;
-        vertical = true;
-        chooseButton.onClick.AddListener(() => CardMenu.instance.ChooseFromList(this, cardNames, vertical));
+        chooseButton.onClick.AddListener(() => CardMenu.instance.ChooseFromList(this, allData, vertical));
     }
 
     private void Start()
     {
         if (PlayerPrefs.HasKey(this.name) && PlayerPrefs.GetInt(this.name) >= 0)
-        {
             SetCardImage(PlayerPrefs.GetInt(this.name));
-        }
         else
-        {
             SetCardImage(-1);
-        }
     }
 
     public void SetCardImage(int number)
@@ -50,10 +49,7 @@ public class CardSelect : MonoBehaviour
         else
         {
             PlayerPrefs.SetInt(this.name, number);
-            string answer = Regex.Replace(cardNames[number], "(?<=[a-z])(?=[A-Z])", " ");
-
-            Sprite sprite = Resources.Load<Sprite>($"Card Art/{answer}");
-            //layout.FillInCards(sprite, 1, vertical ? 0 : -90);
+            layout.FillInCards(allData[number], 1, vertical ? 0: -90);
         }
         PlayerPrefs.Save();
     }

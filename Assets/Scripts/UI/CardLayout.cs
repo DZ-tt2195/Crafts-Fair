@@ -37,7 +37,7 @@ public class CardLayout : MonoBehaviour, IPointerClickHandler
         this.transform.localEulerAngles = new(0, 0, rotation);
         this.rotation = rotation;
 
-        if (newCard)
+        if (dataFile != null && newCard)
         {
             if (dataFile.crownAmount >= 1)
                 cardName.text = KeywordTooltip.instance.EditText($"{Translator.inst.Translate(dataFile.cardName)} {dataFile.crownAmount} {AutoTranslate.CrownIcon()}");

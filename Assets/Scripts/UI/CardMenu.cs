@@ -6,30 +6,48 @@ using System.Collections.Generic;
 using Photon.Pun;
 using System.Text.RegularExpressions;
 
-public class CardMenu : MonoBehaviour
+public class CardMenu : PhotonCompatible
 {
     public static CardMenu instance;
     int step = 0;
-
     [SerializeField] Button confirmButton;
     [SerializeField] GridLayoutGroup storeButtons;
     CardSelect mostRecentClick;
-    List<Button> blankButtons = new();
+    List<(CardLayout, Button)> blankButtons = new();
+    [SerializeField] List<CardSelect> placardSelect = new();
+    [SerializeField] List<CardSelect> twistSelect = new();
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        this.bottomType = this.GetType();
         instance = this;
     }
 
     private void Start()
     {
-        Advance();
-        confirmButton.onClick.AddListener(Advance);
-        if (PhotonNetwork.IsConnected && PhotonNetwork.CurrentRoom.MaxPlayers >= 2)
+        string currentPhase = (string)GetRoomProperty(ConstantStrings.CurrentPhase);
+        if (!(AmMaster() && currentPhase.Equals(nameof(WaitForJoiners))))
+        {
+            foreach (CardSelect select in placardSelect)
+                select.SetCardImage(-1);
+            foreach (CardSelect select in twistSelect)
+                select.SetCardImage(-1);
             this.gameObject.SetActive(false);
+        }
+        else
+        {
+            if ((int)GetRoomProperty(ConstantStrings.CanPlay) >= 2)
+            {
+                foreach (CardSelect select in placardSelect)
+                    select.SetCardImage(-1);
+            }
+            Advance();
+            confirmButton.onClick.AddListener(Advance);
+        }
     }
 
-    public void ChooseFromList(CardSelect clicked, List<string> cardNames, bool vertical)
+    public void ChooseFromList(CardSelect clicked, List<CardData> allData, bool vertical)
     {
         mostRecentClick = clicked;
         if (vertical)
@@ -45,13 +63,10 @@ public class CardMenu : MonoBehaviour
 
         for (int i = 0; i < blankButtons.Count; i++)
         {
-            Button button = blankButtons[i];
+            (CardLayout layout, Button button) = blankButtons[i];
             try
             {
-                string answer = Regex.Replace(cardNames[i], "(?<=[a-z])(?=[A-Z])", " ");
-                Sprite data = Resources.Load<Sprite>($"Card Art/{answer}");
-
-                //button.GetComponent<CardLayout>().FillInCards(data, 1, vertical ? 0 : -90);
+                layout.FillInCards(allData[i], 1, vertical ? 0 : -90);
                 button.gameObject.SetActive(true);
             }
             catch
@@ -65,8 +80,8 @@ public class CardMenu : MonoBehaviour
     {
         mostRecentClick.SetCardImage(number);
         mostRecentClick = null;
-        foreach (Button button in blankButtons)
-            button.gameObject.SetActive(false);
+        foreach (var thing in blankButtons)
+            thing.Item1.gameObject.SetActive(false);
     }
 
     void Advance()
@@ -76,7 +91,7 @@ public class CardMenu : MonoBehaviour
             for (int i = 0; i < storeButtons.transform.childCount; i++)
             {
                 Button nextButton = storeButtons.transform.GetChild(i).gameObject.GetComponent<Button>();
-                blankButtons.Add(nextButton);
+                blankButtons.Add((nextButton.GetComponent<CardLayout>(), nextButton));
                 nextButton.interactable = true;
                 nextButton.onClick.RemoveAllListeners();
                 int number = i;

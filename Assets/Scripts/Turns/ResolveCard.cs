@@ -6,6 +6,7 @@ public class ResolveCard : Turn
     public override void MasterStart()
     {
         Card card = TurnManager.inst.TopCard();
+        MakeDecision.inst.ChangeDisplayedCards(new int[1] {card.photonView.ViewID});
         Log.inst.MasterText(true, OnlineTranslate.Online_Next_Card(card.name));
         card.thisCard.MasterStart();
     }
