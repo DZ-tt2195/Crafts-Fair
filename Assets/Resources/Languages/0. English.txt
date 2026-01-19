@@ -60,34 +60,35 @@ BoneIcon	BoneIcon
 WeaponIcon	WeaponIcon
 TextIcon	TextIcon
 CrownIcon	CrownIcon
+TokenIcon	TokenIcon
 Done	Done
 Pause_to_Read	A pause to let you read things.
 Pause_to_Undo	Last chance to undo anything.
 Add_New_Token	Add $Token$
-Coin1	1-CoinIcon
-Coin2	2-CoinIcon
-Coin3	3-CoinIcon
-Coin4	4-CoinIcon
-Coin5	5-CoinIcon
-Coin6	6-CoinIcon
-Bone1	1-BoneIcon
-Bone2	2-BoneIcon
-Bone3	3-BoneIcon
-Bone4	4-BoneIcon
-Bone5	5-BoneIcon
-Bone6	6-BoneIcon
-Weapon1	1-WeaponIcon
-Weapon2	2-WeaponIcon
-Weapon3	3-WeaponIcon
-Weapon4	4-WeaponIcon
-Weapon5	5-WeaponIcon
-Weapon6	6-WeaponIcon
-Text1	1-TextIcon
-Text2	2-TextIcon
-Text3	3-TextIcon
-Text4	4-TextIcon
-Text5	5-TextIcon
-Text6	6-TextIcon
+Coin1	CoinIcon (1)
+Coin2	CoinIcon (2)
+Coin3	CoinIcon (3)
+Coin4	CoinIcon (4)
+Coin5	CoinIcon (5)
+Coin6	CoinIcon (6)
+Bone1	BoneIcon (1)
+Bone2	BoneIcon (2)
+Bone3	BoneIcon (3)
+Bone4	BoneIcon (4)
+Bone5	BoneIcon (5)
+Bone6	BoneIcon (6)
+Weapon1	WeaponIcon (1)
+Weapon2	WeaponIcon (2)
+Weapon3	WeaponIcon (3)
+Weapon4	WeaponIcon (4)
+Weapon5	WeaponIcon (5)
+Weapon6	WeaponIcon (6)
+Text1	TextIcon (1)
+Text2	TextIcon (2)
+Text3	TextIcon (3)
+Text4	TextIcon (4)
+Text5	TextIcon (5)
+Text6	TextIcon (6)
 Online_Add_Score	$Player$ gets +$Num$ CrownIcon.
 Online_Lose_Score	$Player$ loses $Num$ CrownIcon.
 Online_Add_Token	$Player$ adds $Num$ $Token$.
@@ -96,3 +97,7 @@ Online_Draw_Placard	$Player$ draws $Card$.
 Online_Draw_Placard_Others	$Player$ draws 1 CardIcon.
 Online_Discard_Placard	$Player$ discards $Card$.
 Online_Make_Submission	$Player$ submits $Num1$ tokens and $Num2$ placards.
+Work	Work
+Work_Text	Do twice: +1 TokenIcon (1); or advance 1 TokenIcon. \nYou may submit 2-4 TokenIcon and 2-4 CardIcon.
+Request	Request
+Request_Text	 +1 CardIcon

@@ -347,6 +347,10 @@ MonoBehaviour:
     translated: 
     description: 
     color: {r: 0, g: 0, b: 0, a: 0}
+  - original: TokenIcon
+    translated: 
+    description: 
+    color: {r: 0, g: 0, b: 0, a: 0}
   tooltipText: {fileID: 1828323579}
 --- !u!1 &300021384
 GameObject:
@@ -1089,10 +1093,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hello <link="CardIcon"><sprite="CardIcon" name="CardIcon"><link="CoinIcon"><sprite="CoinIcon"
-    name="CoinIcon"></link><sprite="BoneIcon" name="BoneIcon"><link="BoneIcon"><sprite="WeaponIcon"
-    name="WeaponIcon"><link="WeaponIcon"><sprite="TextIcon" name="TextIcon"><link="TextIcon"><sprite="CrownIcon"
-    name="CrownIcon"><link="CrownIcon">
+  m_text: Hello <link="CardIcon"><sprite="CardIcon" name="CardIcon"><link="CrownIcon"><sprite="CrownIcon"
+    name="CrownIcon"><link="TokenIcon"><sprite="TokenIcon" name="TokenIcon"><link="CoinIcon"><sprite="CoinIcon"
+    name="CoinIcon"><link="BoneIcon"><sprite="BoneIcon" name="BoneIcon"><link="WeaponIcon"><sprite="WeaponIcon"
+    name="WeaponIcon"><link="TextIcon"><sprite="TextIcon" name="TextIcon">
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 31e79ddad7b2d41c395ada76a18cbcdd, type: 2}
   m_sharedMaterial: {fileID: -3852492252101762229, guid: 31e79ddad7b2d41c395ada76a18cbcdd, type: 2}
@@ -1119,7 +1123,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 100
+  m_fontSize: 63.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

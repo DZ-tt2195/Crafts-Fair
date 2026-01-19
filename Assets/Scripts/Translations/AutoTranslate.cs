@@ -53,6 +53,7 @@ public static string BoneIcon() => Translator.inst.Translate("BoneIcon");
 public static string WeaponIcon() => Translator.inst.Translate("WeaponIcon");
 public static string TextIcon() => Translator.inst.Translate("TextIcon");
 public static string CrownIcon() => Translator.inst.Translate("CrownIcon");
+public static string TokenIcon() => Translator.inst.Translate("TokenIcon");
 public static string Done() => Translator.inst.Translate("Done");
 public static string Pause_to_Read() => Translator.inst.Translate("Pause_to_Read");
 public static string Pause_to_Undo() => Translator.inst.Translate("Pause_to_Undo");
@@ -80,6 +81,10 @@ public static string Text3() => Translator.inst.Translate("Text3");
 public static string Text4() => Translator.inst.Translate("Text4");
 public static string Text5() => Translator.inst.Translate("Text5");
 public static string Text6() => Translator.inst.Translate("Text6");
+public static string Work() => Translator.inst.Translate("Work");
+public static string Work_Text() => Translator.inst.Translate("Work_Text");
+public static string Request() => Translator.inst.Translate("Request");
+public static string Request_Text() => Translator.inst.Translate("Request_Text");
 }
-public enum ToTranslate {Game_Designer,Last_Update,Translator_Credit,Language,Loading,Update_History,Upload_Translation,Download_English,Select_Region,US_West_Coast,US_East_Coast,Europe,Asia,Single_Player,Connect,Enter_username,Disconnect,Disconnected_from_server,Failed_to_connect_to_server,Reconnect,Tutorial_1,Tutorial_2,Create,Create_Room_with_players,Enter_hostname,Join,Type_in_username,Encyclopedia,Close,Type_into_chat,Undo,Short,Long,Confirm,Decline,Blank,Game_Over,Leave,Resigned,CardIcon,CoinIcon,BoneIcon,WeaponIcon,TextIcon,CrownIcon,Done,Pause_to_Read,Pause_to_Undo,Coin1,Coin2,Coin3,Coin4,Coin5,Coin6,Bone1,Bone2,Bone3,Bone4,Bone5,Bone6,Weapon1,Weapon2,Weapon3,Weapon4,Weapon5,Weapon6,Text1,Text2,Text3,Text4,Text5,Text6}
+public enum ToTranslate {Game_Designer,Last_Update,Translator_Credit,Language,Loading,Update_History,Upload_Translation,Download_English,Select_Region,US_West_Coast,US_East_Coast,Europe,Asia,Single_Player,Connect,Enter_username,Disconnect,Disconnected_from_server,Failed_to_connect_to_server,Reconnect,Tutorial_1,Tutorial_2,Create,Create_Room_with_players,Enter_hostname,Join,Type_in_username,Encyclopedia,Close,Type_into_chat,Undo,Short,Long,Confirm,Decline,Blank,Game_Over,Leave,Resigned,CardIcon,CoinIcon,BoneIcon,WeaponIcon,TextIcon,CrownIcon,TokenIcon,Done,Pause_to_Read,Pause_to_Undo,Coin1,Coin2,Coin3,Coin4,Coin5,Coin6,Bone1,Bone2,Bone3,Bone4,Bone5,Bone6,Weapon1,Weapon2,Weapon3,Weapon4,Weapon5,Weapon6,Text1,Text2,Text3,Text4,Text5,Text6,Work,Work_Text,Request,Request_Text}
 public enum NeedSub {Player_Count,Attempt_to_reconnect,Failed_to_reconnect,Choose_One_Instruction,Discard_Instruction,Target_Instruction,Pick_Player,Add_New_Token,}
