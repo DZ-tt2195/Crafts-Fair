@@ -49,18 +49,17 @@ public class Card : PhotonCompatible
     */
     public void AssignCard(CardData dataFile, float startingAlpha)
     {
-        string noSpaces = dataFile.cardName.Replace(" ", "");
         try
         {
             this.dataFile = dataFile;
-            thisCard = (CardType)Activator.CreateInstance(Type.GetType(noSpaces), dataFile);
+            thisCard = (CardType)Activator.CreateInstance(Type.GetType(dataFile.cardName), dataFile);
             this.layout.FillInCards(dataFile, startingAlpha, 0);
             this.name = dataFile.cardName;
             KeywordTooltip.instance.NewCardRC(Translator.inst.Translate(dataFile.cardName), this.layout);
         }
         catch
         {
-            Debug.Log($"{noSpaces} failed");
+            Debug.Log($"{dataFile.cardName} failed");
         }
     }
 

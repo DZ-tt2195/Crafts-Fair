@@ -171,7 +171,7 @@ public class CreateGame : PhotonCompatible
     {
         List<int> startingProgress = new();
         List<int> startingIDs = new();
-        for (int i = 0; i<5; i++)
+        for (int i = 0; i<4; i++)
         {
             GameObject nextCard = MakeObject(cardPrefab.gameObject);
             PhotonView cardPV = nextCard.GetComponent<PhotonView>();
@@ -191,7 +191,7 @@ public class CreateGame : PhotonCompatible
 
         HashSet<int> forcedTwists = new();
         List<int> twistIDs = new();
-        int numTwists = 3;
+        int numTwists = 4;
         for (int i = 1; i<=numTwists; i++)
         {
             GameObject nextCard = MakeObject(cardPrefab.gameObject);

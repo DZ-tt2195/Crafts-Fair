@@ -98,7 +98,7 @@ Online_Draw_Placard_Others	$Player$ draws 1 CardIcon.
 Online_Discard_Placard	$Player$ discards $Card$.
 Online_Make_Submission	$Player$ submits $Num1$ tokens and $Num2$ placards.
 Work	Work
-Work_Text	Do twice: +1 TokenIcon (1); or advance 1 TokenIcon. \nYou may submit 2-4 TokenIcon and 2-4 CardIcon.
+Work_Text	Choose one +1 TokenIcon (1); or advance 1 TokenIcon. \nYou may submit 2-4 TokenIcon and 2-4 CardIcon.
 Request	Request
 Request_Text	 +1 CardIcon
 Choose_Cards	Choose Cards
@@ -109,3 +109,8 @@ Custom_Placard_4	Placard 4
 Custom_Twist_1	Twist 1
 Custom_Twist_2	Twist 2
 Custom_Twist_3	Twist 3
+Custom_Twist_4	Twist 4
+Perfect_Fit	Perfect Fit
+Perfect_Fit_Text	Have 0 TokenIcon after submitting.
+Unnecessary_Surplus	Unnecessary Surplus
+Unnecessary_Surplus_Text	Have 5 TokenIcon or more after submitting.

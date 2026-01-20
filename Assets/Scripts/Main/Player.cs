@@ -230,7 +230,18 @@ public class Player : PhotonCompatible
     public int[] GetBones() => TurnManager.inst.GetIntArray(TokenType.Bone.ToString(), this);
     public int[] GetWeapons() => TurnManager.inst.GetIntArray(TokenType.Weapon.ToString(), this);
     public int[] GetTexts() => TurnManager.inst.GetIntArray(TokenType.Text.ToString(), this);
-    public Dictionary<TokenType, int[]> GetAllTokens() => new Dictionary<TokenType, int[]>() {{ TokenType.Coin, GetCoins() },{ TokenType.Bone, GetBones() },{ TokenType.Weapon, GetWeapons() },{ TokenType.Text, GetTexts() }};
+    public (int, Dictionary<TokenType, int[]>) GetAllTokens()
+    {
+        int totalTokens = 0;
+        var dictionary = new Dictionary<TokenType, int[]>();
+        foreach (TokenType value in Enum.GetValues(typeof(TokenType)))
+        {
+            int[] array = TokenToArray(value);
+            totalTokens += array.Length;
+            dictionary.Add(value, array);
+        }
+        return (totalTokens, dictionary);
+    }
     public int[] TokenToArray(TokenType token)
     {
         if (token == TokenType.Coin) return GetCoins();

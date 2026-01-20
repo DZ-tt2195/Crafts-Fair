@@ -120,7 +120,8 @@ public class Log : PhotonCompatible
         base.Awake();
         this.bottomType = this.GetType();
         inst = this;
-        undoButton.onClick.AddListener(() => InvokeUndo());
+
+        undoButton.onClick.AddListener(() => InvokeUndo(undosInLog[^1].undoToThis));
         undoButton.gameObject.SetActive(false);
         groupToWait = new(this);
         forward = true;
@@ -307,23 +308,13 @@ public class Log : PhotonCompatible
         MakeDecision.inst.ClearDecisions();
     }
 
-    void InvokeUndo()
+    public void InvokeUndo(DecisionContainer toThisPoint)
     {
-        DecisionContainer toThisPoint = undosInLog[^1].undoToThis;
         ClearCurrentDecision();
-        if (currentContainer != null && currentContainer.parent != null)
-        {
-            int index = currentContainer.parent.listOfDCs.IndexOf(currentContainer);
-            if (index == 0)
-            {
-                currentContainer.parent.listOfDCs.Clear();
-                //Debug.Log($"parent DCs cleared");
-            }
-        }
+        ClearParents(currentContainer);
         currentContainer = null;
 
         forward = false;
-
         for (int i = completedDecisions.Count - 1; i >= 0; i--)
         {
             DecisionContainer container = completedDecisions[i];
@@ -341,14 +332,22 @@ public class Log : PhotonCompatible
                 PopStack();
                 return;
             }
-            else if (container.parent != null)
+            else
+            {
+                ClearParents(container);
+            }
+        }
+
+        void ClearParents(DecisionContainer container)
+        {
+            if (container != null && container.parent != null)
             {
                 int index = container.parent.listOfDCs.IndexOf(container);
                 if (index == 0)
                 {
                     container.parent.listOfDCs.Clear();
                     //Debug.Log($"parent DCs cleared");
-                }
+                }                
             }
         }
     }

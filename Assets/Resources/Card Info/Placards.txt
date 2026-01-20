@@ -1,2 +1,3 @@
 cardName	textBox	crownAmount	artCredit	notes
-Acolyte	#N/A	0	Hans Krill|Dominion: Allies|(Acolyte)	LoseShield, HealAny
+Perfect_Fit	Have 0 TokenIcon after submitting.	1		
+Unnecessary_Surplus	Have 5 TokenIcon or more after submitting.	1		

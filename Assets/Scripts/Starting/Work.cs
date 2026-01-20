@@ -9,8 +9,7 @@ public class Work : CardType
 
     public override void ForPlayer(Player player)
     {
-        for (int i = 0; i<2; i++)
-            Log.inst.NewDecisionContainer(() => TokenStuff(player), 0);
+        Log.inst.NewDecisionContainer(() => TokenStuff(player), 0);
         Log.inst.NewDecisionContainer(() => Submit(player, new(), new()), 0);
     }
 

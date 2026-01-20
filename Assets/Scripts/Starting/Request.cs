@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class GainPlacard : CardType
+public class Request : CardType
 {
-    public GainPlacard(CardData dataFile) : base(dataFile)
+    public Request(CardData dataFile) : base(dataFile)
     {
     }
 
