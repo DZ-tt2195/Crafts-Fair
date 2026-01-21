@@ -42,6 +42,7 @@ public class TurnManager : PhotonCompatible
         if (HasPropertyAndValue(changedProps, ConstantStrings.Waiting, true))
         {
             (List<Photon.Realtime.Player> players, List<Photon.Realtime.Player> spectators) = GetPlayers(false);
+            
             int WaitingOnPlayers()
             {
                 int playersWaiting = (int)GetRoomProperty(ConstantStrings.CanPlay);

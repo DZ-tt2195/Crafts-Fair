@@ -2,9 +2,6 @@ using UnityEngine;
 
 public static class ConstantStrings
 {
-    //misc
-    public const string Tokens = nameof(Tokens);
-
     //player prefs
     public const string MyUserName = nameof(MyUserName);
     public const string LastRoom = nameof(LastRoom);

@@ -110,7 +110,22 @@ Custom_Twist_1	Twist 1
 Custom_Twist_2	Twist 2
 Custom_Twist_3	Twist 3
 Custom_Twist_4	Twist 4
+Online_No_Submission	$Player$ doesn't submit.
+Placard	Placard
 Perfect_Fit	Perfect Fit
-Perfect_Fit_Text	Have 0 TokenIcon after submitting.
+Perfect_Fit_Text	Have exactly 0 TokenIcon after submitting.
 Unnecessary_Surplus	Unnecessary Surplus
 Unnecessary_Surplus_Text	Have 5 TokenIcon or more after submitting.
+Bare_Minimum	Bare Minimum
+Bare_Minimum_Text	This submission has exactly 2 TokenIcon.
+Above_And_Beyond	Above and Beyond
+Above_And_Beyond_Text	This submission has exactly 4 TokenIcon.
+Strength_In_Numbers	Strength in Numbers
+Strength_In_Numbers_Text	This submission has exactly 4 CardIcon (including this).
+Rise_Of_Villages	Rise of Villages
+Rise_Of_Villages_Text	2 TokenIcon (2).
+Rise_Of_Kingdoms	Rise of Kingdoms
+Rise_Of_Kingdoms_Text	2 TokenIcon (4).
+Rise_Of_Empires	Rise of Empires
+Rise_Of_Empires_Text	2 TokenIcon (6).
+Twist	Twist

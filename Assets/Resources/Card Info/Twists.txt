@@ -1,2 +1,2 @@
 cardName	textBox	artCredit	notes
-Acolyte	#N/A	Hans Krill|Dominion: Allies|(Acolyte)	LoseShield, HealAny
+Acolyte	#N/A	Hans Krill|Dominion: Allies|(Acolyte)	

@@ -18,5 +18,6 @@ public static string Online_Draw_Placard (string Player,string Card) => $"Online
 public static string Online_Draw_Placard_Others (string Player) => $"Online_Draw_Placard_Others\tPlayer\t{Player}";
 public static string Online_Discard_Placard (string Player,string Card) => $"Online_Discard_Placard\tPlayer\t{Player}\tCard\t{Card}";
 public static string Online_Make_Submission (string Player,string Num1,string Num2) => $"Online_Make_Submission\tPlayer\t{Player}\tNum1\t{Num1}\tNum2\t{Num2}";
+public static string Online_No_Submission (string Player) => $"Online_No_Submission\tPlayer\t{Player}";
 }
-public enum OnlinePackage {Online_Player_Playing,Online_Player_Spectating,Online_Player_Reconnected,Online_Player_Disconnected,Online_Player_Quit,Online_Waiting_on_Players,Online_Tie_Game,Online_Player_Resigned,Online_Player_Won,Online_Next_Card,Online_Add_Score,Online_Lose_Score,Online_Add_Token,Online_Remove_Token,Online_Draw_Placard,Online_Draw_Placard_Others,Online_Discard_Placard,Online_Make_Submission}
+public enum OnlinePackage {Online_Player_Playing,Online_Player_Spectating,Online_Player_Reconnected,Online_Player_Disconnected,Online_Player_Quit,Online_Waiting_on_Players,Online_Tie_Game,Online_Player_Resigned,Online_Player_Won,Online_Next_Card,Online_Add_Score,Online_Lose_Score,Online_Add_Token,Online_Remove_Token,Online_Draw_Placard,Online_Draw_Placard_Others,Online_Discard_Placard,Online_Make_Submission,Online_No_Submission}

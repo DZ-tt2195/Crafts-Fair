@@ -94,10 +94,24 @@ public static string Custom_Twist_1() => Translator.inst.Translate("Custom_Twist
 public static string Custom_Twist_2() => Translator.inst.Translate("Custom_Twist_2");
 public static string Custom_Twist_3() => Translator.inst.Translate("Custom_Twist_3");
 public static string Custom_Twist_4() => Translator.inst.Translate("Custom_Twist_4");
+public static string Placard() => Translator.inst.Translate("Placard");
 public static string Perfect_Fit() => Translator.inst.Translate("Perfect_Fit");
 public static string Perfect_Fit_Text() => Translator.inst.Translate("Perfect_Fit_Text");
 public static string Unnecessary_Surplus() => Translator.inst.Translate("Unnecessary_Surplus");
 public static string Unnecessary_Surplus_Text() => Translator.inst.Translate("Unnecessary_Surplus_Text");
+public static string Bare_Minimum() => Translator.inst.Translate("Bare_Minimum");
+public static string Bare_Minimum_Text() => Translator.inst.Translate("Bare_Minimum_Text");
+public static string Above_And_Beyond() => Translator.inst.Translate("Above_And_Beyond");
+public static string Above_And_Beyond_Text() => Translator.inst.Translate("Above_And_Beyond_Text");
+public static string Strength_In_Numbers() => Translator.inst.Translate("Strength_In_Numbers");
+public static string Strength_In_Numbers_Text() => Translator.inst.Translate("Strength_In_Numbers_Text");
+public static string Rise_Of_Villages() => Translator.inst.Translate("Rise_Of_Villages");
+public static string Rise_Of_Villages_Text() => Translator.inst.Translate("Rise_Of_Villages_Text");
+public static string Rise_Of_Kingdoms() => Translator.inst.Translate("Rise_Of_Kingdoms");
+public static string Rise_Of_Kingdoms_Text() => Translator.inst.Translate("Rise_Of_Kingdoms_Text");
+public static string Rise_Of_Empires() => Translator.inst.Translate("Rise_Of_Empires");
+public static string Rise_Of_Empires_Text() => Translator.inst.Translate("Rise_Of_Empires_Text");
+public static string Twist() => Translator.inst.Translate("Twist");
 }
-public enum ToTranslate {Game_Designer,Last_Update,Translator_Credit,Language,Loading,Update_History,Upload_Translation,Download_English,Select_Region,US_West_Coast,US_East_Coast,Europe,Asia,Single_Player,Connect,Enter_username,Disconnect,Disconnected_from_server,Failed_to_connect_to_server,Reconnect,Tutorial_1,Tutorial_2,Create,Create_Room_with_players,Enter_hostname,Join,Type_in_username,Encyclopedia,Close,Type_into_chat,Undo,Short,Long,Confirm,Decline,Blank,Game_Over,Leave,Resigned,CardIcon,CoinIcon,BoneIcon,WeaponIcon,TextIcon,CrownIcon,TokenIcon,Done,Pause_to_Read,Pause_to_Undo,Coin1,Coin2,Coin3,Coin4,Coin5,Coin6,Bone1,Bone2,Bone3,Bone4,Bone5,Bone6,Weapon1,Weapon2,Weapon3,Weapon4,Weapon5,Weapon6,Text1,Text2,Text3,Text4,Text5,Text6,Work,Work_Text,Request,Request_Text,Choose_Cards,Custom_Placard_1,Custom_Placard_2,Custom_Placard_3,Custom_Placard_4,Custom_Twist_1,Custom_Twist_2,Custom_Twist_3,Custom_Twist_4,Perfect_Fit,Perfect_Fit_Text,Unnecessary_Surplus,Unnecessary_Surplus_Text}
+public enum ToTranslate {Game_Designer,Last_Update,Translator_Credit,Language,Loading,Update_History,Upload_Translation,Download_English,Select_Region,US_West_Coast,US_East_Coast,Europe,Asia,Single_Player,Connect,Enter_username,Disconnect,Disconnected_from_server,Failed_to_connect_to_server,Reconnect,Tutorial_1,Tutorial_2,Create,Create_Room_with_players,Enter_hostname,Join,Type_in_username,Encyclopedia,Close,Type_into_chat,Undo,Short,Long,Confirm,Decline,Blank,Game_Over,Leave,Resigned,CardIcon,CoinIcon,BoneIcon,WeaponIcon,TextIcon,CrownIcon,TokenIcon,Done,Pause_to_Read,Pause_to_Undo,Coin1,Coin2,Coin3,Coin4,Coin5,Coin6,Bone1,Bone2,Bone3,Bone4,Bone5,Bone6,Weapon1,Weapon2,Weapon3,Weapon4,Weapon5,Weapon6,Text1,Text2,Text3,Text4,Text5,Text6,Work,Work_Text,Request,Request_Text,Choose_Cards,Custom_Placard_1,Custom_Placard_2,Custom_Placard_3,Custom_Placard_4,Custom_Twist_1,Custom_Twist_2,Custom_Twist_3,Custom_Twist_4,Placard,Perfect_Fit,Perfect_Fit_Text,Unnecessary_Surplus,Unnecessary_Surplus_Text,Bare_Minimum,Bare_Minimum_Text,Above_And_Beyond,Above_And_Beyond_Text,Strength_In_Numbers,Strength_In_Numbers_Text,Rise_Of_Villages,Rise_Of_Villages_Text,Rise_Of_Kingdoms,Rise_Of_Kingdoms_Text,Rise_Of_Empires,Rise_Of_Empires_Text,Twist}
 public enum NeedSub {Player_Count,Attempt_to_reconnect,Failed_to_reconnect,Choose_One_Instruction,Discard_Instruction,Target_Instruction,Pick_Player,Add_New_Token,}
