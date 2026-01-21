@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Linq;
 
 public class Rise_Of_Villages : CardType
 {
@@ -9,12 +10,6 @@ public class Rise_Of_Villages : CardType
 
     public override bool CanSubmit(Player player, List<(int value, TokenType type)> tokensSubmitted, List<CardData> placardsSubmitted)
     {
-        int ranked2 = 0;
-        foreach (var token in tokensSubmitted)
-        {
-            if (token.value == 2)
-                ranked2++;
-        }
-        return ranked2 >= 2;
+        return tokensSubmitted.Where(info => info.value == 2).ToList().Count >= 2;
     }
 }

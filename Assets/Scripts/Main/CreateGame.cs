@@ -95,34 +95,28 @@ public class CreateGame : PhotonCompatible
             };
 
             List<int> startingPlacardDeck = new();
-            List<int> placardID = new();
-
-            for (int i = 0; i < GameFiles.inst.placardFiles.Count; i++)
+            List<int> placardIDs = new();
+            for (int i = 0; i<GameFiles.inst.placardFiles.Count; i++)
             {
-                for (int j = 0; j < 1; j++)
-                {
-                    GameObject nextCard = MakeObject(cardPrefab.gameObject);
-                    PhotonView cardPV = nextCard.GetComponent<PhotonView>();
-
-                    startingPlacardDeck.Add(cardPV.ViewID);
-                    placardID.Add(i);
-                }
+                GameObject nextCard = MakeObject(cardPrefab.gameObject);
+                PhotonView cardPV = nextCard.GetComponent<PhotonView>();
+                startingPlacardDeck.Add(cardPV.ViewID);
+                placardIDs.Add(i);
             }
-            DoFunction(() => CreatePlacards(startingPlacardDeck.ToArray(), placardID.ToArray()));
-            startingPlacardDeck = startingPlacardDeck.Shuffle();
+            placardIDs = placardIDs.Shuffle();
+
+            int forcedPlacards = 4;
+            for (int i = 1; i<=forcedPlacards; i++)
+            {
+                int chosenNumber = PlayerPrefs.GetInt($"Twist {i}");
+                if (chosenNumber >= 0 && placardIDs.Remove(chosenNumber))
+                    placardIDs.Insert(0, chosenNumber);
+            }
+
+            DoFunction(() => CreateCards("Placard", startingPlacardDeck.ToArray(), placardIDs.ToArray()));
             playerProps.Add(ConstantStrings.MyDeck, startingPlacardDeck.ToArray());
             PhotonNetwork.LocalPlayer.SetCustomProperties(playerProps);
             MakeObject(playerPrefab.gameObject);
-        }
-    }
-
-    [PunRPC]
-    void CreatePlacards(int[] arrayOfPVs, int[] cardNames)
-    {
-        for (int i = 0; i<arrayOfPVs.Length; i++)
-        {
-            GameObject obj = PhotonView.Find(arrayOfPVs[i]).gameObject;
-            obj.GetComponent<Card>().AssignCard(GameFiles.inst.placardFiles[cardNames[i]], 0f);
         }
     }
 
@@ -187,10 +181,11 @@ public class CreateGame : PhotonCompatible
             startingProgress.Add(cardPV.ViewID);
             startingIDs.Add(1);                    
         }
-        DoFunction(() => CreateStartings(startingProgress.ToArray(), startingIDs.ToArray()));
+        DoFunction(() => CreateCards("Starting", startingProgress.ToArray(), startingIDs.ToArray()));
 
         HashSet<int> forcedTwists = new();
         List<int> twistIDs = new();
+
         int numTwists = 4;
         for (int i = 1; i<=numTwists; i++)
         {
@@ -209,7 +204,7 @@ public class CreateGame : PhotonCompatible
             if (!forcedTwists.Contains(randomNum))
                 forcedTwists.Add(randomNum);
         }
-        DoFunction(() => CreateTwists(twistIDs.ToArray(), forcedTwists.ToArray()));
+        DoFunction(() => CreateCards("Twist", twistIDs.ToArray(), forcedTwists.ToArray()));
         MakeDecision.inst.ChangeDisplayedCards(twistIDs.ToArray());
 
         startingProgress = startingProgress.Shuffle();
@@ -217,21 +212,20 @@ public class CreateGame : PhotonCompatible
     }
 
     [PunRPC]
-    void CreateStartings(int[] arrayOfPVs, int[] cardNames)
+    void CreateCards(string typeToFind, int[] arrayOfPVs, int[] cardNames)
     {
+        List<CardData> toFind = new();
+        if (typeToFind.Equals("Twist"))
+            toFind = GameFiles.inst.twistFiles;
+        else if (typeToFind.Equals("Starting"))
+            toFind = GameFiles.inst.startingFiles;
+        else if (typeToFind.Equals("Placard"))
+            toFind = GameFiles.inst.placardFiles;
+
         for (int i = 0; i<arrayOfPVs.Length; i++)
         {
             GameObject obj = PhotonView.Find(arrayOfPVs[i]).gameObject;
-            obj.GetComponent<Card>().AssignCard(GameFiles.inst.startingFiles[cardNames[i]], 0f);
-        }
-    }
-    [PunRPC]
-    void CreateTwists(int[] arrayOfPVs, int[] cardNames)
-    {
-        for (int i = 0; i<arrayOfPVs.Length; i++)
-        {
-            GameObject obj = PhotonView.Find(arrayOfPVs[i]).gameObject;
-            obj.GetComponent<Card>().AssignCard(GameFiles.inst.twistFiles[cardNames[i]], 0f);
+            obj.GetComponent<Card>().AssignCard(toFind[cardNames[i]], 0f);
         }
     }
 

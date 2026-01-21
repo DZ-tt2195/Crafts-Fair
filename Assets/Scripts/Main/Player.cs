@@ -2,7 +2,6 @@ using Photon.Pun;
 using UnityEngine;
 using TMPro;
 using MyBox;
-using System.Collections;
 using System;
 using System.Collections.Generic;
 using UnityEngine.UI;
@@ -173,7 +172,7 @@ public class Player : PhotonCompatible
         total += (!Log.inst.forward) ? -num : num;
         TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyScore, total); uiDictionary[ConstantStrings.MyScore] = true;
     }
-    public void ChangeTokenRPC(int num, (int value, TokenType token) info, int logged)
+    public void ChangeTokenRPC(int num, (int value, TokenType token) info, int logged = 0)
     {
         if (num == 0)
             return;

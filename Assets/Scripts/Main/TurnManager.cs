@@ -80,7 +80,7 @@ public class TurnManager : PhotonCompatible
     void UpdateWaitingText(List<Photon.Realtime.Player> toSend, int playersWaiting)
     {
         foreach (Photon.Realtime.Player player in toSend)
-            MakeDecision.inst.DoFunction(() => MakeDecision.inst.Instructions(OnlineTranslate.Online_Waiting_on_Players(playersWaiting.ToString())), player);
+            MakeDecision.inst.DoFunction(() => MakeDecision.inst.PackagedInstructions(OnlineTranslate.Online_Waiting_on_Players(playersWaiting.ToString())), player);
     }
 
     void NextPhase()

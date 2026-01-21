@@ -111,6 +111,7 @@ Custom_Twist_2	Twist 2
 Custom_Twist_3	Twist 3
 Custom_Twist_4	Twist 4
 Online_No_Submission	$Player$ doesn't submit.
+Add_Or_Advance	Choose one: +1 TokenIcon (1), or advance 1 TokenIcon.
 Placard	Placard
 Perfect_Fit	Perfect Fit
 Perfect_Fit_Text	Have exactly 0 TokenIcon after submitting.

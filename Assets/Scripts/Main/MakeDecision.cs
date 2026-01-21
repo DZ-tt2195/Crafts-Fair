@@ -123,7 +123,6 @@ public class MakeDecision : PhotonCompatible
             }
         }
     }
-
     public void ChooseCardOnScreen(List<Card> listOfCards, string instructions, Action<Card> action = null, bool autoResolve = true)
     {
         if (listOfCards.Count == 1 && autoResolve)
@@ -153,7 +152,6 @@ public class MakeDecision : PhotonCompatible
             }
         }
     }
-
     public void ChooseDisplayOnScreen(List<TokenDisplay> listOfDisplays, string instructions, Action<(int, TokenType)> action = null, bool autoResolve = true)
     {
         if (listOfDisplays.Count == 1 && autoResolve)
@@ -211,7 +209,6 @@ public class MakeDecision : PhotonCompatible
             }
         }
     }
-
     /*
     public void ChooseCardInPopup(List<CardButtonInfo> possibleCards, string instructions, bool autoResolve = true)
     {
@@ -272,7 +269,7 @@ public class MakeDecision : PhotonCompatible
     }
 
     [PunRPC]
-    public string Instructions(string packagedText)
+    public string PackagedInstructions(string packagedText)
     {
         string answer = Translator.inst.UnPackage(packagedText);
         instructionsText.text = answer;
