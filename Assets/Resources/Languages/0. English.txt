@@ -1,5 +1,5 @@
 Game_Designer	by Thomas Tang (DZ)
-Last_Update	Last Updated: Jan 19, 2026
+Last_Update	Last Updated: Jan 21, 2026
 Translator_Credit	Original Language
 Language	Language
 Loading	Loading
@@ -112,6 +112,8 @@ Custom_Twist_3	Twist 3
 Custom_Twist_4	Twist 4
 Online_No_Submission	$Player$ doesn't submit.
 Add_Or_Advance	Choose one: +1 TokenIcon (1), or advance 1 TokenIcon.
+Ask_Submission	Submit 2-4 TokenIcon and 2-4 CardIcon?
+Undo_Submission	Undo All
 Placard	Placard
 Perfect_Fit	Perfect Fit
 Perfect_Fit_Text	Have exactly 0 TokenIcon after submitting.

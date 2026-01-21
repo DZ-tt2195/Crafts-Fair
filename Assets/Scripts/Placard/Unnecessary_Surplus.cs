@@ -7,7 +7,7 @@ public class Unnecessary_Surplus : CardType
     {
     }
 
-    public override bool CanSubmit(Player player, List<(int, TokenType)> tokensSubmitted, List<CardData> placardsSubmitted)
+    public override bool CanSubmit(Player player, List<(int value, TokenType type)> tokensSubmitted, List<Card> placardsSubmitted)
     {
         return player.GetAllTokens().Item1 >= 5;
     }

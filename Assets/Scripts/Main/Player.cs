@@ -127,7 +127,7 @@ public class Player : PhotonCompatible
         TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyPlacards, TurnManager.inst.ConvertCardList(myPlacards)); uiDictionary[ConstantStrings.MyPlacards] = true;
         TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyDeck, TurnManager.inst.ConvertCardList(myDeck));
     }
-    public void DiscardPlacardRPC(Card card, int logged)
+    public void DiscardPlacardRPC(Card card, int logged = 0)
     {
         Log.inst.NewRollback(() => DiscardPlacard(card));
         Log.inst.AddMyText(false, OnlineTranslate.Online_Discard_Placard(this.name, card.name), logged);

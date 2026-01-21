@@ -121,7 +121,7 @@ public class Log : PhotonCompatible
         this.bottomType = this.GetType();
         inst = this;
 
-        undoButton.onClick.AddListener(() => InvokeUndo(undosInLog[^1].undoToThis));
+        undoButton.onClick.AddListener(() => InvokeUndo(undosInLog[^1].undoToThis, true));
         undoButton.gameObject.SetActive(false);
         groupToWait = new(this);
         forward = true;
@@ -308,7 +308,7 @@ public class Log : PhotonCompatible
         MakeDecision.inst.ClearDecisions();
     }
 
-    public void InvokeUndo(DecisionContainer toThisPoint)
+    public void InvokeUndo(DecisionContainer toThisPoint, bool pop)
     {
         ClearCurrentDecision();
         ClearParents(currentContainer);
@@ -329,7 +329,7 @@ public class Log : PhotonCompatible
 
             if (container == toThisPoint)
             {
-                PopStack();
+                if (pop) PopStack();
                 return;
             }
             else
@@ -363,7 +363,7 @@ public class Log : PhotonCompatible
         return next;
     }
 
-    public DecisionContainer NewDecisionContainer(Expression<Action> action, int logged)
+    public DecisionContainer NewDecisionContainer(Expression<Action> action, int logged = 0)
     {
         DecisionContainer next = new(currentContainer, logged, action);
         if (currentContainer == null)

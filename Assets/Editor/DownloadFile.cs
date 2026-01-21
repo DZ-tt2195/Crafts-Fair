@@ -119,7 +119,7 @@ public static class FileManager
             writer.WriteLine("}");
             
             writer.WriteLine("public enum ToTranslate {" + toTranslateEnum + "}");
-            writer.WriteLine("public enum NeedSub {" + needSubEnum + "}");
+            //writer.WriteLine("public enum NeedSub {" + needSubEnum + "}");
         }
 
         using (StreamWriter writer = new StreamWriter("Assets/Scripts/Translations/OnlineTranslate.cs"))
@@ -153,7 +153,7 @@ public static class FileManager
             }
 
             writer.WriteLine("}");
-            writer.WriteLine("public enum OnlinePackage {" + onlineEnum + "}");
+            //writer.WriteLine("public enum OnlinePackage {" + onlineEnum + "}");
         }
 
         Debug.Log($"{noConvert.Count} enum lines, {needConvert.Count} converted lines, {online.Count} online lines");

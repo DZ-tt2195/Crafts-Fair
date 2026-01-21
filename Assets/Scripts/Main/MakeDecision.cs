@@ -88,14 +88,18 @@ public class MakeDecision : PhotonCompatible
 
     public void ChooseTextButton(List<TextButtonInfo> possibleChoices, string instructions, bool autoResolve = true)
     {
-        if (possibleChoices.Count == 1 && autoResolve)
+        if (possibleChoices.Count == 0)
+        {
+            return;
+        }
+        else if (possibleChoices.Count == 1 && autoResolve)
         {
             Log.inst.inReaction.Add(() => possibleChoices[0].action?.Invoke());
         }
-        else if (possibleChoices.Count >= 1 || !autoResolve)
+        else
         {
             Log.inst.SetUndoPoint(true);
-            instructionsText.text = instructions;
+            instructionsText.text = KeywordTooltip.instance.EditText(instructions);
 
             for (int i = 0; i<textButtons.Count; i++)
             {
@@ -125,14 +129,18 @@ public class MakeDecision : PhotonCompatible
     }
     public void ChooseCardOnScreen(List<Card> listOfCards, string instructions, Action<Card> action = null, bool autoResolve = true)
     {
-        if (listOfCards.Count == 1 && autoResolve)
+        if (listOfCards.Count == 0)
+        {
+            return;
+        }
+        else if (listOfCards.Count == 1 && autoResolve)
         {
             Log.inst.inReaction.Add(() => action?.Invoke(listOfCards[0]));
         }
-        else if (listOfCards.Count >= 1 || !autoResolve)
+        else
         {
             Log.inst.SetUndoPoint(true);
-            instructionsText.text = instructions;
+            instructionsText.text = KeywordTooltip.instance.EditText(instructions);
 
             for (int j = 0; j < listOfCards.Count; j++)
             {
@@ -154,14 +162,18 @@ public class MakeDecision : PhotonCompatible
     }
     public void ChooseDisplayOnScreen(List<TokenDisplay> listOfDisplays, string instructions, Action<(int, TokenType)> action = null, bool autoResolve = true)
     {
-        if (listOfDisplays.Count == 1 && autoResolve)
+        if (listOfDisplays.Count == 0)
+        {
+            return;
+        }
+        else if (listOfDisplays.Count == 1 && autoResolve)
         {
             Log.inst.inReaction.Add(() => action?.Invoke(listOfDisplays[0].info));
         }
-        else if (listOfDisplays.Count >= 1 || !autoResolve)
+        else
         {
             Log.inst.SetUndoPoint(true);
-            instructionsText.text = instructions;
+            instructionsText.text = KeywordTooltip.instance.EditText(instructions);
 
             for (int j = 0; j < listOfDisplays.Count; j++)
             {
@@ -191,7 +203,7 @@ public class MakeDecision : PhotonCompatible
         else
         {
             Log.inst.SetUndoPoint(true);
-            instructionsText.text = instructions;
+            instructionsText.text = KeywordTooltip.instance.EditText(instructions);
 
             slider.gameObject.SetActive(true);
             sliderConfirm.onClick.AddListener(DecisionMade);

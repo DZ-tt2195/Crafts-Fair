@@ -8,7 +8,7 @@ public class Rise_Of_Empires : CardType
     {
     }
 
-    public override bool CanSubmit(Player player, List<(int value, TokenType type)> tokensSubmitted, List<CardData> placardsSubmitted)
+    public override bool CanSubmit(Player player, List<(int value, TokenType type)> tokensSubmitted, List<Card> placardsSubmitted)
     {
         return tokensSubmitted.Where(info => info.value == 6).ToList().Count >= 2;
     }

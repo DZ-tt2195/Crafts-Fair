@@ -7,7 +7,7 @@ public class Strength_In_Numbers : CardType
     {
     }
 
-    public override bool CanSubmit(Player player, List<(int, TokenType)> tokensSubmitted, List<CardData> placardsSubmitted)
+    public override bool CanSubmit(Player player, List<(int value, TokenType type)> tokensSubmitted, List<Card> placardsSubmitted)
     {
         return (placardsSubmitted.Count + 1) == 4;
     }
