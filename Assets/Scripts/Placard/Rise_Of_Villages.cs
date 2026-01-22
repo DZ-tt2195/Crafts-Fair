@@ -8,7 +8,7 @@ public class Rise_Of_Villages : CardType
     {
     }
 
-    public override bool CanSubmit(Player player, List<(int value, TokenType type)> tokensSubmitted, List<Card> placardsSubmitted)
+    public override bool CanSubmit(Player player, List<(int value, TokenType type)> tokensSubmitted)
     {
         return tokensSubmitted.Where(info => info.value == 2).ToList().Count >= 2;
     }

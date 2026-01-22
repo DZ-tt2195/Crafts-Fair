@@ -98,7 +98,7 @@ Online_Draw_Placard_Others	$Player$ draws 1 CardIcon.
 Online_Discard_Placard	$Player$ discards $Card$.
 Online_Make_Submission	$Player$ submits $Num1$ tokens and $Num2$ placards.
 Work	Work
-Work_Text	Choose one +1 TokenIcon (1); or advance 1 TokenIcon. \nYou may submit 2-4 TokenIcon and 2-4 CardIcon.
+Work_Text	Choose one +1 TokenIcon (1); or advance 1 TokenIcon. \nYou may make a submission (at least TokenIcon and at least 2 CardIcon).
 Request	Request
 Request_Text	 +1 CardIcon
 Choose_Cards	Choose Cards
@@ -112,7 +112,7 @@ Custom_Twist_3	Twist 3
 Custom_Twist_4	Twist 4
 Online_No_Submission	$Player$ doesn't submit.
 Add_Or_Advance	Choose one: +1 TokenIcon (1), or advance 1 TokenIcon.
-Ask_Submission	Submit 2-4 TokenIcon and 2-4 CardIcon?
+Ask_Submission	Submit 2+ TokenIcon, while meeting requirements for 2+ CardIcon.
 Undo_Submission	Undo All
 Placard	Placard
 Perfect_Fit	Perfect Fit
@@ -122,9 +122,9 @@ Unnecessary_Surplus_Text	Have 5 TokenIcon or more after submitting.
 Bare_Minimum	Bare Minimum
 Bare_Minimum_Text	This submission has exactly 2 TokenIcon.
 Above_And_Beyond	Above and Beyond
-Above_And_Beyond_Text	This submission has exactly 4 TokenIcon.
+Above_And_Beyond_Text	This submission has 4 TokenIcon or more.
 Strength_In_Numbers	Strength in Numbers
-Strength_In_Numbers_Text	This submission has exactly 4 CardIcon (including this).
+Strength_In_Numbers_Text	This submission has 4 CardIcon or more (including this).
 Rise_Of_Villages	Rise of Villages
 Rise_Of_Villages_Text	2 TokenIcon (2).
 Rise_Of_Kingdoms	Rise of Kingdoms

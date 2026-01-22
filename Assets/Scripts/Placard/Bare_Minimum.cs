@@ -7,7 +7,7 @@ public class Bare_Minimum : CardType
     {
     }
 
-    public override bool CanSubmit(Player player, List<(int value, TokenType type)> tokensSubmitted, List<Card> placardsSubmitted)
+    public override bool CanSubmit(Player player, List<(int value, TokenType type)> tokensSubmitted)
     {
         return tokensSubmitted.Count == 2;
     }

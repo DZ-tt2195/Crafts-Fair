@@ -272,6 +272,7 @@ public class Player : PhotonCompatible
                     nextCard.transform.localPosition = new(0, -1000);
                 }
                 nextCard.transform.SetSiblingIndex(i);
+                nextCard.selectMe.SetBorder(false);
                 nextCard.MoveCardRPC(handPositions[i], 0.25f, Vector3.one);
 
                 if (thisPlayerPosition == -1 || thisPlayerPosition == myPosition)

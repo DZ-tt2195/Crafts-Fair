@@ -31,7 +31,6 @@ public class TurnManager : PhotonCompatible
     #endregion
 
 #region Turns
-
     public override void OnPlayerPropertiesUpdate(Photon.Realtime.Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
     {
         bool HasPropertyAndValue(ExitGames.Client.Photon.Hashtable changedProps, string propertyName, object expected)

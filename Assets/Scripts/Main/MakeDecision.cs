@@ -149,7 +149,7 @@ public class MakeDecision : PhotonCompatible
                 Button cardButton = nextCard.selectMe.button;
 
                 cardButton.interactable = true;
-                nextCard.selectMe.border.gameObject.SetActive(true);
+                nextCard.selectMe.SetBorder(true);
                 cardButton.onClick.AddListener(ClickedThis);
 
                 void ClickedThis()
@@ -182,7 +182,7 @@ public class MakeDecision : PhotonCompatible
                 Button cardButton = nextDisplay.selectMe.button;
 
                 cardButton.interactable = true;
-                nextDisplay.selectMe.border.gameObject.SetActive(true);
+                nextDisplay.selectMe.SetBorder(true);
                 cardButton.onClick.AddListener(ClickedThis);
 
                 void ClickedThis()
@@ -273,7 +273,7 @@ public class MakeDecision : PhotonCompatible
         {
             select.button.onClick.RemoveAllListeners();
             select.button.interactable = false;
-            select.border.gameObject.SetActive(false);
+            select.SetBorder(false);
         }
         availableUI.Clear();
         slider.gameObject.SetActive(false);

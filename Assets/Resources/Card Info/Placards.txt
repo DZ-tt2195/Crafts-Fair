@@ -1,9 +1,8 @@
 cardName	textBox	crownAmount	artCredit	notes
-Above_And_Beyond	This submission has exactly 4 TokenIcon.	2		
+Above_And_Beyond	This submission has 4 TokenIcon or more.	2		
 Bare_Minimum	This submission has exactly 2 TokenIcon.	1		
 Perfect_Fit	Have exactly 0 TokenIcon after submitting.	1		
 Rise_Of_Empires	2 TokenIcon (6).	6		
 Rise_Of_Kingdoms	2 TokenIcon (4).	4		
 Rise_Of_Villages	2 TokenIcon (2).	2		
-Strength_In_Numbers	This submission has exactly 4 CardIcon (including this).	2		
 Unnecessary_Surplus	Have 5 TokenIcon or more after submitting.	1		
