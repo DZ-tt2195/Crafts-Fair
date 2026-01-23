@@ -110,7 +110,7 @@ public class MakeDecision : PhotonCompatible
                     nextButton.gameObject.SetActive(true);
                     nextButton.name = info.myText;
 
-                    nextButton.transform.GetChild(0).GetComponent<TMP_Text>().text = info.myText;
+                    nextButton.transform.GetChild(0).GetComponent<TMP_Text>().text = KeywordTooltip.instance.EditText(info.myText);
                     nextButton.image.color = info.buttonColor;
                     nextButton.onClick.AddListener(Resolve);
 

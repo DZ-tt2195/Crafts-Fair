@@ -21,9 +21,11 @@ public class CardSelect : MonoBehaviour
         {
             case CardList.Placard:
                 allData = GameFiles.inst.placardFiles;
+                vertical = true;
                 break;
             case CardList.Twist:
                 allData = GameFiles.inst.twistFiles;
+                vertical = true;
                 break;
         }
 

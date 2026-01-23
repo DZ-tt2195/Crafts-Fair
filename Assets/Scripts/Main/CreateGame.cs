@@ -183,32 +183,36 @@ public class CreateGame : PhotonCompatible
         }
         DoFunction(() => CreateCards("Starting", startingProgress.ToArray(), startingIDs.ToArray()));
 
-        HashSet<int> forcedTwists = new();
+        List<int> twistDeck = new();
         List<int> twistIDs = new();
-
-        int numTwists = 4;
-        for (int i = 1; i<=numTwists; i++)
+        for (int i = 0; i<GameFiles.inst.twistFiles.Count; i++)
         {
             GameObject nextCard = MakeObject(cardPrefab.gameObject);
             PhotonView cardPV = nextCard.GetComponent<PhotonView>();
-            startingProgress.Add(cardPV.ViewID);
-            twistIDs.Add(cardPV.ViewID);
-
-            int chosenNumber = PlayerPrefs.GetInt($"Twist {i}");
-            if (chosenNumber >= 0)
-                forcedTwists.Add(chosenNumber);
+            twistDeck.Add(cardPV.ViewID);
+            twistIDs.Add(i);
         }
-        while (forcedTwists.Count < numTwists)
+        twistIDs = twistIDs.Shuffle();
+
+        int forcedTwists = 4;
+        for (int i = 1; i<=forcedTwists; i++)
         {
-            int randomNum = UnityEngine.Random.Range(0, GameFiles.inst.twistFiles.Count);
-            if (!forcedTwists.Contains(randomNum))
-                forcedTwists.Add(randomNum);
+            int chosenNumber = PlayerPrefs.GetInt($"Twist {i}");
+            if (chosenNumber >= 0 && twistIDs.Remove(chosenNumber))
+                twistIDs.Insert(0, chosenNumber);
         }
-        DoFunction(() => CreateCards("Twist", twistIDs.ToArray(), forcedTwists.ToArray()));
-        MakeDecision.inst.ChangeDisplayedCards(twistIDs.ToArray());
 
+        DoFunction(() => CreateCards("Twist", twistDeck.ToArray(), twistIDs.ToArray()));
+
+        int[] chosenTwists = new int[forcedTwists];
+        for (int i = 0; i<forcedTwists; i++)
+        {
+            startingProgress.Add(twistDeck[i]);
+            chosenTwists[i] = twistDeck[i];
+        }
         startingProgress = startingProgress.Shuffle();
-        InstantChangeRoomProp(ConstantStrings.ProgressDeck, startingProgress.ToArray());        
+        MakeDecision.inst.ChangeDisplayedCards(chosenTwists.ToArray());
+        InstantChangeRoomProp(ConstantStrings.ProgressDiscard, startingProgress.ToArray());        
     }
 
     [PunRPC]

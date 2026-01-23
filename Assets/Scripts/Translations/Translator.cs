@@ -148,7 +148,7 @@ public class Translator : PhotonCompatible
 
         List<(string, string)> toReplace = new();
         for (int i = 1; i<splitUp.Length; i+=2)
-            toReplace.Add((splitUp[i], splitUp[i+1]));
+            toReplace.Add((splitUp[i], Translate(splitUp[i+1])));
 
         string translated = Translate(targetText, toReplace);
         return KeywordTooltip.instance.EditText(translated);

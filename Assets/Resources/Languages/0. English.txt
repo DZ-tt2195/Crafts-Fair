@@ -1,5 +1,5 @@
 Game_Designer	by Thomas Tang (DZ)
-Last_Update	Last Updated: Jan 21, 2026
+Last_Update	Last Updated: Jan 22, 2026
 Translator_Credit	Original Language
 Language	Language
 Loading	Loading
@@ -53,7 +53,7 @@ Online_Tie_Game	The game is a tie.
 Online_Player_Resigned	$Player$ has resigned.
 Online_Player_Won	$Player$ has won.
 Resigned	(Resigned)
-Online_Next_Card	Next card: $Card$
+Online_Next_Card	Shuffle $Shuffle$, Card $Num$/$Max$: $Card$
 CardIcon	CardIcon
 CoinIcon	CoinIcon
 BoneIcon	BoneIcon
@@ -114,7 +114,7 @@ Online_No_Submission	$Player$ doesn't submit.
 Add_Or_Advance	Choose one: +1 TokenIcon (1), or advance 1 TokenIcon.
 Ask_Submission	Submit 2+ TokenIcon, while meeting requirements for 2+ CardIcon.
 Undo_Submission	Undo All
-Placard	Placard
+Online_Shuffle_Deck	Shuffling the deck...
 Perfect_Fit	Perfect Fit
 Perfect_Fit_Text	Have exactly 0 TokenIcon after submitting.
 Unnecessary_Surplus	Unnecessary Surplus
@@ -132,3 +132,11 @@ Rise_Of_Kingdoms_Text	2 TokenIcon (4).
 Rise_Of_Empires	Rise of Empires
 Rise_Of_Empires_Text	2 TokenIcon (6).
 Twist	Twist
+Make_Coin	Make Coin
+Make_Coin_Text	 +2 CoinIcon (1).
+Make_Bone	Make Bone
+Make_Bone_Text	 +2 BoneIcon (1).
+Make_Weapon	Make Weapon
+Make_Weapon_Text	 +2 WeaponIcon (1).
+Make_Text	Make Text
+Make_Text_Text	 +2 TextIcon (1).

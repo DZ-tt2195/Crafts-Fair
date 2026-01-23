@@ -64,13 +64,10 @@ public class TurnManager : PhotonCompatible
             if (PhotonNetwork.IsMasterClient && WaitingOnPlayers() == 0 && !(bool)GetRoomProperty(ConstantStrings.GameOver))
             {
                 foreach (Photon.Realtime.Player nextPlayer in players)
-                {
                     DoFunction(() => SharePropertyChanges(), nextPlayer);
-                }
-
                 storedTurns[GetCurrentPhase()].MasterEnd();
-                UpdateWaitingText(spectators, players.Count);
 
+                UpdateWaitingText(spectators, players.Count);
                 Invoke(nameof(NextPhase), 0.5f);
             }
         }
@@ -84,19 +81,19 @@ public class TurnManager : PhotonCompatible
 
     void NextPhase()
     {
-        (Player, int) mostScore = (null, 1000);
+        (Player, int) highestScore = (null, 0);
         foreach (Player player in CreateGame.inst.listOfPlayers)
         {
             int health = player.GetScore();
-            if (health > mostScore.Item2)
-                mostScore = (player, health);
-            else if (health == mostScore.Item2)
-                mostScore = (null, health);
+            if (health > highestScore.Item2)
+                highestScore = (player, health);
+            else if (health == highestScore.Item2)
+                highestScore = (null, health);
         }
 
-        if (mostScore.Item2 >= 20 && mostScore.Item1 != null)
+        if (highestScore.Item2 >= 20 && highestScore.Item1 != null)
         {
-            TextForEnding(OnlineTranslate.Online_Player_Won(mostScore.Item1.name), -1);
+            TextForEnding(OnlineTranslate.Online_Player_Won(highestScore.Item1.name), -1);
             InstantChangeRoomProp(ConstantStrings.CurrentPhase, nameof(Ending));
         }
         else
@@ -104,27 +101,25 @@ public class TurnManager : PhotonCompatible
             string currentPhase = (string)GetRoomProperty(ConstantStrings.CurrentPhase);
             string nextPhase = (string)GetRoomProperty(ConstantStrings.NextPhase);
 
+            List<Card> deck = GetCardList(ConstantStrings.ProgressDeck);
+            List<Card> discard = GetCardList(ConstantStrings.ProgressDiscard);
+
             if (currentPhase.Equals(nameof(ResolveCard)))
             {
-                List<Card> deck = GetCardList(ConstantStrings.ProgressDeck);
-                List<Card> discard = GetCardList(ConstantStrings.ProgressDiscard);
-
                 Card top = deck[0];
                 deck.RemoveAt(0);
                 discard.Add(top);
-
-                InstantChangeRoomProp(ConstantStrings.ProgressDeck, ConvertCardList(deck));
-                InstantChangeRoomProp(ConstantStrings.ProgressDiscard, ConvertCardList(discard));
             }
-
-            if (nextPhase.Equals(nameof(ResolveCard)) && GetCardList(ConstantStrings.ProgressDeck).Count == 0)
+            if (nextPhase.Equals(nameof(ResolveCard)) && deck.Count == 0)
             {
-                List<Card> discard = GetCardList(ConstantStrings.ProgressDiscard);
-                discard = discard.Shuffle();
-
-                InstantChangeRoomProp(ConstantStrings.ProgressDeck, ConvertCardList(discard));
-                InstantChangeRoomProp(ConstantStrings.ProgressDiscard, new int[0]);
+                InstantChangeRoomProp(ConstantStrings.Shuffle, GetInt(ConstantStrings.Shuffle)+1);
+                Log.inst.MasterText(true, AutoTranslate.Blank());
+                Log.inst.MasterText(true, OnlineTranslate.Online_Shuffle_Deck());
+                deck = discard.Shuffle();
+                discard.Clear();
             }
+            InstantChangeRoomProp(ConstantStrings.ProgressDeck, ConvertCardList(deck));
+            InstantChangeRoomProp(ConstantStrings.ProgressDiscard, ConvertCardList(discard));
 
             InstantChangeRoomProp(ConstantStrings.NextPhase, nameof(ResolveCard));
             InstantChangeRoomProp(ConstantStrings.CurrentPhase, nextPhase);
@@ -135,6 +130,7 @@ public class TurnManager : PhotonCompatible
     {
         if (propertiesThatChanged.ContainsKey(ConstantStrings.CurrentPhase))
         {
+            Debug.Log($"switched to {GetCurrentPhase()}");
             if (PhotonNetwork.IsMasterClient)
                 storedTurns[GetCurrentPhase()].MasterStart();
 

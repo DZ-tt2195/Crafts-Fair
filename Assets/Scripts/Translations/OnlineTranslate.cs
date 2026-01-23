@@ -9,7 +9,7 @@ public static string Online_Waiting_on_Players (string Num) => $"Online_Waiting_
 public static string Online_Tie_Game () => $"Online_Tie_Game";
 public static string Online_Player_Resigned (string Player) => $"Online_Player_Resigned\tPlayer\t{Player}";
 public static string Online_Player_Won (string Player) => $"Online_Player_Won\tPlayer\t{Player}";
-public static string Online_Next_Card (string Card) => $"Online_Next_Card\tCard\t{Card}";
+public static string Online_Next_Card (string Shuffle,string Num,string Max,string Card) => $"Online_Next_Card\tShuffle\t{Shuffle}\tNum\t{Num}\tMax\t{Max}\tCard\t{Card}";
 public static string Online_Add_Score (string Player,string Num) => $"Online_Add_Score\tPlayer\t{Player}\tNum\t{Num}";
 public static string Online_Lose_Score (string Player,string Num) => $"Online_Lose_Score\tPlayer\t{Player}\tNum\t{Num}";
 public static string Online_Add_Token (string Player,string Num,string Token) => $"Online_Add_Token\tPlayer\t{Player}\tNum\t{Num}\tToken\t{Token}";
@@ -19,4 +19,5 @@ public static string Online_Draw_Placard_Others (string Player) => $"Online_Draw
 public static string Online_Discard_Placard (string Player,string Card) => $"Online_Discard_Placard\tPlayer\t{Player}\tCard\t{Card}";
 public static string Online_Make_Submission (string Player,string Num1,string Num2) => $"Online_Make_Submission\tPlayer\t{Player}\tNum1\t{Num1}\tNum2\t{Num2}";
 public static string Online_No_Submission (string Player) => $"Online_No_Submission\tPlayer\t{Player}";
+public static string Online_Shuffle_Deck () => $"Online_Shuffle_Deck";
 }

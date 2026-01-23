@@ -25,4 +25,5 @@ public static class ConstantStrings
     public const string ProgressDeck = nameof(ProgressDeck);
     public const string ProgressDiscard = nameof(ProgressDiscard);
     public const string CardsToDisplay = nameof(CardsToDisplay);
+    public const string Shuffle = nameof(Shuffle);
 }
