@@ -66,7 +66,7 @@ public class CardMenu : PhotonCompatible
             (CardLayout layout, Button button) = blankButtons[i];
             try
             {
-                layout.FillInCards(allData[i], 1, vertical ? 0 : -90);
+                layout.FillInCards(allData[i], 1, vertical);
                 button.gameObject.SetActive(true);
             }
             catch

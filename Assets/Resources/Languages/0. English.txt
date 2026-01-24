@@ -115,6 +115,8 @@ Add_Or_Advance	Choose one: +1 TokenIcon (1), or advance 1 TokenIcon.
 Ask_Submission	Submit 2+ TokenIcon, while meeting requirements for 2+ CardIcon.
 Undo_Submission	Undo All
 Online_Shuffle_Deck	Shuffling the deck...
+Choose	Choose
+Random	Random
 Perfect_Fit	Perfect Fit
 Perfect_Fit_Text	Have exactly 0 TokenIcon after submitting.
 Unnecessary_Surplus	Unnecessary Surplus

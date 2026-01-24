@@ -293,7 +293,7 @@ public class MakeDecision : PhotonCompatible
         for (int i = 0; i<cardIDs.Length; i++)
         {
             Card card = PhotonView.Find(cardIDs[i]).GetComponent<Card>();
-            visualCards[i].FillInCards(card.dataFile, 1, 0);
+            visualCards[i].FillInCards(card.dataFile, 1, true);
             visualCards[i].gameObject.SetActive(true);
         }
         for (int i = cardIDs.Length; i<visualCards.Count; i++)

@@ -13,6 +13,7 @@ public class Card : PhotonCompatible
 
     public CardLayout layout { get; private set; }
     bool flipping;
+    bool vertical;
     public CardType thisCard { get; private set; }
     public ButtonSelect selectMe { get; private set; }
     public CardData dataFile {get; private set;}
@@ -47,13 +48,14 @@ public class Card : PhotonCompatible
 
     public string ProtectString() => $"{this.photonView.ViewID}_Protect";
     */
-    public void AssignCard(CardData dataFile, float startingAlpha)
+    public void AssignCard(CardData dataFile, float startingAlpha, bool vertical)
     {
         try
         {
             this.dataFile = dataFile;
+            this.vertical = vertical;
             thisCard = (CardType)Activator.CreateInstance(Type.GetType(dataFile.cardName), dataFile);
-            this.layout.FillInCards(dataFile, startingAlpha, 0);
+            this.layout.FillInCards(dataFile, startingAlpha, vertical);
             this.name = dataFile.cardName;
             KeywordTooltip.instance.NewCardRC(Translator.inst.Translate(dataFile.cardName), this.layout);
         }
@@ -89,20 +91,20 @@ public class Card : PhotonCompatible
         this.transform.localPosition = newPos;
     }
 
-    public void FlipCardRPC(float newAlpha, float totalTime, float rotation)
+    public void FlipCardRPC(float newAlpha, float totalTime)
     {
         if (!flipping && this.layout.GetAlpha() != newAlpha)
-            StartCoroutine(FlipCard(newAlpha, totalTime, rotation));
+            StartCoroutine(FlipCard(newAlpha, totalTime));
     }
 
-    IEnumerator FlipCard(float newAlpha, float totalTime, float rotation)
+    IEnumerator FlipCard(float newAlpha, float totalTime)
     {
         flipping = true;
-        transform.localEulerAngles = new Vector3(0, 0, rotation);
+        transform.localEulerAngles = new Vector3(0, 0, 0);
         float elapsedTime = 0f;
 
         Vector3 originalRot = this.transform.localEulerAngles;
-        Vector3 newRot = new(0, 90, rotation);
+        Vector3 newRot = new(0, 90, 0);
 
         while (elapsedTime < totalTime)
         {
@@ -111,7 +113,7 @@ public class Card : PhotonCompatible
             yield return null;
         }
 
-        this.layout.FillInCards(thisCard.dataFile, newAlpha, rotation);
+        this.layout.FillInCards(thisCard.dataFile, newAlpha, vertical);
         elapsedTime = 0f;
 
         while (elapsedTime < totalTime)

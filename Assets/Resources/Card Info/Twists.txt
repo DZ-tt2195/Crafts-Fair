@@ -1,2 +1,5 @@
 cardName	textBox	artCredit	notes
-Acolyte	#N/A	Hans Krill|Dominion: Allies|(Acolyte)	
+Make_Coin	 +2 CoinIcon (1).		AddCoin
+Make_Bone	 +2 BoneIcon (1).		AddBone
+Make_Weapon	 +2 WeaponIcon (1).		AddWeapon
+Make_Text	 +2 TextIcon (1).		AddText

@@ -11,7 +11,7 @@ public class CardLayout : MonoBehaviour, IPointerClickHandler
     [SerializeField] TMP_Text cardName;
     [SerializeField] TMP_Text textBox;
     CardData storedData;
-    float rotation;
+    bool vertical;
 
     public void OnPointerClick(PointerEventData eventData)
     {
@@ -21,7 +21,7 @@ public class CardLayout : MonoBehaviour, IPointerClickHandler
 
     public void RightClickedMe(float alpha)
     {
-        PermaUI.inst.RightClickDisplay(storedData, alpha == 1f, rotation);
+        PermaUI.inst.RightClickDisplay(storedData, alpha == 1f, vertical);
     }
 
     public float GetAlpha()
@@ -29,13 +29,12 @@ public class CardLayout : MonoBehaviour, IPointerClickHandler
         return cg.alpha;
     }
 
-    public void FillInCards(CardData dataFile, float alpha, float rotation)
+    public void FillInCards(CardData dataFile, float alpha, bool vertical)
     {
         bool newCard = storedData != dataFile;
         storedData = dataFile;
         cg.alpha = alpha;
-        this.transform.localEulerAngles = new(0, 0, rotation);
-        this.rotation = rotation;
+        this.vertical = vertical;
 
         if (dataFile != null && newCard)
         {

@@ -46,12 +46,12 @@ public class CardSelect : MonoBehaviour
         if (number < 0)
         {
             PlayerPrefs.SetInt(this.name, -1);
-            layout.FillInCards(null, 0, vertical ? 0 : -90);
+            layout.FillInCards(null, 0, vertical);
         }
         else
         {
             PlayerPrefs.SetInt(this.name, number);
-            layout.FillInCards(allData[number], 1, vertical ? 0: -90);
+            layout.FillInCards(allData[number], 1, vertical);
         }
         PlayerPrefs.Save();
     }

@@ -219,17 +219,27 @@ public class CreateGame : PhotonCompatible
     void CreateCards(string typeToFind, int[] arrayOfPVs, int[] cardNames)
     {
         List<CardData> toFind = new();
+        bool vertical = false;
         if (typeToFind.Equals("Twist"))
+        {
             toFind = GameFiles.inst.twistFiles;
+            vertical = true;
+        }
         else if (typeToFind.Equals("Starting"))
+        {
             toFind = GameFiles.inst.startingFiles;
+            vertical = true;
+        }
         else if (typeToFind.Equals("Placard"))
+        {
             toFind = GameFiles.inst.placardFiles;
+            vertical = true;
+        }
 
         for (int i = 0; i<arrayOfPVs.Length; i++)
         {
             GameObject obj = PhotonView.Find(arrayOfPVs[i]).gameObject;
-            obj.GetComponent<Card>().AssignCard(toFind[cardNames[i]], 0f);
+            obj.GetComponent<Card>().AssignCard(toFind[cardNames[i]], 0f, vertical);
         }
     }
 

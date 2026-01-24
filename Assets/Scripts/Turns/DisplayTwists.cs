@@ -11,6 +11,6 @@ public class DisplayTwists : Turn
 
     public override void ForPlayer(Player player)
     {
-        player.DrawPlacardRPC(4);
+        player.DrawPlacardRPC(6);
     }
 }

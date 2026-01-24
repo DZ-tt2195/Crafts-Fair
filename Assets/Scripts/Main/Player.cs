@@ -124,6 +124,7 @@ public class Player : PhotonCompatible
                 myDeck.Remove(card);
             }
         }
+        myPlacards = myPlacards.OrderBy(card => card.dataFile.crownAmount).ThenBy(card => card.dataFile.cardName).ToList();
         TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyPlacards, TurnManager.inst.ConvertCardList(myPlacards)); uiDictionary[ConstantStrings.MyPlacards] = true;
         TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyDeck, TurnManager.inst.ConvertCardList(myDeck));
     }
@@ -147,6 +148,7 @@ public class Player : PhotonCompatible
             myDiscard.Add(card);
             card.transform.SetParent(null);
         }
+        myPlacards = myPlacards.OrderBy(card => card.dataFile.crownAmount).ThenBy(card => card.dataFile.cardName).ToList();
         TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyPlacards, TurnManager.inst.ConvertCardList(myPlacards)); uiDictionary[ConstantStrings.MyPlacards] = true;
         TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyDiscard, TurnManager.inst.ConvertCardList(myDiscard)); uiDictionary[ConstantStrings.MyDiscard] = true;
     }
@@ -276,7 +278,7 @@ public class Player : PhotonCompatible
                 nextCard.MoveCardRPC(handPositions[i], 0.25f, Vector3.one);
 
                 if (thisPlayerPosition == -1 || thisPlayerPosition == myPosition)
-                    nextCard.FlipCardRPC(1, 0.25f, 0);
+                    nextCard.FlipCardRPC(1, 0.25f);
             }
         }
 

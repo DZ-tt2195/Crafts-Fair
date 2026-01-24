@@ -12,7 +12,8 @@ public class PermaUI : MonoBehaviour
     public static PermaUI inst;
 
     [SerializeField] Transform rightClickBackground;
-    [SerializeField] CardLayout rightClickCard;
+    [SerializeField] CardLayout rightClickVertical;
+    [SerializeField] CardLayout rightClickHorizontal;
     [SerializeField] TMP_Text artistCredit;
     [SerializeField] Transform permanentCanvas;
 
@@ -49,11 +50,17 @@ public class PermaUI : MonoBehaviour
             rightClickBackground.gameObject.SetActive(false);
     }
 
-    public void RightClickDisplay(CardData dataFile, bool visible, float rotation)
+    public void RightClickDisplay(CardData dataFile, bool visible, bool vertical)
     {
         rightClickBackground.gameObject.SetActive(true);
-        rightClickCard.gameObject.SetActive(true);
-        rightClickCard.FillInCards(dataFile, visible ? 1f : 0f, rotation);
+        rightClickVertical.gameObject.SetActive(vertical);
+        rightClickHorizontal.gameObject.SetActive(!vertical);
+
+        if (vertical)
+            rightClickVertical.FillInCards(dataFile, visible ? 1f : 0f, vertical);
+        else
+            rightClickHorizontal.FillInCards(dataFile, visible ? 1f : 0f, vertical);
+
         if (visible)
             artistCredit.text = dataFile.artCredit;
         else
