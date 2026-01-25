@@ -13,6 +13,7 @@ public static class ConstantStrings
     public const string MyPlacards = nameof(MyPlacards);
     public const string MyDeck = nameof(MyDeck);
     public const string MyDiscard = nameof(MyDiscard);
+    public const string MyToken = nameof(MyToken);
 
     //room properties
     public const string GameName = nameof(GameName);

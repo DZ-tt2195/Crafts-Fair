@@ -81,15 +81,7 @@ public static string Text3() => Translator.inst.Translate("Text3");
 public static string Text4() => Translator.inst.Translate("Text4");
 public static string Text5() => Translator.inst.Translate("Text5");
 public static string Text6() => Translator.inst.Translate("Text6");
-public static string Work() => Translator.inst.Translate("Work");
-public static string Work_Text() => Translator.inst.Translate("Work_Text");
-public static string Request() => Translator.inst.Translate("Request");
-public static string Request_Text() => Translator.inst.Translate("Request_Text");
 public static string Choose_Cards() => Translator.inst.Translate("Choose_Cards");
-public static string Custom_Placard_1() => Translator.inst.Translate("Custom_Placard_1");
-public static string Custom_Placard_2() => Translator.inst.Translate("Custom_Placard_2");
-public static string Custom_Placard_3() => Translator.inst.Translate("Custom_Placard_3");
-public static string Custom_Placard_4() => Translator.inst.Translate("Custom_Placard_4");
 public static string Custom_Twist_1() => Translator.inst.Translate("Custom_Twist_1");
 public static string Custom_Twist_2() => Translator.inst.Translate("Custom_Twist_2");
 public static string Custom_Twist_3() => Translator.inst.Translate("Custom_Twist_3");
@@ -125,4 +117,4 @@ public static string Make_Weapon_Text() => Translator.inst.Translate("Make_Weapo
 public static string Make_Text() => Translator.inst.Translate("Make_Text");
 public static string Make_Text_Text() => Translator.inst.Translate("Make_Text_Text");
 }
-public enum ToTranslate {Game_Designer,Last_Update,Translator_Credit,Language,Loading,Update_History,Upload_Translation,Download_English,Select_Region,US_West_Coast,US_East_Coast,Europe,Asia,Single_Player,Connect,Enter_username,Disconnect,Disconnected_from_server,Failed_to_connect_to_server,Reconnect,Tutorial_1,Tutorial_2,Create,Create_Room_with_players,Enter_hostname,Join,Type_in_username,Encyclopedia,Close,Type_into_chat,Undo,Short,Long,Confirm,Decline,Blank,Game_Over,Leave,Resigned,CardIcon,CoinIcon,BoneIcon,WeaponIcon,TextIcon,CrownIcon,TokenIcon,Done,Pause_to_Read,Pause_to_Undo,Coin1,Coin2,Coin3,Coin4,Coin5,Coin6,Bone1,Bone2,Bone3,Bone4,Bone5,Bone6,Weapon1,Weapon2,Weapon3,Weapon4,Weapon5,Weapon6,Text1,Text2,Text3,Text4,Text5,Text6,Work,Work_Text,Request,Request_Text,Choose_Cards,Custom_Placard_1,Custom_Placard_2,Custom_Placard_3,Custom_Placard_4,Custom_Twist_1,Custom_Twist_2,Custom_Twist_3,Custom_Twist_4,Add_Or_Advance,Ask_Submission,Undo_Submission,Choose,Random,Perfect_Fit,Perfect_Fit_Text,Unnecessary_Surplus,Unnecessary_Surplus_Text,Bare_Minimum,Bare_Minimum_Text,Above_And_Beyond,Above_And_Beyond_Text,Strength_In_Numbers,Strength_In_Numbers_Text,Rise_Of_Villages,Rise_Of_Villages_Text,Rise_Of_Kingdoms,Rise_Of_Kingdoms_Text,Rise_Of_Empires,Rise_Of_Empires_Text,Twist,Make_Coin,Make_Coin_Text,Make_Bone,Make_Bone_Text,Make_Weapon,Make_Weapon_Text,Make_Text,Make_Text_Text}
+public enum ToTranslate {Game_Designer,Last_Update,Translator_Credit,Language,Loading,Update_History,Upload_Translation,Download_English,Select_Region,US_West_Coast,US_East_Coast,Europe,Asia,Single_Player,Connect,Enter_username,Disconnect,Disconnected_from_server,Failed_to_connect_to_server,Reconnect,Tutorial_1,Tutorial_2,Create,Create_Room_with_players,Enter_hostname,Join,Type_in_username,Encyclopedia,Close,Type_into_chat,Undo,Short,Long,Confirm,Decline,Blank,Game_Over,Leave,Resigned,CardIcon,CoinIcon,BoneIcon,WeaponIcon,TextIcon,CrownIcon,TokenIcon,Done,Pause_to_Read,Pause_to_Undo,Coin1,Coin2,Coin3,Coin4,Coin5,Coin6,Bone1,Bone2,Bone3,Bone4,Bone5,Bone6,Weapon1,Weapon2,Weapon3,Weapon4,Weapon5,Weapon6,Text1,Text2,Text3,Text4,Text5,Text6,Choose_Cards,Custom_Twist_1,Custom_Twist_2,Custom_Twist_3,Custom_Twist_4,Add_Or_Advance,Ask_Submission,Undo_Submission,Choose,Random,Perfect_Fit,Perfect_Fit_Text,Unnecessary_Surplus,Unnecessary_Surplus_Text,Bare_Minimum,Bare_Minimum_Text,Above_And_Beyond,Above_And_Beyond_Text,Strength_In_Numbers,Strength_In_Numbers_Text,Rise_Of_Villages,Rise_Of_Villages_Text,Rise_Of_Kingdoms,Rise_Of_Kingdoms_Text,Rise_Of_Empires,Rise_Of_Empires_Text,Twist,Make_Coin,Make_Coin_Text,Make_Bone,Make_Bone_Text,Make_Weapon,Make_Weapon_Text,Make_Text,Make_Text_Text}

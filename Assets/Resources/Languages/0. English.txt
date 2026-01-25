@@ -1,5 +1,5 @@
 Game_Designer	by Thomas Tang (DZ)
-Last_Update	Last Updated: Jan 22, 2026
+Last_Update	Last Updated: Jan 24, 2026
 Translator_Credit	Original Language
 Language	Language
 Loading	Loading
@@ -97,15 +97,7 @@ Online_Draw_Placard	$Player$ draws $Card$.
 Online_Draw_Placard_Others	$Player$ draws 1 CardIcon.
 Online_Discard_Placard	$Player$ discards $Card$.
 Online_Make_Submission	$Player$ submits $Num1$ tokens and $Num2$ placards.
-Work	Work
-Work_Text	Choose one +1 TokenIcon (1); or advance 1 TokenIcon. \nYou may make a submission (at least TokenIcon and at least 2 CardIcon).
-Request	Request
-Request_Text	 +1 CardIcon
 Choose_Cards	Choose Cards
-Custom_Placard_1	Placard 1
-Custom_Placard_2	Placard 2
-Custom_Placard_3	Placard 3
-Custom_Placard_4	Placard 4
 Custom_Twist_1	Twist 1
 Custom_Twist_2	Twist 2
 Custom_Twist_3	Twist 3
@@ -114,7 +106,6 @@ Online_No_Submission	$Player$ doesn't submit.
 Add_Or_Advance	Choose one: +1 TokenIcon (1), or advance 1 TokenIcon.
 Ask_Submission	Submit 2+ TokenIcon, while meeting requirements for 2+ CardIcon.
 Undo_Submission	Undo All
-Online_Shuffle_Deck	Shuffling the deck...
 Choose	Choose
 Random	Random
 Perfect_Fit	Perfect Fit

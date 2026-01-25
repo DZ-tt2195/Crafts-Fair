@@ -12,23 +12,10 @@ public class CardSelect : MonoBehaviour
     [SerializeField]Button chooseButton;
     List<CardData> allData;
     bool vertical;
-    enum CardList {Placard, Twist}
-    [SerializeField] CardList toFind;
 
     private void Awake()
     {
-        switch (toFind)
-        {
-            case CardList.Placard:
-                allData = GameFiles.inst.placardFiles;
-                vertical = true;
-                break;
-            case CardList.Twist:
-                allData = GameFiles.inst.twistFiles;
-                vertical = true;
-                break;
-        }
-
+        vertical = false;
         randomButton.onClick.AddListener(() => SetCardImage(-1));
         chooseButton.onClick.AddListener(() => CardMenu.instance.ChooseFromList(this, allData, vertical));
     }

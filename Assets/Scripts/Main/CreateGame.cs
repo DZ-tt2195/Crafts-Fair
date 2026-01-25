@@ -26,7 +26,6 @@ public class CreateGame : PhotonCompatible
     public float opacity { get; private set; }
     bool decrease = true;
     public Canvas canvas { get; private set; }
-
     protected override void Awake()
     {
         base.Awake();
@@ -105,14 +104,6 @@ public class CreateGame : PhotonCompatible
             }
             placardIDs = placardIDs.Shuffle();
 
-            int forcedPlacards = 4;
-            for (int i = 1; i<=forcedPlacards; i++)
-            {
-                int chosenNumber = PlayerPrefs.GetInt($"Twist {i}");
-                if (chosenNumber >= 0 && placardIDs.Remove(chosenNumber))
-                    placardIDs.Insert(0, chosenNumber);
-            }
-
             DoFunction(() => CreateCards("Placard", startingPlacardDeck.ToArray(), placardIDs.ToArray()));
             playerProps.Add(ConstantStrings.MyDeck, startingPlacardDeck.ToArray());
             PhotonNetwork.LocalPlayer.SetCustomProperties(playerProps);
@@ -163,26 +154,6 @@ public class CreateGame : PhotonCompatible
 
     public void CreateStartingDeck()
     {
-        List<int> startingProgress = new();
-        List<int> startingIDs = new();
-        for (int i = 0; i<4; i++)
-        {
-            GameObject nextCard = MakeObject(cardPrefab.gameObject);
-            PhotonView cardPV = nextCard.GetComponent<PhotonView>();
-
-            startingProgress.Add(cardPV.ViewID);
-            startingIDs.Add(0);                    
-        }
-        for (int i = 0; i<2; i++)
-        {
-            GameObject nextCard = MakeObject(cardPrefab.gameObject);
-            PhotonView cardPV = nextCard.GetComponent<PhotonView>();
-
-            startingProgress.Add(cardPV.ViewID);
-            startingIDs.Add(1);                    
-        }
-        DoFunction(() => CreateCards("Starting", startingProgress.ToArray(), startingIDs.ToArray()));
-
         List<int> twistDeck = new();
         List<int> twistIDs = new();
         for (int i = 0; i<GameFiles.inst.twistFiles.Count; i++)
@@ -203,14 +174,9 @@ public class CreateGame : PhotonCompatible
         }
 
         DoFunction(() => CreateCards("Twist", twistDeck.ToArray(), twistIDs.ToArray()));
-
         int[] chosenTwists = new int[forcedTwists];
         for (int i = 0; i<forcedTwists; i++)
-        {
-            startingProgress.Add(twistDeck[i]);
             chosenTwists[i] = twistDeck[i];
-        }
-        startingProgress = startingProgress.Shuffle();
         InstantChangeRoomProp(ConstantStrings.TwistList, chosenTwists.ToArray());
     }
 
@@ -222,11 +188,6 @@ public class CreateGame : PhotonCompatible
         if (typeToFind.Equals("Twist"))
         {
             toFind = GameFiles.inst.twistFiles;
-            vertical = true;
-        }
-        else if (typeToFind.Equals("Starting"))
-        {
-            toFind = GameFiles.inst.startingFiles;
             vertical = true;
         }
         else if (typeToFind.Equals("Placard"))

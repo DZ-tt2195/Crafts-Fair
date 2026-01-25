@@ -664,7 +664,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1761235060413094877, guid: d50eb448d0731474ebebdd3627d1ec5a, type: 3}
       propertyPath: m_Name
-      value: Vertical
+      value: Vertical Card
       objectReference: {fileID: 0}
     - target: {fileID: 2383158818842941943, guid: d50eb448d0731474ebebdd3627d1ec5a, type: 3}
       propertyPath: sceneViewId
@@ -1290,7 +1290,10 @@ PrefabInstance:
       propertyPath: sceneViewId
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4752275793854564576, guid: 4d0686b994da1445589ed656148a7cae, type: 3}
+    - {fileID: 2383158818842941943, guid: 4d0686b994da1445589ed656148a7cae, type: 3}
+    - {fileID: 3197849793019336440, guid: 4d0686b994da1445589ed656148a7cae, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []

@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.UI;
@@ -14,18 +15,25 @@ public class TakeTurn : Turn
     {
         List<TextButtonInfo> addTokens = new()
         {
-            new(AutoTranslate.Coin1(), () => player.ChangeTokenRPC(1, (1, TokenType.Coin))),
-            new(AutoTranslate.Bone1(), () => player.ChangeTokenRPC(1, (1, TokenType.Bone))),
-            new(AutoTranslate.Weapon1(), () => player.ChangeTokenRPC(1, (1, TokenType.Weapon))),
-            new(AutoTranslate.Text1(), () => player.ChangeTokenRPC(1, (1, TokenType.Text)))
+            new(AutoTranslate.Coin1(), () => AddThis(TokenType.Coin)),
+            new(AutoTranslate.Bone1(), () => AddThis(TokenType.Bone)),
+            new(AutoTranslate.Weapon1(), () => AddThis(TokenType.Weapon)),
+            new(AutoTranslate.Text1(), () => AddThis(TokenType.Text))
         };
         MakeDecision.inst.ChooseTextButton(addTokens, AutoTranslate.Add_Or_Advance());
 
         List<TokenDisplay> canAdvance = player.OfNumber(FindNumber.Minimum, 1).Where(display => display.info.Item1 != 6).ToList();
         MakeDecision.inst.ChooseDisplayOnScreen(canAdvance, AutoTranslate.Add_Or_Advance(), AdvanceThis);
 
+        void AddThis(TokenType type)
+        {
+            TurnManager.inst.WillChangePlayerProperty(player, ConstantStrings.MyToken, type.ToString());
+            player.ChangeTokenRPC(1, (1, type));
+        }
+
         void AdvanceThis((int value, TokenType type) info)
         {
+            TurnManager.inst.WillChangePlayerProperty(player, ConstantStrings.MyToken, info.type.ToString());
             player.ChangeTokenRPC(-1, info);
             player.ChangeTokenRPC(1, (info.value+1, info.type));
         }

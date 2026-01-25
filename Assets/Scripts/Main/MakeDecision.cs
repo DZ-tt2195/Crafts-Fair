@@ -6,6 +6,12 @@ using System.Collections;
 using TMPro;
 using MyBox;
 using Photon.Pun;
+[System.Serializable]
+public class TwistVisual
+{
+    public Card card;
+    public TMP_Text countText;
+}
 
 public class CardButtonInfo
 {
@@ -54,13 +60,12 @@ public class MakeDecision : PhotonCompatible
     [SerializeField] Transform findTextButtons;
     List<Button> textButtons = new();
     HashSet<ButtonSelect> availableUI = new();
-    [SerializeField] List<CardLayout> visualCards = new();
+    [SerializeField] List<TwistVisual> twistInfo = new();
     [SerializeField] Button sliderConfirm;
     [SerializeField] Slider slider;
     [SerializeField] TMP_Text minimumText;
     [SerializeField] TMP_Text maximumText;
     [SerializeField] TMP_Text currentText;
-    List<Card> twistList = new();
 
     protected override void Awake()
     {
@@ -294,18 +299,15 @@ public class MakeDecision : PhotonCompatible
 #region  Twists
     void VisualCards(int[] cardIDs)
     {
-        twistList = new();
-
         for (int i = 0; i<cardIDs.Length; i++)
         {
-            Card card = PhotonView.Find(cardIDs[i]).GetComponent<Card>();
-            twistList.Add(card);
-            visualCards[i].FillInCards(card.dataFile, 1, true);
-            visualCards[i].gameObject.SetActive(true);
+            Card nextCard = PhotonView.Find(cardIDs[i]).GetComponent<Card>();
+            twistInfo[i].card.layout.FillInCards(nextCard.dataFile, 1, false);
+            twistInfo[i].card.gameObject.SetActive(true);
         }
-        for (int i = cardIDs.Length; i<visualCards.Count; i++)
+        for (int i = cardIDs.Length; i<twistInfo.Count; i++)
         {
-            visualCards[i].gameObject.SetActive(false);
+            twistInfo[i].card.gameObject.SetActive(false);
         }
     }
 
@@ -313,16 +315,6 @@ public class MakeDecision : PhotonCompatible
     {
         if (propertiesThatChanged.ContainsKey(ConstantStrings.TwistList))
             VisualCards((int[])GetRoomProperty(ConstantStrings.TwistList));
-    }
-    public List<Card> FindTwistTriggers(Player player, TwistTrigger trigger)
-    {
-        List<Card> toReturn = new();
-        foreach (Card card in twistList)
-        {
-            if (card.thisCard.WillTrigger(player, trigger))
-                toReturn.Add(card);
-        }
-        return toReturn;
     }
 
 #endregion

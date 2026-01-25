@@ -14,9 +14,7 @@ public class CardMenu : PhotonCompatible
     [SerializeField] GridLayoutGroup storeButtons;
     CardSelect mostRecentClick;
     List<(CardLayout, Button)> blankButtons = new();
-    [SerializeField] List<CardSelect> placardSelect = new();
     [SerializeField] List<CardSelect> twistSelect = new();
-
     protected override void Awake()
     {
         base.Awake();
@@ -29,19 +27,12 @@ public class CardMenu : PhotonCompatible
         string currentPhase = (string)GetRoomProperty(ConstantStrings.CurrentPhase);
         if (!(AmMaster() && currentPhase.Equals(nameof(WaitForJoiners))))
         {
-            foreach (CardSelect select in placardSelect)
-                select.SetCardImage(-1);
             foreach (CardSelect select in twistSelect)
                 select.SetCardImage(-1);
             this.gameObject.SetActive(false);
         }
         else
         {
-            if ((int)GetRoomProperty(ConstantStrings.CanPlay) >= 2)
-            {
-                foreach (CardSelect select in placardSelect)
-                    select.SetCardImage(-1);
-            }
             Advance();
             confirmButton.onClick.AddListener(Advance);
         }

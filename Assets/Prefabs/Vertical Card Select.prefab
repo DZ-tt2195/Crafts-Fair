@@ -647,7 +647,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159b66c071ced43f499eb58b9b7c8b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SetText
-  key: 90
+  key: 82
 --- !u!1 &5001021857928597259
 GameObject:
   m_ObjectHideFlags: 0
@@ -808,7 +808,6 @@ MonoBehaviour:
   layout: {fileID: 4487928128281750378}
   randomButton: {fileID: 8039125217585423827}
   chooseButton: {fileID: 8722579294417721946}
-  toFind: 0
 --- !u!1 &5123945899479391716
 GameObject:
   m_ObjectHideFlags: 0
@@ -959,7 +958,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159b66c071ced43f499eb58b9b7c8b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SetText
-  key: 89
+  key: 81
 --- !u!1 &5735398251244290665
 GameObject:
   m_ObjectHideFlags: 0
