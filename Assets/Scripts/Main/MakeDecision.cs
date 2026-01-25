@@ -60,6 +60,7 @@ public class MakeDecision : PhotonCompatible
     [SerializeField] TMP_Text minimumText;
     [SerializeField] TMP_Text maximumText;
     [SerializeField] TMP_Text currentText;
+    List<Card> twistList = new();
 
     protected override void Awake()
     {
@@ -67,7 +68,7 @@ public class MakeDecision : PhotonCompatible
         inst = this;
         this.bottomType = this.GetType();
         slider.onValueChanged.AddListener(UpdateText);
-        VisualCards((int[])GetRoomProperty(ConstantStrings.CardsToDisplay));
+        VisualCards((int[])GetRoomProperty(ConstantStrings.TwistList));
 
         foreach (Transform child in findTextButtons)
         {
@@ -288,11 +289,17 @@ public class MakeDecision : PhotonCompatible
         return answer;
     }
 
+#endregion
+
+#region  Twists
     void VisualCards(int[] cardIDs)
     {
+        twistList = new();
+
         for (int i = 0; i<cardIDs.Length; i++)
         {
             Card card = PhotonView.Find(cardIDs[i]).GetComponent<Card>();
+            twistList.Add(card);
             visualCards[i].FillInCards(card.dataFile, 1, true);
             visualCards[i].gameObject.SetActive(true);
         }
@@ -302,15 +309,20 @@ public class MakeDecision : PhotonCompatible
         }
     }
 
-    public void ChangeDisplayedCards(int[] cardIDs)
-    {
-        InstantChangeRoomProp(ConstantStrings.CardsToDisplay, cardIDs);
-    }
-
     public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
     {
-        if (propertiesThatChanged.ContainsKey(ConstantStrings.CardsToDisplay))
-            VisualCards((int[])GetRoomProperty(ConstantStrings.CardsToDisplay));
+        if (propertiesThatChanged.ContainsKey(ConstantStrings.TwistList))
+            VisualCards((int[])GetRoomProperty(ConstantStrings.TwistList));
+    }
+    public List<Card> FindTwistTriggers(Player player, TwistTrigger trigger)
+    {
+        List<Card> toReturn = new();
+        foreach (Card card in twistList)
+        {
+            if (card.thisCard.WillTrigger(player, trigger))
+                toReturn.Add(card);
+        }
+        return toReturn;
     }
 
 #endregion

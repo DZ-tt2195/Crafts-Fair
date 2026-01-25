@@ -100,10 +100,7 @@ public class TurnManager : PhotonCompatible
         {
             string currentPhase = (string)GetRoomProperty(ConstantStrings.CurrentPhase);
             string nextPhase = (string)GetRoomProperty(ConstantStrings.NextPhase);
-
-            List<Card> deck = GetCardList(ConstantStrings.ProgressDeck);
-            List<Card> discard = GetCardList(ConstantStrings.ProgressDiscard);
-
+/*
             if (currentPhase.Equals(nameof(ResolveCard)))
             {
                 Card top = deck[0];
@@ -120,12 +117,11 @@ public class TurnManager : PhotonCompatible
             }
             InstantChangeRoomProp(ConstantStrings.ProgressDeck, ConvertCardList(deck));
             InstantChangeRoomProp(ConstantStrings.ProgressDiscard, ConvertCardList(discard));
-
-            InstantChangeRoomProp(ConstantStrings.NextPhase, nameof(ResolveCard));
+*/
+            InstantChangeRoomProp(ConstantStrings.NextPhase, nameof(TakeTurn));
             InstantChangeRoomProp(ConstantStrings.CurrentPhase, nextPhase);
         }
     }
-
     public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
     {
         if (propertiesThatChanged.ContainsKey(ConstantStrings.CurrentPhase))
@@ -212,11 +208,6 @@ public class TurnManager : PhotonCompatible
     {
         string currentPhase = GetCurrentPhase();
         return (currentPhase, () => storedTurns[currentPhase].ForPlayer(player));
-    }
-    public Card TopCard()
-    {
-        List<Card> deck = GetCardList(ConstantStrings.ProgressDeck); 
-        return deck[0];       
     }
     public void WillChangePlayerProperty(Player player, string playerProperty, object changeInto)
     {

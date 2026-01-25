@@ -22,8 +22,6 @@ public static class ConstantStrings
     public const string CurrentPhase = nameof(CurrentPhase);
     public const string NextPhase = nameof(NextPhase);
     public const string NextPlayerPosition = nameof(NextPlayerPosition);
-    public const string ProgressDeck = nameof(ProgressDeck);
-    public const string ProgressDiscard = nameof(ProgressDiscard);
-    public const string CardsToDisplay = nameof(CardsToDisplay);
-    public const string Shuffle = nameof(Shuffle);
+    public const string TwistList = nameof(TwistList);
+    public const string TurnNumber = nameof(TurnNumber);
 }

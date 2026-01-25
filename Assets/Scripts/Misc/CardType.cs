@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System;
 
+public enum TwistTrigger {StartTurn, WhenSubmit}
 public class CardType
 {
     public CardData dataFile { get; private set; }
@@ -12,17 +13,14 @@ public class CardType
         this.dataFile = dataFile;
     }
 
-#region Progress
+#region Twist
 
-    public virtual void MasterStart()
+    public virtual bool WillTrigger(Player player, TwistTrigger trigger)
     {
+        return false;
     }
 
-    public virtual void ForPlayer(Player player)
-    {
-    }
-
-    public virtual void MasterEnd()
+    public virtual void TwistEffect(Player player, int logged)
     {
     }
 

@@ -1,15 +1,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.UI;
-
-public class Work : CardType
+public class TakeTurn : Turn
 {
-    public Work(CardData dataFile) : base(dataFile)
-    {
-    }
-
     public override void ForPlayer(Player player)
     {
+        player.DrawPlacardRPC(1);
         Log.inst.NewDecisionContainer(() => TokenStuff(player));
         Log.inst.NewDecisionContainer(() => MakeSubmission(player, new(), null));
     }
@@ -107,5 +103,10 @@ public class Work : CardType
             newList.Add(info);
             Log.inst.NewDecisionContainer(() => MakeSubmission(player, newList, restartContainer));
         }
+    }
+
+    public override void MasterEnd()
+    {
+        PhotonCompatible.InstantChangeRoomProp(ConstantStrings.TurnNumber, TurnManager.inst.GetInt(ConstantStrings.TurnNumber)+1);                
     }
 }

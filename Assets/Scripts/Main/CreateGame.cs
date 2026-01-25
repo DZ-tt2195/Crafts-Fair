@@ -211,8 +211,7 @@ public class CreateGame : PhotonCompatible
             chosenTwists[i] = twistDeck[i];
         }
         startingProgress = startingProgress.Shuffle();
-        MakeDecision.inst.ChangeDisplayedCards(chosenTwists.ToArray());
-        InstantChangeRoomProp(ConstantStrings.ProgressDiscard, startingProgress.ToArray());        
+        InstantChangeRoomProp(ConstantStrings.TwistList, chosenTwists.ToArray());
     }
 
     [PunRPC]

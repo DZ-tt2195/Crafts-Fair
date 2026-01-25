@@ -211,14 +211,12 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
             { ConstantStrings.GameName, Application.productName },
             { ConstantStrings.CurrentPhase, nameof(WaitForJoiners) },
             { ConstantStrings.NextPhase, nameof(DisplayTwists) },
-            { ConstantStrings.ProgressDeck, new int[0] },
-            { ConstantStrings.ProgressDiscard, new int[0] },
             { ConstantStrings.CanPlay, numPlayers },
             { ConstantStrings.JoinAsSpec, false },
             { ConstantStrings.GameOver, false },
             { ConstantStrings.NextPlayerPosition, 0 },
-            { ConstantStrings.CardsToDisplay, new int[0]},
-            { ConstantStrings.Shuffle, 0 },
+            { ConstantStrings.TwistList, new int[0]},
+            { ConstantStrings.TurnNumber, 1 },
         };
         return roomProps;
     }
