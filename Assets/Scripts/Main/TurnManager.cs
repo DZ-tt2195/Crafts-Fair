@@ -65,22 +65,21 @@ public class TurnManager : PhotonCompatible
             {
                 foreach (Photon.Realtime.Player nextPlayer in players)
                     DoFunction(() => SharePropertyChanges(), nextPlayer);
-                storedTurns[GetCurrentPhase()].MasterEnd();
 
                 UpdateWaitingText(spectators, players.Count);
                 Invoke(nameof(NextPhase), 0.5f);
             }
         }
     }
-
     void UpdateWaitingText(List<Photon.Realtime.Player> toSend, int playersWaiting)
     {
         foreach (Photon.Realtime.Player player in toSend)
             MakeDecision.inst.DoFunction(() => MakeDecision.inst.PackagedInstructions(OnlineTranslate.Online_Waiting_on_Players(playersWaiting.ToString())), player);
     }
-
     void NextPhase()
     {
+        storedTurns[GetCurrentPhase()].MasterEnd();
+
         (Player, int) highestScore = (null, 0);
         foreach (Player player in CreateGame.inst.listOfPlayers)
         {
@@ -186,7 +185,7 @@ public class TurnManager : PhotonCompatible
             arrayOfCards[i] = listOfCards[i].photonView.ViewID;
         return arrayOfCards;
     }
-
+    public string GetString(string property, Player player) => (string)FindThisProperty(property, player);
     #endregion
 
 #region Change Properties

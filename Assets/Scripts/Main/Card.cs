@@ -50,19 +50,12 @@ public class Card : PhotonCompatible
     */
     public void AssignCard(CardData dataFile, float startingAlpha, bool vertical)
     {
-        try
-        {
-            this.dataFile = dataFile;
-            this.vertical = vertical;
-            thisCard = (CardType)Activator.CreateInstance(Type.GetType(dataFile.cardName), dataFile);
-            this.layout.FillInCards(dataFile, startingAlpha, vertical);
-            this.name = dataFile.cardName;
-            KeywordTooltip.instance.NewCardRC(Translator.inst.Translate(dataFile.cardName), this.layout);
-        }
-        catch
-        {
-            Debug.Log($"{dataFile.cardName} failed");
-        }
+        this.dataFile = dataFile;
+        this.vertical = vertical;
+        thisCard = (CardType)Activator.CreateInstance(Type.GetType(dataFile.cardName), dataFile);
+        this.layout.FillInCards(dataFile, startingAlpha, vertical);
+        this.name = dataFile.cardName;
+        KeywordTooltip.instance.NewCardRC(Translator.inst.Translate(dataFile.cardName), this.layout);
     }
 
     #endregion

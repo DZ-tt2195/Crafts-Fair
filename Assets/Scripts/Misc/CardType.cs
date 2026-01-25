@@ -15,11 +15,6 @@ public class CardType
 
 #region Twist
 
-    public virtual bool WillTrigger(Player player, TwistTrigger trigger)
-    {
-        return false;
-    }
-
     public virtual void TwistEffect(Player player, int logged)
     {
     }

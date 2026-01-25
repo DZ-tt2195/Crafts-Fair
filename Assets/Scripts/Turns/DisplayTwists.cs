@@ -6,11 +6,11 @@ public class DisplayTwists : Turn
 {
     public override void MasterStart()
     {
-        CreateGame.inst.CreateStartingDeck();
+        CreateGame.inst.CreateTwists();
     }
 
     public override void ForPlayer(Player player)
     {
-        player.DrawPlacardRPC(2);
+        player.DrawPlacardRPC(3);
     }
 }

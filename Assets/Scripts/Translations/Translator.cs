@@ -141,7 +141,8 @@ public class Translator : PhotonCompatible
         string targetText;
         string[] splitUp = toSplit.Split('\t');
 
-        if (TranslationExists($"{splitUp[0]}_Others") && (int)PhotonNetwork.LocalPlayer.CustomProperties[ConstantStrings.MyPosition] != owner)
+        int myPosition = (int)PhotonNetwork.LocalPlayer.CustomProperties[ConstantStrings.MyPosition];
+        if (TranslationExists($"{splitUp[0]}_Others") && myPosition >= 0 && myPosition != owner)
             targetText = $"{splitUp[0]}_Others";
         else
             targetText = splitUp[0];

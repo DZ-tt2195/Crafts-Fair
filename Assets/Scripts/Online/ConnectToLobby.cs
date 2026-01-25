@@ -189,7 +189,7 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
         }
     }
 
-    public void CreateRoom()
+    public void CreateRoom(int numPlayers)
     {
         PhotonNetwork.LocalPlayer.SetCustomProperties(InitialPlayerProps());
         RoomOptions options = new()
@@ -197,7 +197,7 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
             MaxPlayers = 10,
             PlayerTtl = Application.isEditor ? 15000 : 120000,
             EmptyRoomTtl = 10000,
-            //CustomRoomProperties = InitialRoomProps(),
+            CustomRoomProperties = InitialRoomProps(numPlayers),
             CustomRoomPropertiesForLobby = new string[] { ConstantStrings.GameName, ConstantStrings.CanPlay, ConstantStrings.JoinAsSpec, ConstantStrings.GameOver }
         };
         PhotonNetwork.CreateRoom(PlayerPrefs.GetString(ConstantStrings.MyUserName), options);
@@ -240,6 +240,7 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
             [ConstantStrings.MyPlacards] = new int[0],
             [ConstantStrings.MyDeck] = new int[0],
             [ConstantStrings.MyDiscard] = new int[0],
+            [ConstantStrings.MyToken] = "",
         };
         return playerProps;
     }

@@ -209,7 +209,7 @@ public class Log : PhotonCompatible
     public void MasterText(bool important, string packagedText, int indent = 0)
     {
         if (AmMaster())
-            DoFunction(() => AddToPast(important, packagedText, indent), RpcTarget.AllBuffered);
+            DoFunction(() => AddToPast(important, packagedText, indent, -1), RpcTarget.AllBuffered);
     }
 
     public void DoneWithTurn()
@@ -221,9 +221,9 @@ public class Log : PhotonCompatible
 
     public void ShareTexts()
     {
-        int currentPosition = (int)GetPlayerProperty(PhotonNetwork.LocalPlayer, ConstantStrings.MyPosition);
+        int playerPosition = (int)GetPlayerProperty(PhotonNetwork.LocalPlayer, ConstantStrings.MyPosition);
         foreach (LogText nextLog in currentLogTexts)
-            DoFunction(() => AddToPast(nextLog.important, nextLog.packagedText, nextLog.indent), RpcTarget.AllBuffered);
+            DoFunction(() => AddToPast(nextLog.important, nextLog.packagedText, nextLog.indent, playerPosition), RpcTarget.AllBuffered);
 
         allCurrent.text = "";
         importantCurrent.text = "";
@@ -231,13 +231,12 @@ public class Log : PhotonCompatible
     }
 
     [PunRPC]
-    void AddToPast(bool important, string packagedText, int indent)
+    void AddToPast(bool important, string packagedText, int indent, int playerPosition)
     {
-        int currentPosition = (int)PhotonNetwork.LocalPlayer.CustomProperties[ConstantStrings.MyPosition];
         string targetText = "";
         for (int i = 0; i < indent; i++)
             targetText += "     ";
-        targetText += $"{Translator.inst.UnPackage(packagedText, currentPosition)}\n";
+        targetText += $"{Translator.inst.UnPackage(packagedText, playerPosition)}\n";
 
         allPast.text += targetText;
         if (important)

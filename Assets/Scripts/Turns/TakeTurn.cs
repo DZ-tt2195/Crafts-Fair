@@ -1,4 +1,4 @@
-using System;
+using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.UI;
@@ -115,6 +115,28 @@ public class TakeTurn : Turn
 
     public override void MasterEnd()
     {
-        PhotonCompatible.InstantChangeRoomProp(ConstantStrings.TurnNumber, TurnManager.inst.GetInt(ConstantStrings.TurnNumber)+1);                
+        PhotonCompatible.InstantChangeRoomProp(ConstantStrings.TurnNumber, TurnManager.inst.GetInt(ConstantStrings.TurnNumber)+1);
+
+        foreach (Player player in CreateGame.inst.listOfPlayers)
+        {
+            string selectedToken = TurnManager.inst.GetString(ConstantStrings.MyToken, player);
+            Debug.Log($"{player.name}, {selectedToken}");
+            if (selectedToken.Equals(TokenType.Coin.ToString()))
+            {
+                
+            }
+            else if (selectedToken.Equals(TokenType.Bone.ToString()))
+            {
+                
+            }
+            else if (selectedToken.Equals(TokenType.Weapon.ToString()))
+            {
+                
+            }
+            else if (selectedToken.Equals(TokenType.Text.ToString()))
+            {
+                
+            }
+        }
     }
 }

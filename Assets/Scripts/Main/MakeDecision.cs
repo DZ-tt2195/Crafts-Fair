@@ -301,9 +301,9 @@ public class MakeDecision : PhotonCompatible
     {
         for (int i = 0; i<cardIDs.Length; i++)
         {
-            Card nextCard = PhotonView.Find(cardIDs[i]).GetComponent<Card>();
-            twistInfo[i].card.layout.FillInCards(nextCard.dataFile, 1, false);
             twistInfo[i].card.gameObject.SetActive(true);
+            CardData data = GameFiles.inst.twistFiles[cardIDs[i]];
+            twistInfo[i].card.AssignCard(data, 1, false);
         }
         for (int i = cardIDs.Length; i<twistInfo.Count; i++)
         {

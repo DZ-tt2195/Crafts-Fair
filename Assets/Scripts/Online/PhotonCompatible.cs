@@ -200,17 +200,18 @@ public class PhotonCompatible : MonoBehaviourPunCallbacks
 
         foreach (Photon.Realtime.Player nextPlayer in PhotonNetwork.CurrentRoom.Players.Values.OrderBy(p => p.ActorNumber))
         {
-            if ((int)GetPlayerProperty(nextPlayer, ConstantStrings.MyPosition) == -1)
+            int position = (int)GetPlayerProperty(nextPlayer, ConstantStrings.MyPosition);
+            if (position == -1)
             {
                 spectators.Add(nextPlayer);
                 if (printLog)
-                    Debug.Log($"spectating (inactive: {nextPlayer.IsInactive}, {nextPlayer.ActorNumber}): {nextPlayer.NickName}");
+                    Debug.Log($"spectating (inactive: {nextPlayer.IsInactive}, actor: {nextPlayer.ActorNumber}, position: {position}): {nextPlayer.NickName}");
             }
             else
             {
                 players.Add(nextPlayer);
                 if (printLog)
-                    Debug.Log($"playing (inactive: {nextPlayer.IsInactive}, {nextPlayer.ActorNumber}): {nextPlayer.NickName}");
+                    Debug.Log($"playing (inactive: {nextPlayer.IsInactive}, actor: {nextPlayer.ActorNumber}, position: {position}): {nextPlayer.NickName}");
             }
         }
 
