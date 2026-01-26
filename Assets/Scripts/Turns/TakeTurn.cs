@@ -9,6 +9,7 @@ public class TakeTurn : Turn
     public override void MasterStart()
     {
         int currentTurn = TurnManager.inst.GetInt(ConstantStrings.TurnNumber);
+        Log.inst.MasterText(true, AutoTranslate.Blank());
         Log.inst.MasterText(true, OnlineTranslate.Online_Next_Turn(currentTurn.ToString()));
     }
     public override void ForPlayer(Player player)
@@ -125,7 +126,7 @@ public class TakeTurn : Turn
         ExitGames.Client.Photon.Hashtable toChange = new();
         bool twistTriggers = false;
 
-        foreach (Player player in CreateGame.inst.listOfPlayers)
+        foreach (Player player in CreateGame.inst.GetPlayers())
         {
             string selectedToken = TurnManager.inst.GetString(ConstantStrings.MyToken, player);
             Debug.Log($"{player.name}, {selectedToken}");

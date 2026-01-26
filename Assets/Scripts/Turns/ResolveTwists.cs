@@ -43,7 +43,7 @@ public class ResolveTwists : Turn
         {
             string tokencounter = ConstantStrings.TokenCounter(type);
             if (TurnManager.inst.GetInt(tokencounter) <= 0)
-                PhotonCompatible.InstantChangeRoomProp(tokencounter, 2*CreateGame.inst.listOfPlayers.Count);
+                PhotonCompatible.InstantChangeRoomProp(tokencounter, 2*CreateGame.inst.GetPlayers().Count);
         }
     }
 }

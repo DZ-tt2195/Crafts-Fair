@@ -23,9 +23,10 @@ public class CreateGame : PhotonCompatible
 
     public static CreateGame inst;
     [Foldout("Players", true)]
-    [ReadOnly] public List<Player> listOfPlayers = new();
+    List<Player> listOfPlayers = new();
     [SerializeField] Player playerPrefab;
     [SerializeField] Card cardPrefab;
+    [SerializeField] TMP_Dropdown playerDropdown;
 
     [Foldout("UI and Animation", true)]
     public Camera mainCamera;
@@ -41,6 +42,7 @@ public class CreateGame : PhotonCompatible
         PhotonNetwork.AutomaticallySyncScene = true;
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         VisualCards((int[])GetRoomProperty(ConstantStrings.TwistList));
+        playerDropdown.onValueChanged.AddListener(SwitchToPlayer);
 
         if (!PhotonNetwork.OfflineMode)
         {
@@ -159,6 +161,30 @@ public class CreateGame : PhotonCompatible
         foreach (Player player in listOfPlayers)
             player.UpdateUI(forced);
     }
+
+    public void SwitchToPlayer(Player player)
+    {
+        foreach (Player nextPlayer in listOfPlayers)
+            nextPlayer.transform.localPosition = new (-10000, -10000);
+        player.transform.localPosition = Vector3.zero;
+    }
+
+    public void SwitchToPlayer(int value) => SwitchToPlayer(listOfPlayers[value]);
+
+    public List<Player> GetPlayers() => listOfPlayers;
+
+    public void AddPlayer(Player player, int position)
+    {
+        int thisPlayerPosition = (int)GetPlayerProperty(PhotonNetwork.LocalPlayer, ConstantStrings.MyPosition);
+        listOfPlayers.Insert(position, player);
+        player.transform.SetParent(canvas.transform);
+        player.transform.SetAsFirstSibling();
+
+        playerDropdown.options.Insert(position, new TMP_Dropdown.OptionData(player.name));
+        if (thisPlayerPosition == position || (thisPlayerPosition == -1 && position == 0))
+            SwitchToPlayer(player);
+    }
+
 #endregion 
 
 #region  Twists
@@ -202,7 +228,7 @@ public class CreateGame : PhotonCompatible
         for (int i = 0; i<arrayOfPVs.Length; i++)
         {
             GameObject obj = PhotonView.Find(arrayOfPVs[i]).gameObject;
-            obj.GetComponent<Card>().AssignCard(toFind[cardNames[i]], 0f, vertical);
+            obj.GetComponent<Card>().AssignCard(toFind[cardNames[i]], 0f, vertical, Vector3.one);
         }
     }
     void VisualCards(int[] cardIDs)
@@ -211,7 +237,7 @@ public class CreateGame : PhotonCompatible
         {
             twistInfo[i].card.gameObject.SetActive(true);
             CardData data = GameFiles.inst.twistFiles[cardIDs[i]];
-            twistInfo[i].card.AssignCard(data, 1, false);
+            twistInfo[i].card.AssignCard(data, 1, false, new(0.75f, 0.75f));
             twistInfo[i].countText.text = $"{TurnManager.inst.GetInt(ConstantStrings.TokenCounter(twistInfo[i].type))}";
         }
         for (int i = cardIDs.Length; i<twistInfo.Count; i++)

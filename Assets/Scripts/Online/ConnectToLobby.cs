@@ -29,12 +29,19 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
     [SerializeField] Button joinManually;
     [SerializeField] Button disconnectButton;
     List<JoinRoomButton> listOfJoinButtons = new();
+    [SerializeField] Slider playerSlider;
+    [SerializeField] TMP_Text currentText;
 
     private void Start()
     {
         part2.gameObject.SetActive(true);
         joinManually.onClick.AddListener(() => JoinRoom(joinInput.text));
         disconnectButton.onClick.AddListener(() => PhotonNetwork.Disconnect());
+        playerSlider.onValueChanged.AddListener(UpdateText);
+        void UpdateText(float value)
+        {
+            currentText.text = KeywordTooltip.instance.EditText($"{(int)value}");
+        }
 
         foreach (Transform child in keepJoinButtons)
             listOfJoinButtons.Add(child.GetComponent<JoinRoomButton>());
@@ -189,7 +196,7 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
         }
     }
 
-    public void CreateRoom(int numPlayers)
+    public void CreateRoom()
     {
         PhotonNetwork.LocalPlayer.SetCustomProperties(InitialPlayerProps());
         RoomOptions options = new()
@@ -197,7 +204,7 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
             MaxPlayers = 10,
             PlayerTtl = Application.isEditor ? 15000 : 120000,
             EmptyRoomTtl = 10000,
-            CustomRoomProperties = InitialRoomProps(numPlayers),
+            CustomRoomProperties = InitialRoomProps((int)playerSlider.value),
             CustomRoomPropertiesForLobby = new string[] { ConstantStrings.GameName, ConstantStrings.CanPlay, ConstantStrings.JoinAsSpec, ConstantStrings.GameOver }
         };
         PhotonNetwork.CreateRoom(PlayerPrefs.GetString(ConstantStrings.MyUserName), options);

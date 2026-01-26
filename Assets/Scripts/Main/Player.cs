@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Linq;
+
 public enum FindNumber {Exact, Minimum, Maximum, Not}
 public class Player : PhotonCompatible
 {
@@ -16,6 +17,7 @@ public class Player : PhotonCompatible
     [ReadOnly] public bool endPause = true;
     public int myPosition { get; private set; }
     [SerializeField] Transform keepHand;
+    [SerializeField] TMP_Text crownText;
     public Dictionary<string, bool> uiDictionary = new();
     [SerializeField] List<TokenDisplay> allCoinDisplays = new();
     [SerializeField] List<TokenDisplay> allBoneDisplays = new();
@@ -45,15 +47,10 @@ public class Player : PhotonCompatible
     [PunRPC]
     void SendName(string username)
     {
-        this.transform.SetParent(CreateGame.inst.canvas.transform);
-        this.transform.localPosition = Vector3.zero;
-        this.transform.SetAsFirstSibling();
-
         initialized = true;
         this.name = username;
-        myPosition = (int)GetPlayerProperty(this, ConstantStrings.MyPosition);
-        CreateGame.inst.listOfPlayers.Insert(myPosition, this);
         SetToPlayerProps();
+        CreateGame.inst.AddPlayer(this, myPosition);
 
         Button resignButton = GameObject.Find("Resign Button").GetComponent<Button>();
         if (photonView.AmOwner)
@@ -64,6 +61,7 @@ public class Player : PhotonCompatible
     }
     void SetToPlayerProps()
     {
+        myPosition = (int)GetPlayerProperty(this, ConstantStrings.MyPosition);
         myPlacards = TurnManager.inst.GetCardList(ConstantStrings.MyPlacards, this);
         myTokens = new Dictionary<TokenType, int[]>();
         foreach (TokenType value in Enum.GetValues(typeof(TokenType)))
@@ -251,6 +249,7 @@ public class Player : PhotonCompatible
     public void UpdateUI(bool forcedUpdate)
     {
         List<string> uiKeys = uiDictionary.Keys.ToList();
+        int thisPlayerPosition = (int)GetPlayerProperty(PhotonNetwork.LocalPlayer, ConstantStrings.MyPosition);
 
         if (forcedUpdate)
         {
@@ -261,8 +260,7 @@ public class Player : PhotonCompatible
 
         if (uiDictionary[ConstantStrings.MyPlacards])
         {
-            List<Vector2> handPositions = ObjectPositions(myPlacards.Count, -700, 475, 225, -550, true);
-            int thisPlayerPosition = (int)GetPlayerProperty(PhotonNetwork.LocalPlayer, ConstantStrings.MyPosition.ToString());
+            List<Vector2> handPositions = ObjectPositions(myPlacards.Count, -1125, 475, 225, -550, true);
             for (int i = 0; i < myPlacards.Count; i++)
             {
                 Card nextCard = myPlacards[i];
@@ -304,7 +302,7 @@ public class Player : PhotonCompatible
 
         if (uiDictionary[ConstantStrings.MyScore])
         {
-            //myUI.infoText.text = KeywordTooltip.instance.EditText("fill in information");
+            crownText.text = KeywordTooltip.instance.EditText($"{GetScore()} {AutoTranslate.CrownIcon()}");
         }
 
         foreach (var key in uiKeys)

@@ -23,8 +23,6 @@ public class Card : PhotonCompatible
         base.Awake();
         this.bottomType = this.GetType();
 
-        Canvas canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
-        this.transform.localScale = Vector3.Lerp(Vector3.one, canvas.transform.localScale, 0.5f);
         selectMe = GetComponent<ButtonSelect>();
         layout = GetComponent<CardLayout>();
 
@@ -48,13 +46,16 @@ public class Card : PhotonCompatible
 
     public string ProtectString() => $"{this.photonView.ViewID}_Protect";
     */
-    public void AssignCard(CardData dataFile, float startingAlpha, bool vertical)
+    public void AssignCard(CardData dataFile, float startingAlpha, bool vertical, Vector3 scale)
     {
-        this.dataFile = dataFile;
+        this.name = dataFile.cardName;
         this.vertical = vertical;
+        Canvas canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+        this.transform.localScale = Vector3.Lerp(scale, canvas.transform.localScale, 0.5f);
+
+        this.dataFile = dataFile;
         thisCard = (CardType)Activator.CreateInstance(Type.GetType(dataFile.cardName), dataFile);
         this.layout.FillInCards(dataFile, startingAlpha, vertical);
-        this.name = dataFile.cardName;
         KeywordTooltip.instance.NewCardRC(Translator.inst.Translate(dataFile.cardName), this.layout);
     }
 

@@ -107,6 +107,7 @@ Online_Tie_Game	The game is a tie.
 Online_Player_Resigned	$Player$ has resigned.
 Online_Player_Won	$Player$ has won.
 Resigned	(Resigned)
+Switch_Player	Switch Player
 Placard	Placard
 Perfect_Fit	Perfect Fit
 Perfect_Fit_Text	Have exactly 0 TokenIcon after submitting.

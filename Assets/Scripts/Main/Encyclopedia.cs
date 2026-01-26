@@ -28,7 +28,7 @@ public class Encyclopedia : MonoBehaviour
             {
                 GameObject nextCard = Instantiate(cardPrefab.gameObject);
                 Card cardPV = nextCard.GetComponent<Card>();
-                cardPV.AssignCard(GameFiles.inst.placardFiles[i], 1f, true);
+                cardPV.AssignCard(GameFiles.inst.placardFiles[i], 1f, true, Vector3.one);
                 allCards.Add(cardPV);
             }
         }

@@ -81,7 +81,7 @@ public class TurnManager : PhotonCompatible
         storedTurns[GetCurrentPhase()].MasterEnd();
 
         (Player, int) highestScore = (null, 0);
-        foreach (Player player in CreateGame.inst.listOfPlayers)
+        foreach (Player player in CreateGame.inst.GetPlayers())
         {
             int health = player.GetScore();
             if (health > highestScore.Item2)
@@ -130,10 +130,13 @@ public class TurnManager : PhotonCompatible
                 storedTurns[GetCurrentPhase()].MasterStart();
 
             CreateGame.inst.RefreshUI(true);
-            foreach (Player player in CreateGame.inst.listOfPlayers)
+            foreach (Player player in CreateGame.inst.GetPlayers())
             {
                 if (player.photonView.AmOwner)
+                {
+                    CreateGame.inst.SwitchToPlayer(player);
                     player.StartTurn();
+                }
             }
         }
     }
@@ -259,7 +262,7 @@ public class TurnManager : PhotonCompatible
         endScreen.gameObject.SetActive(true);
         string text = "";
 
-        foreach (Player player in CreateGame.inst.listOfPlayers)
+        foreach (Player player in CreateGame.inst.GetPlayers())
         {
             text += $"{player.name}";
             if (player.myPosition == resignPosition)

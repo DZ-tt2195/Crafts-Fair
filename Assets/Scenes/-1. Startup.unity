@@ -1072,8 +1072,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1767.5295, y: -18}
-  m_SizeDelta: {x: 767.941, y: 275}
+  m_AnchoredPosition: {x: -2009.3706, y: -375.2652}
+  m_SizeDelta: {x: 1251.6233, y: 989.5304}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1152480849
 MonoBehaviour:
@@ -1095,10 +1095,24 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hello <link="CardIcon"><sprite="CardIcon" name="CardIcon"><link="CrownIcon"><sprite="CrownIcon"
+  m_text: 'Hello <link="CardIcon"><sprite="CardIcon" name="CardIcon"><link="CrownIcon"><sprite="CrownIcon"
     name="CrownIcon"><link="TokenIcon"><sprite="TokenIcon" name="TokenIcon"><link="CoinIcon"><sprite="CoinIcon"
     name="CoinIcon"><link="BoneIcon"><sprite="BoneIcon" name="BoneIcon"><link="WeaponIcon"><sprite="WeaponIcon"
     name="WeaponIcon"><link="TextIcon"><sprite="TextIcon" name="TextIcon">
+
+
+    Switch
+    view in online
+
+    See player names and crowns
+
+    Fix twist display on screen
+
+
+    Retheme
+    tokens and placards
+
+    Figure out when/how to draw placards'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 31e79ddad7b2d41c395ada76a18cbcdd, type: 2}
   m_sharedMaterial: {fileID: -3852492252101762229, guid: 31e79ddad7b2d41c395ada76a18cbcdd, type: 2}
@@ -1132,8 +1146,8 @@ MonoBehaviour:
   m_fontSizeMin: 18
   m_fontSizeMax: 100
   m_fontStyle: 0
-  m_HorizontalAlignment: 2
-  m_VerticalAlignment: 512
+  m_HorizontalAlignment: 1
+  m_VerticalAlignment: 256
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_characterHorizontalScale: 1
@@ -1508,7 +1522,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "\u3053\u3093\u306B\u3061\u306F \nhi \n\uC5C4\uCCAD\uB09C\n\u4F60\u597D"
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 31e79ddad7b2d41c395ada76a18cbcdd, type: 2}
   m_sharedMaterial: {fileID: -3852492252101762229, guid: 31e79ddad7b2d41c395ada76a18cbcdd, type: 2}
@@ -1535,7 +1549,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 51.1
+  m_fontSize: 36
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
