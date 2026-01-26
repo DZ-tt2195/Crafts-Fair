@@ -612,7 +612,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159b66c071ced43f499eb58b9b7c8b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SetText
-  key: 28
+  key: 29
 --- !u!114 &971116838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -819,8 +819,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Encyclopedia
   cardPrefab: {fileID: 4752275793854564576, guid: d50eb448d0731474ebebdd3627d1ec5a, type: 3}
   groupUI: {fileID: 1515963458}
-  typeOneDropdown: {fileID: 0}
-  typeTwoDropdown: {fileID: 0}
 --- !u!4 &1189922528
 Transform:
   m_ObjectHideFlags: 0

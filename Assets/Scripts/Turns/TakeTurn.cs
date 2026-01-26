@@ -6,6 +6,11 @@ using System;
 using Photon.Pun;
 public class TakeTurn : Turn
 {
+    public override void MasterStart()
+    {
+        int currentTurn = TurnManager.inst.GetInt(ConstantStrings.TurnNumber);
+        Log.inst.MasterText(true, OnlineTranslate.Online_Next_Turn(currentTurn.ToString()));
+    }
     public override void ForPlayer(Player player)
     {
         player.DrawPlacardRPC(1);
@@ -30,14 +35,14 @@ public class TakeTurn : Turn
         void AddThis(TokenType type)
         {
             TurnManager.inst.WillChangePlayerProperty(player, ConstantStrings.MyToken, type.ToString());
-            player.ChangeTokenRPC(1, (1, type));
+            player.ChangeTokenRPC(1, (1, type), 0, true);
         }
 
         void AdvanceThis((int value, TokenType type) info)
         {
             TurnManager.inst.WillChangePlayerProperty(player, ConstantStrings.MyToken, info.type.ToString());
-            player.ChangeTokenRPC(-1, info);
-            player.ChangeTokenRPC(1, (info.value+1, info.type));
+            player.ChangeTokenRPC(-1, info, 0, true);
+            player.ChangeTokenRPC(1, (info.value+1, info.type), 0, true);
         }
     }
 
@@ -103,7 +108,7 @@ public class TakeTurn : Turn
                 player.DiscardPlacardRPC(card, 1);
                 card.selectMe.SetBorder(false);
             }
-            player.ScoreRPC(totalScore, 0);
+            player.ScoreRPC(totalScore, 0, true);
         }
 
         void SubmitToken((int value, TokenType type) info)

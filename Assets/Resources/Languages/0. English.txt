@@ -1,5 +1,6 @@
 Game_Designer	by Thomas Tang (DZ)
 Last_Update	Last Updated: Jan 25, 2026
+Blank	
 Translator_Credit	Original Language
 Language	Language
 Loading	Loading
@@ -30,30 +31,23 @@ Attempt_to_reconnect	Attempting to reconnect to $Room$'s room...
 Failed_to_reconnect	Failed to reconnect to $Room$'s room.
 Encyclopedia	Encyclopedia
 Close	Close
+Choose_Twists	Choose Twists for this game
+Custom_Twist_1	Twist CoinIcon
+Custom_Twist_2	Twist BoneIcon
+Custom_Twist_3	Twist WeaponIcon
+Custom_Twist_4	Twist TextIcon
+Choose	Choose
+Random	Random
 Type_into_chat	Type into chat
-Undo	Undo
-Short	Short
-Long	Long
 Online_Player_Playing	$Player$ is playing.
 Online_Player_Spectating	$Player$ is spectating.
 Online_Player_Reconnected	$Player$ reconnected.
 Online_Player_Disconnected	$Player$ has disconnected.
 Online_Player_Quit	$Player$ has quit the room.
 Online_Waiting_on_Players	Waiting on players ($Num$ more)
-Confirm	Confirm
-Decline	Decline
-Choose_One_Instruction	Choose one ($Card$).
-Discard_Instruction	Discard 1 Card ($Card$).
-Target_Instruction	Choose one of $Player$'s Card ($Card$).
-Pick_Player	$Player$
-Blank	
-Game_Over	Game Over
-Leave	Leave
-Online_Tie_Game	The game is a tie.
-Online_Player_Resigned	$Player$ has resigned.
-Online_Player_Won	$Player$ has won.
-Resigned	(Resigned)
-Online_Next_Card	Shuffle $Shuffle$, Card $Num$/$Max$: $Card$
+Undo	Undo
+Short	Short
+Long	Long
 CardIcon	CardIcon
 CoinIcon	CoinIcon
 BoneIcon	BoneIcon
@@ -61,10 +55,6 @@ WeaponIcon	WeaponIcon
 TextIcon	TextIcon
 CrownIcon	CrownIcon
 TokenIcon	TokenIcon
-Done	Done
-Pause_to_Read	A pause to let you read things.
-Pause_to_Undo	Last chance to undo anything.
-Add_New_Token	Add $Token$
 Coin1	CoinIcon (1)
 Coin2	CoinIcon (2)
 Coin3	CoinIcon (3)
@@ -89,6 +79,8 @@ Text3	TextIcon (3)
 Text4	TextIcon (4)
 Text5	TextIcon (5)
 Text6	TextIcon (6)
+Online_Next_Turn	Turn $Number$
+Add_Or_Advance	Choose one: +1 TokenIcon (1), or advance 1 TokenIcon.
 Online_Add_Score	$Player$ gets +$Num$ CrownIcon.
 Online_Lose_Score	$Player$ loses $Num$ CrownIcon.
 Online_Add_Token	$Player$ adds $Num$ $Token$.
@@ -96,21 +88,25 @@ Online_Remove_Token	$Player$ removes $Num$ $Token$.
 Online_Draw_Placard	$Player$ draws $Card$.
 Online_Draw_Placard_Others	$Player$ draws 1 CardIcon.
 Online_Discard_Placard	$Player$ discards $Card$.
-Online_Make_Submission	$Player$ submits $Num1$ tokens and $Num2$ placards.
-Choose_Twists	Choose Twists for this game
-Custom_Twist_1	Twist 1
-Custom_Twist_2	Twist 2
-Custom_Twist_3	Twist 3
-Custom_Twist_4	Twist 4
-Online_No_Submission	$Player$ doesn't submit.
-Add_Or_Advance	Choose one: +1 TokenIcon (1), or advance 1 TokenIcon.
 Ask_Submission	Submit 2+ TokenIcon, while meeting requirements for 2+ CardIcon.
+Online_Make_Submission	$Player$ submits $TokenNum$ tokens and $CardNum$ placards.
+Online_No_Submission	$Player$ doesn't submit.
 Undo_Submission	Undo All
-Choose	Choose
-Random	Random
-Online_Next_Turn	Turn $Number$
 Resolve_Twist	Choose a Twist to resolve.
 Online_Resolve_Card	$Player$ resolves $Card$.
+Confirm	Confirm
+Decline	Decline
+Choose_One_Instruction	Choose one ($Card$).
+Discard_Instruction	Discard 1 Card ($Card$).
+Done	Done
+Pause_to_Read	A pause to let you read things.
+Pause_to_Undo	Last chance to undo anything.
+Game_Over	Game Over
+Leave	Leave
+Online_Tie_Game	The game is a tie.
+Online_Player_Resigned	$Player$ has resigned.
+Online_Player_Won	$Player$ has won.
+Resigned	(Resigned)
 Placard	Placard
 Perfect_Fit	Perfect Fit
 Perfect_Fit_Text	Have exactly 0 TokenIcon after submitting.

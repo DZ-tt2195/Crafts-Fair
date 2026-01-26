@@ -157,14 +157,14 @@ public class Player : PhotonCompatible
 #region Resources
 
     public int GetScore() => TurnManager.inst.GetInt(ConstantStrings.MyScore, this);
-    public void ScoreRPC(int num, int logged = 0)
+    public void ScoreRPC(int num, int logged = 0, bool important = false)
     {
         if (num == 0)
             return;
         if (num > 0)
-            Log.inst.AddMyText(false, OnlineTranslate.Online_Add_Score(this.name, num.ToString()), logged);
+            Log.inst.AddMyText(important, OnlineTranslate.Online_Add_Score(this.name, num.ToString()), logged);
         else
-            Log.inst.AddMyText(false, OnlineTranslate.Online_Lose_Score(this.name, num.ToString()), logged);
+            Log.inst.AddMyText(important, OnlineTranslate.Online_Lose_Score(this.name, num.ToString()), logged);
         Log.inst.NewRollback(() => ChangeScore(num));
     }
     void ChangeScore(int num)
@@ -173,14 +173,14 @@ public class Player : PhotonCompatible
         total += (!Log.inst.forward) ? -num : num;
         TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyScore, total); uiDictionary[ConstantStrings.MyScore] = true;
     }
-    public void ChangeTokenRPC(int num, (int value, TokenType token) info, int logged = 0)
+    public void ChangeTokenRPC(int num, (int value, TokenType token) info, int logged = 0, bool important = false)
     {
         if (num == 0)
             return;
         if (num > 0)
-            Log.inst.AddMyText(false, OnlineTranslate.Online_Add_Token(this.name, num.ToString(), Translator.ConvertToken(info)), logged);
+            Log.inst.AddMyText(important, OnlineTranslate.Online_Add_Token(this.name, num.ToString(), Translator.ConvertToken(info)), logged);
         else
-            Log.inst.AddMyText(false, OnlineTranslate.Online_Remove_Token(this.name, num.ToString(), Translator.ConvertToken(info)), logged);
+            Log.inst.AddMyText(important, OnlineTranslate.Online_Remove_Token(this.name, num.ToString(), Translator.ConvertToken(info)), logged);
         Log.inst.NewRollback(() => ChangeToken(num, info));
     }
     void ChangeToken(int num, (int value, TokenType token) info)
