@@ -19,4 +19,6 @@ public static string Online_Draw_Placard_Others (string Player) => $"Online_Draw
 public static string Online_Discard_Placard (string Player,string Card) => $"Online_Discard_Placard\tPlayer\t{Player}\tCard\t{Card}";
 public static string Online_Make_Submission (string Player,string Num1,string Num2) => $"Online_Make_Submission\tPlayer\t{Player}\tNum1\t{Num1}\tNum2\t{Num2}";
 public static string Online_No_Submission (string Player) => $"Online_No_Submission\tPlayer\t{Player}";
+public static string Online_Next_Turn (string Number) => $"Online_Next_Turn\tNumber\t{Number}";
+public static string Online_Resolve_Card (string Player,string Card) => $"Online_Resolve_Card\tPlayer\t{Player}\tCard\t{Card}";
 }

@@ -76,7 +76,6 @@ public class Player : PhotonCompatible
     #endregion
 
 #region Hand
-
     public List<Card> GetPlacards() => myPlacards;
     public void DrawPlacardRPC(int amount, int logged = 0)
     {
@@ -238,7 +237,6 @@ public class Player : PhotonCompatible
     #endregion
 
 #region UI
-
     public (int, Dictionary<TokenType, int[]>) GetAllTokens()
     {
         int totalTokens = 0;

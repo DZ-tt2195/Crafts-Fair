@@ -25,4 +25,6 @@ public static class ConstantStrings
     public const string NextPlayerPosition = nameof(NextPlayerPosition);
     public const string TwistList = nameof(TwistList);
     public const string TurnNumber = nameof(TurnNumber);
+    public static string TokenCounter(TokenType type) => TokenCounter(type.ToString());
+    public static string TokenCounter(string type) => $"TokenCounter{type}";
 }

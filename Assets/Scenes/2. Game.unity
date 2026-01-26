@@ -4606,15 +4606,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::DecisionManager
   instructionsText: {fileID: 1595118521}
   findTextButtons: {fileID: 735515497}
-  twistInfo:
-  - card: {fileID: 758368484}
-    countText: {fileID: 808065487}
-  - card: {fileID: 1955538280}
-    countText: {fileID: 464900584}
-  - card: {fileID: 1475113518}
-    countText: {fileID: 1758367798}
-  - card: {fileID: 823909828}
-    countText: {fileID: 792578934}
   sliderConfirm: {fileID: 1752158606}
   slider: {fileID: 5380632698592418570}
   minimumText: {fileID: 8036832353591802597}
@@ -11612,6 +11603,19 @@ MonoBehaviour:
   playerPrefab: {fileID: 3899444981988973258, guid: 750628c4c7de8441aa142af28a651ffe, type: 3}
   cardPrefab: {fileID: 4752275793854564576, guid: d50eb448d0731474ebebdd3627d1ec5a, type: 3}
   mainCamera: {fileID: 849367364}
+  twistInfo:
+  - card: {fileID: 758368484}
+    countText: {fileID: 808065487}
+    type: 0
+  - card: {fileID: 1955538280}
+    countText: {fileID: 464900584}
+    type: 1
+  - card: {fileID: 1475113518}
+    countText: {fileID: 1758367798}
+    type: 2
+  - card: {fileID: 823909828}
+    countText: {fileID: 792578934}
+    type: 3
 --- !u!114 &1562350002
 MonoBehaviour:
   m_ObjectHideFlags: 0

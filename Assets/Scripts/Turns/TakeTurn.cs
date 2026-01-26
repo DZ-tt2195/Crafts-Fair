@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine.UI;
+using System;
+using Photon.Pun;
 public class TakeTurn : Turn
 {
     public override void ForPlayer(Player player)
@@ -115,28 +117,32 @@ public class TakeTurn : Turn
 
     public override void MasterEnd()
     {
-        PhotonCompatible.InstantChangeRoomProp(ConstantStrings.TurnNumber, TurnManager.inst.GetInt(ConstantStrings.TurnNumber)+1);
+        ExitGames.Client.Photon.Hashtable toChange = new();
+        bool twistTriggers = false;
 
         foreach (Player player in CreateGame.inst.listOfPlayers)
         {
             string selectedToken = TurnManager.inst.GetString(ConstantStrings.MyToken, player);
             Debug.Log($"{player.name}, {selectedToken}");
-            if (selectedToken.Equals(TokenType.Coin.ToString()))
+
+            string targetString = ConstantStrings.TokenCounter(selectedToken);
+            if (toChange.ContainsKey(targetString))
             {
-                
+                int currentValue = (int)toChange[targetString];
+                toChange[targetString] = currentValue-1;
             }
-            else if (selectedToken.Equals(TokenType.Bone.ToString()))
+            else
             {
-                
+                int currentCounter = TurnManager.inst.GetInt(targetString);
+                toChange[targetString] = currentCounter - 1;
             }
-            else if (selectedToken.Equals(TokenType.Weapon.ToString()))
-            {
-                
-            }
-            else if (selectedToken.Equals(TokenType.Text.ToString()))
-            {
-                
-            }
+            if ((int)toChange[targetString] <= 0)
+                twistTriggers = true;
         }
+
+        PhotonNetwork.CurrentRoom.SetCustomProperties(toChange);
+        PhotonCompatible.InstantChangeRoomProp(ConstantStrings.TurnNumber, TurnManager.inst.GetInt(ConstantStrings.TurnNumber)+1);
+        if (twistTriggers)
+            PhotonCompatible.InstantChangeRoomProp(ConstantStrings.NextPhase, nameof(ResolveTwists));
     }
 }

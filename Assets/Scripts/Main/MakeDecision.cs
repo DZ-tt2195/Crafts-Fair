@@ -6,12 +6,6 @@ using System.Collections;
 using TMPro;
 using MyBox;
 using Photon.Pun;
-[System.Serializable]
-public class TwistVisual
-{
-    public Card card;
-    public TMP_Text countText;
-}
 
 public class CardButtonInfo
 {
@@ -60,7 +54,6 @@ public class MakeDecision : PhotonCompatible
     [SerializeField] Transform findTextButtons;
     List<Button> textButtons = new();
     HashSet<ButtonSelect> availableUI = new();
-    [SerializeField] List<TwistVisual> twistInfo = new();
     [SerializeField] Button sliderConfirm;
     [SerializeField] Slider slider;
     [SerializeField] TMP_Text minimumText;
@@ -73,7 +66,6 @@ public class MakeDecision : PhotonCompatible
         inst = this;
         this.bottomType = this.GetType();
         slider.onValueChanged.AddListener(UpdateText);
-        VisualCards((int[])GetRoomProperty(ConstantStrings.TwistList));
 
         foreach (Transform child in findTextButtons)
         {
@@ -292,29 +284,6 @@ public class MakeDecision : PhotonCompatible
         string answer = Translator.inst.UnPackage(packagedText);
         instructionsText.text = answer;
         return answer;
-    }
-
-#endregion
-
-#region  Twists
-    void VisualCards(int[] cardIDs)
-    {
-        for (int i = 0; i<cardIDs.Length; i++)
-        {
-            twistInfo[i].card.gameObject.SetActive(true);
-            CardData data = GameFiles.inst.twistFiles[cardIDs[i]];
-            twistInfo[i].card.AssignCard(data, 1, false);
-        }
-        for (int i = cardIDs.Length; i<twistInfo.Count; i++)
-        {
-            twistInfo[i].card.gameObject.SetActive(false);
-        }
-    }
-
-    public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
-    {
-        if (propertiesThatChanged.ContainsKey(ConstantStrings.TwistList))
-            VisualCards((int[])GetRoomProperty(ConstantStrings.TwistList));
     }
 
 #endregion

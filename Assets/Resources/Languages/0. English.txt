@@ -1,5 +1,5 @@
 Game_Designer	by Thomas Tang (DZ)
-Last_Update	Last Updated: Jan 24, 2026
+Last_Update	Last Updated: Jan 25, 2026
 Translator_Credit	Original Language
 Language	Language
 Loading	Loading
@@ -97,7 +97,7 @@ Online_Draw_Placard	$Player$ draws $Card$.
 Online_Draw_Placard_Others	$Player$ draws 1 CardIcon.
 Online_Discard_Placard	$Player$ discards $Card$.
 Online_Make_Submission	$Player$ submits $Num1$ tokens and $Num2$ placards.
-Choose_Cards	Choose Cards
+Choose_Twists	Choose Twists for this game
 Custom_Twist_1	Twist 1
 Custom_Twist_2	Twist 2
 Custom_Twist_3	Twist 3
@@ -108,6 +108,10 @@ Ask_Submission	Submit 2+ TokenIcon, while meeting requirements for 2+ CardIcon.
 Undo_Submission	Undo All
 Choose	Choose
 Random	Random
+Online_Next_Turn	Turn $Number$
+Resolve_Twist	Choose a Twist to resolve.
+Online_Resolve_Card	$Player$ resolves $Card$.
+Placard	Placard
 Perfect_Fit	Perfect Fit
 Perfect_Fit_Text	Have exactly 0 TokenIcon after submitting.
 Unnecessary_Surplus	Unnecessary Surplus

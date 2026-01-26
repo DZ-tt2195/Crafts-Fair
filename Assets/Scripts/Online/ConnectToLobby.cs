@@ -216,6 +216,10 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
             { ConstantStrings.GameOver, false },
             { ConstantStrings.NextPlayerPosition, 0 },
             { ConstantStrings.TwistList, new int[0]},
+            { ConstantStrings.TokenCounter(TokenType.Coin), 2*numPlayers},
+            { ConstantStrings.TokenCounter(TokenType.Bone), 2*numPlayers},
+            { ConstantStrings.TokenCounter(TokenType.Weapon), 2*numPlayers},
+            { ConstantStrings.TokenCounter(TokenType.Text), 2*numPlayers},
             { ConstantStrings.TurnNumber, 1 },
         };
         return roomProps;

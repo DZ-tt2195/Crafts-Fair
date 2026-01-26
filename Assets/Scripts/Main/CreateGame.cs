@@ -9,7 +9,13 @@ using MyBox;
 using UnityEngine.UI;
 using TMPro;
 using System.Linq;
-
+[Serializable]
+public class TwistVisual
+{
+    public Card card;
+    public TMP_Text countText;
+    public TokenType type;
+}
 public class CreateGame : PhotonCompatible
 {
 
@@ -26,6 +32,7 @@ public class CreateGame : PhotonCompatible
     public float opacity { get; private set; }
     bool decrease = true;
     public Canvas canvas { get; private set; }
+    [SerializeField] List<TwistVisual> twistInfo = new();
     protected override void Awake()
     {
         base.Awake();
@@ -33,6 +40,7 @@ public class CreateGame : PhotonCompatible
         inst = this;
         PhotonNetwork.AutomaticallySyncScene = true;
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
+        VisualCards((int[])GetRoomProperty(ConstantStrings.TwistList));
 
         if (!PhotonNetwork.OfflineMode)
         {
@@ -133,7 +141,7 @@ public class CreateGame : PhotonCompatible
 
     #endregion
 
-#region Misc
+#region UI
 
     private void FixedUpdate()
     {
@@ -151,7 +159,9 @@ public class CreateGame : PhotonCompatible
         foreach (Player player in listOfPlayers)
             player.UpdateUI(forced);
     }
+#endregion 
 
+#region  Twists
     public void CreateTwists()
     {
         List<int> twistIDs = new();
@@ -195,7 +205,47 @@ public class CreateGame : PhotonCompatible
             obj.GetComponent<Card>().AssignCard(toFind[cardNames[i]], 0f, vertical);
         }
     }
+    void VisualCards(int[] cardIDs)
+    {
+        for (int i = 0; i<cardIDs.Length; i++)
+        {
+            twistInfo[i].card.gameObject.SetActive(true);
+            CardData data = GameFiles.inst.twistFiles[cardIDs[i]];
+            twistInfo[i].card.AssignCard(data, 1, false);
+            twistInfo[i].countText.text = $"{TurnManager.inst.GetInt(ConstantStrings.TokenCounter(twistInfo[i].type))}";
+        }
+        for (int i = cardIDs.Length; i<twistInfo.Count; i++)
+        {
+            twistInfo[i].card.gameObject.SetActive(false);
+        }
+    }
 
+    public TwistVisual GetTwist(TokenType type)
+    {
+        foreach (TwistVisual tv in twistInfo)
+        {
+            if (tv.type == type)
+                return tv;
+        }
+        return null;
+    }
+
+    public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
+    {
+        if (propertiesThatChanged.ContainsKey(ConstantStrings.TwistList))
+        {    
+            VisualCards((int[])propertiesThatChanged[ConstantStrings.TwistList]);
+        }
+        else
+        {
+            foreach (TokenType type in Enum.GetValues(typeof(TokenType)))
+            {
+                string changedTokenText = ConstantStrings.TokenCounter(type);
+                if (propertiesThatChanged.ContainsKey(changedTokenText))
+                    GetTwist(type).countText.text = $"{(int)propertiesThatChanged[changedTokenText]}";
+            }        
+        }
+    }
     #endregion
 
 }
