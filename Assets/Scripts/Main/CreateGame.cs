@@ -24,6 +24,7 @@ public class CreateGame : PhotonCompatible
     public static CreateGame inst;
     [Foldout("Players", true)]
     List<Player> listOfPlayers = new();
+    [ReadOnly] public Player mainPlayer;
     [SerializeField] Player playerPrefab;
     [SerializeField] Card cardPrefab;
     [SerializeField] TMP_Dropdown playerDropdown;
@@ -34,6 +35,7 @@ public class CreateGame : PhotonCompatible
     bool decrease = true;
     public Canvas canvas { get; private set; }
     [SerializeField] List<TwistVisual> twistInfo = new();
+
     protected override void Awake()
     {
         base.Awake();
@@ -58,7 +60,7 @@ public class CreateGame : PhotonCompatible
                 ExitGames.Client.Photon.Hashtable playerProps = new()
                 {
                     [ConstantStrings.Waiting] = true,
-                    [ConstantStrings.MyPosition] = -1,
+                    [ConstantStrings.Playing] = false,
                 };
                 PhotonNetwork.LocalPlayer.SetCustomProperties(playerProps);
                 StartCoroutine(Wait());
@@ -69,7 +71,7 @@ public class CreateGame : PhotonCompatible
                 PlayerPrefs.SetString(ConstantStrings.LastRoom, PhotonNetwork.CurrentRoom.Name);
                 StartCoroutine(MakePlayerAndCards());
                 
-                if (PhotonNetwork.CurrentRoom.Players.Count == (int)GetRoomProperty(ConstantStrings.CanPlay))
+                if (GetPlayers(false).Item1.Count == (int)GetRoomProperty(ConstantStrings.CanPlay))
                     InstantChangeRoomProp(ConstantStrings.JoinAsSpec, true, false);
             }
         }
@@ -88,20 +90,11 @@ public class CreateGame : PhotonCompatible
 
         IEnumerator MakePlayerAndCards()
         {
-            int nextPlayerPosition = (int)GetRoomProperty(ConstantStrings.NextPlayerPosition);
-            InstantChangeRoomProp(ConstantStrings.NextPlayerPosition, nextPlayerPosition + 1);
-
             yield return new WaitForSeconds(1f);
             while (CardMenu.instance.gameObject.activeSelf)
             {
                 yield return null;
             }
-
-            ExitGames.Client.Photon.Hashtable playerProps = new()
-            {
-                [ConstantStrings.Waiting] = false,
-                [ConstantStrings.MyPosition] = nextPlayerPosition,
-            };
 
             List<int> startingPlacardDeck = new();
             List<int> placardIDs = new();
@@ -115,8 +108,7 @@ public class CreateGame : PhotonCompatible
             placardIDs = placardIDs.Shuffle();
 
             DoFunction(() => CreateCards("Placard", startingPlacardDeck.ToArray(), placardIDs.ToArray()));
-            playerProps.Add(ConstantStrings.MyDeck, startingPlacardDeck.ToArray());
-            PhotonNetwork.LocalPlayer.SetCustomProperties(playerProps);
+            InstantChangePlayerProp(PhotonNetwork.LocalPlayer, ConstantStrings.MyDeck, startingPlacardDeck.ToArray());
             MakeObject(playerPrefab.gameObject);
         }
     }
@@ -154,35 +146,46 @@ public class CreateGame : PhotonCompatible
         if (opacity < 0 || opacity > 1)
             decrease = !decrease;
     }
-
     public void RefreshUI(bool forced)
     {
         Log.inst.ChangeScrolling();
         foreach (Player player in listOfPlayers)
             player.UpdateUI(forced);
     }
-
-    public void SwitchToPlayer(Player player)
+    public void SwitchToPlayer(Player player) => playerDropdown.value = listOfPlayers.IndexOf(player);
+    public void SwitchToPlayer(int value)
     {
-        foreach (Player nextPlayer in listOfPlayers)
-            nextPlayer.transform.localPosition = new (-10000, -10000);
-        player.transform.localPosition = Vector3.zero;
+        Debug.Log($"switching to player {value}");
+        foreach (Player next in listOfPlayers)
+            next.transform.localPosition = new Vector3(-10000, -10000);
+        listOfPlayers[value].transform.localPosition = Vector3.zero;
     }
-
-    public void SwitchToPlayer(int value) => SwitchToPlayer(listOfPlayers[value]);
-
     public List<Player> GetPlayers() => listOfPlayers;
-
-    public void AddPlayer(Player player, int position)
+    public void AddPlayerRPC(Player player)
     {
-        int thisPlayerPosition = (int)GetPlayerProperty(PhotonNetwork.LocalPlayer, ConstantStrings.MyPosition);
-        listOfPlayers.Insert(position, player);
+        DoFunction(() => AddPlayer(player.photonView.ViewID), RpcTarget.AllBuffered);
+    }
+    [PunRPC]
+    void AddPlayer(int playerID)
+    {
+        Player player = PhotonView.Find(playerID).GetComponent<Player>();
+        listOfPlayers.Add(player);
         player.transform.SetParent(canvas.transform);
         player.transform.SetAsFirstSibling();
 
-        playerDropdown.options.Insert(position, new TMP_Dropdown.OptionData(player.name));
-        if (thisPlayerPosition == position || (thisPlayerPosition == -1 && position == 0))
-            SwitchToPlayer(player);
+        playerDropdown.AddOptions(new List<TMP_Dropdown.OptionData>() { new(player.name) });
+        playerDropdown.gameObject.SetActive(playerDropdown.options.Count >= 2);
+
+        if (listOfPlayers.Count == (int)GetRoomProperty(ConstantStrings.CanPlay))
+        {
+            int myPosition = GetThisPlayerPosition(PhotonNetwork.LocalPlayer);
+            int index = listOfPlayers.IndexOf(mainPlayer);
+
+            if (myPosition == -1 || index == 0)
+                SwitchToPlayer(0);
+            else
+                playerDropdown.value = index;
+        }
     }
 
 #endregion 
@@ -237,7 +240,7 @@ public class CreateGame : PhotonCompatible
         {
             twistInfo[i].card.gameObject.SetActive(true);
             CardData data = GameFiles.inst.twistFiles[cardIDs[i]];
-            twistInfo[i].card.AssignCard(data, 1, false, new(0.75f, 0.75f));
+            twistInfo[i].card.AssignCard(data, 1, false, new(0.5f, 0.5f, 0.5f));
             twistInfo[i].countText.text = $"{TurnManager.inst.GetInt(ConstantStrings.TokenCounter(twistInfo[i].type))}";
         }
         for (int i = cardIDs.Length; i<twistInfo.Count; i++)

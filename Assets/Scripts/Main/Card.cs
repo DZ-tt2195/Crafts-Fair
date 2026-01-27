@@ -25,27 +25,7 @@ public class Card : PhotonCompatible
 
         selectMe = GetComponent<ButtonSelect>();
         layout = GetComponent<CardLayout>();
-
-        /*
-        if (PhotonNetwork.IsConnected && !PhotonNetwork.CurrentRoom.CustomProperties.ContainsKey(HealthString()))
-        {
-            ExitGames.Client.Photon.Hashtable initialProps = new()
-            {
-                [HealthString()] = 0,
-                [StunString()] = new int[0],
-                [ProtectString()] = new int[0],
-            };
-            PhotonNetwork.CurrentRoom.SetCustomProperties(initialProps);
-        }
-        */
     }
-
-    /*public string HealthString() => $"{this.photonView.ViewID}_Health";
-
-    public string StunString() => $"{this.photonView.ViewID}_Stun";
-
-    public string ProtectString() => $"{this.photonView.ViewID}_Protect";
-    */
     public void AssignCard(CardData dataFile, float startingAlpha, bool vertical, Vector3 scale)
     {
         this.name = dataFile.cardName;

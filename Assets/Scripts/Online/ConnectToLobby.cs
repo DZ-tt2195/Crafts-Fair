@@ -221,7 +221,6 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
             { ConstantStrings.CanPlay, numPlayers },
             { ConstantStrings.JoinAsSpec, false },
             { ConstantStrings.GameOver, false },
-            { ConstantStrings.NextPlayerPosition, 0 },
             { ConstantStrings.TwistList, new int[0]},
             { ConstantStrings.TokenCounter(TokenType.Coin), 2*numPlayers},
             { ConstantStrings.TokenCounter(TokenType.Bone), 2*numPlayers},
@@ -239,9 +238,9 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
 
         ExitGames.Client.Photon.Hashtable playerProps = new()
         {
+            [ConstantStrings.Playing] = true,
             [ConstantStrings.Waiting] = false,
             [ConstantStrings.MyScore] = 0,
-            [ConstantStrings.MyPosition] = -1,
 
             [TokenType.Coin.ToString()] = new int[numRanks],
             [TokenType.Bone.ToString()] = new int[numRanks],

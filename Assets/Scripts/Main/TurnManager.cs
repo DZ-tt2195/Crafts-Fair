@@ -31,6 +31,12 @@ public class TurnManager : PhotonCompatible
     #endregion
 
 #region Turns
+
+    void UpdateWaitingText(List<Photon.Realtime.Player> toSend, int playersWaiting)
+    {
+        foreach (Photon.Realtime.Player player in toSend)
+            MakeDecision.inst.DoFunction(() => MakeDecision.inst.PackagedInstructions(OnlineTranslate.Online_Waiting_on_Players(playersWaiting.ToString())), player);
+    }
     public override void OnPlayerPropertiesUpdate(Photon.Realtime.Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
     {
         bool HasPropertyAndValue(ExitGames.Client.Photon.Hashtable changedProps, string propertyName, object expected)
@@ -41,7 +47,6 @@ public class TurnManager : PhotonCompatible
         if (HasPropertyAndValue(changedProps, ConstantStrings.Waiting, true))
         {
             (List<Photon.Realtime.Player> players, List<Photon.Realtime.Player> spectators) = GetPlayers(false);
-            
             int WaitingOnPlayers()
             {
                 int playersWaiting = (int)GetRoomProperty(ConstantStrings.CanPlay);
@@ -56,11 +61,10 @@ public class TurnManager : PhotonCompatible
                         playersWaiting--;
                     }
                 }
-
                 UpdateWaitingText(isWaiting, playersWaiting);
                 return playersWaiting;
             }
-
+            //all players finish their turn
             if (PhotonNetwork.IsMasterClient && WaitingOnPlayers() == 0 && !(bool)GetRoomProperty(ConstantStrings.GameOver))
             {
                 foreach (Photon.Realtime.Player nextPlayer in players)
@@ -71,12 +75,7 @@ public class TurnManager : PhotonCompatible
             }
         }
     }
-    void UpdateWaitingText(List<Photon.Realtime.Player> toSend, int playersWaiting)
-    {
-        foreach (Photon.Realtime.Player player in toSend)
-            MakeDecision.inst.DoFunction(() => MakeDecision.inst.PackagedInstructions(OnlineTranslate.Online_Waiting_on_Players(playersWaiting.ToString())), player);
-    }
-    void NextPhase()
+    void NextPhase() //switch phases
     {
         storedTurns[GetCurrentPhase()].MasterEnd();
 
@@ -99,30 +98,14 @@ public class TurnManager : PhotonCompatible
         {
             string currentPhase = (string)GetRoomProperty(ConstantStrings.CurrentPhase);
             string nextPhase = (string)GetRoomProperty(ConstantStrings.NextPhase);
-/*
-            if (currentPhase.Equals(nameof(ResolveCard)))
-            {
-                Card top = deck[0];
-                deck.RemoveAt(0);
-                discard.Add(top);
-            }
-            if (nextPhase.Equals(nameof(ResolveCard)) && deck.Count == 0)
-            {
-                InstantChangeRoomProp(ConstantStrings.Shuffle, GetInt(ConstantStrings.Shuffle)+1);
-                Log.inst.MasterText(true, AutoTranslate.Blank());
-                Log.inst.MasterText(true, OnlineTranslate.Online_Shuffle_Deck());
-                deck = discard.Shuffle();
-                discard.Clear();
-            }
-            InstantChangeRoomProp(ConstantStrings.ProgressDeck, ConvertCardList(deck));
-            InstantChangeRoomProp(ConstantStrings.ProgressDiscard, ConvertCardList(discard));
-*/
+
             InstantChangeRoomProp(ConstantStrings.NextPhase, nameof(TakeTurn));
             InstantChangeRoomProp(ConstantStrings.CurrentPhase, nextPhase);
         }
     }
     public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
     {
+        //players start a new turn
         if (propertiesThatChanged.ContainsKey(ConstantStrings.CurrentPhase))
         {
             Debug.Log($"switched to {GetCurrentPhase()}");
@@ -130,13 +113,9 @@ public class TurnManager : PhotonCompatible
                 storedTurns[GetCurrentPhase()].MasterStart();
 
             CreateGame.inst.RefreshUI(true);
-            foreach (Player player in CreateGame.inst.GetPlayers())
+            if (CreateGame.inst.mainPlayer != null)
             {
-                if (player.photonView.AmOwner)
-                {
-                    CreateGame.inst.SwitchToPlayer(player);
-                    player.StartTurn();
-                }
+                CreateGame.inst.mainPlayer.StartTurn();                
             }
         }
     }
@@ -234,8 +213,6 @@ public class TurnManager : PhotonCompatible
     void SharePropertyChanges()
     {
         Log.inst.ShareTexts();
-        int currentPosition = (int)GetPlayerProperty(PhotonNetwork.LocalPlayer, ConstantStrings.MyPosition);
-
         foreach (var KVP in playerPropertyToChange)
         {
             KVP.Key.photonView.Owner.SetCustomProperties(KVP.Value);
@@ -265,10 +242,9 @@ public class TurnManager : PhotonCompatible
         foreach (Player player in CreateGame.inst.GetPlayers())
         {
             text += $"{player.name}";
-            if (player.myPosition == resignPosition)
+            if (GetThisPlayerPosition(player.photonView.Owner) == resignPosition)
                 text += AutoTranslate.Resigned();
             text += "\n";
-
 /*
             List<string> cardsPlayed = GetStringList(ConstantStrings.AllCardsPlayed, player);
             for (int i = 0; i<cardsPlayed.Count; i++)

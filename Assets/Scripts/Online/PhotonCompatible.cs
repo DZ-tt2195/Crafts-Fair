@@ -131,7 +131,6 @@ public class PhotonCompatible : MonoBehaviourPunCallbacks
     #endregion
 
 #region Properties
-
     public static void InstantChangePlayerProp(Photon.Realtime.Player player, string propertyName, object changeToThis, object expected = null)
     {
         ExitGames.Client.Photon.Hashtable changeTable = new() { { propertyName.ToString(), changeToThis } };
@@ -147,10 +146,8 @@ public class PhotonCompatible : MonoBehaviourPunCallbacks
             Debug.Log($"change to {propertyName} has been rejected");
         }
     }
-
     public static void InstantChangePlayerProp(Player playerObject, string propertyName, object changeToThis, object expected = null)
         => InstantChangePlayerProp(playerObject.photonView.Controller, propertyName, changeToThis, expected);
-
     public static object GetPlayerProperty(Photon.Realtime.Player player, string propertyName)
     {
         if (player == null)
@@ -168,9 +165,7 @@ public class PhotonCompatible : MonoBehaviourPunCallbacks
             return null;
         }
     }
-
     public static object GetPlayerProperty(Player player, string propertyName) => GetPlayerProperty(player.photonView.Owner, propertyName);
-
     public static void InstantChangeRoomProp(string propertyName, object changeToThis, object expected = null)
     {
         ExitGames.Client.Photon.Hashtable changeTable = new() { { propertyName, changeToThis } };
@@ -186,13 +181,11 @@ public class PhotonCompatible : MonoBehaviourPunCallbacks
             Debug.Log($"change to {propertyName} has been rejected");
         }
     }
-
     public static object GetRoomProperty(string propertyName) => PhotonNetwork.CurrentRoom.CustomProperties[propertyName];
 
     #endregion
 
 #region Misc
-
     public static (List<Photon.Realtime.Player>, List<Photon.Realtime.Player>) GetPlayers(bool printLog)
     {
         List<Photon.Realtime.Player> players = new();
@@ -200,24 +193,28 @@ public class PhotonCompatible : MonoBehaviourPunCallbacks
 
         foreach (Photon.Realtime.Player nextPlayer in PhotonNetwork.CurrentRoom.Players.Values.OrderBy(p => p.ActorNumber))
         {
-            int position = (int)GetPlayerProperty(nextPlayer, ConstantStrings.MyPosition);
-            if (position == -1)
+            bool playing = (bool)GetPlayerProperty(nextPlayer, ConstantStrings.Playing);
+            if (!playing)
             {
                 spectators.Add(nextPlayer);
                 if (printLog)
-                    Debug.Log($"spectating (inactive: {nextPlayer.IsInactive}, actor: {nextPlayer.ActorNumber}, position: {position}): {nextPlayer.NickName}");
+                    Debug.Log($"spectating (inactive: {nextPlayer.IsInactive}, actor: {nextPlayer.ActorNumber}): {nextPlayer.NickName}");
             }
             else
             {
                 players.Add(nextPlayer);
                 if (printLog)
-                    Debug.Log($"playing (inactive: {nextPlayer.IsInactive}, actor: {nextPlayer.ActorNumber}, position: {position}): {nextPlayer.NickName}");
+                    Debug.Log($"playing (inactive: {nextPlayer.IsInactive}, actor: {nextPlayer.ActorNumber}): {nextPlayer.NickName}");
             }
         }
 
         return (players, spectators);
     }
-
+    public int GetThisPlayerPosition(Photon.Realtime.Player playerToFind)
+    {
+        List<Photon.Realtime.Player> allPlayers = GetPlayers(false).Item1;
+        return allPlayers.IndexOf(playerToFind);
+    }
     public GameObject MakeObject(GameObject prefab)
     {
         if (PhotonNetwork.IsConnected)
@@ -225,7 +222,6 @@ public class PhotonCompatible : MonoBehaviourPunCallbacks
         else
             return Instantiate(prefab);
     }
-
     public bool AmMaster()
     {
         return !PhotonNetwork.IsConnected || PhotonNetwork.IsMasterClient;

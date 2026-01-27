@@ -7,7 +7,7 @@ public static class ConstantStrings
     public const string LastRoom = nameof(LastRoom);
 
     //player properties
-    public const string MyPosition = nameof(MyPosition);
+    public const string Playing = nameof(Playing);
     public const string Waiting = nameof(Waiting);
     public const string MyScore = nameof(MyScore);
     public const string MyPlacards = nameof(MyPlacards);
@@ -22,7 +22,6 @@ public static class ConstantStrings
     public const string JoinAsSpec = nameof(JoinAsSpec);
     public const string CurrentPhase = nameof(CurrentPhase);
     public const string NextPhase = nameof(NextPhase);
-    public const string NextPlayerPosition = nameof(NextPlayerPosition);
     public const string TwistList = nameof(TwistList);
     public const string TurnNumber = nameof(TurnNumber);
     public static string TokenCounter(TokenType type) => TokenCounter(type.ToString());

@@ -60,7 +60,7 @@ public class CommHub : PhotonCompatible
 
     public override void OnPlayerLeftRoom(Photon.Realtime.Player otherPlayer)
     {
-        int playerPosition = (int)GetPlayerProperty(otherPlayer, ConstantStrings.MyPosition);
+        int playerPosition = GetThisPlayerPosition(otherPlayer);
         if (PhotonNetwork.IsMasterClient && playerPosition >= 0)
         {
             if (otherPlayer.IsInactive)
@@ -68,10 +68,11 @@ public class CommHub : PhotonCompatible
                 ShareMessageRPC(OnlineTranslate.Online_Player_Disconnected(otherPlayer.NickName), true);
                 InstantChangePlayerProp(otherPlayer, ConstantStrings.Waiting, false);
             }
-            else if (!(bool)GetRoomProperty(ConstantStrings.GameOver.ToString()))
+            else if (!(bool)GetRoomProperty(ConstantStrings.GameOver))
             {
                 ShareMessageRPC(OnlineTranslate.Online_Player_Quit(otherPlayer.NickName), true);
-                TurnManager.inst.TextForEnding(OnlineTranslate.Online_Player_Resigned(otherPlayer.NickName), playerPosition); 
+                if (!GetRoomProperty(ConstantStrings.CurrentPhase).Equals(nameof(WaitForJoiners)))
+                    TurnManager.inst.TextForEnding(OnlineTranslate.Online_Player_Resigned(otherPlayer.NickName), playerPosition); 
             }
         }
     }

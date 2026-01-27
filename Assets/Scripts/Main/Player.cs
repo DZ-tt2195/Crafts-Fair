@@ -15,7 +15,6 @@ public class Player : PhotonCompatible
 
     bool initialized = false;
     [ReadOnly] public bool endPause = true;
-    public int myPosition { get; private set; }
     [SerializeField] Transform keepHand;
     [SerializeField] TMP_Text crownText;
     public Dictionary<string, bool> uiDictionary = new();
@@ -50,18 +49,17 @@ public class Player : PhotonCompatible
         initialized = true;
         this.name = username;
         SetToPlayerProps();
-        CreateGame.inst.AddPlayer(this, myPosition);
 
         Button resignButton = GameObject.Find("Resign Button").GetComponent<Button>();
         if (photonView.AmOwner)
         {
-            resignButton.onClick.AddListener(() => TurnManager.inst.TextForEnding(OnlineTranslate.Online_Player_Resigned(this.name), myPosition));
+            CreateGame.inst.mainPlayer = this;
+            resignButton.onClick.AddListener(() => TurnManager.inst.TextForEnding(OnlineTranslate.Online_Player_Resigned(this.name), GetThisPlayerPosition(PhotonNetwork.LocalPlayer)));
             StartTurn();
         }
     }
     void SetToPlayerProps()
     {
-        myPosition = (int)GetPlayerProperty(this, ConstantStrings.MyPosition);
         myPlacards = TurnManager.inst.GetCardList(ConstantStrings.MyPlacards, this);
         myTokens = new Dictionary<TokenType, int[]>();
         foreach (TokenType value in Enum.GetValues(typeof(TokenType)))
@@ -205,6 +203,7 @@ public class Player : PhotonCompatible
     public void StartTurn()
     {
         //this.DoFunction(() => this.ChangeButtonColor(false));
+        CreateGame.inst.SwitchToPlayer(CreateGame.inst.mainPlayer);
         InstantChangePlayerProp(this, ConstantStrings.Waiting, false);
         endPause = true;
 
@@ -249,7 +248,8 @@ public class Player : PhotonCompatible
     public void UpdateUI(bool forcedUpdate)
     {
         List<string> uiKeys = uiDictionary.Keys.ToList();
-        int thisPlayerPosition = (int)GetPlayerProperty(PhotonNetwork.LocalPlayer, ConstantStrings.MyPosition);
+        int myPosition = GetThisPlayerPosition(PhotonNetwork.LocalPlayer);
+        int thisPlayerPosition = GetThisPlayerPosition(this.photonView.Owner);
 
         if (forcedUpdate)
         {
@@ -273,7 +273,7 @@ public class Player : PhotonCompatible
                 nextCard.selectMe.SetBorder(false);
                 nextCard.MoveCardRPC(handPositions[i], 0.25f, Vector3.one);
 
-                if (thisPlayerPosition == -1 || thisPlayerPosition == myPosition)
+                if (myPosition == -1 || thisPlayerPosition == myPosition)
                     nextCard.FlipCardRPC(1, 0.25f);
             }
         }
