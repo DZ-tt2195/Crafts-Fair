@@ -16,6 +16,7 @@ public static string Online_Draw_Placard_Others (string Player) => $"Online_Draw
 public static string Online_Discard_Placard (string Player,string Card) => $"Online_Discard_Placard\tPlayer\t{Player}\tCard\t{Card}";
 public static string Online_Make_Submission (string Player,string TokenNum,string CardNum) => $"Online_Make_Submission\tPlayer\t{Player}\tTokenNum\t{TokenNum}\tCardNum\t{CardNum}";
 public static string Online_No_Submission (string Player) => $"Online_No_Submission\tPlayer\t{Player}";
+public static string Online_Twists_To_Resolve (string Num) => $"Online_Twists_To_Resolve\tNum\t{Num}";
 public static string Online_Resolve_Card (string Player,string Card) => $"Online_Resolve_Card\tPlayer\t{Player}\tCard\t{Card}";
 public static string Online_Tie_Game () => $"Online_Tie_Game";
 public static string Online_Player_Resigned (string Player) => $"Online_Player_Resigned\tPlayer\t{Player}";

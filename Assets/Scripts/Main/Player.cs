@@ -23,6 +23,7 @@ public class Player : PhotonCompatible
     [SerializeField] List<TokenDisplay> allWeaponDisplays = new();
     [SerializeField] List<TokenDisplay> allTextDisplays = new();
     List<Card> myPlacards;
+    int myScore;
     Dictionary<TokenType, int[]> myTokens;
 
     protected override void Awake()
@@ -30,7 +31,7 @@ public class Player : PhotonCompatible
         base.Awake();
         this.bottomType = this.GetType();
 
-        List<string> toAdd = new() { ConstantStrings.MyPlacards, ConstantStrings.MyDiscard, ConstantStrings.MyScore, TokenType.Coin.ToString(), TokenType.Bone.ToString(), TokenType.Weapon.ToString(), TokenType.Text.ToString() };
+        List<string> toAdd = new() { ConstantStrings.MyPlacards, ConstantStrings.MyDiscard, ConstantStrings.MyScore, TokenType.Art.ToString(), TokenType.House.ToString(), TokenType.Sword.ToString(), TokenType.Tech.ToString() };
         foreach (string next in toAdd)
             uiDictionary.Add(next, true);
 
@@ -60,6 +61,7 @@ public class Player : PhotonCompatible
     }
     void SetToPlayerProps()
     {
+        myScore = TurnManager.inst.GetInt(ConstantStrings.MyScore, this);
         myPlacards = TurnManager.inst.GetCardList(ConstantStrings.MyPlacards, this);
         myTokens = new Dictionary<TokenType, int[]>();
         foreach (TokenType value in Enum.GetValues(typeof(TokenType)))
@@ -152,7 +154,7 @@ public class Player : PhotonCompatible
 
 #region Resources
 
-    public int GetScore() => TurnManager.inst.GetInt(ConstantStrings.MyScore, this);
+    public int GetScore() => myScore;
     public void ScoreRPC(int num, int logged = 0, bool important = false)
     {
         if (num == 0)
@@ -165,9 +167,8 @@ public class Player : PhotonCompatible
     }
     void ChangeScore(int num)
     {
-        int total = TurnManager.inst.GetInt(ConstantStrings.MyScore, this);
-        total += (!Log.inst.forward) ? -num : num;
-        TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyScore, total); uiDictionary[ConstantStrings.MyScore] = true;
+        myScore += (!Log.inst.forward) ? -num : num;
+        TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyScore, myScore); uiDictionary[ConstantStrings.MyScore] = true;
     }
     public void ChangeTokenRPC(int num, (int value, TokenType token) info, int logged = 0, bool important = false)
     {
@@ -284,14 +285,14 @@ public class Player : PhotonCompatible
                 card.transform.SetParent(null);
         }
 
-        if (uiDictionary[TokenType.Coin.ToString()])
-            ApplyToken(TokenType.Coin, allCoinDisplays);
-        if (uiDictionary[TokenType.Bone.ToString()])
-            ApplyToken(TokenType.Bone, allBoneDisplays);
-        if (uiDictionary[TokenType.Weapon.ToString()])
-            ApplyToken(TokenType.Weapon, allWeaponDisplays);
-        if (uiDictionary[TokenType.Text.ToString()])
-            ApplyToken(TokenType.Text, allTextDisplays);
+        if (uiDictionary[TokenType.Art.ToString()])
+            ApplyToken(TokenType.Art, allCoinDisplays);
+        if (uiDictionary[TokenType.House.ToString()])
+            ApplyToken(TokenType.House, allBoneDisplays);
+        if (uiDictionary[TokenType.Sword.ToString()])
+            ApplyToken(TokenType.Sword, allWeaponDisplays);
+        if (uiDictionary[TokenType.Tech.ToString()])
+            ApplyToken(TokenType.Tech, allTextDisplays);
 
         void ApplyToken(TokenType type, List<TokenDisplay> list)
         {
@@ -335,10 +336,10 @@ public class Player : PhotonCompatible
     {
         List<TokenDisplay> toReturn = new();
 
-        ApplyToken(myTokens[TokenType.Coin], allCoinDisplays);
-        ApplyToken(myTokens[TokenType.Bone], allBoneDisplays);
-        ApplyToken(myTokens[TokenType.Weapon], allWeaponDisplays);
-        ApplyToken(myTokens[TokenType.Text], allTextDisplays);
+        ApplyToken(myTokens[TokenType.Art], allCoinDisplays);
+        ApplyToken(myTokens[TokenType.House], allBoneDisplays);
+        ApplyToken(myTokens[TokenType.Sword], allWeaponDisplays);
+        ApplyToken(myTokens[TokenType.Tech], allTextDisplays);
 
         void ApplyToken(int[] array, List<TokenDisplay> list)
         {

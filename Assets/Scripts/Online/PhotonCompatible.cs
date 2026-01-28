@@ -212,8 +212,15 @@ public class PhotonCompatible : MonoBehaviourPunCallbacks
     }
     public int GetThisPlayerPosition(Photon.Realtime.Player playerToFind)
     {
-        List<Photon.Realtime.Player> allPlayers = GetPlayers(false).Item1;
-        return allPlayers.IndexOf(playerToFind);
+        if ((bool)GetPlayerProperty(playerToFind, ConstantStrings.Playing))
+        {
+            List<Photon.Realtime.Player> allPlayers = GetPlayers(false).Item1;
+            return allPlayers.IndexOf(playerToFind);
+        }
+        else
+        {
+            return -1;
+        }
     }
     public GameObject MakeObject(GameObject prefab)
     {

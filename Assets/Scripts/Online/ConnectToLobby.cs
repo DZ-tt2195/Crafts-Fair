@@ -222,10 +222,10 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
             { ConstantStrings.JoinAsSpec, false },
             { ConstantStrings.GameOver, false },
             { ConstantStrings.TwistList, new int[0]},
-            { ConstantStrings.TokenCounter(TokenType.Coin), 2*numPlayers},
-            { ConstantStrings.TokenCounter(TokenType.Bone), 2*numPlayers},
-            { ConstantStrings.TokenCounter(TokenType.Weapon), 2*numPlayers},
-            { ConstantStrings.TokenCounter(TokenType.Text), 2*numPlayers},
+            { ConstantStrings.TokenCounter(TokenType.Art), 2*numPlayers},
+            { ConstantStrings.TokenCounter(TokenType.House), 2*numPlayers},
+            { ConstantStrings.TokenCounter(TokenType.Sword), 2*numPlayers},
+            { ConstantStrings.TokenCounter(TokenType.Tech), 2*numPlayers},
             { ConstantStrings.TurnNumber, 1 },
         };
         return roomProps;
@@ -242,10 +242,10 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
             [ConstantStrings.Waiting] = false,
             [ConstantStrings.MyScore] = 0,
 
-            [TokenType.Coin.ToString()] = new int[numRanks],
-            [TokenType.Bone.ToString()] = new int[numRanks],
-            [TokenType.Weapon.ToString()] = new int[numRanks],
-            [TokenType.Text.ToString()] = new int[numRanks],
+            [TokenType.Art.ToString()] = new int[numRanks],
+            [TokenType.House.ToString()] = new int[numRanks],
+            [TokenType.Sword.ToString()] = new int[numRanks],
+            [TokenType.Tech.ToString()] = new int[numRanks],
 
             [ConstantStrings.MyPlacards] = new int[0],
             [ConstantStrings.MyDeck] = new int[0],

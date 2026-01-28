@@ -174,10 +174,9 @@ public class CreateGame : PhotonCompatible
         player.transform.SetAsFirstSibling();
 
         playerDropdown.AddOptions(new List<TMP_Dropdown.OptionData>() { new(player.name) });
-        playerDropdown.gameObject.SetActive(playerDropdown.options.Count >= 2);
-
         if (listOfPlayers.Count == (int)GetRoomProperty(ConstantStrings.CanPlay))
         {
+            playerDropdown.gameObject.SetActive(playerDropdown.options.Count >= 2);
             int myPosition = GetThisPlayerPosition(PhotonNetwork.LocalPlayer);
             int index = listOfPlayers.IndexOf(mainPlayer);
 

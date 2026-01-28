@@ -1,5 +1,5 @@
 Game_Designer	by Thomas Tang (DZ)
-Last_Update	Last Updated: Jan 26, 2026
+Last_Update	Last Updated: Jan 28, 2026
 Blank	
 Translator_Credit	Original Language
 Language	Language
@@ -32,10 +32,10 @@ Failed_to_reconnect	Failed to reconnect to $Room$'s room.
 Encyclopedia	Encyclopedia
 Close	Close
 Choose_Twists	Choose Twists for this game
-Custom_Twist_1	Twist CoinIcon
-Custom_Twist_2	Twist BoneIcon
-Custom_Twist_3	Twist WeaponIcon
-Custom_Twist_4	Twist TextIcon
+Custom_Twist_1	Twist ArtIcon
+Custom_Twist_2	Twist HouseIcon
+Custom_Twist_3	Twist SwordIcon
+Custom_Twist_4	Twist TechIcon
 Choose	Choose
 Random	Random
 Type_into_chat	Type into chat
@@ -49,36 +49,36 @@ Undo	Undo
 Short	Short
 Long	Long
 CardIcon	CardIcon
-CoinIcon	CoinIcon
-BoneIcon	BoneIcon
-WeaponIcon	WeaponIcon
-TextIcon	TextIcon
+ArtIcon	ArtIcon
+HouseIcon	HouseIcon
+SwordIcon	SwordIcon
+TechIcon	TechIcon
 CrownIcon	CrownIcon
 TokenIcon	TokenIcon
-Coin1	CoinIcon (1)
-Coin2	CoinIcon (2)
-Coin3	CoinIcon (3)
-Coin4	CoinIcon (4)
-Coin5	CoinIcon (5)
-Coin6	CoinIcon (6)
-Bone1	BoneIcon (1)
-Bone2	BoneIcon (2)
-Bone3	BoneIcon (3)
-Bone4	BoneIcon (4)
-Bone5	BoneIcon (5)
-Bone6	BoneIcon (6)
-Weapon1	WeaponIcon (1)
-Weapon2	WeaponIcon (2)
-Weapon3	WeaponIcon (3)
-Weapon4	WeaponIcon (4)
-Weapon5	WeaponIcon (5)
-Weapon6	WeaponIcon (6)
-Text1	TextIcon (1)
-Text2	TextIcon (2)
-Text3	TextIcon (3)
-Text4	TextIcon (4)
-Text5	TextIcon (5)
-Text6	TextIcon (6)
+Art1	ArtIcon (1)
+Art2	ArtIcon (2)
+Art3	ArtIcon (3)
+Art4	ArtIcon (4)
+Art5	ArtIcon (5)
+Art6	ArtIcon (6)
+House1	HouseIcon (1)
+House2	HouseIcon (2)
+House3	HouseIcon (3)
+House4	HouseIcon (4)
+House5	HouseIcon (5)
+House6	HouseIcon (6)
+Sword1	SwordIcon (1)
+Sword2	SwordIcon (2)
+Sword3	SwordIcon (3)
+Sword4	SwordIcon (4)
+Sword5	SwordIcon (5)
+Sword6	SwordIcon (6)
+Tech1	TechIcon (1)
+Tech2	TechIcon (2)
+Tech3	TechIcon (3)
+Tech4	TechIcon (4)
+Tech5	TechIcon (5)
+Tech6	TechIcon (6)
 Online_Next_Turn	Turn $Number$
 Add_Or_Advance	Choose one: +1 TokenIcon (1), or advance 1 TokenIcon.
 Online_Add_Score	$Player$ gets +$Num$ CrownIcon.
@@ -92,6 +92,7 @@ Ask_Submission	Submit 2+ TokenIcon, while meeting requirements for 2+ CardIcon.
 Online_Make_Submission	$Player$ submits $TokenNum$ tokens and $CardNum$ placards.
 Online_No_Submission	$Player$ doesn't submit.
 Undo_Submission	Undo All
+Online_Twists_To_Resolve	Twists to resolve: $Num$
 Resolve_Twist	Choose a Twist to resolve.
 Online_Resolve_Card	$Player$ resolves $Card$.
 Confirm	Confirm
@@ -108,6 +109,8 @@ Online_Player_Resigned	$Player$ has resigned.
 Online_Player_Won	$Player$ has won.
 Resigned	(Resigned)
 Switch_Player	Switch Player
+Rules	Rules
+Rules_Summary	Each Turn: \n1. Either add a token at rank 1, or advance 1 token on your grid. \n2. Remove a counter from that token's Twist. \n3. Submit 2+ tokens and 2+ placards at once to score crowns. \n\nBetween Turns:\n4. For each Twist with 0 counters, each player draws 2 placards and follows its instructions. \n5. Add the counters back onto those Twists (2 per player). \n6. The first player to reach 20+ crowns wins.
 Placard	Placard
 Perfect_Fit	Perfect Fit
 Perfect_Fit_Text	Have exactly 0 TokenIcon after submitting.
@@ -126,11 +129,11 @@ Rise_Of_Kingdoms_Text	2 TokenIcon (4).
 Rise_Of_Empires	Rise of Empires
 Rise_Of_Empires_Text	2 TokenIcon (6).
 Twist	Twist
-Make_Coin	Make Coin
-Make_Coin_Text	 +2 CoinIcon (1).
-Make_Bone	Make Bone
-Make_Bone_Text	 +2 BoneIcon (1).
-Make_Weapon	Make Weapon
-Make_Weapon_Text	 +2 WeaponIcon (1).
-Make_Text	Make Text
-Make_Text_Text	 +2 TextIcon (1).
+Make_Art	Make Art
+Make_Art_Text	 +2 ArtIcon (1).
+Make_House	Make House
+Make_House_Text	 +2 HouseIcon (1).
+Make_Sword	Make Sword
+Make_Sword_Text	 +2 SwordIcon (1).
+Make_Tech	Make Tech
+Make_Tech_Text	 +2 TechIcon (1).

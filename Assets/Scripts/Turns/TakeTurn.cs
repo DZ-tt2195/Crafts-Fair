@@ -23,10 +23,10 @@ public class TakeTurn : Turn
     {
         List<TextButtonInfo> addTokens = new()
         {
-            new(AutoTranslate.Coin1(), () => AddThis(TokenType.Coin)),
-            new(AutoTranslate.Bone1(), () => AddThis(TokenType.Bone)),
-            new(AutoTranslate.Weapon1(), () => AddThis(TokenType.Weapon)),
-            new(AutoTranslate.Text1(), () => AddThis(TokenType.Text))
+            new(AutoTranslate.Art1(), () => AddThis(TokenType.Art)),
+            new(AutoTranslate.House1(), () => AddThis(TokenType.House)),
+            new(AutoTranslate.Sword1(), () => AddThis(TokenType.Sword)),
+            new(AutoTranslate.Tech1(), () => AddThis(TokenType.Tech))
         };
         MakeDecision.inst.ChooseTextButton(addTokens, AutoTranslate.Add_Or_Advance());
 

@@ -5,19 +5,33 @@ using UnityEngine;
 
 public class ResolveTwists : Turn
 {
-    public override void MasterStart()
+    (List<TokenType>, List<Card>) TwistsNoCounter()
     {
-    }
-
-    public override void ForPlayer(Player player)
-    {
+        List<TokenType> typesToResolve = new();
         List<Card> twistsToResolve = new();
         foreach (TokenType type in Enum.GetValues(typeof(TokenType)))
         {
             string tokencounter = ConstantStrings.TokenCounter(type);
             if (TurnManager.inst.GetInt(tokencounter) <= 0)
+            {
+                typesToResolve.Add(type);
                 twistsToResolve.Add(CreateGame.inst.GetTwist(type).card);
+            }
         }
+        return (typesToResolve, twistsToResolve);        
+    }
+
+    public override void MasterStart()
+    {
+        List<Card> twistsToResolve = TwistsNoCounter().Item2;
+        Log.inst.MasterText(true, AutoTranslate.Blank());
+        Log.inst.MasterText(true, OnlineTranslate.Online_Twists_To_Resolve(twistsToResolve.Count.ToString()));
+    }
+
+    public override void ForPlayer(Player player)
+    {
+        List<Card> twistsToResolve = TwistsNoCounter().Item2;
+        player.DrawPlacardRPC(2*twistsToResolve.Count);
         Log.inst.NewDecisionContainer(() => ChooseTwist(player, twistsToResolve));
     }
 
@@ -39,11 +53,11 @@ public class ResolveTwists : Turn
 
     public override void MasterEnd()
     {
-        foreach (TokenType type in Enum.GetValues(typeof(TokenType)))
+        List<TokenType> tokenTwistsToAdd = TwistsNoCounter().Item1;
+        foreach (TokenType type in tokenTwistsToAdd)
         {
             string tokencounter = ConstantStrings.TokenCounter(type);
-            if (TurnManager.inst.GetInt(tokencounter) <= 0)
-                PhotonCompatible.InstantChangeRoomProp(tokencounter, 2*CreateGame.inst.GetPlayers().Count);
+            PhotonCompatible.InstantChangeRoomProp(tokencounter, 2*CreateGame.inst.GetPlayers().Count);
         }
     }
 }

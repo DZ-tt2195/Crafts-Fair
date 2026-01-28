@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using MyBox;
 
-public enum TokenType { Coin, Bone, Weapon, Text}
+public enum TokenType { Art, House, Sword, Tech}
 public class TokenDisplay : MonoBehaviour
 {
     public ButtonSelect selectMe { get; private set; }

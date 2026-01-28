@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: f1c5fe9f3602645999ce27d053add208
+guid: 8961fdfce155b4e4b94a1f83612a8c0b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 464206127066122051
-    second: CoinIcon_0
+      213: 1718435485421201579
+    second: HouseIcon_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: CoinIcon_0
+      name: HouseIcon_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 956
-        height: 956
+        width: 911
+        height: 911
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: 347065a5301317600800000000000000
-      internalID: 464206127066122051
+      spriteID: ba8e4f528fb19d710800000000000000
+      internalID: 1718435485421201579
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      CoinIcon_0: 464206127066122051
+      HouseIcon_0: 1718435485421201579
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
