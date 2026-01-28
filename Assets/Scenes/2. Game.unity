@@ -2836,7 +2836,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159b66c071ced43f499eb58b9b7c8b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SetText
-  key: 81
+  key: 82
 --- !u!1 &375307093
 GameObject:
   m_ObjectHideFlags: 0
@@ -4542,7 +4542,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159b66c071ced43f499eb58b9b7c8b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: 84
+  key: 85
 --- !u!114 &613561510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8926,7 +8926,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159b66c071ced43f499eb58b9b7c8b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SetText
-  key: 82
+  key: 83
 --- !u!1 &1120750735
 GameObject:
   m_ObjectHideFlags: 0
@@ -9536,7 +9536,7 @@ RectTransform:
   m_Father: {fileID: 2102407694}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -10373,7 +10373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159b66c071ced43f499eb58b9b7c8b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SetText
-  key: 85
+  key: 86
 --- !u!114 &1240597073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15588,7 +15588,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1951802729
 RectTransform:
   m_ObjectHideFlags: 0
@@ -16597,7 +16597,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159b66c071ced43f499eb58b9b7c8b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SetText
-  key: 86
+  key: 87
 --- !u!114 &2097049516
 MonoBehaviour:
   m_ObjectHideFlags: 0

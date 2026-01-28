@@ -41,17 +41,6 @@ public class CardMenu : PhotonCompatible
     public void ChooseFromList(CardSelect clicked, List<CardData> allData, bool vertical)
     {
         mostRecentClick = clicked;
-        if (vertical)
-        {
-            storeButtons.constraintCount = 4;
-            storeButtons.spacing = new(30, 30);
-        }
-        else
-        {
-            storeButtons.constraintCount = 2;
-            storeButtons.spacing = new(200, -80);
-        }
-
         for (int i = 0; i < blankButtons.Count; i++)
         {
             (CardLayout layout, Button button) = blankButtons[i];

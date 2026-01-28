@@ -112,7 +112,7 @@ public class Translator : PhotonCompatible
         if (toReplace != null)
         {
             foreach ((string one, string two) in toReplace)
-                answer = answer.Replace($"${one}$", two);
+                answer = answer.Replace($"${one}$", Translate(two));
         }
         return answer;
     }
@@ -149,13 +149,13 @@ public class Translator : PhotonCompatible
 
         List<(string, string)> toReplace = new();
         for (int i = 1; i<splitUp.Length; i+=2)
-            toReplace.Add((splitUp[i], Translate(splitUp[i+1])));
+            toReplace.Add((splitUp[i], splitUp[i+1]));
 
         string translated = Translate(targetText, toReplace);
         return KeywordTooltip.instance.EditText(translated);
     }
 
-    public static string ConvertToken((int value, TokenType type) info) => $"{info.type}{info.value}";
+    public static string ConvertToken((int value, TokenType type) info) => $"{info.type}_{info.value}";
 
 #endregion
 

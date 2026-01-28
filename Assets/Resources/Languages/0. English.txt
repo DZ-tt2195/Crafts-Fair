@@ -55,36 +55,41 @@ SwordIcon	SwordIcon
 TechIcon	TechIcon
 CrownIcon	CrownIcon
 TokenIcon	TokenIcon
-Art1	ArtIcon (1)
-Art2	ArtIcon (2)
-Art3	ArtIcon (3)
-Art4	ArtIcon (4)
-Art5	ArtIcon (5)
-Art6	ArtIcon (6)
-House1	HouseIcon (1)
-House2	HouseIcon (2)
-House3	HouseIcon (3)
-House4	HouseIcon (4)
-House5	HouseIcon (5)
-House6	HouseIcon (6)
-Sword1	SwordIcon (1)
-Sword2	SwordIcon (2)
-Sword3	SwordIcon (3)
-Sword4	SwordIcon (4)
-Sword5	SwordIcon (5)
-Sword6	SwordIcon (6)
-Tech1	TechIcon (1)
-Tech2	TechIcon (2)
-Tech3	TechIcon (3)
-Tech4	TechIcon (4)
-Tech5	TechIcon (5)
-Tech6	TechIcon (6)
+ArtIcon_1	ArtIcon (1)
+ArtIcon_2	ArtIcon (2)
+ArtIcon_3	ArtIcon (3)
+ArtIcon_4	ArtIcon (4)
+ArtIcon_5	ArtIcon (5)
+ArtIcon_6	ArtIcon (6)
+HouseIcon_1	HouseIcon (1)
+HouseIcon_2	HouseIcon (2)
+HouseIcon_3	HouseIcon (3)
+HouseIcon_4	HouseIcon (4)
+HouseIcon_5	HouseIcon (5)
+HouseIcon_6	HouseIcon (6)
+SwordIcon_1	SwordIcon (1)
+SwordIcon_2	SwordIcon (2)
+SwordIcon_3	SwordIcon (3)
+SwordIcon_4	SwordIcon (4)
+SwordIcon_5	SwordIcon (5)
+SwordIcon_6	SwordIcon (6)
+TechIcon_1	TechIcon (1)
+TechIcon_2	TechIcon (2)
+TechIcon_3	TechIcon (3)
+TechIcon_4	TechIcon (4)
+TechIcon_5	TechIcon (5)
+TechIcon_6	TechIcon (6)
 Online_Next_Turn	Turn $Number$
-Add_Or_Advance	Choose one: +1 TokenIcon (1), or advance 1 TokenIcon.
+Ask_Token_Type	Choose a token type.
+Ask_Advance	Advance 1 $Token$.
+Ask_Retreat	Retreat 1 $Token$.
+Online_Chose_Token	$Player$ chooses $Token$.
 Online_Add_Score	$Player$ gets +$Num$ CrownIcon.
 Online_Lose_Score	$Player$ loses $Num$ CrownIcon.
 Online_Add_Token	$Player$ adds $Num$ $Token$.
 Online_Remove_Token	$Player$ removes $Num$ $Token$.
+Online_Advance_Token	$Player$ advances $Num$ $Token1$ to $Token2$.
+Online_Retreat_Token	$Player$ retreats $Num$ $Token1$ to $Token2$.
 Online_Draw_Placard	$Player$ draws $Card$.
 Online_Draw_Placard_Others	$Player$ draws 1 CardIcon.
 Online_Discard_Placard	$Player$ discards $Card$.
@@ -97,8 +102,7 @@ Resolve_Twist	Choose a Twist to resolve.
 Online_Resolve_Card	$Player$ resolves $Card$.
 Confirm	Confirm
 Decline	Decline
-Choose_One_Instruction	Choose one ($Card$).
-Discard_Instruction	Discard 1 Card ($Card$).
+Discard_Instruction	Discard 1 CardIcon.
 Done	Done
 Pause_to_Read	A pause to let you read things.
 Pause_to_Undo	Last chance to undo anything.
@@ -110,7 +114,7 @@ Online_Player_Won	$Player$ has won.
 Resigned	(Resigned)
 Switch_Player	Switch Player
 Rules	Rules
-Rules_Summary	Each Turn: \n1. Either add a token at rank 1, or advance 1 token on your grid. \n2. Remove a counter from that token's Twist. \n3. Submit 2+ tokens and 2+ placards at once to score crowns. \n\nBetween Turns:\n4. For each Twist with 0 counters, each player draws 2 placards and follows its instructions. \n5. Add the counters back onto those Twists (2 per player). \n6. The first player to reach 20+ crowns wins.
+Rules_Summary	Each Turn: \n1. Choose a token type and remove a counter from that token's Twist. \n2. Add 1 of that token with a value of 1, then advance 1 token of that type. \n3. You may submit 2+ tokens and 2+ placards at once to score crowns. \n\nBetween Turns:\n4. For each Twist with 0 counters, each player draws 2 placards and follows its instructions. \n5. Add the counters back onto those Twists (2 per player). \n6. The first player to reach 20+ crowns wins.
 Placard	Placard
 Perfect_Fit	Perfect Fit
 Perfect_Fit_Text	Have exactly 0 TokenIcon after submitting.
@@ -130,10 +134,12 @@ Rise_Of_Empires	Rise of Empires
 Rise_Of_Empires_Text	2 TokenIcon (6).
 Twist	Twist
 Make_Art	Make Art
-Make_Art_Text	 +2 ArtIcon (1).
+Make_Art_Text	 +4 ArtIcon (1).
 Make_House	Make House
-Make_House_Text	 +2 HouseIcon (1).
+Make_House_Text	 +4 HouseIcon (1).
 Make_Sword	Make Sword
-Make_Sword_Text	 +2 SwordIcon (1).
+Make_Sword_Text	 +4 SwordIcon (1).
 Make_Tech	Make Tech
-Make_Tech_Text	 +2 TechIcon (1).
+Make_Tech_Text	 +4 TechIcon (1).
+Advance_Two	Advance Two
+Advance_Two_Text	Advance all your TokenIcon (2).

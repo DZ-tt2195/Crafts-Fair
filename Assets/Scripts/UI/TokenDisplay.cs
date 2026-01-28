@@ -4,12 +4,12 @@ using UnityEngine.UI;
 using TMPro;
 using MyBox;
 
-public enum TokenType { Art, House, Sword, Tech}
+public enum TokenType { ArtIcon, HouseIcon, SwordIcon, TechIcon}
 public class TokenDisplay : MonoBehaviour
 {
     public ButtonSelect selectMe { get; private set; }
     [SerializeField] TMP_Text description;
-    public (int,TokenType) info {get; private set;}
+    public (int value, TokenType type) info {get; private set;}
 
     private void Awake()
     {

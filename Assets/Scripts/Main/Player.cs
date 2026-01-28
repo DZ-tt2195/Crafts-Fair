@@ -31,7 +31,7 @@ public class Player : PhotonCompatible
         base.Awake();
         this.bottomType = this.GetType();
 
-        List<string> toAdd = new() { ConstantStrings.MyPlacards, ConstantStrings.MyDiscard, ConstantStrings.MyScore, TokenType.Art.ToString(), TokenType.House.ToString(), TokenType.Sword.ToString(), TokenType.Tech.ToString() };
+        List<string> toAdd = new() { ConstantStrings.MyPlacards, ConstantStrings.MyDiscard, ConstantStrings.MyScore, TokenType.ArtIcon.ToString(), TokenType.HouseIcon.ToString(), TokenType.SwordIcon.ToString(), TokenType.TechIcon.ToString() };
         foreach (string next in toAdd)
             uiDictionary.Add(next, true);
 
@@ -170,7 +170,18 @@ public class Player : PhotonCompatible
         myScore += (!Log.inst.forward) ? -num : num;
         TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyScore, myScore); uiDictionary[ConstantStrings.MyScore] = true;
     }
-    public void ChangeTokenRPC(int num, (int value, TokenType token) info, int logged = 0, bool important = false)
+    public void AdvanceRetreatToken(int num, (int value, TokenType token) first, (int value, TokenType token) second, int logged = 0, bool important = false)
+    {
+        if (first.value == second.value)
+            return;
+        if (first.value < second.value)
+            Log.inst.AddMyText(important, OnlineTranslate.Online_Advance_Token(this.name, num.ToString(), Translator.ConvertToken(first), Translator.ConvertToken(second)), logged);
+        else
+            Log.inst.AddMyText(important, OnlineTranslate.Online_Retreat_Token(this.name, num.ToString(), Translator.ConvertToken(first), Translator.ConvertToken(second)), logged);
+        Log.inst.NewRollback(() => ChangeToken(-1, first));
+        Log.inst.NewRollback(() => ChangeToken(1, second));
+    }    
+    public void AddRemoveToken(int num, (int value, TokenType token) info, int logged = 0, bool important = false)
     {
         if (num == 0)
             return;
@@ -285,14 +296,14 @@ public class Player : PhotonCompatible
                 card.transform.SetParent(null);
         }
 
-        if (uiDictionary[TokenType.Art.ToString()])
-            ApplyToken(TokenType.Art, allCoinDisplays);
-        if (uiDictionary[TokenType.House.ToString()])
-            ApplyToken(TokenType.House, allBoneDisplays);
-        if (uiDictionary[TokenType.Sword.ToString()])
-            ApplyToken(TokenType.Sword, allWeaponDisplays);
-        if (uiDictionary[TokenType.Tech.ToString()])
-            ApplyToken(TokenType.Tech, allTextDisplays);
+        if (uiDictionary[TokenType.ArtIcon.ToString()])
+            ApplyToken(TokenType.ArtIcon, allCoinDisplays);
+        if (uiDictionary[TokenType.HouseIcon.ToString()])
+            ApplyToken(TokenType.HouseIcon, allBoneDisplays);
+        if (uiDictionary[TokenType.SwordIcon.ToString()])
+            ApplyToken(TokenType.SwordIcon, allWeaponDisplays);
+        if (uiDictionary[TokenType.TechIcon.ToString()])
+            ApplyToken(TokenType.TechIcon, allTextDisplays);
 
         void ApplyToken(TokenType type, List<TokenDisplay> list)
         {
@@ -336,10 +347,10 @@ public class Player : PhotonCompatible
     {
         List<TokenDisplay> toReturn = new();
 
-        ApplyToken(myTokens[TokenType.Art], allCoinDisplays);
-        ApplyToken(myTokens[TokenType.House], allBoneDisplays);
-        ApplyToken(myTokens[TokenType.Sword], allWeaponDisplays);
-        ApplyToken(myTokens[TokenType.Tech], allTextDisplays);
+        ApplyToken(myTokens[TokenType.ArtIcon], allCoinDisplays);
+        ApplyToken(myTokens[TokenType.HouseIcon], allBoneDisplays);
+        ApplyToken(myTokens[TokenType.SwordIcon], allWeaponDisplays);
+        ApplyToken(myTokens[TokenType.TechIcon], allTextDisplays);
 
         void ApplyToken(int[] array, List<TokenDisplay> list)
         {

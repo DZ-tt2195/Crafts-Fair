@@ -8,6 +8,6 @@ public class Make_Tech : CardType
 
     public override void TwistEffect(Player player, int logged)
     {
-        player.ChangeTokenRPC(2, (1, TokenType.Tech));
+        player.AddRemoveToken(4, (1, TokenType.TechIcon), logged);
     }
 }

@@ -1,8 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine.UI;
-using System;
 using Photon.Pun;
 public class TakeTurn : Turn
 {
@@ -14,36 +12,38 @@ public class TakeTurn : Turn
     }
     public override void ForPlayer(Player player)
     {
-        player.DrawPlacardRPC(1);
-        Log.inst.NewDecisionContainer(() => TokenStuff(player));
+        Log.inst.NewDecisionContainer(() => ChooseToken(player));
         Log.inst.NewDecisionContainer(() => MakeSubmission(player, new(), null));
     }
 
-    void TokenStuff(Player player)
+    void ChooseToken(Player player)
     {
         List<TextButtonInfo> addTokens = new()
         {
-            new(AutoTranslate.Art1(), () => AddThis(TokenType.Art)),
-            new(AutoTranslate.House1(), () => AddThis(TokenType.House)),
-            new(AutoTranslate.Sword1(), () => AddThis(TokenType.Sword)),
-            new(AutoTranslate.Tech1(), () => AddThis(TokenType.Tech))
+            new(AutoTranslate.ArtIcon(), () => AddThis(TokenType.ArtIcon)),
+            new(AutoTranslate.HouseIcon(), () => AddThis(TokenType.HouseIcon)),
+            new(AutoTranslate.SwordIcon(), () => AddThis(TokenType.SwordIcon)),
+            new(AutoTranslate.TechIcon(), () => AddThis(TokenType.TechIcon))
         };
-        MakeDecision.inst.ChooseTextButton(addTokens, AutoTranslate.Add_Or_Advance());
-
-        List<TokenDisplay> canAdvance = player.OfNumber(FindNumber.Minimum, 1).Where(display => display.info.Item1 != 6).ToList();
-        MakeDecision.inst.ChooseDisplayOnScreen(canAdvance, AutoTranslate.Add_Or_Advance(), AdvanceThis);
+        MakeDecision.inst.ChooseTextButton(addTokens, AutoTranslate.Ask_Token_Type());
 
         void AddThis(TokenType type)
         {
             TurnManager.inst.WillChangePlayerProperty(player, ConstantStrings.MyToken, type.ToString());
-            player.ChangeTokenRPC(1, (1, type), 0, true);
+            Log.inst.AddMyText(true, OnlineTranslate.Online_Chose_Token(player.name, type.ToString()));
+            player.AddRemoveToken(1, (1, type), 1);
+            Log.inst.NewDecisionContainer(() => AdvanceToken(player, type));
         }
+    }
+
+    void AdvanceToken(Player player, TokenType token)
+    {
+        List<TokenDisplay> canAdvance = player.OfNumber(FindNumber.Minimum, 1).Where(display => display.info.value != 6 && display.info.type == token).ToList();
+        MakeDecision.inst.ChooseDisplayOnScreen(canAdvance, AutoTranslate.Ask_Advance(token.ToString()), AdvanceThis);
 
         void AdvanceThis((int value, TokenType type) info)
         {
-            TurnManager.inst.WillChangePlayerProperty(player, ConstantStrings.MyToken, info.type.ToString());
-            player.ChangeTokenRPC(-1, info, 0, true);
-            player.ChangeTokenRPC(1, (info.value+1, info.type), 0, true);
+            player.AdvanceRetreatToken(1, info, (info.value+1, info.type), 1);
         }
     }
 
@@ -114,7 +114,7 @@ public class TakeTurn : Turn
 
         void SubmitToken((int value, TokenType type) info)
         {
-            player.ChangeTokenRPC(-1, info);
+            player.AddRemoveToken(-1, info);
             List<(int, TokenType)> newList = submittedTokens;
             newList.Add(info);
             Log.inst.NewDecisionContainer(() => MakeSubmission(player, newList, restartContainer));

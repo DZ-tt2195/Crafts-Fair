@@ -8,6 +8,6 @@ public class Make_Art : CardType
 
     public override void TwistEffect(Player player, int logged)
     {
-        player.ChangeTokenRPC(2, (1, TokenType.Art));
+        player.AddRemoveToken(4, (1, TokenType.ArtIcon), logged);
     }
 }

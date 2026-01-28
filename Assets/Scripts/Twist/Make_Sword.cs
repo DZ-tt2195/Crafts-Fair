@@ -8,6 +8,6 @@ public class Make_Sword : CardType
 
     public override void TwistEffect(Player player, int logged)
     {
-        player.ChangeTokenRPC(2, (1, TokenType.Sword));
+        player.AddRemoveToken(4, (1, TokenType.SwordIcon), logged);
     }
 }
