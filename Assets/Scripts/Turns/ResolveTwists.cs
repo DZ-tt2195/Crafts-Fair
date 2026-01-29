@@ -37,7 +37,7 @@ public class ResolveTwists : Turn
 
     void ChooseTwist(Player player, List<Card> twistsToResolve)
     {
-        MakeDecision.inst.ChooseCardOnScreen(twistsToResolve, AutoTranslate.Resolve_Twist(), DoTwist);
+        MakeDecision.inst.ChooseCardOnScreen(twistsToResolve, AutoTranslate.Ask_Resolve(), DoTwist);
 
         void DoTwist(Card card)
         {

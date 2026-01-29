@@ -8,61 +8,46 @@ using Photon.Pun;
 public class Encyclopedia : MonoBehaviour
 {
     public static Encyclopedia inst;
-    [SerializeField] Card cardPrefab;
-    [SerializeField] RectTransform groupUI;
-    List<Card> allCards = new();
+    [SerializeField] Card placardPrefab;
+    [SerializeField] Card twistPrefab;
+    [SerializeField] GridLayoutGroup placardGrid;
+    [SerializeField] GridLayoutGroup twistGrid;
+    [SerializeField] RectTransform placardView;
+    [SerializeField] RectTransform twistView;
+    [SerializeField] Slider viewSlider;
+    List<Card> allPlacards = new();
+    List<Card> allTwists = new();
 
     private void Awake()
     {
         inst = this;
+        viewSlider.onValueChanged.AddListener(Change);
+        Change(0);
+
+        void Change(float value)
+        {
+            placardView.gameObject.SetActive((int)value == 0);
+            twistView.gameObject.SetActive((int)value == 1);
+        }
     }
 
     private void Start()
     {
-        //typeOneDropdown.dropdown.onValueChanged.AddListener(NewSort);
-        //typeTwoDropdown.dropdown.onValueChanged.AddListener(NewSort);
-
         for (int i = 0; i < GameFiles.inst.placardFiles.Count; i++)
         {
-            for (int j = 0; j < 1; j++)
-            {
-                GameObject nextCard = Instantiate(cardPrefab.gameObject);
-                Card cardPV = nextCard.GetComponent<Card>();
-                cardPV.AssignCard(GameFiles.inst.placardFiles[i], 1f, true, Vector3.one);
-                allCards.Add(cardPV);
-            }
+            GameObject nextCard = Instantiate(placardPrefab.gameObject);
+            Card cardPV = nextCard.GetComponent<Card>();
+            cardPV.AssignCard(GameFiles.inst.placardFiles[i], 1f, true, Vector3.one);
+            allPlacards.Add(cardPV);
+            cardPV.transform.SetParent(placardGrid.transform);
         }
-        NewSort(0);
-    }
-
-    void NewSort(int n)
-    {
-        //string dropdownOne = typeOneDropdown.GetOriginal();
-        //string dropdownTwo = typeTwoDropdown.GetOriginal();
-
-        foreach (Card card in allCards)
+        for (int i = 0; i < GameFiles.inst.twistFiles.Count; i++)
         {
-            bool include = true;
-/*
-            if (!Matches(dropdownOne))
-                include = false;
-            else if (!Matches(dropdownTwo))
-                include = false;
-
-            bool Matches(string text)
-            {
-                return text switch
-                {
-                    "Play" => card.thisCard.dataFile.typeOne == AbilityType.Play || card.thisCard.dataFile.typeTwo == AbilityType.Play,
-                    "Defend" => card.thisCard.dataFile.typeOne == AbilityType.Defend || card.thisCard.dataFile.typeTwo == AbilityType.Defend,
-                    "Attack" => card.thisCard.dataFile.typeOne == AbilityType.Attack || card.thisCard.dataFile.typeTwo == AbilityType.Attack,
-                    _ => true  // no filter
-                };
-            }
-*/
-            card.transform.SetParent(include ? groupUI : null);
+            GameObject nextCard = Instantiate(twistPrefab.gameObject);
+            Card cardPV = nextCard.GetComponent<Card>();
+            cardPV.AssignCard(GameFiles.inst.twistFiles[i], 1f, false, Vector3.one);
+            allTwists.Add(cardPV);
+            cardPV.transform.SetParent(twistGrid.transform);
         }
-
-        groupUI.sizeDelta = new(groupUI.sizeDelta.x, 400 * Mathf.Ceil(groupUI.childCount / 6f));
     }
 }

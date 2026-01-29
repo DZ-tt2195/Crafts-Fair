@@ -1,6 +1,6 @@
 cardName	textBox	artCredit	notes
+Advance_Two	Advance all your TokenIcon (2).		Care2, Advance
 Make_Art	 +4 ArtIcon (1).		AddArt
 Make_House	 +4 HouseIcon (1).		AddHouse
 Make_Sword	 +4 SwordIcon (1).		AddSword
 Make_Tech	 +4 TechIcon (1).		AddTech
-Advance_Two	Advance all your TokenIcon (2).		Care2, Advance

@@ -1,5 +1,5 @@
 Game_Designer	by Thomas Tang (DZ)
-Last_Update	Last Updated: Jan 28, 2026
+Last_Update	Last Updated: Jan 29, 2026
 Blank	
 Translator_Credit	Original Language
 Language	Language
@@ -21,7 +21,6 @@ Failed_to_connect_to_server	Failed to connect to the server.
 Reconnect	Reconnect
 Tutorial_1	To play multiplayer: Have 1 person create a room, then their room should be displayed below. Everyone also must have joined the same server region.
 Tutorial_2	Click a button below to join a room, or manually type in the host's username (yellow rooms are spectator only)
-Create	Create
 Create_Room_with_players	Create a room with how many players?
 Enter_hostname	Enter host's username
 Join	Join
@@ -29,8 +28,6 @@ Player_Count	$Current$ / $Max$ Players
 Type_in_username	You have to type in a username.
 Attempt_to_reconnect	Attempting to reconnect to $Room$'s room...
 Failed_to_reconnect	Failed to reconnect to $Room$'s room.
-Encyclopedia	Encyclopedia
-Close	Close
 Choose_Twists	Choose Twists for this game
 Custom_Twist_1	Twist ArtIcon
 Custom_Twist_2	Twist HouseIcon
@@ -98,11 +95,11 @@ Online_Make_Submission	$Player$ submits $TokenNum$ tokens and $CardNum$ placards
 Online_No_Submission	$Player$ doesn't submit.
 Undo_Submission	Undo All
 Online_Twists_To_Resolve	Twists to resolve: $Num$
-Resolve_Twist	Choose a Twist to resolve.
+Ask_Resolve	Choose a Twist to resolve.
 Online_Resolve_Card	$Player$ resolves $Card$.
 Confirm	Confirm
 Decline	Decline
-Discard_Instruction	Discard 1 CardIcon.
+Ask_Discard	Discard 1 CardIcon.
 Done	Done
 Pause_to_Read	A pause to let you read things.
 Pause_to_Undo	Last chance to undo anything.
@@ -115,7 +112,11 @@ Resigned	(Resigned)
 Switch_Player	Switch Player
 Rules	Rules
 Rules_Summary	Each Turn: \n1. Choose a token type and remove a counter from that token's Twist. \n2. Add 1 of that token with a value of 1, then advance 1 token of that type. \n3. You may submit 2+ tokens and 2+ placards at once to score crowns. \n\nBetween Turns:\n4. For each Twist with 0 counters, each player draws 2 placards and follows its instructions. \n5. Add the counters back onto those Twists (2 per player). \n6. The first player to reach 20+ crowns wins.
+Encyclopedia	Encyclopedia
+Close	Close
+Any	Any
 Placard	Placard
+Twist	Twist
 Perfect_Fit	Perfect Fit
 Perfect_Fit_Text	Have exactly 0 TokenIcon after submitting.
 Unnecessary_Surplus	Unnecessary Surplus
@@ -132,7 +133,6 @@ Rise_Of_Kingdoms	Rise of Kingdoms
 Rise_Of_Kingdoms_Text	2 TokenIcon (4).
 Rise_Of_Empires	Rise of Empires
 Rise_Of_Empires_Text	2 TokenIcon (6).
-Twist	Twist
 Make_Art	Make Art
 Make_Art_Text	 +4 ArtIcon (1).
 Make_House	Make House
