@@ -121,7 +121,7 @@ public class Log : PhotonCompatible
         this.bottomType = this.GetType();
         inst = this;
 
-        undoButton.onClick.AddListener(() => InvokeUndo(undosInLog[^1].undoToThis, true));
+        undoButton.onClick.AddListener(() => InvokeUndo(undosInLog[0].undoToThis, true));
         undoButton.gameObject.SetActive(false);
         groupToWait = new(this);
         forward = true;
@@ -174,9 +174,12 @@ public class Log : PhotonCompatible
 
             void RemoveText(TMP_Text textBox)
             {
-                int lastNewline = textBox.text.LastIndexOf('\n');
-                int secondNewLastLine = textBox.text.LastIndexOf('\n', lastNewline-1);
-                textBox.text = textBox.text[..secondNewLastLine];
+                string text = textBox.text.TrimEnd('\n');
+                int lastNewline = text.LastIndexOf('\n');
+                if (lastNewline < 0)
+                    textBox.text = "\n";
+                else
+                    textBox.text = text[..(lastNewline + 1)];
             }
         }
         else

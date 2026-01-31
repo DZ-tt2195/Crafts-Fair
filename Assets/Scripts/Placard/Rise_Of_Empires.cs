@@ -8,8 +8,8 @@ public class Rise_Of_Empires : CardType
     {
     }
 
-    public override bool CanSubmit(Player player, List<(int value, TokenType type)> tokensSubmitted)
+    public override bool CanSubmit(Player player, List<(int level, TokenType type)> tokensSubmitted)
     {
-        return tokensSubmitted.Where(info => info.value == 6).ToList().Count >= 2;
+        return tokensSubmitted.Where(info => info.level == 6).ToList().Count >= 2;
     }
 }

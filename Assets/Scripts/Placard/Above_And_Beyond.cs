@@ -7,7 +7,7 @@ public class Above_And_Beyond : CardType
     {
     }
 
-    public override bool CanSubmit(Player player, List<(int value, TokenType type)> tokensSubmitted)
+    public override bool CanSubmit(Player player, List<(int level, TokenType type)> tokensSubmitted)
     {
         return tokensSubmitted.Count >= 4;
     }

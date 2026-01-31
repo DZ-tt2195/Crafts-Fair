@@ -1,5 +1,5 @@
 Game_Designer	by Thomas Tang (DZ)
-Last_Update	Last Updated: Jan 29, 2026
+Last_Update	Last Updated: Jan 30, 2026
 Blank	
 Translator_Credit	Original Language
 Language	Language
@@ -52,41 +52,17 @@ SwordIcon	SwordIcon
 TechIcon	TechIcon
 CrownIcon	CrownIcon
 TokenIcon	TokenIcon
-ArtIcon_1	ArtIcon (1)
-ArtIcon_2	ArtIcon (2)
-ArtIcon_3	ArtIcon (3)
-ArtIcon_4	ArtIcon (4)
-ArtIcon_5	ArtIcon (5)
-ArtIcon_6	ArtIcon (6)
-HouseIcon_1	HouseIcon (1)
-HouseIcon_2	HouseIcon (2)
-HouseIcon_3	HouseIcon (3)
-HouseIcon_4	HouseIcon (4)
-HouseIcon_5	HouseIcon (5)
-HouseIcon_6	HouseIcon (6)
-SwordIcon_1	SwordIcon (1)
-SwordIcon_2	SwordIcon (2)
-SwordIcon_3	SwordIcon (3)
-SwordIcon_4	SwordIcon (4)
-SwordIcon_5	SwordIcon (5)
-SwordIcon_6	SwordIcon (6)
-TechIcon_1	TechIcon (1)
-TechIcon_2	TechIcon (2)
-TechIcon_3	TechIcon (3)
-TechIcon_4	TechIcon (4)
-TechIcon_5	TechIcon (5)
-TechIcon_6	TechIcon (6)
 Online_Next_Turn	Turn $Number$
 Ask_Token_Type	Choose a token type.
-Ask_Advance	Advance 1 $Token$.
-Ask_Retreat	Retreat 1 $Token$.
+Ask_Upgrade	Upgrade 1 $Token$.
+Ask_Downgrade	Downgrade 1 $Token$.
 Online_Chose_Token	$Player$ chooses $Token$.
 Online_Add_Score	$Player$ gets +$Num$ CrownIcon.
 Online_Lose_Score	$Player$ loses $Num$ CrownIcon.
-Online_Add_Token	$Player$ adds $Num$ $Token$.
-Online_Remove_Token	$Player$ removes $Num$ $Token$.
-Online_Advance_Token	$Player$ advances $Num$ $Token1$ to $Token2$.
-Online_Retreat_Token	$Player$ retreats $Num$ $Token1$ to $Token2$.
+Online_Add_Token	$Player$ adds $Amount$ $Token$ at level $Level$.
+Online_Remove_Token	$Player$ removes $Amount$ $Token$ at level $Level$.
+Online_Upgrade_Token	$Player$ upgrades $Amount$ $Token$ from level $Level1$ up to level $Level2$.
+Online_Downgrade_Token	$Player$ downgrades $Amount$ $Token$ from level $Level1$ down to level $Level2$.
 Online_Draw_Placard	$Player$ draws $Card$.
 Online_Draw_Placard_Others	$Player$ draws 1 CardIcon.
 Online_Discard_Placard	$Player$ discards $Card$.
@@ -111,7 +87,7 @@ Online_Player_Won	$Player$ has won.
 Resigned	(Resigned)
 Switch_Player	Switch Player
 Rules	Rules
-Rules_Summary	Each Turn: \n1. Choose a token type and remove a counter from that token's Twist. \n2. Add 1 of that token with a value of 1, then advance 1 token of that type. \n3. You may submit 2+ tokens and 2+ placards at once to score crowns. \n\nBetween Turns:\n4. For each Twist with 0 counters, each player draws 2 placards and follows its instructions. \n5. Add the counters back onto those Twists (2 per player). \n6. The first player to reach 20+ crowns wins.
+Rules_Summary	Each Turn: \n1. Choose a token type and remove a counter from that token's Twist. \n2. Add 1 of that token at level 1, then upgrade 1 token of that type. \n3. You may submit 2+ tokens and 2+ placards at once to score crowns. \n\nBetween Turns:\n4. For each Twist with 0 counters, each player draws 2 placards and follows its instructions. \n5. Add the counters back onto those Twists (2 per player). \n6. The first player to reach 20+ crowns wins.
 Encyclopedia	Encyclopedia
 Close	Close
 Any	Any
@@ -125,21 +101,19 @@ Bare_Minimum	Bare Minimum
 Bare_Minimum_Text	This submission has exactly 2 TokenIcon.
 Above_And_Beyond	Above and Beyond
 Above_And_Beyond_Text	This submission has 4 TokenIcon or more.
-Strength_In_Numbers	Strength in Numbers
-Strength_In_Numbers_Text	This submission has 4 CardIcon or more (including this).
 Rise_Of_Villages	Rise of Villages
-Rise_Of_Villages_Text	2 TokenIcon (2).
+Rise_Of_Villages_Text	2 TokenIcon at level 2.
 Rise_Of_Kingdoms	Rise of Kingdoms
-Rise_Of_Kingdoms_Text	2 TokenIcon (4).
+Rise_Of_Kingdoms_Text	2 TokenIcon at level 4.
 Rise_Of_Empires	Rise of Empires
-Rise_Of_Empires_Text	2 TokenIcon (6).
+Rise_Of_Empires_Text	2 TokenIcon at level 6.
 Make_Art	Make Art
-Make_Art_Text	 +4 ArtIcon (1).
+Make_Art_Text	 +4 ArtIcon at level 1.
 Make_House	Make House
-Make_House_Text	 +4 HouseIcon (1).
+Make_House_Text	 +4 HouseIcon at level 1.
 Make_Sword	Make Sword
-Make_Sword_Text	 +4 SwordIcon (1).
+Make_Sword_Text	 +4 SwordIcon at level 1.
 Make_Tech	Make Tech
-Make_Tech_Text	 +4 TechIcon (1).
-Advance_Two	Advance Two
-Advance_Two_Text	Advance all your TokenIcon (2).
+Make_Tech_Text	 +4 TechIcon at level 1.
+Upgrade_Two	Upgrade Two
+Upgrade_Two_Text	Upgrade all your TokenIcon from level 2 up to level 3.

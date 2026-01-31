@@ -155,8 +155,6 @@ public class Translator : PhotonCompatible
         return KeywordTooltip.instance.EditText(translated);
     }
 
-    public static string ConvertToken((int value, TokenType type) info) => $"{info.type}_{info.value}";
-
 #endregion
 
 }

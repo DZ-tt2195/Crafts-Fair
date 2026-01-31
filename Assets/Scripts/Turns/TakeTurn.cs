@@ -38,12 +38,12 @@ public class TakeTurn : Turn
 
     void AdvanceToken(Player player, TokenType token)
     {
-        List<TokenDisplay> canAdvance = player.OfNumber(FindNumber.Minimum, 1).Where(display => display.info.value != 6 && display.info.type == token).ToList();
-        MakeDecision.inst.ChooseDisplayOnScreen(canAdvance, AutoTranslate.Ask_Advance(token.ToString()), AdvanceThis);
+        List<TokenDisplay> canAdvance = player.OfNumber(FindNumber.Minimum, 1).Where(display => display.info.level != 6 && display.info.type == token).ToList();
+        MakeDecision.inst.ChooseDisplayOnScreen(canAdvance, AutoTranslate.Ask_Upgrade(token.ToString()), AdvanceThis);
 
-        void AdvanceThis((int value, TokenType type) info)
+        void AdvanceThis((int level, TokenType type) info)
         {
-            player.AdvanceRetreatToken(1, info, (info.value+1, info.type), 1);
+            player.UpDowngradeToken(1, info, (info.level+1, info.type), 1);
         }
     }
 

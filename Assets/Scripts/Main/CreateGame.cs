@@ -14,7 +14,7 @@ public class TwistVisual
 {
     public Card card;
     public TMP_Text countText;
-    public TokenType type;
+    public TokenType token;
 }
 public class CreateGame : PhotonCompatible
 {
@@ -240,22 +240,30 @@ public class CreateGame : PhotonCompatible
             twistInfo[i].card.gameObject.SetActive(true);
             CardData data = GameFiles.inst.twistFiles[cardIDs[i]];
             twistInfo[i].card.AssignCard(data, 1, false, new(0.5f, 0.5f, 0.5f));
-            twistInfo[i].countText.text = $"{TurnManager.inst.GetInt(ConstantStrings.TokenCounter(twistInfo[i].type))}";
         }
         for (int i = cardIDs.Length; i<twistInfo.Count; i++)
         {
             twistInfo[i].card.gameObject.SetActive(false);
         }
+        UpdateTexts();
     }
 
     public TwistVisual GetTwist(TokenType type)
     {
         foreach (TwistVisual tv in twistInfo)
         {
-            if (tv.type == type)
+            if (tv.token == type)
                 return tv;
         }
         return null;
+    }
+    void UpdateTexts()
+    {
+        foreach (TwistVisual visual in twistInfo)
+        {
+            string tokenText = ConstantStrings.TokenCounter(visual.token);
+            visual.countText.text = KeywordTooltip.instance.EditText($"{TurnManager.inst.GetInt(tokenText)}{Translator.inst.Translate(visual.token.ToString())}");
+        }
     }
 
     public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
@@ -266,12 +274,15 @@ public class CreateGame : PhotonCompatible
         }
         else
         {
-            foreach (TokenType type in Enum.GetValues(typeof(TokenType)))
+            foreach (TokenType token in Enum.GetValues(typeof(TokenType)))
             {
-                string changedTokenText = ConstantStrings.TokenCounter(type);
+                string changedTokenText = ConstantStrings.TokenCounter(token);
                 if (propertiesThatChanged.ContainsKey(changedTokenText))
-                    GetTwist(type).countText.text = $"{(int)propertiesThatChanged[changedTokenText]}";
-            }        
+                {
+                    UpdateTexts();
+                    return;
+                }
+            }   
         }
     }
     #endregion

@@ -64,10 +64,10 @@ public class Player : PhotonCompatible
         myScore = TurnManager.inst.GetInt(ConstantStrings.MyScore, this);
         myPlacards = TurnManager.inst.GetCardList(ConstantStrings.MyPlacards, this);
         myTokens = new Dictionary<TokenType, int[]>();
-        foreach (TokenType value in Enum.GetValues(typeof(TokenType)))
+        foreach (TokenType token in Enum.GetValues(typeof(TokenType)))
         {
-            int[] array = TurnManager.inst.GetIntArray(value.ToString(), this);
-            myTokens.Add(value, array);
+            int[] array = TurnManager.inst.GetIntArray(token.ToString(), this);
+            myTokens.Add(token, array);
         }        
     }
 
@@ -170,25 +170,26 @@ public class Player : PhotonCompatible
         myScore += (!Log.inst.forward) ? -num : num;
         TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyScore, myScore); uiDictionary[ConstantStrings.MyScore] = true;
     }
-    public void AdvanceRetreatToken(int num, (int value, TokenType token) first, (int value, TokenType token) second, int logged = 0, bool important = false)
+    public void UpDowngradeToken(int num, (int level, TokenType token) first, (int level, TokenType token) second, int logged = 0, bool important = false)
     {
-        if (first.value == second.value)
+        if (first.level == second.level)
             return;
-        if (first.value < second.value)
-            Log.inst.AddMyText(important, OnlineTranslate.Online_Advance_Token(this.name, num.ToString(), Translator.ConvertToken(first), Translator.ConvertToken(second)), logged);
+        if (first.level < second.level)
+            Log.inst.AddMyText(important, OnlineTranslate.Online_Upgrade_Token(this.name, num.ToString(), first.token.ToString(), first.level.ToString(), second.level.ToString()), logged);
         else
-            Log.inst.AddMyText(important, OnlineTranslate.Online_Retreat_Token(this.name, num.ToString(), Translator.ConvertToken(first), Translator.ConvertToken(second)), logged);
+            Log.inst.AddMyText(important, OnlineTranslate.Online_Downgrade_Token(this.name, num.ToString(), first.token.ToString(), first.level.ToString(), second.level.ToString()), logged);
+        
         Log.inst.NewRollback(() => ChangeToken(-1, first));
         Log.inst.NewRollback(() => ChangeToken(1, second));
     }    
-    public void AddRemoveToken(int num, (int value, TokenType token) info, int logged = 0, bool important = false)
+    public void AddRemoveToken(int num, (int level, TokenType token) info, int logged = 0, bool important = false)
     {
         if (num == 0)
             return;
         if (num > 0)
-            Log.inst.AddMyText(important, OnlineTranslate.Online_Add_Token(this.name, num.ToString(), Translator.ConvertToken(info)), logged);
+            Log.inst.AddMyText(important, OnlineTranslate.Online_Add_Token(this.name, num.ToString(), info.token.ToString(), info.level.ToString()), logged);
         else
-            Log.inst.AddMyText(important, OnlineTranslate.Online_Remove_Token(this.name, num.ToString(), Translator.ConvertToken(info)), logged);
+            Log.inst.AddMyText(important, OnlineTranslate.Online_Remove_Token(this.name, Mathf.Abs(num).ToString(), info.token.ToString(), info.level.ToString()), logged);
         Log.inst.NewRollback(() => ChangeToken(num, info));
     }
     void ChangeToken(int num, (int value, TokenType token) info)
@@ -249,9 +250,9 @@ public class Player : PhotonCompatible
     public (int, Dictionary<TokenType, int[]>) GetAllTokens()
     {
         int totalTokens = 0;
-        foreach (TokenType value in Enum.GetValues(typeof(TokenType)))
+        foreach (TokenType token in Enum.GetValues(typeof(TokenType)))
         {
-            int[] tokenArray = myTokens[value];
+            int[] tokenArray = myTokens[token];
             for (int i = 0; i<tokenArray.Length; i++)
                 totalTokens += tokenArray[i];
         }
