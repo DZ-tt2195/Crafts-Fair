@@ -9,10 +9,10 @@ using Photon.Pun;
 
 public class CardButtonInfo
 {
-    public Card card;
-    public Action<Card> action;
-    public float alpha;
-    public bool clickable;
+    public Card card {get; private set;}
+    public Action<Card> action{get; private set;}
+    public float alpha{get; private set;}
+    public bool clickable{get; private set;}
 
     public CardButtonInfo(Card card, Action<Card> action = null, float alpha = 1f, bool clickable = true)
     {
@@ -25,9 +25,9 @@ public class CardButtonInfo
 
 public class TextButtonInfo
 {
-    public string myText;
-    public Color buttonColor;
-    public Action action;
+    public string myText{get; private set;}
+    public Color buttonColor{get; private set;}
+    public Action action{get; private set;}
 
     public TextButtonInfo(string myText, Action action = null)
     {

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
 
+public enum FindNumber {Exact, Minimum, Maximum, Not}
 public static class MyExtensions
 {
     public static string StopwatchTime(Stopwatch stopwatch)
@@ -50,5 +51,17 @@ public static class MyExtensions
         }
 
         return newList;
+    }
+
+    public static bool Comparison(FindNumber toFind, int firstNum, int secondNum)
+    {
+        return toFind switch
+        {
+            FindNumber.Exact => firstNum == secondNum,
+            FindNumber.Not => firstNum != secondNum,
+            FindNumber.Minimum => firstNum >= secondNum,
+            FindNumber.Maximum => firstNum <= secondNum,
+            _ => false,
+        };
     }
 }

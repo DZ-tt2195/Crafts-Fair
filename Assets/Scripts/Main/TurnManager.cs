@@ -78,6 +78,7 @@ public class TurnManager : PhotonCompatible
     void NextPhase() //switch phases
     {
         storedTurns[GetCurrentPhase()].MasterEnd();
+        string nextPhase = (string)GetRoomProperty(ConstantStrings.NextPhase);
 
         (Player, int) highestScore = (null, 0);
         foreach (Player player in CreateGame.inst.GetPlayers())
@@ -89,16 +90,13 @@ public class TurnManager : PhotonCompatible
                 highestScore = (null, health);
         }
 
-        if (highestScore.Item2 >= 20 && highestScore.Item1 != null)
+        if (nextPhase.Equals(nameof(TakeTurn)) && highestScore.Item2 >= 20 && highestScore.Item1 != null)
         {
             TextForEnding(OnlineTranslate.Online_Player_Won(highestScore.Item1.name), -1);
             InstantChangeRoomProp(ConstantStrings.CurrentPhase, nameof(Ending));
         }
         else
         {
-            string currentPhase = (string)GetRoomProperty(ConstantStrings.CurrentPhase);
-            string nextPhase = (string)GetRoomProperty(ConstantStrings.NextPhase);
-
             InstantChangeRoomProp(ConstantStrings.NextPhase, nameof(TakeTurn));
             InstantChangeRoomProp(ConstantStrings.CurrentPhase, nextPhase);
         }

@@ -250,7 +250,8 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
             [ConstantStrings.MyPlacards] = new int[0],
             [ConstantStrings.MyDeck] = new int[0],
             [ConstantStrings.MyDiscard] = new int[0],
-            [ConstantStrings.MyToken] = "",
+            [ConstantStrings.ChosenToken] = "",
+            [ConstantStrings.PlacardsSubmitted] = 0,
         };
         return playerProps;
     }

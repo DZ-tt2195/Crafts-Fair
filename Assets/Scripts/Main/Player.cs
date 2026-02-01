@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Linq;
 
-public enum FindNumber {Exact, Minimum, Maximum, Not}
 public class Player : PhotonCompatible
 {
 
@@ -357,17 +356,8 @@ public class Player : PhotonCompatible
         {
             for (int i = 1; i<array.Length; i++)
             {
-                switch (toFind)
-                {
-                    case FindNumber.Exact:
-                        if (array[i] == number) toReturn.Add(list[i]); break;
-                    case FindNumber.Not:
-                        if (array[i] != number) toReturn.Add(list[i]); break;
-                    case FindNumber.Minimum:
-                        if (array[i] >= number) toReturn.Add(list[i]); break;
-                    case FindNumber.Maximum:
-                        if (array[i] <= number) toReturn.Add(list[i]); break;
-                }
+                if (MyExtensions.Comparison(toFind, array[i], number))
+                    toReturn.Add(list[i]);
             }
         }
         return toReturn;

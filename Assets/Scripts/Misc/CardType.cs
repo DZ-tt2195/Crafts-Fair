@@ -27,6 +27,25 @@ public class CardType
     {
         return false;
     }
+    public bool SumOfLevels(List<(int level, TokenType type)> tokensSubmitted, FindNumber toFind, int compare)
+    {
+        int totalLevels = 0;
+        foreach (var (level, type) in tokensSubmitted)
+            totalLevels += level;
+
+        return MyExtensions.Comparison(toFind, totalLevels, compare); 
+    }
+    public bool WithLevel(List<(int level, TokenType type)> tokensSubmitted, FindNumber toFind, int specificLevel, int compare)
+    {
+        int withLevel = 0;
+        foreach (var (level, type) in tokensSubmitted)
+        {
+            if (level == specificLevel)
+                withLevel++;
+        }
+
+        return MyExtensions.Comparison(toFind, withLevel, compare); 
+    }
 
 #endregion
 

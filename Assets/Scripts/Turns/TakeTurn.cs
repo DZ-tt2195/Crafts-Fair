@@ -15,7 +15,6 @@ public class TakeTurn : Turn
         Log.inst.NewDecisionContainer(() => ChooseToken(player));
         Log.inst.NewDecisionContainer(() => MakeSubmission(player, new(), null));
     }
-
     void ChooseToken(Player player)
     {
         List<TextButtonInfo> addTokens = new()
@@ -29,13 +28,12 @@ public class TakeTurn : Turn
 
         void AddThis(TokenType type)
         {
-            TurnManager.inst.WillChangePlayerProperty(player, ConstantStrings.MyToken, type.ToString());
+            TurnManager.inst.WillChangePlayerProperty(player, ConstantStrings.ChosenToken, type.ToString());
             Log.inst.AddMyText(true, OnlineTranslate.Online_Chose_Token(player.name, type.ToString()));
             player.AddRemoveToken(1, (1, type), 1);
             Log.inst.NewDecisionContainer(() => AdvanceToken(player, type));
         }
     }
-
     void AdvanceToken(Player player, TokenType token)
     {
         List<TokenDisplay> canAdvance = player.OfNumber(FindNumber.Minimum, 1).Where(display => display.info.level != 6 && display.info.type == token).ToList();
@@ -46,7 +44,6 @@ public class TakeTurn : Turn
             player.UpDowngradeToken(1, info, (info.level+1, info.type), 1);
         }
     }
-
     void MakeSubmission(Player player, List<(int value, TokenType type)> submittedTokens, DecisionContainer rewind)
     {
         int minimum = 2;
@@ -70,7 +67,7 @@ public class TakeTurn : Turn
             if (submittedTokens.Count >= 2 && card.thisCard.CanSubmit(player, submittedTokens))
             {
                 placardsToSubmit.Add(card);
-                card.selectMe.SetBorder(true);
+                card.selectMe.SetBorder(true, Color.yellow);
             }
             else
             {
@@ -91,6 +88,7 @@ public class TakeTurn : Turn
 
         void NoSubmission()
         {
+            TurnManager.inst.WillChangePlayerProperty(player, ConstantStrings.PlacardsSubmitted, 0);
             Log.inst.AddMyText(false, OnlineTranslate.Online_No_Submission(player.name));            
         }
 
@@ -102,6 +100,7 @@ public class TakeTurn : Turn
         void SubmitEverything()
         {
             Log.inst.AddMyText(true, OnlineTranslate.Online_Make_Submission(player.name, submittedTokens.Count.ToString(), placardsToSubmit.Count.ToString()));
+            TurnManager.inst.WillChangePlayerProperty(player, ConstantStrings.PlacardsSubmitted, placardsToSubmit.Count);
             int totalScore = 0;
             foreach (Card card in placardsToSubmit)
             {
@@ -120,7 +119,6 @@ public class TakeTurn : Turn
             Log.inst.NewDecisionContainer(() => MakeSubmission(player, newList, restartContainer));
         }
     }
-
     public override void MasterEnd()
     {
         ExitGames.Client.Photon.Hashtable toChange = new();
@@ -128,7 +126,7 @@ public class TakeTurn : Turn
 
         foreach (Player player in CreateGame.inst.GetPlayers())
         {
-            string selectedToken = TurnManager.inst.GetString(ConstantStrings.MyToken, player);
+            string selectedToken = TurnManager.inst.GetString(ConstantStrings.ChosenToken, player);
             Debug.Log($"{player.name}, {selectedToken}");
 
             string targetString = ConstantStrings.TokenCounter(selectedToken);
