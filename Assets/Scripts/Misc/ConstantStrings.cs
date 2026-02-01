@@ -23,7 +23,7 @@ public static class ConstantStrings
     public const string JoinAsSpec = nameof(JoinAsSpec);
     public const string CurrentPhase = nameof(CurrentPhase);
     public const string NextPhase = nameof(NextPhase);
-    public const string TwistList = nameof(TwistList);
+    public const string EventList = nameof(EventList);
     public const string TurnNumber = nameof(TurnNumber);
     public static string TokenCounter(TokenType type) => TokenCounter(type.ToString());
     public static string TokenCounter(string type) => $"TokenCounter{type}";

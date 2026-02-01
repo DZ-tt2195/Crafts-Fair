@@ -1,14 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class Above_And_Beyond : CardType
+public class Sequential_Sword : CardType
 {
-    public Above_And_Beyond(CardData dataFile) : base(dataFile)
+    public Sequential_Sword(CardData dataFile) : base(dataFile)
     {
     }
 
     public override bool CanSubmit(Player player, List<(int level, TokenType type)> tokensSubmitted)
     {
-        return tokensSubmitted.Count >= 4;
+        return SequentialLevels(tokensSubmitted, TokenType.SwordIcon, 4);
     }
 }

@@ -221,7 +221,7 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
             { ConstantStrings.CanPlay, numPlayers },
             { ConstantStrings.JoinAsSpec, false },
             { ConstantStrings.GameOver, false },
-            { ConstantStrings.TwistList, new int[0]},
+            { ConstantStrings.EventList, new int[0]},
             { ConstantStrings.TokenCounter(TokenType.ArtIcon), 2*numPlayers},
             { ConstantStrings.TokenCounter(TokenType.HouseIcon), 2*numPlayers},
             { ConstantStrings.TokenCounter(TokenType.SwordIcon), 2*numPlayers},

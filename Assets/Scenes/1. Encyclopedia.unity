@@ -190,7 +190,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Twist
+  m_text: Event
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 31e79ddad7b2d41c395ada76a18cbcdd, type: 2}
   m_sharedMaterial: {fileID: -3852492252101762229, guid: 31e79ddad7b2d41c395ada76a18cbcdd, type: 2}
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 54.9
+  m_fontSize: 59.55
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -679,7 +679,7 @@ GameObject:
   - component: {fileID: 489674816}
   - component: {fileID: 489674817}
   m_Layer: 5
-  m_Name: Twist View
+  m_Name: Event View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1443,9 +1443,9 @@ MonoBehaviour:
   placardPrefab: {fileID: 4752275793854564576, guid: d50eb448d0731474ebebdd3627d1ec5a, type: 3}
   twistPrefab: {fileID: 4752275793854564576, guid: 4d0686b994da1445589ed656148a7cae, type: 3}
   placardGrid: {fileID: 1515963459}
-  twistGrid: {fileID: 1926261712}
+  eventGrid: {fileID: 1926261712}
   placardView: {fileID: 451277966}
-  twistView: {fileID: 489674816}
+  eventView: {fileID: 489674816}
   viewSlider: {fileID: 347830364}
 --- !u!4 &1189922528
 Transform:
@@ -1821,7 +1821,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 45.4
+  m_fontSize: 47.75
   m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2094,7 +2094,7 @@ GameObject:
   - component: {fileID: 1926261711}
   - component: {fileID: 1926261712}
   m_Layer: 5
-  m_Name: Twist Grid
+  m_Name: Event Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

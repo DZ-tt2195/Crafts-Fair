@@ -6245,7 +6245,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1761235060413094877, guid: 4d0686b994da1445589ed656148a7cae, type: 3}
       propertyPath: m_Name
-      value: Art Twist
+      value: Art Event
       objectReference: {fileID: 0}
     - target: {fileID: 1761235060413094877, guid: 4d0686b994da1445589ed656148a7cae, type: 3}
       propertyPath: m_IsActive
@@ -6828,11 +6828,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5171458088357418665, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
       propertyPath: m_Name
-      value: Twist 2
+      value: Event 2
       objectReference: {fileID: 0}
     - target: {fileID: 6453452532442191667, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
       propertyPath: m_text
-      value: Twist 2
+      value: Event 2
       objectReference: {fileID: 0}
     - target: {fileID: 6601185372570472947, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
       propertyPath: m_Pivot.x
@@ -7182,7 +7182,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1761235060413094877, guid: 4d0686b994da1445589ed656148a7cae, type: 3}
       propertyPath: m_Name
-      value: Tech Twist
+      value: Tech Event
       objectReference: {fileID: 0}
     - target: {fileID: 1761235060413094877, guid: 4d0686b994da1445589ed656148a7cae, type: 3}
       propertyPath: m_IsActive
@@ -7636,7 +7636,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5171458088357418665, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
       propertyPath: m_Name
-      value: Twist 1
+      value: Event 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6453452532442191667, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
+      propertyPath: m_text
+      value: Event 1
       objectReference: {fileID: 0}
     - target: {fileID: 6601185372570472947, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
       propertyPath: m_Pivot.x
@@ -9725,11 +9729,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5171458088357418665, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
       propertyPath: m_Name
-      value: Twist 3
+      value: Event 3
       objectReference: {fileID: 0}
     - target: {fileID: 6453452532442191667, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
       propertyPath: m_text
-      value: Twist 3
+      value: Event 3
       objectReference: {fileID: 0}
     - target: {fileID: 6601185372570472947, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
       propertyPath: m_Pivot.x
@@ -12254,7 +12258,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1761235060413094877, guid: 4d0686b994da1445589ed656148a7cae, type: 3}
       propertyPath: m_Name
-      value: Sword Twist
+      value: Sword Event
       objectReference: {fileID: 0}
     - target: {fileID: 1761235060413094877, guid: 4d0686b994da1445589ed656148a7cae, type: 3}
       propertyPath: m_IsActive
@@ -12694,7 +12698,7 @@ MonoBehaviour:
   cardPrefab: {fileID: 4752275793854564576, guid: d50eb448d0731474ebebdd3627d1ec5a, type: 3}
   playerDropdown: {fileID: 1970410456}
   mainCamera: {fileID: 849367364}
-  twistInfo:
+  eventInfo:
   - card: {fileID: 758368484}
     countText: {fileID: 808065487}
     token: 0
@@ -14199,7 +14203,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   confirmButton: {fileID: 41199474}
   storeButtons: {fileID: 522817643}
-  twistSelect:
+  eventSelect:
   - {fileID: 905231728}
   - {fileID: 808057359}
   - {fileID: 1211775728}
@@ -15777,7 +15781,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1761235060413094877, guid: 4d0686b994da1445589ed656148a7cae, type: 3}
       propertyPath: m_Name
-      value: House Twist
+      value: House Event
       objectReference: {fileID: 0}
     - target: {fileID: 1761235060413094877, guid: 4d0686b994da1445589ed656148a7cae, type: 3}
       propertyPath: m_IsActive
@@ -16770,11 +16774,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5171458088357418665, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
       propertyPath: m_Name
-      value: Twist 4
+      value: Event 4
       objectReference: {fileID: 0}
     - target: {fileID: 6453452532442191667, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
       propertyPath: m_text
-      value: Twist 4
+      value: Event 4
       objectReference: {fileID: 0}
     - target: {fileID: 6601185372570472947, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
       propertyPath: m_Pivot.x

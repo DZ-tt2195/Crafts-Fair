@@ -1,14 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class Exact_One : CardType
+public class Sequential_Art : CardType
 {
-    public Exact_One(CardData dataFile) : base(dataFile)
+    public Sequential_Art(CardData dataFile) : base(dataFile)
     {
     }
 
     public override bool CanSubmit(Player player, List<(int level, TokenType type)> tokensSubmitted)
     {
-        return WithLevel(tokensSubmitted, FindNumber.Exact, 1, 2);
+        return SequentialLevels(tokensSubmitted, TokenType.ArtIcon, 4);
     }
 }

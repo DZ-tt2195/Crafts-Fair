@@ -6,7 +6,7 @@ public class DisplayTwists : Turn
 {
     public override void MasterStart()
     {
-        CreateGame.inst.CreateTwists();
+        CreateGame.inst.CreateEvents();
     }
 
     public override void ForPlayer(Player player)

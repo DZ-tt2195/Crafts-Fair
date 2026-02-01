@@ -11,9 +11,9 @@ public class Encyclopedia : MonoBehaviour
     [SerializeField] Card placardPrefab;
     [SerializeField] Card twistPrefab;
     [SerializeField] GridLayoutGroup placardGrid;
-    [SerializeField] GridLayoutGroup twistGrid;
+    [SerializeField] GridLayoutGroup eventGrid;
     [SerializeField] RectTransform placardView;
-    [SerializeField] RectTransform twistView;
+    [SerializeField] RectTransform eventView;
     [SerializeField] Slider viewSlider;
     List<Card> allPlacards = new();
     List<Card> allTwists = new();
@@ -27,7 +27,7 @@ public class Encyclopedia : MonoBehaviour
         void Change(float value)
         {
             placardView.gameObject.SetActive((int)value == 0);
-            twistView.gameObject.SetActive((int)value == 1);
+            eventView.gameObject.SetActive((int)value == 1);
         }
     }
 
@@ -41,13 +41,13 @@ public class Encyclopedia : MonoBehaviour
             allPlacards.Add(cardPV);
             cardPV.transform.SetParent(placardGrid.transform);
         }
-        for (int i = 0; i < GameFiles.inst.twistFiles.Count; i++)
+        for (int i = 0; i < GameFiles.inst.eventFiles.Count; i++)
         {
             GameObject nextCard = Instantiate(twistPrefab.gameObject);
             Card cardPV = nextCard.GetComponent<Card>();
-            cardPV.AssignCard(GameFiles.inst.twistFiles[i], 1f, false, Vector3.one);
+            cardPV.AssignCard(GameFiles.inst.eventFiles[i], 1f, false, Vector3.one);
             allTwists.Add(cardPV);
-            cardPV.transform.SetParent(twistGrid.transform);
+            cardPV.transform.SetParent(eventGrid.transform);
         }
     }
 }

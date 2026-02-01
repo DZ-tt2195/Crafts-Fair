@@ -16,7 +16,7 @@ public class CardSelect : MonoBehaviour
     private void Awake()
     {
         vertical = false;
-        allData = GameFiles.inst.twistFiles;
+        allData = GameFiles.inst.eventFiles;
         randomButton.onClick.AddListener(() => SetCardImage(-1));
         chooseButton.onClick.AddListener(() => CardMenu.instance.ChooseFromList(this, allData, vertical));
     }

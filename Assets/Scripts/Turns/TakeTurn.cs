@@ -147,6 +147,6 @@ public class TakeTurn : Turn
         PhotonNetwork.CurrentRoom.SetCustomProperties(toChange);
         PhotonCompatible.InstantChangeRoomProp(ConstantStrings.TurnNumber, TurnManager.inst.GetInt(ConstantStrings.TurnNumber)+1);
         if (twistTriggers)
-            PhotonCompatible.InstantChangeRoomProp(ConstantStrings.NextPhase, nameof(ResolveTwists));
+            PhotonCompatible.InstantChangeRoomProp(ConstantStrings.NextPhase, nameof(ResolveEvents));
     }
 }

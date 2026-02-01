@@ -10,7 +10,7 @@ using UnityEngine.UI;
 using TMPro;
 using System.Linq;
 [Serializable]
-public class TwistVisual
+public class EventVisual
 {
     public Card card;
     public TMP_Text countText;
@@ -34,7 +34,7 @@ public class CreateGame : PhotonCompatible
     public float opacity { get; private set; }
     bool decrease = true;
     public Canvas canvas { get; private set; }
-    [SerializeField] List<TwistVisual> twistInfo = new();
+    [SerializeField] List<EventVisual> eventInfo = new();
 
     protected override void Awake()
     {
@@ -43,7 +43,7 @@ public class CreateGame : PhotonCompatible
         inst = this;
         PhotonNetwork.AutomaticallySyncScene = true;
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
-        VisualCards((int[])GetRoomProperty(ConstantStrings.TwistList));
+        VisualCards((int[])GetRoomProperty(ConstantStrings.EventList));
         playerDropdown.onValueChanged.AddListener(SwitchToPlayer);
 
         if (!PhotonNetwork.OfflineMode)
@@ -189,26 +189,26 @@ public class CreateGame : PhotonCompatible
 
 #endregion 
 
-#region  Twists
-    public void CreateTwists()
+#region  Events
+    public void CreateEvents()
     {
-        List<int> twistIDs = new();
-        for (int i = 0; i<GameFiles.inst.twistFiles.Count; i++)
-            twistIDs.Add(i);
-        twistIDs = twistIDs.Shuffle();
+        List<int> EventIDs = new();
+        for (int i = 0; i<GameFiles.inst.eventFiles.Count; i++)
+            EventIDs.Add(i);
+        EventIDs = EventIDs.Shuffle();
 
-        int forcedTwists = 4;
-        for (int i = 1; i<=forcedTwists; i++)
+        int forcedEvents = 4;
+        for (int i = 1; i<=forcedEvents; i++)
         {
-            int chosenNumber = PlayerPrefs.GetInt($"Twist {i}");
-            if (chosenNumber >= 0 && twistIDs.Remove(chosenNumber))
-                twistIDs.Insert(0, chosenNumber);
+            int chosenNumber = PlayerPrefs.GetInt($"Event {i}");
+            if (chosenNumber >= 0 && EventIDs.Remove(chosenNumber))
+                EventIDs.Insert(0, chosenNumber);
         }
 
-        int[] chosenTwists = new int[forcedTwists];
-        for (int i = 0; i<forcedTwists; i++)
-            chosenTwists[i] = twistIDs[i];
-        InstantChangeRoomProp(ConstantStrings.TwistList, chosenTwists.ToArray());
+        int[] chosenEvents = new int[forcedEvents];
+        for (int i = 0; i<forcedEvents; i++)
+            chosenEvents[i] = EventIDs[i];
+        InstantChangeRoomProp(ConstantStrings.EventList, chosenEvents.ToArray());
     }
 
     [PunRPC]
@@ -216,9 +216,9 @@ public class CreateGame : PhotonCompatible
     {
         List<CardData> toFind = new();
         bool vertical = false;
-        if (typeToFind.Equals("Twist"))
+        if (typeToFind.Equals("Event"))
         {
-            toFind = GameFiles.inst.twistFiles;
+            toFind = GameFiles.inst.eventFiles;
             vertical = false;
         }
         else if (typeToFind.Equals("Placard"))
@@ -237,20 +237,20 @@ public class CreateGame : PhotonCompatible
     {
         for (int i = 0; i<cardIDs.Length; i++)
         {
-            twistInfo[i].card.gameObject.SetActive(true);
-            CardData data = GameFiles.inst.twistFiles[cardIDs[i]];
-            twistInfo[i].card.AssignCard(data, 1, false, new(0.5f, 0.5f, 0.5f));
+            eventInfo[i].card.gameObject.SetActive(true);
+            CardData data = GameFiles.inst.eventFiles[cardIDs[i]];
+            eventInfo[i].card.AssignCard(data, 1, false, new(0.5f, 0.5f, 0.5f));
         }
-        for (int i = cardIDs.Length; i<twistInfo.Count; i++)
+        for (int i = cardIDs.Length; i<eventInfo.Count; i++)
         {
-            twistInfo[i].card.gameObject.SetActive(false);
+            eventInfo[i].card.gameObject.SetActive(false);
         }
         UpdateTexts();
     }
 
-    public TwistVisual GetTwist(TokenType type)
+    public EventVisual GetEvent(TokenType type)
     {
-        foreach (TwistVisual tv in twistInfo)
+        foreach (EventVisual tv in eventInfo)
         {
             if (tv.token == type)
                 return tv;
@@ -259,7 +259,7 @@ public class CreateGame : PhotonCompatible
     }
     void UpdateTexts()
     {
-        foreach (TwistVisual visual in twistInfo)
+        foreach (EventVisual visual in eventInfo)
         {
             string tokenText = ConstantStrings.TokenCounter(visual.token);
             visual.countText.text = KeywordTooltip.instance.EditText($"{TurnManager.inst.GetInt(tokenText)}{Translator.inst.Translate(visual.token.ToString())}");
@@ -268,9 +268,9 @@ public class CreateGame : PhotonCompatible
 
     public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
     {
-        if (propertiesThatChanged.ContainsKey(ConstantStrings.TwistList))
+        if (propertiesThatChanged.ContainsKey(ConstantStrings.EventList))
         {    
-            VisualCards((int[])propertiesThatChanged[ConstantStrings.TwistList]);
+            VisualCards((int[])propertiesThatChanged[ConstantStrings.EventList]);
         }
         else
         {

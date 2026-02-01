@@ -1,10 +1,22 @@
 cardName	textBox	crownAmount	artCredit	notes
 Bare_Minimum	Submit exactly 2 TokenIcon.	1		
-Exact_One	Submit exactly 2 TokenIcon at level 1.	1		
 Perfect_Fit	You have exactly 0 TokenIcon left after submitting.	1		
+Chose_Art	You chose ArtIcon this turn.	1		CareArt
+Chose_House	You chose HouseIcon this turn.	1		CareHouse
+Chose_Sword	You chose SwordIcon this turn.	1		CareSword
+Chose_Tech	You chose TechIcon this turn.	1		CareTech
 Unnecessary_Surplus	You have at least 5 TokenIcon left after submitting.	1		
-Above_And_Beyond	Submit 4 TokenIcon or more.	2		
+Above_And_Beyond	Submit at least 5 TokenIcon.	2		
+Many_Ones	Submit at least 4 TokenIcon at level 1.	2		Care1
+Menagerie	Submit at least 1 ArtIcon, 1 HouseIcon, 1 SwordIcon, and 1 TechIcon.	2		CareArt, CareHouse, CareSword, CareTech
 Rise_Of_Villages	Submit at least 2 TokenIcon at level 2.	2		Care2
-Rise_Of_Kingdoms	Submit at least 2 TokenIcon at level 4.	4		Care4
-Rise_Of_Empires	Submit at least 2 TokenIcon at level 6.	6		Care6
 Total_Four	The levels of all submitted TokenIcon total to exactly 4.	2		
+Total_Six	The levels of all submitted TokenIcon total to exactly 6.	3		
+Rise_Of_Kingdoms	Submit at least 2 TokenIcon at level 4.	4		Care4
+Total_Eight	The levels of all submitted TokenIcon total to exactly 8.	4		
+Sequential_Art	Submit at least 4 sequentially leveled ArtIcon.	5		CareArt
+Sequential_House	Submit at least 4 sequentially leveled HouseIcon.	5		CareHouse
+Sequential_Sword	Sequential_Sword_Text	5		CareSword
+Sequential_Tech	Submit at least 4 sequentially leveled TechIcon.	5		CareTech
+Total_Ten	The levels of all submitted TokenIcon total to exactly 10.	5		
+Rise_Of_Empires	Submit at least 2 TokenIcon at level 6.	6		Care6
