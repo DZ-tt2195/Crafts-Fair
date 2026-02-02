@@ -1,8 +1,8 @@
 cardName	textBox	artCredit	notes
-Grab_Bag	 +1 ArtIcon, +1 HouseIcon, +1 SwordIcon, and +1 TechIcon, all at level 1.		AddArt, AddHouse, AddSword, AddTech
+Grab_Bag	 +1 ArtIcon, +1 HouseIcon, +1 SwordIcon, and +1 TechIcon, all at 1 LevelIcon.		AddArt, AddHouse, AddSword, AddTech
+Make_Art	If you have at least 5 CoinIcon, +4 ArtIcon at 1 LevelIcon.		CoinOrMore, AddArt
+Make_House	If you have at least 3 TokenIcon at level 2, +4 HouseIcon at LevelIcon.		TokenOrMore, Care2, AddHouse
+Make_Sword	If you have at least 1 TokenIcon at level 6, +4 SwordIcon at 1 LevelIcon.		TokenOrMore, Care6, AddSword
+Make_Tech	If you have no TechIcon, +4 TechIcon at 1 LevelIcon.		TokenOrLess, CareTech, AddTech
 Strength_In_Numbers	 +1 CoinIcon per 2 CardIcon you sold this turn (round down).		GainCoin
-Upgrade_Two	Upgrade all your TokenIcon from level 2 up to level 3.		Care2, Upgrade
-Make_Art	If you have at least 5 CoinIcon, +4 ArtIcon at level 1.		CoinOrMore, AddArt
-Make_House	If you have at least 3 TokenIcon at level 2, +4 HouseIcon at level 1.		TokenOrMore, Care2, AddHouse
-Make_Sword	If you have at least 1 TokenIcon at level 6, +4 SwordIcon at level 1.		TokenOrMore, Care6, AddSword
-Make_Tech	If you have no TechIcon, +4 TechIcon at level 1.		TokenOrLess, CareTech, AddTech
+Upgrade_Two	Upgrade all your TokenIcon from 2 LevelIcon up to 3 LevelIcon.		Care2, UpgradeAny

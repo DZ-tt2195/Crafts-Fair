@@ -352,6 +352,10 @@ MonoBehaviour:
     translated: 
     description: 
     color: {r: 0, g: 0, b: 0, a: 0}
+  - original: LevelIcon
+    translated: 
+    description: 
+    color: {r: 0, g: 0, b: 0, a: 0}
   tooltipText: {fileID: 1828323579}
 --- !u!1 &300021384
 GameObject:
@@ -1159,7 +1163,10 @@ PrefabInstance:
     - {fileID: 3197849793019336440, guid: 4d0686b994da1445589ed656148a7cae, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 8131750164463628565, guid: 4d0686b994da1445589ed656148a7cae, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1196610554}
   m_SourcePrefab: {fileID: 100100000, guid: 4d0686b994da1445589ed656148a7cae, type: 3}
 --- !u!224 &1196610551 stripped
 RectTransform:
@@ -1177,6 +1184,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e0126a1609b1248ce829909dda3b6b2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardLayout
+--- !u!1 &1196610553 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8131750164463628565, guid: 4d0686b994da1445589ed656148a7cae, type: 3}
+  m_PrefabInstance: {fileID: 1196610550}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1196610554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1196610553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd447db666c474fceaf9cfb6b4bdb9ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::KeywordLinkHover
 --- !u!1 &1693348572
 GameObject:
   m_ObjectHideFlags: 0
@@ -1374,7 +1398,8 @@ MonoBehaviour:
   m_text: Hello <link="CardIcon"><sprite="CardIcon" name="CardIcon"><link="CoinIcon"><sprite="CoinIcon"
     name="CoinIcon"><link="TokenIcon"><sprite="TokenIcon" name="TokenIcon"><link="ArtIcon"><sprite="ArtIcon"
     name="ArtIcon"><link="HouseIcon"><sprite="HouseIcon" name="HouseIcon"><link="SwordIcon"><sprite="SwordIcon"
-    name="SwordIcon"><link="TechIcon"><sprite="TechIcon" name="TechIcon">
+    name="SwordIcon"><link="TechIcon"><sprite="TechIcon" name="TechIcon"><link="LevelIcon"><sprite="LevelIcon"
+    name="LevelIcon">
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 31e79ddad7b2d41c395ada76a18cbcdd, type: 2}
   m_sharedMaterial: {fileID: -3852492252101762229, guid: 31e79ddad7b2d41c395ada76a18cbcdd, type: 2}
@@ -1401,7 +1426,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 90.95
+  m_fontSize: 78.75
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
