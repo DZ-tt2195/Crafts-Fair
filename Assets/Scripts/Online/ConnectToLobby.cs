@@ -240,18 +240,18 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
         {
             [ConstantStrings.Playing] = true,
             [ConstantStrings.Waiting] = false,
-            [ConstantStrings.MyScore] = 0,
+            [ConstantStrings.MyCoins] = 0,
 
             [TokenType.ArtIcon.ToString()] = new int[numRanks],
             [TokenType.HouseIcon.ToString()] = new int[numRanks],
             [TokenType.SwordIcon.ToString()] = new int[numRanks],
             [TokenType.TechIcon.ToString()] = new int[numRanks],
 
-            [ConstantStrings.MyPlacards] = new int[0],
+            [ConstantStrings.MyHand] = new int[0],
             [ConstantStrings.MyDeck] = new int[0],
             [ConstantStrings.MyDiscard] = new int[0],
             [ConstantStrings.ChosenToken] = "",
-            [ConstantStrings.PlacardsSubmitted] = 0,
+            [ConstantStrings.BuyersSold] = 0,
         };
         return playerProps;
     }

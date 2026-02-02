@@ -8,7 +8,7 @@ public class Menagerie : CardType
     {
     }
 
-    public override bool CanSubmit(Player player, List<(int level, TokenType type)> tokensSubmitted)
+    public override bool CanSell(Player player, List<(int level, TokenType type)> tokensSubmitted)
     {
         HashSet<TokenType> required = new() {TokenType.ArtIcon, TokenType.HouseIcon, TokenType.SwordIcon, TokenType.TechIcon};
         return TypesOrNot(tokensSubmitted, required, new());

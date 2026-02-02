@@ -8,15 +8,15 @@ using Photon.Pun;
 public class Encyclopedia : MonoBehaviour
 {
     public static Encyclopedia inst;
-    [SerializeField] Card placardPrefab;
-    [SerializeField] Card twistPrefab;
-    [SerializeField] GridLayoutGroup placardGrid;
+    [SerializeField] Card buyerPrefab;
+    [SerializeField] Card eventPrefab;
+    [SerializeField] GridLayoutGroup buyerGrid;
     [SerializeField] GridLayoutGroup eventGrid;
-    [SerializeField] RectTransform placardView;
+    [SerializeField] RectTransform buyerView;
     [SerializeField] RectTransform eventView;
     [SerializeField] Slider viewSlider;
-    List<Card> allPlacards = new();
-    List<Card> allTwists = new();
+    List<Card> allBuyers = new();
+    List<Card> allEvents = new();
 
     private void Awake()
     {
@@ -26,27 +26,27 @@ public class Encyclopedia : MonoBehaviour
 
         void Change(float value)
         {
-            placardView.gameObject.SetActive((int)value == 0);
+            buyerView.gameObject.SetActive((int)value == 0);
             eventView.gameObject.SetActive((int)value == 1);
         }
     }
 
     private void Start()
     {
-        for (int i = 0; i < GameFiles.inst.placardFiles.Count; i++)
+        for (int i = 0; i < GameFiles.inst.buyerFiles.Count; i++)
         {
-            GameObject nextCard = Instantiate(placardPrefab.gameObject);
+            GameObject nextCard = Instantiate(buyerPrefab.gameObject);
             Card cardPV = nextCard.GetComponent<Card>();
-            cardPV.AssignCard(GameFiles.inst.placardFiles[i], 1f, true, Vector3.one);
-            allPlacards.Add(cardPV);
-            cardPV.transform.SetParent(placardGrid.transform);
+            cardPV.AssignCard(GameFiles.inst.buyerFiles[i], 1f, true, Vector3.one);
+            allBuyers.Add(cardPV);
+            cardPV.transform.SetParent(buyerGrid.transform);
         }
         for (int i = 0; i < GameFiles.inst.eventFiles.Count; i++)
         {
-            GameObject nextCard = Instantiate(twistPrefab.gameObject);
+            GameObject nextCard = Instantiate(eventPrefab.gameObject);
             Card cardPV = nextCard.GetComponent<Card>();
             cardPV.AssignCard(GameFiles.inst.eventFiles[i], 1f, false, Vector3.one);
-            allTwists.Add(cardPV);
+            allEvents.Add(cardPV);
             cardPV.transform.SetParent(eventGrid.transform);
         }
     }

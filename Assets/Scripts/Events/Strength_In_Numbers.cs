@@ -8,7 +8,7 @@ public class Strength_In_Numbers : CardType
 
     public override void TwistEffect(Player player, int logged)
     {
-        int getPlacards = TurnManager.inst.GetInt(ConstantStrings.PlacardsSubmitted, player);
-        player.ScoreRPC(Mathf.FloorToInt(getPlacards/2f), logged);
+        int getPlacards = TurnManager.inst.GetInt(ConstantStrings.BuyersSold, player);
+        player.CoinRPC(Mathf.FloorToInt(getPlacards/2f), logged);
     }
 }

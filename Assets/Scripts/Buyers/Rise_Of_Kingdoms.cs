@@ -8,7 +8,7 @@ public class Rise_Of_Kingdoms : CardType
     {
     }
 
-    public override bool CanSubmit(Player player, List<(int level, TokenType type)> tokensSubmitted)
+    public override bool CanSell(Player player, List<(int level, TokenType type)> tokensSubmitted)
     {
         return WithLevel(tokensSubmitted, FindNumber.Minimum, 4, 2);
     }

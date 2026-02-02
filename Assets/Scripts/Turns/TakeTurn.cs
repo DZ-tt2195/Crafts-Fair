@@ -13,7 +13,7 @@ public class TakeTurn : Turn
     public override void ForPlayer(Player player)
     {
         Log.inst.NewDecisionContainer(() => ChooseToken(player));
-        Log.inst.NewDecisionContainer(() => MakeSubmission(player, new(), null));
+        Log.inst.NewDecisionContainer(() => DoSelling(player, new(), null));
     }
     void ChooseToken(Player player)
     {
@@ -44,10 +44,10 @@ public class TakeTurn : Turn
             player.UpDowngradeToken(1, info, (info.level+1, info.type), 1);
         }
     }
-    void MakeSubmission(Player player, List<(int value, TokenType type)> submittedTokens, DecisionContainer rewind)
+    void DoSelling(Player player, List<(int value, TokenType type)> submittedTokens, DecisionContainer rewind)
     {
         int minimum = 2;
-        List<Card> playerPlacards = player.GetPlacards();
+        List<Card> playerPlacards = player.GetHand();
         List<TokenDisplay> tokensToSubmit = player.OfNumber(FindNumber.Minimum, 1);
         DecisionContainer restartContainer = rewind;
 
@@ -56,17 +56,17 @@ public class TakeTurn : Turn
             restartContainer = Log.inst.currentContainer;
             if (player.GetAllTokens().Item1 < minimum || playerPlacards.Count < minimum)
             {
-                NoSubmission();
+                NoSelling();
                 return;
             }
         }
 
-        List<Card> placardsToSubmit = new();
+        List<Card> buyersHappy = new();
         foreach (Card card in playerPlacards)
         {
-            if (submittedTokens.Count >= 2 && card.thisCard.CanSubmit(player, submittedTokens))
+            if (submittedTokens.Count >= 2 && card.thisCard.CanSell(player, submittedTokens))
             {
-                placardsToSubmit.Add(card);
+                buyersHappy.Add(card);
                 card.selectMe.SetBorder(true, Color.yellow);
             }
             else
@@ -76,20 +76,20 @@ public class TakeTurn : Turn
         }
 
         List<TextButtonInfo> textOptions = new();
-        if (submittedTokens.Count >= minimum && placardsToSubmit.Count >= minimum)
-            textOptions.Add(new(AutoTranslate.Confirm(), SubmitEverything));
+        if (submittedTokens.Count >= minimum && buyersHappy.Count >= minimum)
+            textOptions.Add(new(AutoTranslate.Confirm(), CompleteSell));
         if (submittedTokens.Count == 0)
-            textOptions.Add(new(AutoTranslate.Decline(), NoSubmission));
+            textOptions.Add(new(AutoTranslate.Decline(), NoSelling));
         else
-            textOptions.Add(new(AutoTranslate.Undo_Submission(), UndoAll));
+            textOptions.Add(new(AutoTranslate.Undo_All(), UndoAll));
 
-        MakeDecision.inst.ChooseTextButton(textOptions, AutoTranslate.Ask_Submission(), false);
-        MakeDecision.inst.ChooseDisplayOnScreen(tokensToSubmit, AutoTranslate.Ask_Submission(), SubmitToken, false);
+        MakeDecision.inst.ChooseTextButton(textOptions, AutoTranslate.Ask_Sell(), false);
+        MakeDecision.inst.ChooseDisplayOnScreen(tokensToSubmit, AutoTranslate.Ask_Sell(), SellToken, false);
 
-        void NoSubmission()
+        void NoSelling()
         {
-            TurnManager.inst.WillChangePlayerProperty(player, ConstantStrings.PlacardsSubmitted, 0);
-            Log.inst.AddMyText(false, OnlineTranslate.Online_No_Submission(player.name));            
+            TurnManager.inst.WillChangePlayerProperty(player, ConstantStrings.BuyersSold, 0);
+            Log.inst.AddMyText(false, OnlineTranslate.Online_No_Sell(player.name));            
         }
 
         void UndoAll()
@@ -97,26 +97,26 @@ public class TakeTurn : Turn
             Log.inst.InvokeUndo(rewind, false);
         }
 
-        void SubmitEverything()
+        void CompleteSell()
         {
-            Log.inst.AddMyText(true, OnlineTranslate.Online_Make_Submission(player.name, submittedTokens.Count.ToString(), placardsToSubmit.Count.ToString()));
-            TurnManager.inst.WillChangePlayerProperty(player, ConstantStrings.PlacardsSubmitted, placardsToSubmit.Count);
+            Log.inst.AddMyText(true, OnlineTranslate.Online_Make_Sell(player.name, submittedTokens.Count.ToString(), buyersHappy.Count.ToString()));
+            TurnManager.inst.WillChangePlayerProperty(player, ConstantStrings.BuyersSold, buyersHappy.Count);
             int totalScore = 0;
-            foreach (Card card in placardsToSubmit)
+            foreach (Card card in buyersHappy)
             {
-                totalScore += card.dataFile.crownAmount;
-                player.DiscardPlacardRPC(card, 1);
+                totalScore += card.dataFile.coinAmount;
+                player.DiscardBuyerRPC(card, 1);
                 card.selectMe.SetBorder(false);
             }
-            player.ScoreRPC(totalScore, 0, true);
+            player.CoinRPC(totalScore, 0, true);
         }
 
-        void SubmitToken((int value, TokenType type) info)
+        void SellToken((int value, TokenType type) info)
         {
             player.AddRemoveToken(-1, info);
             List<(int, TokenType)> newList = submittedTokens;
             newList.Add(info);
-            Log.inst.NewDecisionContainer(() => MakeSubmission(player, newList, restartContainer));
+            Log.inst.NewDecisionContainer(() => DoSelling(player, newList, restartContainer));
         }
     }
     public override void MasterEnd()

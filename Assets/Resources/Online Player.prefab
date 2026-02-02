@@ -896,7 +896,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Player
   endPause: 1
   keepHand: {fileID: 3827459076193100336}
-  crownText: {fileID: 58405904152204351}
+  coinText: {fileID: 58405904152204351}
   allCoinDisplays:
   - {fileID: 0}
   - {fileID: 223857215783700001}
@@ -1387,7 +1387,7 @@ GameObject:
   - component: {fileID: 4935673399928306818}
   - component: {fileID: 58405904152204351}
   m_Layer: 5
-  m_Name: Crown Display
+  m_Name: Coin Display
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1440,7 +1440,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 0 <sprite="CrownIcon" name="CrownIcon">
+  m_text: 0 <sprite="CoinIcon" name="CoinIcon">
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 31e79ddad7b2d41c395ada76a18cbcdd, type: 2}
   m_sharedMaterial: {fileID: -3852492252101762229, guid: 31e79ddad7b2d41c395ada76a18cbcdd, type: 2}
@@ -1467,7 +1467,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 121.15
+  m_fontSize: 125.45
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

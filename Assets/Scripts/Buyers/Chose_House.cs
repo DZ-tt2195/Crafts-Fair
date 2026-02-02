@@ -7,7 +7,7 @@ public class Chose_House : CardType
     {
     }
 
-    public override bool CanSubmit(Player player, List<(int level, TokenType type)> tokensSubmitted)
+    public override bool CanSell(Player player, List<(int level, TokenType type)> tokensSubmitted)
     {
         return TurnManager.inst.GetString(ConstantStrings.ChosenToken, player).Equals(TokenType.HouseIcon);
     }

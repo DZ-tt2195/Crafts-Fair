@@ -9,12 +9,12 @@ public static class ConstantStrings
     //player properties
     public const string Playing = nameof(Playing);
     public const string Waiting = nameof(Waiting);
-    public const string MyScore = nameof(MyScore);
-    public const string MyPlacards = nameof(MyPlacards);
+    public const string MyCoins = nameof(MyCoins);
+    public const string MyHand = nameof(MyHand);
     public const string MyDeck = nameof(MyDeck);
     public const string MyDiscard = nameof(MyDiscard);
     public const string ChosenToken = nameof(ChosenToken);
-    public const string PlacardsSubmitted = nameof(PlacardsSubmitted);
+    public const string BuyersSold = nameof(BuyersSold);
 
     //room properties
     public const string GameName = nameof(GameName);

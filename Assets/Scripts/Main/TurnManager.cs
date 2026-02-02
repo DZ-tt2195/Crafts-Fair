@@ -83,7 +83,7 @@ public class TurnManager : PhotonCompatible
         (Player, int) highestScore = (null, 0);
         foreach (Player player in CreateGame.inst.GetPlayers())
         {
-            int health = player.GetScore();
+            int health = player.GetCoins();
             if (health > highestScore.Item2)
                 highestScore = (player, health);
             else if (health == highestScore.Item2)

@@ -22,7 +22,7 @@ public class CardType
 
 #region  Placard
 
-    public virtual bool CanSubmit(Player player, List<(int level, TokenType type)> tokensSubmitted)
+    public virtual bool CanSell(Player player, List<(int level, TokenType type)> tokensSubmitted)
     {
         return false;
     }

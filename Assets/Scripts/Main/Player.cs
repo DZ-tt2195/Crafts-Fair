@@ -15,14 +15,14 @@ public class Player : PhotonCompatible
     bool initialized = false;
     [ReadOnly] public bool endPause = true;
     [SerializeField] Transform keepHand;
-    [SerializeField] TMP_Text crownText;
+    [SerializeField] TMP_Text coinText;
     public Dictionary<string, bool> uiDictionary = new();
     [SerializeField] List<TokenDisplay> allCoinDisplays = new();
     [SerializeField] List<TokenDisplay> allBoneDisplays = new();
     [SerializeField] List<TokenDisplay> allWeaponDisplays = new();
     [SerializeField] List<TokenDisplay> allTextDisplays = new();
-    List<Card> myPlacards;
-    int myScore;
+    List<Card> myHand;
+    int myCoins;
     Dictionary<TokenType, int[]> myTokens;
 
     protected override void Awake()
@@ -30,7 +30,7 @@ public class Player : PhotonCompatible
         base.Awake();
         this.bottomType = this.GetType();
 
-        List<string> toAdd = new() { ConstantStrings.MyPlacards, ConstantStrings.MyDiscard, ConstantStrings.MyScore, TokenType.ArtIcon.ToString(), TokenType.HouseIcon.ToString(), TokenType.SwordIcon.ToString(), TokenType.TechIcon.ToString() };
+        List<string> toAdd = new() { ConstantStrings.MyHand, ConstantStrings.MyDiscard, ConstantStrings.MyCoins, TokenType.ArtIcon.ToString(), TokenType.HouseIcon.ToString(), TokenType.SwordIcon.ToString(), TokenType.TechIcon.ToString() };
         foreach (string next in toAdd)
             uiDictionary.Add(next, true);
 
@@ -60,8 +60,8 @@ public class Player : PhotonCompatible
     }
     void SetToPlayerProps()
     {
-        myScore = TurnManager.inst.GetInt(ConstantStrings.MyScore, this);
-        myPlacards = TurnManager.inst.GetCardList(ConstantStrings.MyPlacards, this);
+        myCoins = TurnManager.inst.GetInt(ConstantStrings.MyCoins, this);
+        myHand = TurnManager.inst.GetCardList(ConstantStrings.MyHand, this);
         myTokens = new Dictionary<TokenType, int[]>();
         foreach (TokenType token in Enum.GetValues(typeof(TokenType)))
         {
@@ -73,8 +73,8 @@ public class Player : PhotonCompatible
     #endregion
 
 #region Hand
-    public List<Card> GetPlacards() => myPlacards;
-    public void DrawPlacardRPC(int amount, int logged = 0)
+    public List<Card> GetHand() => myHand;
+    public void DrawBuyerRPC(int amount, int logged = 0)
     {
         if (amount <= 0)
             return;
@@ -92,12 +92,12 @@ public class Player : PhotonCompatible
         for (int i = 0; i < amount; i++)
         {
             Card card = myDeck[i];
-            Log.inst.AddMyText(false, OnlineTranslate.Online_Draw_Placard(this.name, card.name), logged);
+            Log.inst.AddMyText(false, OnlineTranslate.Online_Draw_Buyer(this.name, card.name), logged);
             toDraw.Add(card);
         }
-        Log.inst.NewRollback(() => DrawPlacard(toDraw));
+        Log.inst.NewRollback(() => DrawBuyer(toDraw));
     }
-    void DrawPlacard(List<Card> cardsToAdd)
+    void DrawBuyer(List<Card> cardsToAdd)
     {
         List<Card> myDeck = TurnManager.inst.GetCardList(ConstantStrings.MyDeck, this);
 
@@ -107,7 +107,7 @@ public class Player : PhotonCompatible
             {
                 Card card = cardsToAdd[i];
                 card.transform.SetParent(null);
-                myPlacards.Remove(card);
+                myHand.Remove(card);
                 myDeck.Insert(0, card);
             }
         }
@@ -116,36 +116,36 @@ public class Player : PhotonCompatible
             for (int i = 0; i < cardsToAdd.Count; i++)
             {
                 Card card = cardsToAdd[i];
-                myPlacards.Add(card);
+                myHand.Add(card);
                 myDeck.Remove(card);
             }
         }
-        myPlacards = myPlacards.OrderBy(card => card.dataFile.crownAmount).ThenBy(card => card.dataFile.cardName).ToList();
-        TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyPlacards, TurnManager.inst.ConvertCardList(myPlacards)); uiDictionary[ConstantStrings.MyPlacards] = true;
+        myHand = myHand.OrderBy(card => card.dataFile.coinAmount).ThenBy(card => card.dataFile.cardName).ToList();
+        TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyHand, TurnManager.inst.ConvertCardList(myHand)); uiDictionary[ConstantStrings.MyHand] = true;
         TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyDeck, TurnManager.inst.ConvertCardList(myDeck));
     }
-    public void DiscardPlacardRPC(Card card, int logged = 0)
+    public void DiscardBuyerRPC(Card card, int logged = 0)
     {
-        Log.inst.NewRollback(() => DiscardPlacard(card));
-        Log.inst.AddMyText(false, OnlineTranslate.Online_Discard_Placard(this.name, card.name), logged);
+        Log.inst.NewRollback(() => DiscardBuyer(card));
+        Log.inst.AddMyText(false, OnlineTranslate.Online_Discard_Buyer(this.name, card.name), logged);
     }
-    void DiscardPlacard(Card card)
+    void DiscardBuyer(Card card)
     {
         List<Card> myDiscard = TurnManager.inst.GetCardList(ConstantStrings.MyDiscard, this);
 
         if (!Log.inst.forward)
         {
-            myPlacards.Add(card);
+            myHand.Add(card);
             myDiscard.Remove(card);
         }
         else
         {
-            myPlacards.Remove(card);
+            myHand.Remove(card);
             myDiscard.Add(card);
             card.transform.SetParent(null);
         }
-        myPlacards = myPlacards.OrderBy(card => card.dataFile.crownAmount).ThenBy(card => card.dataFile.cardName).ToList();
-        TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyPlacards, TurnManager.inst.ConvertCardList(myPlacards)); uiDictionary[ConstantStrings.MyPlacards] = true;
+        myHand = myHand.OrderBy(card => card.dataFile.coinAmount).ThenBy(card => card.dataFile.cardName).ToList();
+        TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyHand, TurnManager.inst.ConvertCardList(myHand)); uiDictionary[ConstantStrings.MyHand] = true;
         TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyDiscard, TurnManager.inst.ConvertCardList(myDiscard)); uiDictionary[ConstantStrings.MyDiscard] = true;
     }
 
@@ -153,21 +153,21 @@ public class Player : PhotonCompatible
 
 #region Resources
 
-    public int GetScore() => myScore;
-    public void ScoreRPC(int num, int logged = 0, bool important = false)
+    public int GetCoins() => myCoins;
+    public void CoinRPC(int num, int logged = 0, bool important = false)
     {
         if (num == 0)
             return;
         if (num > 0)
-            Log.inst.AddMyText(important, OnlineTranslate.Online_Add_Score(this.name, num.ToString()), logged);
+            Log.inst.AddMyText(important, OnlineTranslate.Online_Add_Coin(this.name, num.ToString()), logged);
         else
-            Log.inst.AddMyText(important, OnlineTranslate.Online_Lose_Score(this.name, num.ToString()), logged);
-        Log.inst.NewRollback(() => ChangeScore(num));
+            Log.inst.AddMyText(important, OnlineTranslate.Online_Lose_Coin(this.name, Mathf.Abs(num).ToString()), logged);
+        Log.inst.NewRollback(() => ChangeCoin(num));
     }
-    void ChangeScore(int num)
+    void ChangeCoin(int num)
     {
-        myScore += (!Log.inst.forward) ? -num : num;
-        TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyScore, myScore); uiDictionary[ConstantStrings.MyScore] = true;
+        myCoins += (!Log.inst.forward) ? -num : num;
+        TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyCoins, myCoins); uiDictionary[ConstantStrings.MyCoins] = true;
     }
     public void UpDowngradeToken(int num, (int level, TokenType token) first, (int level, TokenType token) second, int logged = 0, bool important = false)
     {
@@ -270,12 +270,12 @@ public class Player : PhotonCompatible
                 uiDictionary[key] = true;
         }
 
-        if (uiDictionary[ConstantStrings.MyPlacards])
+        if (uiDictionary[ConstantStrings.MyHand])
         {
-            List<Vector2> handPositions = ObjectPositions(myPlacards.Count, -1125, 475, 225, -550, true);
-            for (int i = 0; i < myPlacards.Count; i++)
+            List<Vector2> handPositions = ObjectPositions(myHand.Count, -1125, 475, 225, -550, true);
+            for (int i = 0; i < myHand.Count; i++)
             {
-                Card nextCard = myPlacards[i];
+                Card nextCard = myHand[i];
                 if (nextCard.transform.parent != keepHand)
                 {
                     nextCard.transform.SetParent(keepHand);
@@ -312,9 +312,9 @@ public class Player : PhotonCompatible
                 list[i].ChangeInfo(i, type, array[i].ToString());
         }
 
-        if (uiDictionary[ConstantStrings.MyScore])
+        if (uiDictionary[ConstantStrings.MyCoins])
         {
-            crownText.text = KeywordTooltip.instance.EditText($"{GetScore()} {AutoTranslate.CrownIcon()}");
+            coinText.text = KeywordTooltip.instance.EditText(AutoTranslate.Coin_Amount(GetCoins().ToString()));
         }
 
         foreach (var key in uiKeys)

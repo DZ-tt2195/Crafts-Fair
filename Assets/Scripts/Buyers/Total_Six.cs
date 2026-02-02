@@ -7,7 +7,7 @@ public class Total_Six : CardType
     {
     }
 
-    public override bool CanSubmit(Player player, List<(int level, TokenType type)> tokensSubmitted)
+    public override bool CanSell(Player player, List<(int level, TokenType type)> tokensSubmitted)
     {
         return SumOfLevels(tokensSubmitted, FindNumber.Exact, 6);
     }

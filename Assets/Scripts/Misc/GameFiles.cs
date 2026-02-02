@@ -11,7 +11,7 @@ using Photon.Pun;
 public class CardData
 {
     public string cardName;
-    public int crownAmount = 0;
+    public int coinAmount = 0;
     public string artCredit;
     public Sprite sprite;
 }
@@ -19,13 +19,13 @@ public class CardData
 public class GameFiles : MonoBehaviour
 {
     public static GameFiles inst;
-    public List<CardData> placardFiles { get; private set; }
+    public List<CardData> buyerFiles { get; private set; }
     public List<CardData> eventFiles { get; private set; }
 
     void Awake()
     {
         inst = this;
-        placardFiles = ReadTSVFile<CardData>(Resources.Load<TextAsset>("Card Info/Placards").text);
+        buyerFiles = ReadTSVFile<CardData>(Resources.Load<TextAsset>("Card Info/Buyers").text);
         eventFiles = ReadTSVFile<CardData>(Resources.Load<TextAsset>("Card Info/Events").text);
     }
 

@@ -50,26 +50,26 @@ ArtIcon	ArtIcon
 HouseIcon	HouseIcon
 SwordIcon	SwordIcon
 TechIcon	TechIcon
-CrownIcon	CrownIcon
+CoinIcon	CoinIcon
 TokenIcon	TokenIcon
 Online_Next_Turn	Turn $Number$
 Ask_Token_Type	Choose a token type.
 Ask_Upgrade	Upgrade 1 $Token$.
 Ask_Downgrade	Downgrade 1 $Token$.
 Online_Chose_Token	$Player$ chooses $Token$.
-Online_Add_Score	$Player$ gets +$Num$ CrownIcon.
-Online_Lose_Score	$Player$ loses $Num$ CrownIcon.
+Online_Add_Coin	$Player$ gets +$Num$ CoinIcon.
+Online_Lose_Coin	$Player$ loses $Num$ CoinIcon.
 Online_Add_Token	$Player$ adds $Amount$ $Token$ at level $Level$.
 Online_Remove_Token	$Player$ removes $Amount$ $Token$ at level $Level$.
 Online_Upgrade_Token	$Player$ upgrades $Amount$ $Token$ from level $Level1$ up to level $Level2$.
 Online_Downgrade_Token	$Player$ downgrades $Amount$ $Token$ from level $Level1$ down to level $Level2$.
-Online_Draw_Placard	$Player$ draws $Card$.
-Online_Draw_Placard_Others	$Player$ draws 1 CardIcon.
-Online_Discard_Placard	$Player$ discards $Card$.
-Ask_Submission	Submit 2+ TokenIcon, while meeting requirements for 2+ CardIcon.
-Online_Make_Submission	$Player$ submits $TokenNum$ tokens and $CardNum$ placards.
-Online_No_Submission	$Player$ doesn't submit.
-Undo_Submission	Undo All
+Online_Draw_Buyer	$Player$ draws $Card$.
+Online_Draw_Buyer_Others	$Player$ draws 1 CardIcon.
+Online_Discard_Buyer	$Player$ discards $Card$.
+Ask_Sell	You may sell 2+ TokenIcon, while meeting requirements for 2+ CardIcon.
+Online_Make_Sell	$Player$ sells $TokenNum$ TokenIcon and $CardNum$ CardIcon.
+Online_No_Sell	$Player$ doesn't sell anything.
+Undo_All	Undo All
 Online_Events_To_Resolve	Events to resolve: $Num$
 Ask_Resolve	Choose an Event to resolve.
 Online_Resolve_Card	$Player$ resolves $Card$.
@@ -87,52 +87,53 @@ Online_Player_Won	$Player$ has won.
 Resigned	(Resigned)
 Switch_Player	Switch Player
 Rules	Rules
-Rules_Summary	Each Turn: \n1. Choose a token type and remove a counter from that token's Event. \n2. Add 1 of that token at level 1, then upgrade 1 token of that type. \n3. You may submit 2+ tokens and 2+ placards at once to score crowns. \n\nBetween Turns:\n4. For each Event with 0 counters, each player draws 2 placards and follows its instructions. \n5. Add the counters back onto those Events (2 per player). \n6. The first player to reach 20+ crowns wins.
+Rules_Summary	Each Turn: \n1. Choose a token type and remove a counter from that token's Event. \n2. Add 1 of that token at level 1, then upgrade 1 token of that type. \n3. You may sell 2+ tokens and 2+ cards all at once to score CoinIcon. \n\nBetween Turns:\n4. For each Event with 0 counters, each player draws 2 cards and follows its instructions. \n5. Add the counters back onto those Events (2 per player). \n6. The first player to reach 20+ CoinIcon wins.
 Encyclopedia	Encyclopedia
 Close	Close
 Any	Any
-Placard	Placard
+Buyer	Buyer
 Event	Event
+Coin_Amount	$Num$ CoinIcon
 Perfect_Fit	Perfect Fit
-Perfect_Fit_Text	You have exactly 0 TokenIcon left after submitting.
+Perfect_Fit_Text	You have exactly 0 TokenIcon left after selling.
 Unnecessary_Surplus	Unnecessary Surplus
-Unnecessary_Surplus_Text	You have at least 5 TokenIcon left after submitting.
+Unnecessary_Surplus_Text	You have at least 5 TokenIcon left after selling.
 Bare_Minimum	Bare Minimum
-Bare_Minimum_Text	Submit exactly 2 TokenIcon.
+Bare_Minimum_Text	Sell exactly 2 TokenIcon.
 Above_And_Beyond	Above and Beyond
-Above_And_Beyond_Text	Submit at least 5 TokenIcon.
+Above_And_Beyond_Text	Sell at least 5 TokenIcon.
 Rise_Of_Villages	Rise of Villages
-Rise_Of_Villages_Text	Submit at least 2 TokenIcon at level 2.
+Rise_Of_Villages_Text	Sell at least 2 TokenIcon at level 2.
 Rise_Of_Kingdoms	Rise of Kingdoms
-Rise_Of_Kingdoms_Text	Submit at least 2 TokenIcon at level 4.
+Rise_Of_Kingdoms_Text	Sell at least 2 TokenIcon at level 4.
 Rise_Of_Empires	Rise of Empires
-Rise_Of_Empires_Text	Submit at least 2 TokenIcon at level 6.
+Rise_Of_Empires_Text	Sell at least 2 TokenIcon at level 6.
 Upgrade_Two	Upgrade Two
 Upgrade_Two_Text	Upgrade all your TokenIcon from level 2 up to level 3.
 Strength_In_Numbers	Strength in Numbers
-Strength_In_Numbers_Text	 +1 CrownIcon per 2 CardIcon you submitted this turn (round down).
+Strength_In_Numbers_Text	 +1 CoinIcon per 2 CardIcon you sold this turn (round down).
 Grab_Bag	Grab Bag
 Grab_Bag_Text	 +1 ArtIcon, +1 HouseIcon, +1 SwordIcon, and +1 TechIcon, all at level 1.
 Total_Four	Total Four
-Total_Four_Text	The levels of all submitted TokenIcon total to exactly 4.
+Total_Four_Text	The levels of all sold TokenIcon total to exactly 4.
 Total_Six	Total Six
-Total_Six_Text	The levels of all submitted TokenIcon total to exactly 6.
+Total_Six_Text	The levels of all sold TokenIcon total to exactly 6.
 Total_Eight	Total Eight
-Total_Eight_Text	The levels of all submitted TokenIcon total to exactly 8.
+Total_Eight_Text	The levels of all sold TokenIcon total to exactly 8.
 Total_Ten	Total Ten
-Total_Ten_Text	The levels of all submitted TokenIcon total to exactly 10.
+Total_Ten_Text	The levels of all sold TokenIcon total to exactly 10.
 Sequential_Art	Sequential Art
-Sequential_Art_Text	Submit at least 4 sequentially leveled ArtIcon.
+Sequential_Art_Text	Sell at least 4 sequentially leveled ArtIcon.
 Sequential_House	Sequential House
-Sequential_House_Text	Submit at least 4 sequentially leveled HouseIcon.
+Sequential_House_Text	Sell at least 4 sequentially leveled HouseIcon.
 Sequential_Sword	Sequential Sword
-Sequential_Sword_Text	Sequential_Sword_Text
+Sequential_Sword_Text	Sell at least 4 sequentially leveled SwordIcon.
 Sequential_Tech	Sequential Tech
-Sequential_Tech_Text	Submit at least 4 sequentially leveled TechIcon.
+Sequential_Tech_Text	Sell at least 4 sequentially leveled TechIcon.
 Menagerie	Menagerie
-Menagerie_Text	Submit at least 1 ArtIcon, 1 HouseIcon, 1 SwordIcon, and 1 TechIcon.
+Menagerie_Text	Sell at least 1 ArtIcon, 1 HouseIcon, 1 SwordIcon, and 1 TechIcon.
 Many_Ones	Many Ones
-Many_Ones_Text	Submit at least 4 TokenIcon at level 1.
+Many_Ones_Text	Sell at least 4 TokenIcon at level 1.
 Chose_Art	Chose Art
 Chose_Art_Text	You chose ArtIcon this turn.
 Chose_House	Chose House

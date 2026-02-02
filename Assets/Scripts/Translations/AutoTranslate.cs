@@ -5,6 +5,7 @@ public static string Attempt_to_reconnect (string Room) => Translator.inst.Trans
 public static string Failed_to_reconnect (string Room) => Translator.inst.Translate("Failed_to_reconnect", new() {("Room", Room)});
 public static string Ask_Upgrade (string Token) => Translator.inst.Translate("Ask_Upgrade", new() {("Token", Token)});
 public static string Ask_Downgrade (string Token) => Translator.inst.Translate("Ask_Downgrade", new() {("Token", Token)});
+public static string Coin_Amount (string Num) => Translator.inst.Translate("Coin_Amount", new() {("Num", Num)});
 public static string Game_Designer() => Translator.inst.Translate("Game_Designer");
 public static string Last_Update() => Translator.inst.Translate("Last_Update");
 public static string Blank() => Translator.inst.Translate("Blank");
@@ -48,11 +49,11 @@ public static string ArtIcon() => Translator.inst.Translate("ArtIcon");
 public static string HouseIcon() => Translator.inst.Translate("HouseIcon");
 public static string SwordIcon() => Translator.inst.Translate("SwordIcon");
 public static string TechIcon() => Translator.inst.Translate("TechIcon");
-public static string CrownIcon() => Translator.inst.Translate("CrownIcon");
+public static string CoinIcon() => Translator.inst.Translate("CoinIcon");
 public static string TokenIcon() => Translator.inst.Translate("TokenIcon");
 public static string Ask_Token_Type() => Translator.inst.Translate("Ask_Token_Type");
-public static string Ask_Submission() => Translator.inst.Translate("Ask_Submission");
-public static string Undo_Submission() => Translator.inst.Translate("Undo_Submission");
+public static string Ask_Sell() => Translator.inst.Translate("Ask_Sell");
+public static string Undo_All() => Translator.inst.Translate("Undo_All");
 public static string Ask_Resolve() => Translator.inst.Translate("Ask_Resolve");
 public static string Confirm() => Translator.inst.Translate("Confirm");
 public static string Decline() => Translator.inst.Translate("Decline");
@@ -69,7 +70,7 @@ public static string Rules_Summary() => Translator.inst.Translate("Rules_Summary
 public static string Encyclopedia() => Translator.inst.Translate("Encyclopedia");
 public static string Close() => Translator.inst.Translate("Close");
 public static string Any() => Translator.inst.Translate("Any");
-public static string Placard() => Translator.inst.Translate("Placard");
+public static string Buyer() => Translator.inst.Translate("Buyer");
 public static string Event() => Translator.inst.Translate("Event");
 public static string Perfect_Fit() => Translator.inst.Translate("Perfect_Fit");
 public static string Perfect_Fit_Text() => Translator.inst.Translate("Perfect_Fit_Text");
@@ -120,4 +121,4 @@ public static string Chose_Sword_Text() => Translator.inst.Translate("Chose_Swor
 public static string Chose_Tech() => Translator.inst.Translate("Chose_Tech");
 public static string Chose_Tech_Text() => Translator.inst.Translate("Chose_Tech_Text");
 }
-public enum ToTranslate {Game_Designer,Last_Update,Blank,Translator_Credit,Language,Loading,Update_History,Upload_Translation,Download_English,Select_Region,US_West_Coast,US_East_Coast,Europe,Asia,Single_Player,Connect,Enter_username,Disconnect,Disconnected_from_server,Failed_to_connect_to_server,Reconnect,Tutorial_1,Tutorial_2,Create_Room_with_players,Enter_hostname,Join,Type_in_username,Choose_Events,Custom_Event_1,Custom_Event_2,Custom_Event_3,Custom_Event_4,Choose,Random,Type_into_chat,Undo,Short,Long,CardIcon,ArtIcon,HouseIcon,SwordIcon,TechIcon,CrownIcon,TokenIcon,Ask_Token_Type,Ask_Submission,Undo_Submission,Ask_Resolve,Confirm,Decline,Ask_Discard,Done,Pause_to_Read,Pause_to_Undo,Game_Over,Leave,Resigned,Switch_Player,Rules,Rules_Summary,Encyclopedia,Close,Any,Placard,Event,Perfect_Fit,Perfect_Fit_Text,Unnecessary_Surplus,Unnecessary_Surplus_Text,Bare_Minimum,Bare_Minimum_Text,Above_And_Beyond,Above_And_Beyond_Text,Rise_Of_Villages,Rise_Of_Villages_Text,Rise_Of_Kingdoms,Rise_Of_Kingdoms_Text,Rise_Of_Empires,Rise_Of_Empires_Text,Upgrade_Two,Upgrade_Two_Text,Strength_In_Numbers,Strength_In_Numbers_Text,Grab_Bag,Grab_Bag_Text,Total_Four,Total_Four_Text,Total_Six,Total_Six_Text,Total_Eight,Total_Eight_Text,Total_Ten,Total_Ten_Text,Sequential_Art,Sequential_Art_Text,Sequential_House,Sequential_House_Text,Sequential_Sword,Sequential_Sword_Text,Sequential_Tech,Sequential_Tech_Text,Menagerie,Menagerie_Text,Many_Ones,Many_Ones_Text,Chose_Art,Chose_Art_Text,Chose_House,Chose_House_Text,Chose_Sword,Chose_Sword_Text,Chose_Tech,Chose_Tech_Text}
+public enum ToTranslate {Game_Designer,Last_Update,Blank,Translator_Credit,Language,Loading,Update_History,Upload_Translation,Download_English,Select_Region,US_West_Coast,US_East_Coast,Europe,Asia,Single_Player,Connect,Enter_username,Disconnect,Disconnected_from_server,Failed_to_connect_to_server,Reconnect,Tutorial_1,Tutorial_2,Create_Room_with_players,Enter_hostname,Join,Type_in_username,Choose_Events,Custom_Event_1,Custom_Event_2,Custom_Event_3,Custom_Event_4,Choose,Random,Type_into_chat,Undo,Short,Long,CardIcon,ArtIcon,HouseIcon,SwordIcon,TechIcon,CoinIcon,TokenIcon,Ask_Token_Type,Ask_Sell,Undo_All,Ask_Resolve,Confirm,Decline,Ask_Discard,Done,Pause_to_Read,Pause_to_Undo,Game_Over,Leave,Resigned,Switch_Player,Rules,Rules_Summary,Encyclopedia,Close,Any,Buyer,Event,Perfect_Fit,Perfect_Fit_Text,Unnecessary_Surplus,Unnecessary_Surplus_Text,Bare_Minimum,Bare_Minimum_Text,Above_And_Beyond,Above_And_Beyond_Text,Rise_Of_Villages,Rise_Of_Villages_Text,Rise_Of_Kingdoms,Rise_Of_Kingdoms_Text,Rise_Of_Empires,Rise_Of_Empires_Text,Upgrade_Two,Upgrade_Two_Text,Strength_In_Numbers,Strength_In_Numbers_Text,Grab_Bag,Grab_Bag_Text,Total_Four,Total_Four_Text,Total_Six,Total_Six_Text,Total_Eight,Total_Eight_Text,Total_Ten,Total_Ten_Text,Sequential_Art,Sequential_Art_Text,Sequential_House,Sequential_House_Text,Sequential_Sword,Sequential_Sword_Text,Sequential_Tech,Sequential_Tech_Text,Menagerie,Menagerie_Text,Many_Ones,Many_Ones_Text,Chose_Art,Chose_Art_Text,Chose_House,Chose_House_Text,Chose_Sword,Chose_Sword_Text,Chose_Tech,Chose_Tech_Text}

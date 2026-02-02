@@ -344,7 +344,7 @@ MonoBehaviour:
     translated: 
     description: 
     color: {r: 0, g: 0, b: 0, a: 0}
-  - original: CrownIcon
+  - original: CoinIcon
     translated: 
     description: 
     color: {r: 0, g: 0, b: 0, a: 0}
@@ -1371,8 +1371,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Hello <link="CardIcon"><sprite="CardIcon" name="CardIcon"><link="CrownIcon"><sprite="CrownIcon"
-    name="CrownIcon"><link="TokenIcon"><sprite="TokenIcon" name="TokenIcon"><link="ArtIcon"><sprite="ArtIcon"
+  m_text: Hello <link="CardIcon"><sprite="CardIcon" name="CardIcon"><link="CoinIcon"><sprite="CoinIcon"
+    name="CoinIcon"><link="TokenIcon"><sprite="TokenIcon" name="TokenIcon"><link="ArtIcon"><sprite="ArtIcon"
     name="ArtIcon"><link="HouseIcon"><sprite="HouseIcon" name="HouseIcon"><link="SwordIcon"><sprite="SwordIcon"
     name="SwordIcon"><link="TechIcon"><sprite="TechIcon" name="TechIcon">
   m_isRightToLeft: 0
@@ -1401,7 +1401,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 89.15
+  m_fontSize: 90.95
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
