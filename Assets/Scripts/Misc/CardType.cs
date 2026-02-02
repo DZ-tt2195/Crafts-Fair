@@ -12,57 +12,52 @@ public class CardType
         this.dataFile = dataFile;
     }
 
-#region Twist
+#region Event
 
-    public virtual void TwistEffect(Player player, int logged)
+    public virtual void EventEffect(Player player, int logged)
     {
     }
 
 #endregion
 
-#region  Placard
-
-    public virtual bool CanSell(Player player, List<(int level, TokenType type)> tokensSubmitted)
+#region  Buyer
+    public virtual bool CanSell(Player player, Dictionary<TokenType, int[]> soldTokens)
     {
         return false;
     }
-    protected bool SumOfLevels(List<(int level, TokenType type)> tokensSubmitted, FindNumber toFind, int compare)
+#endregion
+#region  Checks
+    protected bool SumOfLevels(Dictionary<TokenType, int[]> soldTokens, FindNumber toFind, int compare)
     {
         int totalLevels = 0;
-        foreach (var (level, type) in tokensSubmitted)
-            totalLevels += level;
-
+        foreach (TokenType token in Enum.GetValues(typeof(TokenType)))
+        {
+            for (int i = 0; i<soldTokens[token].Length; i++)
+                totalLevels += soldTokens[token][i] * i;
+        }
         return MyExtensions.Comparison(toFind, totalLevels, compare); 
     }
-    protected bool WithLevel(List<(int level, TokenType type)> tokensSubmitted, FindNumber toFind, int specificLevel, int compare)
+    protected bool WithLevel(Dictionary<TokenType, int[]> soldTokens, FindNumber toFind, int specificLevel, int compare)
     {
         int withLevel = 0;
-        foreach (var (level, type) in tokensSubmitted)
-        {
-            if (level == specificLevel)
-                withLevel++;
-        }
-
+        foreach (TokenType token in Enum.GetValues(typeof(TokenType)))
+            withLevel += soldTokens[token][specificLevel];
         return MyExtensions.Comparison(toFind, withLevel, compare); 
     }
-    protected bool TypesInOrder(List<(int level, TokenType type)> tokensSubmitted, TokenType type1, TokenType type2, TokenType type3)
+    protected bool TypesInOrder(Dictionary<TokenType, int[]> soldTokens, TokenType smallType, TokenType middleType, TokenType bigType)
     {
         int minFirst = int.MaxValue;
         int maxLast = int.MinValue;
         HashSet<int> middleLevels = new();
 
-        foreach (var (level, type) in tokensSubmitted)
-        {
-            if (type == type1)
-                minFirst = Mathf.Min(minFirst, level);
-            else if (type == type2)
-                middleLevels.Add(level);
-            else if (type == type3)
-                maxLast = Mathf.Max(maxLast, level);
-        }
+        for (int i = 0; i<soldTokens[smallType].Length; i++)
+            if (soldTokens[smallType][i] >= 1) minFirst = Mathf.Min(minFirst, i);
+        for (int i = 0; i<soldTokens[bigType].Length; i++)
+            if (soldTokens[bigType][i] >= 1) maxLast = Mathf.Max(maxLast, i);
+        for (int i = 0; i<soldTokens[middleType].Length; i++)
+            if (soldTokens[middleType][i] >= 1) middleLevels.Add(i);
 
         if (minFirst >= maxLast) return false;
-
         for (int level = minFirst + 1; level < maxLast; level++)
         {
             if (middleLevels.Contains(level))
@@ -70,14 +65,16 @@ public class CardType
         }
         return false;    
     }
-    protected bool SequentialLevels(List<(int level, TokenType type)> tokensSubmitted, TokenType toFind, int number)
+    protected bool SequentialLevels(Dictionary<TokenType, int[]> soldTokens, TokenType toFind, int number)
     {
         HashSet<int> uniqueLevels = new();
-
-        foreach (var (level, type) in tokensSubmitted)
-            if (type == toFind) uniqueLevels.Add(level);
-
-        if (uniqueLevels.Count < number) return false;
+        for (int i = 0; i<soldTokens[toFind].Length; i++)
+        {
+            if (soldTokens[toFind][i] >= 1)
+                uniqueLevels.Add(i);
+        }
+        if (uniqueLevels.Count < number) 
+            return false;
 
         foreach (int currentLevel in uniqueLevels)
         {
@@ -91,17 +88,17 @@ public class CardType
         }
         return false;        
     }
-    protected bool TypesOrNot(List<(int level, TokenType type)> tokensSubmitted, HashSet<TokenType> required, HashSet<TokenType> banned)
+    protected bool TypesOrNot(Dictionary<TokenType, int[]> soldTokens, HashSet<TokenType> required, HashSet<TokenType> banned)
     {
-        HashSet<TokenType> checkedOff = new();
-        foreach (var (level, type) in tokensSubmitted)
+        foreach (TokenType token in Enum.GetValues(typeof(TokenType)))
         {
-            if (banned.Contains(type))
+            int sum = MyExtensions.SumOfArray(soldTokens[token]);
+            if (required.Contains(token) && sum == 0)
                 return false;
-            else if (required.Contains(type))
-                checkedOff.Add(type);
+            else if (banned.Contains(token) && sum >= 0)
+                return false;
         }
-        return checkedOff.Count == required.Count;
+        return true;
     }
 #endregion
 

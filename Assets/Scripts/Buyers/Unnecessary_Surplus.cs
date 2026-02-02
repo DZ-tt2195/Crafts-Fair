@@ -7,8 +7,8 @@ public class Unnecessary_Surplus : CardType
     {
     }
 
-    public override bool CanSell(Player player, List<(int level, TokenType type)> tokensSubmitted)
+    public override bool CanSell(Player player, Dictionary<TokenType, int[]> soldTokens)
     {
-        return player.GetAllTokens().Item1 >= 5;
+        return player.TotalTokens() >= 5;
     }
 }

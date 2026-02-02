@@ -7,7 +7,7 @@ public class Chose_Tech : CardType
     {
     }
 
-    public override bool CanSell(Player player, List<(int level, TokenType type)> tokensSubmitted)
+    public override bool CanSell(Player player, Dictionary<TokenType, int[]> soldTokens)
     {
         return TurnManager.inst.GetString(ConstantStrings.ChosenToken, player).Equals(TokenType.TechIcon);
     }

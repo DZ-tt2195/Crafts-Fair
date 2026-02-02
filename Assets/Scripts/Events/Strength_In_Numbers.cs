@@ -6,7 +6,7 @@ public class Strength_In_Numbers : CardType
     {
     }
 
-    public override void TwistEffect(Player player, int logged)
+    public override void EventEffect(Player player, int logged)
     {
         int getPlacards = TurnManager.inst.GetInt(ConstantStrings.BuyersSold, player);
         player.CoinRPC(Mathf.FloorToInt(getPlacards/2f), logged);

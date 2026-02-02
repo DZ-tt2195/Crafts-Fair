@@ -6,8 +6,9 @@ public class Make_Tech : CardType
     {
     }
 
-    public override void TwistEffect(Player player, int logged)
+    public override void EventEffect(Player player, int logged)
     {
-        player.AddRemoveToken(4, (1, TokenType.TechIcon), logged);
+        if (MyExtensions.SumOfArray(player.GetTokenDict()[TokenType.TechIcon]) == 0)
+            player.AddRemoveToken(4, (1, TokenType.TechIcon), logged);
     }
 }

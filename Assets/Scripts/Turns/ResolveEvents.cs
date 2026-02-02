@@ -42,7 +42,7 @@ public class ResolveEvents : Turn
         void DoTwist(Card card)
         {
             Log.inst.AddMyText(false, OnlineTranslate.Online_Resolve_Card(player.name, card.name));
-            card.thisCard.TwistEffect(player, 1);
+            card.thisCard.EventEffect(player, 1);
 
             List<Card> newList = eventsToResolve;
             newList.Remove(card);

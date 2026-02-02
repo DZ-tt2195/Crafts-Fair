@@ -6,8 +6,9 @@ public class Make_Sword : CardType
     {
     }
 
-    public override void TwistEffect(Player player, int logged)
+    public override void EventEffect(Player player, int logged)
     {
-        player.AddRemoveToken(4, (1, TokenType.SwordIcon), logged);
+        if (WithLevel(player.GetTokenDict(), FindNumber.Minimum, 6, 1))
+            player.AddRemoveToken(4, (1, TokenType.SwordIcon), logged);
     }
 }

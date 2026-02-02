@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
 
 public class Bare_Minimum : CardType
 {
@@ -7,8 +8,11 @@ public class Bare_Minimum : CardType
     {
     }
 
-    public override bool CanSell(Player player, List<(int level, TokenType type)> tokensSubmitted)
+    public override bool CanSell(Player player, Dictionary<TokenType, int[]> soldTokens)
     {
-        return tokensSubmitted.Count == 2;
+        int totalTokens = 0;
+        foreach (TokenType token in Enum.GetValues(typeof(TokenType)))
+            totalTokens += MyExtensions.SumOfArray(soldTokens[token]);
+        return totalTokens == 2;
     }
 }

@@ -2,6 +2,8 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using Photon.Pun;
+using System;
+using UnityEngine.UIElements;
 public class TakeTurn : Turn
 {
     public override void MasterStart()
@@ -13,7 +15,13 @@ public class TakeTurn : Turn
     public override void ForPlayer(Player player)
     {
         Log.inst.NewDecisionContainer(() => ChooseToken(player));
-        Log.inst.NewDecisionContainer(() => DoSelling(player, new(), null));
+        Dictionary<TokenType, int[]> newDictionary = new();
+        foreach (TokenType token in Enum.GetValues(typeof(TokenType)))
+        {
+            int arrayLength = player.GetTokenDict()[token].Length;
+            newDictionary.Add(token, new int[arrayLength]);
+        }
+        Log.inst.NewDecisionContainer(() => DoSelling(player, newDictionary, null));
     }
     void ChooseToken(Player player)
     {
@@ -44,7 +52,7 @@ public class TakeTurn : Turn
             player.UpDowngradeToken(1, info, (info.level+1, info.type), 1);
         }
     }
-    void DoSelling(Player player, List<(int value, TokenType type)> submittedTokens, DecisionContainer rewind)
+    void DoSelling(Player player, Dictionary<TokenType, int[]> soldTokens, DecisionContainer rewind)
     {
         int minimum = 2;
         List<Card> playerPlacards = player.GetHand();
@@ -54,17 +62,25 @@ public class TakeTurn : Turn
         if (rewind == null)
         {
             restartContainer = Log.inst.currentContainer;
-            if (player.GetAllTokens().Item1 < minimum || playerPlacards.Count < minimum)
+            if (player.TotalTokens() < minimum || playerPlacards.Count < minimum)
             {
                 NoSelling();
                 return;
             }
         }
 
+        int CountTotal()
+        {
+            int answer = 0;
+            foreach (TokenType token in Enum.GetValues(typeof(TokenType)))
+                answer += MyExtensions.SumOfArray(soldTokens[token]);
+            return answer;        
+        }
+        int totalTokens = CountTotal();
         List<Card> buyersHappy = new();
         foreach (Card card in playerPlacards)
         {
-            if (submittedTokens.Count >= 2 && card.thisCard.CanSell(player, submittedTokens))
+            if (totalTokens >= 2 && card.thisCard.CanSell(player, soldTokens))
             {
                 buyersHappy.Add(card);
                 card.selectMe.SetBorder(true, Color.yellow);
@@ -76,9 +92,9 @@ public class TakeTurn : Turn
         }
 
         List<TextButtonInfo> textOptions = new();
-        if (submittedTokens.Count >= minimum && buyersHappy.Count >= minimum)
+        if (totalTokens >= minimum && buyersHappy.Count >= minimum)
             textOptions.Add(new(AutoTranslate.Confirm(), CompleteSell));
-        if (submittedTokens.Count == 0)
+        if (totalTokens == 0)
             textOptions.Add(new(AutoTranslate.Decline(), NoSelling));
         else
             textOptions.Add(new(AutoTranslate.Undo_All(), UndoAll));
@@ -99,7 +115,7 @@ public class TakeTurn : Turn
 
         void CompleteSell()
         {
-            Log.inst.AddMyText(true, OnlineTranslate.Online_Make_Sell(player.name, submittedTokens.Count.ToString(), buyersHappy.Count.ToString()));
+            Log.inst.AddMyText(true, OnlineTranslate.Online_Make_Sell(player.name, totalTokens.ToString(), buyersHappy.Count.ToString()));
             TurnManager.inst.WillChangePlayerProperty(player, ConstantStrings.BuyersSold, buyersHappy.Count);
             int totalScore = 0;
             foreach (Card card in buyersHappy)
@@ -111,12 +127,12 @@ public class TakeTurn : Turn
             player.CoinRPC(totalScore, 0, true);
         }
 
-        void SellToken((int value, TokenType type) info)
+        void SellToken((int value, TokenType token) info)
         {
             player.AddRemoveToken(-1, info);
-            List<(int, TokenType)> newList = submittedTokens;
-            newList.Add(info);
-            Log.inst.NewDecisionContainer(() => DoSelling(player, newList, restartContainer));
+            Dictionary<TokenType, int[]> newDictionary = soldTokens;
+            newDictionary[info.token][info.value]++;
+            Log.inst.NewDecisionContainer(() => DoSelling(player, newDictionary, restartContainer));
         }
     }
     public override void MasterEnd()

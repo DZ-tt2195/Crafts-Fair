@@ -7,8 +7,8 @@ public class Sequential_Sword : CardType
     {
     }
 
-    public override bool CanSell(Player player, List<(int level, TokenType type)> tokensSubmitted)
+    public override bool CanSell(Player player, Dictionary<TokenType, int[]> soldTokens)
     {
-        return SequentialLevels(tokensSubmitted, TokenType.SwordIcon, 4);
+        return SequentialLevels(soldTokens, TokenType.SwordIcon, 4);
     }
 }

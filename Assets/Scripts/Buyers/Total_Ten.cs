@@ -7,8 +7,8 @@ public class Total_Ten : CardType
     {
     }
 
-    public override bool CanSell(Player player, List<(int level, TokenType type)> tokensSubmitted)
+    public override bool CanSell(Player player, Dictionary<TokenType, int[]> soldTokens)
     {
-        return SumOfLevels(tokensSubmitted, FindNumber.Exact, 10);
+        return SumOfLevels(soldTokens, FindNumber.Exact, 10);
     }
 }

@@ -7,9 +7,9 @@ public class Upgrade_Two : CardType
     {
     }
 
-    public override void TwistEffect(Player player, int logged)
+    public override void EventEffect(Player player, int logged)
     {
-        Dictionary<TokenType, int[]> playerTokens = player.GetAllTokens().Item2;
+        Dictionary<TokenType, int[]> playerTokens = player.GetTokenDict();
         foreach (TokenType token in Enum.GetValues(typeof(TokenType)))
         {
             int number = playerTokens[token][2];

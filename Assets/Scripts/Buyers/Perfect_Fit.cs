@@ -7,8 +7,8 @@ public class Perfect_Fit : CardType
     {
     }
 
-    public override bool CanSell(Player player, List<(int level, TokenType type)> tokensSubmitted)
+    public override bool CanSell(Player player, Dictionary<TokenType, int[]> soldTokens)
     {
-        return player.GetAllTokens().Item1 == 0;
+        return player.TotalTokens() == 0;
     }
 }

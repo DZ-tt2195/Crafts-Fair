@@ -8,8 +8,8 @@ public class Rise_Of_Villages : CardType
     {
     }
 
-    public override bool CanSell(Player player, List<(int level, TokenType type)> tokensSubmitted)
+    public override bool CanSell(Player player, Dictionary<TokenType, int[]> soldTokens)
     {
-        return WithLevel(tokensSubmitted, FindNumber.Minimum, 2, 2);
+        return WithLevel(soldTokens, FindNumber.Minimum, 2, 2);
     }
 }

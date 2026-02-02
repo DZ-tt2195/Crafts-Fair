@@ -152,7 +152,6 @@ public class Player : PhotonCompatible
     #endregion
 
 #region Resources
-
     public int GetCoins() => myCoins;
     public void CoinRPC(int num, int logged = 0, bool important = false)
     {
@@ -169,6 +168,7 @@ public class Player : PhotonCompatible
         myCoins += (!Log.inst.forward) ? -num : num;
         TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyCoins, myCoins); uiDictionary[ConstantStrings.MyCoins] = true;
     }
+    public Dictionary<TokenType, int[]> GetTokenDict() => myTokens;
     public void UpDowngradeToken(int num, (int level, TokenType token) first, (int level, TokenType token) second, int logged = 0, bool important = false)
     {
         if (first.level == second.level)
@@ -197,7 +197,6 @@ public class Player : PhotonCompatible
         tokenArray[info.value] += (Log.inst.forward) ? num : -num;
         TurnManager.inst.WillChangePlayerProperty(this, info.token.ToString(), tokenArray); uiDictionary[info.token.ToString()] = true;
     }
-
     #endregion
 
 #region Turns
@@ -246,17 +245,6 @@ public class Player : PhotonCompatible
     #endregion
 
 #region UI
-    public (int, Dictionary<TokenType, int[]>) GetAllTokens()
-    {
-        int totalTokens = 0;
-        foreach (TokenType token in Enum.GetValues(typeof(TokenType)))
-        {
-            int[] tokenArray = myTokens[token];
-            for (int i = 0; i<tokenArray.Length; i++)
-                totalTokens += tokenArray[i];
-        }
-        return (totalTokens, myTokens);
-    }
     public void UpdateUI(bool forcedUpdate)
     {
         List<string> uiKeys = uiDictionary.Keys.ToList();
@@ -362,7 +350,13 @@ public class Player : PhotonCompatible
         }
         return toReturn;
     }
-
+    public int TotalTokens()
+    {
+        int answer = 0;
+        foreach (TokenType token in Enum.GetValues(typeof(TokenType)))
+            answer += MyExtensions.SumOfArray(myTokens[token]);
+        return answer;
+    }
 #endregion
 
 }

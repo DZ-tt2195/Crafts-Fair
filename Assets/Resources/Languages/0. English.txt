@@ -1,5 +1,5 @@
 Game_Designer	by Thomas Tang (DZ)
-Last_Update	Last Updated: Feb 01, 2026
+Last_Update	Last Updated: Feb 02, 2026
 Blank	
 Translator_Credit	Original Language
 Language	Language
@@ -142,3 +142,11 @@ Chose_Sword	Chose Sword
 Chose_Sword_Text	You chose SwordIcon this turn.
 Chose_Tech	Chose Tech
 Chose_Tech_Text	You chose TechIcon this turn.
+Make_Art	Make Art
+Make_Art_Text	If you have at least 5 CoinIcon, +4 ArtIcon at level 1.
+Make_House	Make House
+Make_House_Text	If you have at least 3 TokenIcon at level 2, +4 HouseIcon at level 1.
+Make_Sword	Make Sword
+Make_Sword_Text	If you have at least 1 TokenIcon at level 6, +4 SwordIcon at level 1.
+Make_Tech	Make Tech
+Make_Tech_Text	If you have no TechIcon, +4 TechIcon at level 1.

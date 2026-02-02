@@ -7,8 +7,8 @@ public class Sequential_Art : CardType
     {
     }
 
-    public override bool CanSell(Player player, List<(int level, TokenType type)> tokensSubmitted)
+    public override bool CanSell(Player player, Dictionary<TokenType, int[]> soldTokens)
     {
-        return SequentialLevels(tokensSubmitted, TokenType.ArtIcon, 4);
+        return SequentialLevels(soldTokens, TokenType.ArtIcon, 4);
     }
 }

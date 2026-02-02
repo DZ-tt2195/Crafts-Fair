@@ -6,8 +6,9 @@ public class Make_Art : CardType
     {
     }
 
-    public override void TwistEffect(Player player, int logged)
+    public override void EventEffect(Player player, int logged)
     {
-        player.AddRemoveToken(4, (1, TokenType.ArtIcon), logged);
+        if (player.GetCoins() >= 5)
+            player.AddRemoveToken(4, (1, TokenType.ArtIcon), logged);
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections.Generic;
 
 public class Above_And_Beyond : CardType
@@ -7,8 +8,11 @@ public class Above_And_Beyond : CardType
     {
     }
 
-    public override bool CanSell(Player player, List<(int level, TokenType type)> tokensSubmitted)
+    public override bool CanSell(Player player, Dictionary<TokenType, int[]> soldTokens)
     {
-        return tokensSubmitted.Count >= 5;
+        int totalTokens = 0;
+        foreach (TokenType token in Enum.GetValues(typeof(TokenType)))
+            totalTokens += MyExtensions.SumOfArray(soldTokens[token]);
+        return totalTokens >= 5;
     }
 }

@@ -6,7 +6,7 @@ public class Grab_Bag : CardType
     {
     }
 
-    public override void TwistEffect(Player player, int logged)
+    public override void EventEffect(Player player, int logged)
     {
         player.AddRemoveToken(1, (1, TokenType.ArtIcon), logged);
         player.AddRemoveToken(1, (1, TokenType.HouseIcon), logged);
