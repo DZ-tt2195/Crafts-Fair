@@ -1,9 +1,9 @@
 cardName	textBox	coinAmount	artCredit	notes
 Bare_Minimum	Sell exactly 2 TokenIcon.	1		
-Chose_Art	You chose ArtIcon this turn.	1		CareArt
-Chose_House	You chose HouseIcon this turn.	1		CareHouse
-Chose_Sword	You chose SwordIcon this turn.	1		CareSword
-Chose_Tech	You chose TechIcon this turn.	1		CareTech
+Chose_Art	You removed a counter from ArtIcon this turn.	1		CareArt
+Chose_House	You removed a counter from HouseIcon this turn.	1		CareHouse
+Chose_Sword	You removed a counter from SwordIcon this turn.	1		CareSword
+Chose_Tech	You removed a counter from TechIcon this turn.	1		CareTech
 Perfect_Fit	You have exactly 0 TokenIcon left after selling.	1		
 Unnecessary_Surplus	You have at least 5 TokenIcon left after selling.	1		
 Above_And_Beyond	Sell at least 5 TokenIcon.	2		
@@ -11,6 +11,10 @@ Many_Ones	Sell at least 4 TokenIcon at 1 LevelIcon.	2		Care1
 Menagerie	Sell at least 1 ArtIcon, 1 HouseIcon, 1 SwordIcon, and 1 TechIcon.	2		CareArt, CareHouse, CareSword, CareTech
 Rise_Of_Villages	Sell at least 2 TokenIcon at 2 LevelIcon.	2		Care2
 Total_Four	The LevelIcon of all sold TokenIcon total to exactly 4.	2		
+Art_Sword_Tech	Submit 1 ArtIcon, 1 SwordIcon with a higher LevelIcon, and 1 TechIcon with an even higher LevelIcon.	3		CareArt, CareSword, CareTech
+House_Tech_Art	Submit 1 HouseIcon, 1 TechIcon with a higher LevelIcon, and 1 ArtIcon with an even higher LevelIcon.	3		CareHouse, CareTech, CareArt
+Sword_Art_House	Submit 1 SwordIcon, 1 ArtIcon with a higher LevelIcon, and 1 HouseIcon with an even higher LevelIcon.	3		CareSword, CareArt, CareHouse
+Tech_House_Sword	Submit 1 TechIcon, 1 HouseIcon with a higher LevelIcon, and 1 SwordIcon with an even higher LevelIcon.	3		CareTech, CareHouse, CareSword
 Total_Six	The LevelIcon of all sold TokenIcon total to exactly 6.	3		
 Rise_Of_Kingdoms	Sell at least 2 TokenIcon at 4 LevelIcon.	4		Care4
 Total_Eight	The LevelIcon of all sold TokenIcon total to exactly 8.	4		

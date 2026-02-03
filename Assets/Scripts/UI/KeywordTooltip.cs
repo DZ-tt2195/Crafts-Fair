@@ -24,8 +24,7 @@ public class KeywordTooltip : MonoBehaviour
     [SerializeField] List<KeywordHover> linkedKeywords = new();
     [SerializeField] List<KeywordHover> spriteKeywords = new();
     [SerializeField] TMP_Text tooltipText;
-    Dictionary<string, CardLayout> listOfCardRC = new();
-
+    Dictionary<string, (CardData, bool)> listOfCardRC = new();
 
     private void Awake()
     {
@@ -48,13 +47,17 @@ public class KeywordTooltip : MonoBehaviour
             if (Translator.inst.TranslationExists($"{hover.original}_Text"))
                 hover.description = Translator.inst.Translate($"{hover.original}_Text");
         }
-
         foreach (KeywordHover hover in linkedKeywords)
             hover.description = EditText(hover.description);
         foreach (KeywordHover hover in spriteKeywords)
             hover.description = EditText(hover.description);
-    }
 
+        listOfCardRC.Clear();
+        foreach (CardData data in GameFiles.inst.buyerFiles)
+            listOfCardRC[Translator.inst.Translate(data.cardName)] = (data, true);
+        foreach (CardData data in GameFiles.inst.eventFiles)
+            listOfCardRC[Translator.inst.Translate(data.cardName)] = (data, false);
+    }
     public string EditText(string text)
     {
         if (text.Length == 0)
@@ -84,7 +87,6 @@ public class KeywordTooltip : MonoBehaviour
         }
         return answer;
     }
-
     public KeywordHover SearchForKeyword(string target)
     {
         foreach (KeywordHover link in linkedKeywords)
@@ -100,12 +102,10 @@ public class KeywordTooltip : MonoBehaviour
         Debug.LogError($"{target} couldn't be found");
         return null;
     }
-
     private void Update()
     {
         tooltipText.transform.parent.gameObject.SetActive(false);
     }
-
     Vector3 CalculatePosition(Vector3 mousePosition)
     {
         return new Vector3
@@ -113,7 +113,6 @@ public class KeywordTooltip : MonoBehaviour
             mousePosition.y + (mousePosition.y > Ydisplace ? -0.5f : 0.5f) * Ydisplace,
             0);
     }
-
     public void ActivateTextBox(string target, Vector3 mousePosition)
     {
         this.transform.SetAsLastSibling();
@@ -139,15 +138,8 @@ public class KeywordTooltip : MonoBehaviour
             }
         }
     }
-
-    public void NewCardRC(string cardName, CardLayout layout)
-    {
-        listOfCardRC[cardName] = layout;
-    }
-
-    public CardLayout FindCardRC(string cardName)
+    public (CardData, bool) FindCardRC(string cardName)
     {
         return listOfCardRC[cardName];
     }
-
 }

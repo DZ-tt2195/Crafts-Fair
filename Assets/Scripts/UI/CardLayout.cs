@@ -12,23 +12,13 @@ public class CardLayout : MonoBehaviour, IPointerClickHandler
     [SerializeField] TMP_Text textBox;
     CardData storedData;
     bool vertical;
-
+    
     public void OnPointerClick(PointerEventData eventData)
     {
         if (eventData.button == PointerEventData.InputButton.Right)
-            RightClickedMe(cg.alpha);
+            PermaUI.inst.RightClickDisplay(storedData, GetAlpha() == 1f, vertical);
     }
-
-    public void RightClickedMe(float alpha)
-    {
-        PermaUI.inst.RightClickDisplay(storedData, alpha == 1f, vertical);
-    }
-
-    public float GetAlpha()
-    {
-        return cg.alpha;
-    }
-
+    public float GetAlpha() => cg.alpha;
     public void FillInCards(CardData dataFile, float alpha, bool vertical)
     {
         bool newCard = storedData != dataFile;

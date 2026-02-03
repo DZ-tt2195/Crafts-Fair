@@ -29,9 +29,8 @@ public class KeywordLinkHover : MonoBehaviour
                 KeywordTooltip.instance.ActivateTextBox(linkID, mousePosition);
                 if (Input.GetKeyDown(KeyCode.Mouse0) || Input.GetKey(KeyCode.Mouse1))
                 {
-                    CardLayout layout = KeywordTooltip.instance.FindCardRC(linkID);
-                    if (layout != null)
-                        layout.RightClickedMe(1f);
+                    (CardData data, bool vertical) = KeywordTooltip.instance.FindCardRC(linkID);
+                    PermaUI.inst.RightClickDisplay(data, true, vertical);
                 }
             }
         }
