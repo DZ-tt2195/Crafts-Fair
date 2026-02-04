@@ -8,9 +8,9 @@ public class Grab_Bag : CardType
 
     public override void EventEffect(Player player, int logged)
     {
-        player.AddRemoveToken(1, (1, TokenType.ArtIcon), logged);
-        player.AddRemoveToken(1, (1, TokenType.HouseIcon), logged);
-        player.AddRemoveToken(1, (1, TokenType.SwordIcon), logged);
-        player.AddRemoveToken(1, (1, TokenType.TechIcon), logged);
+        player.AddLoseToken(1, (1, TokenType.ArtIcon), logged);
+        player.AddLoseToken(1, (1, TokenType.HouseIcon), logged);
+        player.AddLoseToken(1, (1, TokenType.SwordIcon), logged);
+        player.AddLoseToken(1, (1, TokenType.TechIcon), logged);
     }
 }

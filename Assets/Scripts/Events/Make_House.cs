@@ -11,6 +11,6 @@ public class Make_House : CardType
     public override void EventEffect(Player player, int logged)
     {
         if (WithLevel(player.GetTokenDict(), FindNumber.Minimum, 2, 3))
-            player.AddRemoveToken(4, (1, TokenType.HouseIcon), logged);
+            player.AddLoseToken(4, (1, TokenType.HouseIcon), logged);
     }
 }

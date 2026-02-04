@@ -17,10 +17,10 @@ public class Player : PhotonCompatible
     [SerializeField] Transform keepHand;
     [SerializeField] TMP_Text coinText;
     public Dictionary<string, bool> uiDictionary = new();
-    [SerializeField] List<TokenDisplay> allCoinDisplays = new();
-    [SerializeField] List<TokenDisplay> allBoneDisplays = new();
-    [SerializeField] List<TokenDisplay> allWeaponDisplays = new();
-    [SerializeField] List<TokenDisplay> allTextDisplays = new();
+    [SerializeField] List<TokenDisplay> allArtDisplays = new();
+    [SerializeField] List<TokenDisplay> allHouseDisplays = new();
+    [SerializeField] List<TokenDisplay> allSwordDisplays = new();
+    [SerializeField] List<TokenDisplay> allTechDisplays = new();
     List<Card> myHand;
     int myCoins;
     Dictionary<TokenType, int[]> myTokens;
@@ -181,14 +181,14 @@ public class Player : PhotonCompatible
         Log.inst.NewRollback(() => ChangeToken(-1, first));
         Log.inst.NewRollback(() => ChangeToken(1, second));
     }    
-    public void AddRemoveToken(int num, (int level, TokenType token) info, int logged = 0, bool important = false)
+    public void AddLoseToken(int num, (int level, TokenType token) info, int logged = 0, bool important = false)
     {
         if (num == 0)
             return;
         if (num > 0)
             Log.inst.AddMyText(important, OnlineTranslate.Online_Add_Token(this.name, num.ToString(), info.token.ToString(), info.level.ToString()), logged);
         else
-            Log.inst.AddMyText(important, OnlineTranslate.Online_Remove_Token(this.name, Mathf.Abs(num).ToString(), info.token.ToString(), info.level.ToString()), logged);
+            Log.inst.AddMyText(important, OnlineTranslate.Online_Lose_Token(this.name, Mathf.Abs(num).ToString(), info.token.ToString(), info.level.ToString()), logged);
         Log.inst.NewRollback(() => ChangeToken(num, info));
     }
     void ChangeToken(int num, (int value, TokenType token) info)
@@ -285,13 +285,13 @@ public class Player : PhotonCompatible
         }
 
         if (uiDictionary[TokenType.ArtIcon.ToString()])
-            ApplyToken(TokenType.ArtIcon, allCoinDisplays);
+            ApplyToken(TokenType.ArtIcon, allArtDisplays);
         if (uiDictionary[TokenType.HouseIcon.ToString()])
-            ApplyToken(TokenType.HouseIcon, allBoneDisplays);
+            ApplyToken(TokenType.HouseIcon, allHouseDisplays);
         if (uiDictionary[TokenType.SwordIcon.ToString()])
-            ApplyToken(TokenType.SwordIcon, allWeaponDisplays);
+            ApplyToken(TokenType.SwordIcon, allSwordDisplays);
         if (uiDictionary[TokenType.TechIcon.ToString()])
-            ApplyToken(TokenType.TechIcon, allTextDisplays);
+            ApplyToken(TokenType.TechIcon, allTechDisplays);
 
         void ApplyToken(TokenType type, List<TokenDisplay> list)
         {
@@ -331,14 +331,22 @@ public class Player : PhotonCompatible
 #endregion
 
 #region  Helpers
-    public List<TokenDisplay> OfNumber(FindNumber toFind, int number)
+    public List<TokenDisplay> AllOfNumber(FindNumber toFind, int number)
+    {
+        List<TokenType> all = new() {TokenType.ArtIcon, TokenType.HouseIcon, TokenType.SwordIcon, TokenType.TechIcon};
+        return OfNumber(toFind, all, number);
+    }
+    public List<TokenDisplay> OfNumber(FindNumber toFind, List<TokenType> tokensToFind, int number)
     {
         List<TokenDisplay> toReturn = new();
-
-        ApplyToken(myTokens[TokenType.ArtIcon], allCoinDisplays);
-        ApplyToken(myTokens[TokenType.HouseIcon], allBoneDisplays);
-        ApplyToken(myTokens[TokenType.SwordIcon], allWeaponDisplays);
-        ApplyToken(myTokens[TokenType.TechIcon], allTextDisplays);
+        if (tokensToFind.Contains(TokenType.ArtIcon))
+            ApplyToken(myTokens[TokenType.ArtIcon], allArtDisplays);
+        if (tokensToFind.Contains(TokenType.HouseIcon))
+            ApplyToken(myTokens[TokenType.HouseIcon], allHouseDisplays);
+        if (tokensToFind.Contains(TokenType.SwordIcon))
+            ApplyToken(myTokens[TokenType.SwordIcon], allSwordDisplays);
+        if (tokensToFind.Contains(TokenType.TechIcon))
+            ApplyToken(myTokens[TokenType.TechIcon], allTechDisplays);
 
         void ApplyToken(int[] array, List<TokenDisplay> list)
         {

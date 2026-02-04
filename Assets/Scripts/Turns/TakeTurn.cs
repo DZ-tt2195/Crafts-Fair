@@ -37,14 +37,14 @@ public class TakeTurn : Turn
         {
             TurnManager.inst.WillChangePlayerProperty(player, ConstantStrings.ChosenToken, type.ToString());
             Log.inst.AddMyText(true, OnlineTranslate.Online_Chose_Token(player.name, type.ToString()));
-            player.AddRemoveToken(1, (1, type), 1);
+            player.AddLoseToken(1, (1, type), 1);
             Log.inst.NewDecisionContainer(() => AdvanceToken(player, type));
         }
     }
     void AdvanceToken(Player player, TokenType token)
     {
-        List<TokenDisplay> canAdvance = player.OfNumber(FindNumber.Minimum, 1).Where(display => display.info.level != 6 && display.info.type == token).ToList();
-        MakeDecision.inst.ChooseDisplayOnScreen(canAdvance, AutoTranslate.Ask_Upgrade(token.ToString()), AdvanceThis);
+        List<TokenDisplay> canAdvance = player.OfNumber(FindNumber.Minimum, new() {token}, 1).Where(display => display.info.level != 6).ToList();
+        MakeDecision.inst.ChooseDisplayOnScreen(canAdvance, AutoTranslate.Ask_Upgrade(Translator.inst.Translate(token.ToString())), AdvanceThis);
 
         void AdvanceThis((int level, TokenType type) info)
         {
@@ -55,7 +55,7 @@ public class TakeTurn : Turn
     {
         int minimum = 2;
         List<Card> playerPlacards = player.GetHand();
-        List<TokenDisplay> tokensToSubmit = player.OfNumber(FindNumber.Minimum, 1);
+        List<TokenDisplay> tokensToSubmit = player.AllOfNumber(FindNumber.Minimum, 1);
         DecisionContainer restartContainer = rewind;
 
         if (rewind == null)
@@ -128,7 +128,7 @@ public class TakeTurn : Turn
 
         void SellToken((int value, TokenType token) info)
         {
-            player.AddRemoveToken(-1, info);
+            player.AddLoseToken(-1, info);
             Dictionary<TokenType, int[]> newDictionary = soldTokens;
             newDictionary[info.token][info.value]++;
             Log.inst.NewDecisionContainer(() => DoSelling(player, newDictionary, restartContainer));

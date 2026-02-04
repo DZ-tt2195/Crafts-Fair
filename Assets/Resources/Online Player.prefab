@@ -897,7 +897,7 @@ MonoBehaviour:
   endPause: 1
   keepHand: {fileID: 3827459076193100336}
   coinText: {fileID: 58405904152204351}
-  allCoinDisplays:
+  allArtDisplays:
   - {fileID: 0}
   - {fileID: 223857215783700001}
   - {fileID: 8784126138003601208}
@@ -905,7 +905,7 @@ MonoBehaviour:
   - {fileID: 7213942670566111281}
   - {fileID: 6832581447092777696}
   - {fileID: 8224646149750360707}
-  allBoneDisplays:
+  allHouseDisplays:
   - {fileID: 0}
   - {fileID: 5393964621209533545}
   - {fileID: 8011927748700306867}
@@ -913,7 +913,7 @@ MonoBehaviour:
   - {fileID: 3501159552248643639}
   - {fileID: 3972216398101491953}
   - {fileID: 1376535231788570036}
-  allWeaponDisplays:
+  allSwordDisplays:
   - {fileID: 0}
   - {fileID: 2308901019108946999}
   - {fileID: 5054687529894357844}
@@ -921,7 +921,7 @@ MonoBehaviour:
   - {fileID: 7534829567753403649}
   - {fileID: 2270672199194583488}
   - {fileID: 4438327801021516103}
-  allTextDisplays:
+  allTechDisplays:
   - {fileID: 0}
   - {fileID: 3547283346258560234}
   - {fileID: 4809685259078657909}

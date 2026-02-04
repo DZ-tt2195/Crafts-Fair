@@ -9,6 +9,6 @@ public class Make_Tech : CardType
     public override void EventEffect(Player player, int logged)
     {
         if (MyExtensions.SumOfArray(player.GetTokenDict()[TokenType.TechIcon]) == 0)
-            player.AddRemoveToken(4, (1, TokenType.TechIcon), logged);
+            player.AddLoseToken(4, (1, TokenType.TechIcon), logged);
     }
 }
