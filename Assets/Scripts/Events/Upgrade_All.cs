@@ -16,7 +16,7 @@ public class Upgrade_All : CardType
 
     void AdvanceToken(Player player, TokenType token)
     {
-        List<TokenDisplay> canAdvance = player.OfNumber(FindNumber.Minimum, new(){token}, 1).Where(display => display.info.level != 6).ToList();
+        List<TokenDisplay> canAdvance = player.OfNumber(FindNumber.Minimum, new(){token}, Player.AllLevelsBut(TurnManager.inst.GetInt(ConstantStrings.MaxLevel)), 1);
         MakeDecision.inst.ChooseDisplayOnScreen(canAdvance, AutoTranslate.Ask_Upgrade(token.ToString()), AdvanceThis);
 
         void AdvanceThis((int level, TokenType type) info)

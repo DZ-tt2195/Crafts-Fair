@@ -112,9 +112,7 @@ public class TurnManager : PhotonCompatible
 
             CreateGame.inst.RefreshUI(true);
             if (CreateGame.inst.mainPlayer != null)
-            {
                 CreateGame.inst.mainPlayer.StartTurn();                
-            }
         }
     }
 

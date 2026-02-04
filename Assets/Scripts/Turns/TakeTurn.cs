@@ -43,7 +43,8 @@ public class TakeTurn : Turn
     }
     void AdvanceToken(Player player, TokenType token)
     {
-        List<TokenDisplay> canAdvance = player.OfNumber(FindNumber.Minimum, new() {token}, 1).Where(display => display.info.level != 6).ToList();
+        List<int> levelsToAdvance = Player.AllLevelsBut(TurnManager.inst.GetInt(ConstantStrings.MaxLevel));
+        List<TokenDisplay> canAdvance = player.OfNumber(FindNumber.Minimum, new() {token}, levelsToAdvance, 1);
         MakeDecision.inst.ChooseDisplayOnScreen(canAdvance, AutoTranslate.Ask_Upgrade(Translator.inst.Translate(token.ToString())), AdvanceThis);
 
         void AdvanceThis((int level, TokenType type) info)
@@ -55,13 +56,13 @@ public class TakeTurn : Turn
     {
         int minimum = 2;
         List<Card> playerPlacards = player.GetHand();
-        List<TokenDisplay> tokensToSubmit = player.AllOfNumber(FindNumber.Minimum, 1);
+        List<TokenDisplay> tokensToSubmit = player.OfNumber(FindNumber.Minimum, Player.AllTokens(), Player.AllLevels(), 1);
         DecisionContainer restartContainer = rewind;
 
         if (rewind == null)
         {
             restartContainer = Log.inst.currentContainer;
-            if (player.TotalTokens() < minimum || playerPlacards.Count < minimum)
+            if (player.AllTotalTokens() < minimum || playerPlacards.Count < minimum)
             {
                 NoSelling();
                 return;
@@ -137,7 +138,7 @@ public class TakeTurn : Turn
     public override void MasterEnd()
     {
         ExitGames.Client.Photon.Hashtable toChange = new();
-        bool twistTriggers = false;
+        bool triggeredEvent = false;
 
         foreach (Player player in CreateGame.inst.GetPlayers())
         {
@@ -156,12 +157,12 @@ public class TakeTurn : Turn
                 toChange[targetString] = currentCounter - 1;
             }
             if ((int)toChange[targetString] <= 0)
-                twistTriggers = true;
+                triggeredEvent = true;
         }
 
         PhotonNetwork.CurrentRoom.SetCustomProperties(toChange);
         PhotonCompatible.InstantChangeRoomProp(ConstantStrings.TurnNumber, TurnManager.inst.GetInt(ConstantStrings.TurnNumber)+1);
-        if (twistTriggers)
+        if (triggeredEvent)
             PhotonCompatible.InstantChangeRoomProp(ConstantStrings.NextPhase, nameof(ResolveEvents));
     }
 }

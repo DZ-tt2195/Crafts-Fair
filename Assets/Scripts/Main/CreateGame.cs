@@ -52,7 +52,7 @@ public class CreateGame : PhotonCompatible
 
             if (PlayerPrefs.GetString(ConstantStrings.LastRoom).Equals(PhotonNetwork.CurrentRoom.Name))
             {
-                CommHub.inst.ShareMessageRPC(OnlineTranslate.Online_Player_Disconnected(playerName), true);
+                CommHub.inst.ShareMessageRPC(OnlineTranslate.Online_Player_Reconnected(playerName), true);
             }
             else if ((bool)GetRoomProperty(ConstantStrings.JoinAsSpec))
             {

@@ -1563,6 +1563,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CommHub
   scroll: {fileID: 1879995345}
   allTexts: {fileID: 137811038}
+  placeholder: {fileID: 971077800}
   inputMessage: {fileID: 566964605}
   uploadMessage: {fileID: 233372912}
 --- !u!114 &176790718
@@ -1689,7 +1690,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159b66c071ced43f499eb58b9b7c8b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SetText
-  key: 35
+  key: 36
 --- !u!114 &195794212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2771,7 +2772,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 249.5
+  m_fontSize: 254.45
   m_fontSizeBase: 300
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2836,7 +2837,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159b66c071ced43f499eb58b9b7c8b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SetText
-  key: 55
+  key: 60
 --- !u!1 &375307093
 GameObject:
   m_ObjectHideFlags: 0
@@ -4557,7 +4558,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159b66c071ced43f499eb58b9b7c8b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  key: 58
+  key: 63
 --- !u!114 &613561510
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5208,7 +5209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159b66c071ced43f499eb58b9b7c8b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SetText
-  key: 36
+  key: 37
 --- !u!114 &676410242
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7525,7 +7526,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159b66c071ced43f499eb58b9b7c8b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SetText
-  key: 37
+  key: 38
 --- !u!114 &883113349
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7921,7 +7922,6 @@ GameObject:
   - component: {fileID: 971077801}
   - component: {fileID: 971077800}
   - component: {fileID: 971077799}
-  - component: {fileID: 971077798}
   m_Layer: 5
   m_Name: Placeholder
   m_TagString: Untagged
@@ -7948,19 +7948,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &971077798
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 971077796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 159b66c071ced43f499eb58b9b7c8b01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SetText
-  key: 34
 --- !u!114 &971077799
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8001,7 +7988,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Type into chat
+  m_text: 
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 31e79ddad7b2d41c395ada76a18cbcdd, type: 2}
   m_sharedMaterial: {fileID: -3852492252101762229, guid: 31e79ddad7b2d41c395ada76a18cbcdd, type: 2}
@@ -8028,7 +8015,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 72
+  m_fontSize: 18
   m_fontSizeBase: 14
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -8417,7 +8404,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Choose Twists for this game
+  m_text: Choose Events for this game
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 31e79ddad7b2d41c395ada76a18cbcdd, type: 2}
   m_sharedMaterial: {fileID: -3852492252101762229, guid: 31e79ddad7b2d41c395ada76a18cbcdd, type: 2}
@@ -8444,7 +8431,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 50.4
+  m_fontSize: 52.7
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -8951,7 +8938,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159b66c071ced43f499eb58b9b7c8b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SetText
-  key: 56
+  key: 61
 --- !u!1 &1120750735
 GameObject:
   m_ObjectHideFlags: 0
@@ -10398,7 +10385,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159b66c071ced43f499eb58b9b7c8b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SetText
-  key: 59
+  key: 64
 --- !u!114 &1240597073
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13074,6 +13061,7 @@ MonoBehaviour:
   - {fileID: 1475113519}
   - {fileID: 823909829}
   - {fileID: 1970410453}
+  - {fileID: 1970410453}
 --- !u!1001 &1592931991
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14265,7 +14253,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.8}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.9019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -16077,7 +16065,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 65.4
+  m_fontSize: 68.35
   m_fontSizeBase: 24
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -16142,7 +16130,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159b66c071ced43f499eb58b9b7c8b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SetText
-  key: 49
+  key: 54
 --- !u!1 &2075185607
 GameObject:
   m_ObjectHideFlags: 0
@@ -16193,7 +16181,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159b66c071ced43f499eb58b9b7c8b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SetText
-  key: 73
+  key: 54
 --- !u!114 &2075185610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16622,7 +16610,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159b66c071ced43f499eb58b9b7c8b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SetText
-  key: 60
+  key: 65
 --- !u!114 &2097049516
 MonoBehaviour:
   m_ObjectHideFlags: 0

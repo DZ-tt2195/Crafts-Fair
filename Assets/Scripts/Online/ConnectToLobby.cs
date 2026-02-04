@@ -227,6 +227,7 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
             { ConstantStrings.TokenCounter(TokenType.SwordIcon), 2*numPlayers},
             { ConstantStrings.TokenCounter(TokenType.TechIcon), 2*numPlayers},
             { ConstantStrings.TurnNumber, 1 },
+            { ConstantStrings.MaxLevel, 6}
         };
         return roomProps;
     }

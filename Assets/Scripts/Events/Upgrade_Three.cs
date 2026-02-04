@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System;
 
-public class Upgrade_Two : CardType
+public class Upgrade_Three : CardType
 {
-    public Upgrade_Two(CardData dataFile) : base(dataFile)
+    public Upgrade_Three(CardData dataFile) : base(dataFile)
     {
     }
 
@@ -12,8 +12,8 @@ public class Upgrade_Two : CardType
         Dictionary<TokenType, int[]> playerTokens = player.GetTokenDict();
         foreach (TokenType token in Enum.GetValues(typeof(TokenType)))
         {
-            int number = playerTokens[token][2];
-            player.UpDowngradeToken(number, (2, token), (3, token), logged);
+            int number = playerTokens[token][3];
+            player.UpDowngradeToken(number, (3, token), (4, token), logged);
         }
     }
 }

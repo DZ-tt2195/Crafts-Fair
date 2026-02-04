@@ -171,19 +171,19 @@ public class Player : PhotonCompatible
     public Dictionary<TokenType, int[]> GetTokenDict() => myTokens;
     public void UpDowngradeToken(int num, (int level, TokenType token) first, (int level, TokenType token) second, int logged = 0, bool important = false)
     {
-        if (first.level == second.level)
+        if (first.level == second.level || num == 0 || second.level <= 0)
             return;
         if (first.level < second.level)
             Log.inst.AddMyText(important, OnlineTranslate.Online_Upgrade_Token(this.name, num.ToString(), first.token.ToString(), first.level.ToString(), second.level.ToString()), logged);
         else
             Log.inst.AddMyText(important, OnlineTranslate.Online_Downgrade_Token(this.name, num.ToString(), first.token.ToString(), first.level.ToString(), second.level.ToString()), logged);
         
-        Log.inst.NewRollback(() => ChangeToken(-1, first));
-        Log.inst.NewRollback(() => ChangeToken(1, second));
+        Log.inst.NewRollback(() => ChangeToken(-num, first));
+        Log.inst.NewRollback(() => ChangeToken(num, second));
     }    
     public void AddLoseToken(int num, (int level, TokenType token) info, int logged = 0, bool important = false)
     {
-        if (num == 0)
+        if (num == 0 || info.level <= 0)
             return;
         if (num > 0)
             Log.inst.AddMyText(important, OnlineTranslate.Online_Add_Token(this.name, num.ToString(), info.token.ToString(), info.level.ToString()), logged);
@@ -194,7 +194,7 @@ public class Player : PhotonCompatible
     void ChangeToken(int num, (int value, TokenType token) info)
     {
         int[] tokenArray = myTokens[info.token];
-        tokenArray[info.value] += (Log.inst.forward) ? num : -num;
+        tokenArray[Mathf.Min(info.value, TurnManager.inst.GetInt(ConstantStrings.MaxLevel))] += Log.inst.forward ? num : -num;
         TurnManager.inst.WillChangePlayerProperty(this, info.token.ToString(), tokenArray); uiDictionary[info.token.ToString()] = true;
     }
     #endregion
@@ -214,7 +214,7 @@ public class Player : PhotonCompatible
     public void StartTurn()
     {
         //this.DoFunction(() => this.ChangeButtonColor(false));
-        CreateGame.inst.SwitchToPlayer(CreateGame.inst.mainPlayer);
+        CreateGame.inst.SwitchToPlayer(this);
         InstantChangePlayerProp(this, ConstantStrings.Waiting, false);
         endPause = true;
 
@@ -331,12 +331,7 @@ public class Player : PhotonCompatible
 #endregion
 
 #region  Helpers
-    public List<TokenDisplay> AllOfNumber(FindNumber toFind, int number)
-    {
-        List<TokenType> all = new() {TokenType.ArtIcon, TokenType.HouseIcon, TokenType.SwordIcon, TokenType.TechIcon};
-        return OfNumber(toFind, all, number);
-    }
-    public List<TokenDisplay> OfNumber(FindNumber toFind, List<TokenType> tokensToFind, int number)
+    public List<TokenDisplay> OfNumber(FindNumber toFind, List<TokenType> tokensToFind, List<int> levelsToFind, int number)
     {
         List<TokenDisplay> toReturn = new();
         if (tokensToFind.Contains(TokenType.ArtIcon))
@@ -352,19 +347,47 @@ public class Player : PhotonCompatible
         {
             for (int i = 1; i<array.Length; i++)
             {
-                if (MyExtensions.Comparison(toFind, array[i], number))
+                if (MyExtensions.Comparison(toFind, array[i], number) && levelsToFind.Contains(i))
                     toReturn.Add(list[i]);
             }
         }
         return toReturn;
     }
-    public int TotalTokens()
+    public int AllTotalTokens()
     {
         int answer = 0;
         foreach (TokenType token in Enum.GetValues(typeof(TokenType)))
             answer += MyExtensions.SumOfArray(myTokens[token]);
         return answer;
     }
+    public static List<int> AllLevels()
+    {
+        int max = TurnManager.inst.GetInt(ConstantStrings.MaxLevel);
+        List<int> toReturn = new();
+        for (int i = 1; i <= max; i++)
+            toReturn.Add(i);
+        return toReturn;
+    }
+    public static List<int> AllLevelsBut(int blank)
+    {
+        List<int> toReturn = AllLevels();
+        toReturn.Remove(blank);
+        return toReturn;
+    }
+    public static List<TokenType> AllTokens()
+    {
+        List<TokenType> toReturn = new();
+        foreach (TokenType token in Enum.GetValues(typeof(TokenType)))
+            toReturn.Add(token);
+        return toReturn;
+    }
+    public static List<TokenType> AllTokensBut(TokenType blank)
+    {
+        List<TokenType> toReturn = AllTokens();
+        toReturn.Remove(blank);
+        return toReturn;
+    }
+
 #endregion
 
 }

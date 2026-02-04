@@ -16,7 +16,7 @@ public class High_House : CardType
     }
     void RemoveHouse(Player player, int logged)
     {
-        List<TokenDisplay> canLose = player.OfNumber(FindNumber.Minimum, new() {TokenType.HouseIcon}, 1);
+        List<TokenDisplay> canLose = player.OfNumber(FindNumber.Minimum, new() {TokenType.HouseIcon}, Player.AllLevels(), 1);
         MakeDecision.inst.ChooseDisplayOnScreen(canLose, AutoTranslate.Ask_Lose(AutoTranslate.HouseIcon()), LoseToken);
 
         void LoseToken((int level, TokenType type) info)

@@ -35,7 +35,8 @@ Custom_Event_3	Event SwordIcon
 Custom_Event_4	Event TechIcon
 Choose	Choose
 Random	Random
-Type_into_chat	Type into chat
+Message_All	Type into chat (message all)
+Message_Specs	Type into chat (message spectators)
 Online_Player_Playing	$Player$ is playing.
 Online_Player_Spectating	$Player$ is spectating.
 Online_Player_Reconnected	$Player$ reconnected.
@@ -51,11 +52,17 @@ HouseIcon	HouseIcon
 SwordIcon	SwordIcon
 TechIcon	TechIcon
 CoinIcon	CoinIcon
+Coin_Amount	$Num$ CoinIcon
 TokenIcon	TokenIcon
+LevelIcon	LevelIcon
+CoinIcon_Text	CoinIcon: get 20 CoinIcon or more to win
+TokenIcon_Text	TokenIcon: any type of token (ArtIcon, HouseIcon, SwordIcon, TechIcon)
+LevelIcon_Text	LevelIcon: the level of a token, from 1 to 6
 Online_Next_Turn	Turn $Number$
 Ask_Token_Type	Choose a token type.
 Ask_Upgrade	Upgrade 1 $Token$.
 Ask_Downgrade	Downgrade 1 $Token$.
+Ask_Lose	Lose 1 $Token$.
 Online_Chose_Token	$Player$ chooses $Token$.
 Online_Add_Coin	$Player$ gets +$Num$ CoinIcon.
 Online_Lose_Coin	$Player$ loses $Num$ CoinIcon.
@@ -93,12 +100,6 @@ Close	Close
 Any	Any
 Buyer	Buyer
 Event	Event
-Coin_Amount	$Num$ CoinIcon
-LevelIcon	LevelIcon
-CoinIcon_Text	CoinIcon: get 20 CoinIcon or more to win
-TokenIcon_Text	TokenIcon: any token (ArtIcon, HouseIcon, SwordIcon, TechIcon)
-LevelIcon_Text	LevelIcon: the level of a token; goes from 1-6
-Ask_Lose	Lose 1 $Token$.
 Perfect_Fit	Perfect Fit
 Perfect_Fit_Text	You have exactly 0 TokenIcon left after selling.
 Unnecessary_Surplus	Unnecessary Surplus
@@ -113,8 +114,8 @@ Rise_Of_Kingdoms	Rise of Kingdoms
 Rise_Of_Kingdoms_Text	Sell at least 2 TokenIcon at 4 LevelIcon.
 Rise_Of_Empires	Rise of Empires
 Rise_Of_Empires_Text	Sell at least 2 TokenIcon at 6 LevelIcon.
-Upgrade_Two	Upgrade Two
-Upgrade_Two_Text	Upgrade all your TokenIcon from 2 LevelIcon up to 3 LevelIcon.
+Upgrade_Three	Upgrade Three
+Upgrade_Three_Text	Upgrade all your TokenIcon from 3 LevelIcon up to 4 LevelIcon.
 Strength_In_Numbers	Strength in Numbers
 Strength_In_Numbers_Text	 +1 CoinIcon per 2 CardIcon you sold this turn (round down).
 Grab_Bag	Grab Bag
@@ -150,7 +151,7 @@ Chose_Tech_Text	You chose to remove a counter from TechIcon this turn.
 Make_Art	Make Art
 Make_Art_Text	If you have at least 5 CoinIcon, +4 ArtIcon at 1 LevelIcon.
 Make_House	Make House
-Make_House_Text	If you have at least 3 TokenIcon at 2 LevelIcon, +4 HouseIcon at 1 LevelIcon.
+Make_House_Text	If you have at least 3 TokenIcon at exactly 2 LevelIcon, +4 HouseIcon at 1 LevelIcon.
 Make_Sword	Make Sword
 Make_Sword_Text	If you have at least 1 TokenIcon at 6 LevelIcon, +4 SwordIcon at 1 LevelIcon.
 Make_Tech	Make Tech
@@ -168,4 +169,8 @@ Upgrade_All_Text	Upgrade 1 ArtIcon, 1 HouseIcon, 1 SwordIcon, and 1 TechIcon, ea
 High_Art	High Art
 High_Art_Text	 +1 ArtIcon, where its LevelIcon is equal to your SwordIcon with the highest LevelIcon.
 High_House	High House
-High_House_Text	 +1 HouseIcon at 6 LevelIcon, then lose 2 HouseIcon.
+High_House_Text	 +1 HouseIcon at 6 LevelIcon. Then lose 2 HouseIcon.
+High_Sword	High Sword
+High_Sword_Text	 +1 SwordIcon, where its LevelIcon is equal to the number of HouseIcon you have.
+High_Tech	High Tech
+High_Tech_Text	 +1 TechIcon at 6 LevelIcon. Then downgrade 2 TokenIcon that are at 2 LevelIcon or higher.

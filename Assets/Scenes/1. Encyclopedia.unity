@@ -132,7 +132,7 @@ GameObject:
   - component: {fileID: 224632699}
   - component: {fileID: 224632698}
   m_Layer: 5
-  m_Name: Twist
+  m_Name: Event
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159b66c071ced43f499eb58b9b7c8b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SetText
-  key: 65
+  key: 70
 --- !u!114 &224632699
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1235,7 +1235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159b66c071ced43f499eb58b9b7c8b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SetText
-  key: 62
+  key: 67
 --- !u!114 &971116838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1736,7 +1736,7 @@ GameObject:
   - component: {fileID: 1550909540}
   - component: {fileID: 1550909539}
   m_Layer: 5
-  m_Name: Placard
+  m_Name: Buyer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1773,7 +1773,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 159b66c071ced43f499eb58b9b7c8b01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SetText
-  key: 64
+  key: 69
 --- !u!114 &1550909540
 MonoBehaviour:
   m_ObjectHideFlags: 0

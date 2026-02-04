@@ -9,6 +9,6 @@ public class Perfect_Fit : CardType
 
     public override bool CanSell(Player player, Dictionary<TokenType, int[]> soldTokens)
     {
-        return player.TotalTokens() == 0;
+        return player.AllTotalTokens() == 0;
     }
 }
