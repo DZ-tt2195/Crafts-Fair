@@ -13,6 +13,6 @@ public class Above_And_Beyond : CardType
         int totalTokens = 0;
         foreach (TokenType token in Enum.GetValues(typeof(TokenType)))
             totalTokens += MyExtensions.SumOfArray(soldTokens[token]);
-        return totalTokens >= 5;
+        return totalTokens >= 6;
     }
 }

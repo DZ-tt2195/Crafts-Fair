@@ -1,5 +1,5 @@
 Game_Designer	by Thomas Tang (DZ)
-Last_Update	Last Updated: Feb 03, 2026
+Last_Update	Last Updated: Feb 06, 2026
 Blank	
 Translator_Credit	Original Language
 Language	Language
@@ -68,7 +68,7 @@ Online_Add_Coin	$Player$ gets +$Num$ CoinIcon.
 Online_Lose_Coin	$Player$ loses $Num$ CoinIcon.
 Online_Add_Token	$Player$ adds $Amount$ $Token$ at $Level$ LevelIcon.
 Online_Lose_Token	$Player$ loses $Amount$ $Token$ at $Level$ LevelIcon.
-Online_Upgrade_Token	$Player$ upgrades $Amount$ $Token$ from $Level1$ LevelIcon up to $Level2$ LevelIcon.
+Online_Upgrade_Token	$Player$ upgrades $Amount$ $Token$ from $Level1$ LevelIcon to $Level2$ LevelIcon.
 Online_Downgrade_Token	$Player$ downgrades $Amount$ $Token$ from $Level1$ LevelIcon down to $Level2$ LevelIcon.
 Online_Draw_Buyer	$Player$ draws $Card$.
 Online_Draw_Buyer_Others	$Player$ draws 1 CardIcon.
@@ -107,7 +107,7 @@ Unnecessary_Surplus_Text	You have at least 5 TokenIcon left after selling.
 Bare_Minimum	Bare Minimum
 Bare_Minimum_Text	Sell exactly 2 TokenIcon.
 Above_And_Beyond	Above and Beyond
-Above_And_Beyond_Text	Sell at least 5 TokenIcon.
+Above_And_Beyond_Text	Sell at least 6 TokenIcon.
 Rise_Of_Villages	Rise of Villages
 Rise_Of_Villages_Text	Sell at least 2 TokenIcon at 2 LevelIcon.
 Rise_Of_Kingdoms	Rise of Kingdoms
@@ -115,7 +115,7 @@ Rise_Of_Kingdoms_Text	Sell at least 2 TokenIcon at 4 LevelIcon.
 Rise_Of_Empires	Rise of Empires
 Rise_Of_Empires_Text	Sell at least 2 TokenIcon at 6 LevelIcon.
 Upgrade_Three	Upgrade Three
-Upgrade_Three_Text	Upgrade all your TokenIcon from 3 LevelIcon up to 4 LevelIcon.
+Upgrade_Three_Text	Upgrade all your TokenIcon from 3 LevelIcon to 4 LevelIcon.
 Strength_In_Numbers	Strength in Numbers
 Strength_In_Numbers_Text	 +1 CoinIcon per 2 CardIcon you sold this turn (round down).
 Grab_Bag	Grab Bag
@@ -167,10 +167,14 @@ Tech_House_Sword_Text	Sell 1 TechIcon, 1 HouseIcon with a higher LevelIcon, and 
 Upgrade_All	Upgrade All
 Upgrade_All_Text	Upgrade 1 ArtIcon, 1 HouseIcon, 1 SwordIcon, and 1 TechIcon, each by 1 LevelIcon.
 High_Art	High Art
-High_Art_Text	 +1 ArtIcon, where its LevelIcon is equal to your SwordIcon with the highest LevelIcon.
+High_Art_Text	 +1 ArtIcon, where its LevelIcon is equal to your SwordIcon with the highest LevelIcon (you can't create at 0 LevelIcon).
 High_House	High House
 High_House_Text	 +1 HouseIcon at 6 LevelIcon. Then lose 2 HouseIcon.
 High_Sword	High Sword
-High_Sword_Text	 +1 SwordIcon, where its LevelIcon is equal to the number of HouseIcon you have.
+High_Sword_Text	 +1 SwordIcon, where its LevelIcon is equal to the number of HouseIcon you have (you can't create at 0 LevelIcon; max LevelIcon is 6).
 High_Tech	High Tech
 High_Tech_Text	 +1 TechIcon at 6 LevelIcon. Then downgrade 2 TokenIcon that are at 2 LevelIcon or higher.
+Many_Twos	Many Twos
+Many_Twos_Text	Sell at least 4 TokenIcon at 2 LevelIcon.
+Many_Threes	Many Threes
+Many_Threes_Text	Sell at least 4 TokenIcon at 3 LevelIcon.

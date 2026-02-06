@@ -6,16 +6,17 @@ Chose_Sword	You chose to remove a counter from SwordIcon this turn.	1		CareSword
 Chose_Tech	You chose to remove a counter from TechIcon this turn.	1		CareTech
 Perfect_Fit	You have exactly 0 TokenIcon left after selling.	1		
 Unnecessary_Surplus	You have at least 5 TokenIcon left after selling.	1		
-Above_And_Beyond	Sell at least 5 TokenIcon.	2		
 Many_Ones	Sell at least 4 TokenIcon at 1 LevelIcon.	2		Care1
 Menagerie	Sell at least 1 ArtIcon, 1 HouseIcon, 1 SwordIcon, and 1 TechIcon.	2		CareArt, CareHouse, CareSword, CareTech
 Rise_Of_Villages	Sell at least 2 TokenIcon at 2 LevelIcon.	2		Care2
 Total_Four	The LevelIcon of all sold TokenIcon total to exactly 4.	2		
+Above_And_Beyond	Sell at least 6 TokenIcon.	3		
 Art_Sword_Tech	Sell 1 ArtIcon, 1 SwordIcon with a higher LevelIcon, and 1 TechIcon with an even higher LevelIcon.	3		CareArt, CareSword, CareTech
 House_Tech_Art	Sell 1 HouseIcon, 1 TechIcon with a higher LevelIcon, and 1 ArtIcon with an even higher LevelIcon.	3		CareHouse, CareTech, CareArt
 Sword_Art_House	Sell 1 SwordIcon, 1 ArtIcon with a higher LevelIcon, and 1 HouseIcon with an even higher LevelIcon.	3		CareSword, CareArt, CareHouse
 Tech_House_Sword	Sell 1 TechIcon, 1 HouseIcon with a higher LevelIcon, and 1 SwordIcon with an even higher LevelIcon.	3		CareTech, CareHouse, CareSword
 Total_Six	The LevelIcon of all sold TokenIcon total to exactly 6.	3		
+Many_Twos	Sell at least 4 TokenIcon at 2 LevelIcon.	4		Care2
 Rise_Of_Kingdoms	Sell at least 2 TokenIcon at 4 LevelIcon.	4		Care4
 Total_Eight	The LevelIcon of all sold TokenIcon total to exactly 8.	4		
 Sequential_Art	Sell at least 4 ArtIcon with consecutively ordered LevelIcon.	5		CareArt
@@ -23,4 +24,5 @@ Sequential_House	Sell at least 4 HouseIcon with consecutively ordered LevelIcon.
 Sequential_Sword	Sell at least 4 SwordIcon with consecutively ordered LevelIcon.	5		CareSword
 Sequential_Tech	Sell at least 4 TechIcon with consecutively ordered LevelIcon.	5		CareTech
 Total_Ten	The LevelIcon of all sold TokenIcon total to exactly 10.	5		
+Many_Threes	Sell at least 4 TokenIcon at 3 LevelIcon.	6		Care3
 Rise_Of_Empires	Sell at least 2 TokenIcon at 6 LevelIcon.	6		Care6
