@@ -1,5 +1,5 @@
 Game_Designer	by Thomas Tang (DZ)
-Last_Update	Last Updated: Feb 06, 2026
+Last_Update	Last Updated: Feb 07, 2026
 Blank	
 Translator_Credit	Original Language
 Language	Language
@@ -28,11 +28,11 @@ Player_Count	$Current$ / $Max$ Players
 Type_in_username	You have to type in a username.
 Attempt_to_reconnect	Attempting to reconnect to $Room$'s room...
 Failed_to_reconnect	Failed to reconnect to $Room$'s room.
-Choose_Events	Choose Events for this game
-Custom_Event_1	Event ArtIcon
-Custom_Event_2	Event HouseIcon
-Custom_Event_3	Event SwordIcon
-Custom_Event_4	Event TechIcon
+Choose_Trends	Choose Trends for this game
+Custom_Trend_1	Trend ArtIcon
+Custom_Trend_2	Trend HouseIcon
+Custom_Trend_3	Trend SwordIcon
+Custom_Trend_4	Trend TechIcon
 Choose	Choose
 Random	Random
 Message_All	Type into chat (message all)
@@ -77,8 +77,8 @@ Ask_Sell	You may sell 2+ TokenIcon, while meeting requirements for 2+ CardIcon.
 Online_Make_Sell	$Player$ sells $TokenNum$ TokenIcon and $CardNum$ CardIcon.
 Online_No_Sell	$Player$ doesn't sell anything.
 Undo_All	Undo All
-Online_Events_To_Resolve	Events to resolve: $Num$
-Ask_Resolve	Choose an Event to resolve.
+Online_Trends_To_Resolve	Trends to resolve: $Num$
+Ask_Resolve	Choose an Trend to resolve.
 Online_Resolve_Card	$Player$ resolves $Card$.
 Confirm	Confirm
 Decline	Decline
@@ -94,12 +94,12 @@ Online_Player_Won	$Player$ has won.
 Resigned	(Resigned)
 Switch_Player	Switch Player
 Rules	Rules
-Rules_Summary	Each Turn: \n1. Choose a token type and remove a counter from that token's Event. \n2. Create 1 of that token at level 1, then upgrade 1 token of that type to the next level. \n3. You may sell 2+ tokens and 2+ cards, all at once, to score CoinIcon. \n\nBetween Turns:\n4. For each Event with 0 counters, each player draws 2 cards and follows its instructions. \n5. Add the counters back onto those Events (2 per player). \n6. The first player to reach 20+ CoinIcon wins.
+Rules_Summary	Each Turn: \n1. Choose a token type and remove a counter from that token's Trend. \n2. Create 1 of that token at level 1, then upgrade 1 token of that type to the next level. \n3. You may sell 2+ tokens and 2+ cards, all at once, to score CoinIcon. \n\nBetween Turns:\n4. For each Trend with 0 counters, each player draws 2 cards and follows its instructions. \n5. Add the counters back onto those Trends (2 per player). \n6. The first player to reach 20+ CoinIcon wins.
 Encyclopedia	Encyclopedia
 Close	Close
 Any	Any
 Buyer	Buyer
-Event	Event
+Trend	Trend
 Perfect_Fit	Perfect Fit
 Perfect_Fit_Text	You have exactly 0 TokenIcon left after selling.
 Unnecessary_Surplus	Unnecessary Surplus
@@ -114,12 +114,12 @@ Rise_Of_Kingdoms	Rise of Kingdoms
 Rise_Of_Kingdoms_Text	Sell at least 2 TokenIcon at 4 LevelIcon.
 Rise_Of_Empires	Rise of Empires
 Rise_Of_Empires_Text	Sell at least 2 TokenIcon at 6 LevelIcon.
-Upgrade_Three	Upgrade Three
-Upgrade_Three_Text	Upgrade all your TokenIcon from 3 LevelIcon to 4 LevelIcon.
-Strength_In_Numbers	Strength in Numbers
-Strength_In_Numbers_Text	 +1 CoinIcon per 2 CardIcon you sold this turn (round down).
-Grab_Bag	Grab Bag
-Grab_Bag_Text	 +1 ArtIcon, +1 HouseIcon, +1 SwordIcon, and +1 TechIcon, all at 1 LevelIcon.
+Polish	Polish
+Polish_Text	Upgrade each of your TokenIcon at 3 LevelIcon to 4 LevelIcon.
+Stocks	Stocks
+Stocks_Text	 +1 CoinIcon per 2 CardIcon you sold this turn (round down).
+Quantity	Quantity
+Quantity_Text	 +1 ArtIcon, +1 HouseIcon, +1 SwordIcon, and +1 TechIcon, all at 1 LevelIcon.
 Total_Four	Total Four
 Total_Four_Text	The LevelIcon of all sold TokenIcon total to exactly 4.
 Total_Six	Total Six
@@ -148,14 +148,14 @@ Chose_Sword	Chose Sword
 Chose_Sword_Text	You chose to remove a counter from SwordIcon this turn.
 Chose_Tech	Chose Tech
 Chose_Tech_Text	You chose to remove a counter from TechIcon this turn.
-Make_Art	Make Art
-Make_Art_Text	If you have at least 5 CoinIcon, +4 ArtIcon at 1 LevelIcon.
-Make_House	Make House
-Make_House_Text	If you have at least 3 TokenIcon at exactly 2 LevelIcon, +4 HouseIcon at 1 LevelIcon.
-Make_Sword	Make Sword
-Make_Sword_Text	If you have at least 1 TokenIcon at 6 LevelIcon, +4 SwordIcon at 1 LevelIcon.
-Make_Tech	Make Tech
-Make_Tech_Text	If you have no TechIcon, +4 TechIcon at 1 LevelIcon.
+Pageants	Pageants
+Pageants_Text	If you have at least 5 CoinIcon, +4 ArtIcon at 1 LevelIcon.
+Tourism	Tourism
+Tourism_Text	If you have at least 3 TokenIcon at exactly 2 LevelIcon, +4 HouseIcon at 1 LevelIcon.
+Security	Security
+Security_Text	If you have at least 1 TokenIcon at 6 LevelIcon, +4 SwordIcon at 1 LevelIcon.
+Innovation	Innovation
+Innovation_Text	If you have no TechIcon, +4 TechIcon at 1 LevelIcon.
 Art_Sword_Tech	Art Sword Tech
 Art_Sword_Tech_Text	Sell 1 ArtIcon, 1 SwordIcon with a higher LevelIcon, and 1 TechIcon with an even higher LevelIcon.
 House_Tech_Art	House Tech Art
@@ -164,17 +164,19 @@ Sword_Art_House	Sword Art House
 Sword_Art_House_Text	Sell 1 SwordIcon, 1 ArtIcon with a higher LevelIcon, and 1 HouseIcon with an even higher LevelIcon.
 Tech_House_Sword	Tech House Sword
 Tech_House_Sword_Text	Sell 1 TechIcon, 1 HouseIcon with a higher LevelIcon, and 1 SwordIcon with an even higher LevelIcon.
-Upgrade_All	Upgrade All
-Upgrade_All_Text	Upgrade 1 ArtIcon, 1 HouseIcon, 1 SwordIcon, and 1 TechIcon, each by 1 LevelIcon.
-High_Art	High Art
-High_Art_Text	 +1 ArtIcon, where its LevelIcon is equal to your SwordIcon with the highest LevelIcon (you can't create at 0 LevelIcon).
-High_House	High House
-High_House_Text	 +1 HouseIcon at 6 LevelIcon. Then lose 2 HouseIcon.
-High_Sword	High Sword
-High_Sword_Text	 +1 SwordIcon, where its LevelIcon is equal to the number of HouseIcon you have (you can't create at 0 LevelIcon; max LevelIcon is 6).
-High_Tech	High Tech
-High_Tech_Text	 +1 TechIcon at 6 LevelIcon. Then downgrade 2 TokenIcon that are at 2 LevelIcon or higher.
+Progress	Progress
+Progress_Text	Upgrade 1 ArtIcon, 1 HouseIcon, 1 SwordIcon, and 1 TechIcon, each by 1 LevelIcon.
+Museums	Museums
+Museums_Text	 +1 ArtIcon, where its LevelIcon is equal to your HouseIcon with the highest LevelIcon (you can't create at 0 LevelIcon).
+Merging	Merging
+Merging_Text	 +1 HouseIcon at 6 LevelIcon. Then lose 2 HouseIcon.
+Homage	Homage
+Homage_Text	 +1 SwordIcon, where its LevelIcon is equal to the number of ArtIcon you have (you can't create at 0 LevelIcon; max LevelIcon is 6).
+Reallocate	Reallocate
+Reallocate_Text	 +1 TechIcon at 6 LevelIcon. Then downgrade 2 TokenIcon that are at 2 LevelIcon or higher.
 Many_Twos	Many Twos
 Many_Twos_Text	Sell at least 4 TokenIcon at 2 LevelIcon.
 Many_Threes	Many Threes
 Many_Threes_Text	Sell at least 4 TokenIcon at 3 LevelIcon.
+Quality	Quality
+Quality_Text	 +1 of any TokenIcon, at 4 LevelIcon.

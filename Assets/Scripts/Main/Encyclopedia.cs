@@ -9,14 +9,14 @@ public class Encyclopedia : MonoBehaviour
 {
     public static Encyclopedia inst;
     [SerializeField] Card buyerPrefab;
-    [SerializeField] Card eventPrefab;
+    [SerializeField] Card trendPrefab;
     [SerializeField] GridLayoutGroup buyerGrid;
-    [SerializeField] GridLayoutGroup eventGrid;
+    [SerializeField] GridLayoutGroup trendGrid;
     [SerializeField] RectTransform buyerView;
-    [SerializeField] RectTransform eventView;
+    [SerializeField] RectTransform trendView;
     [SerializeField] Slider viewSlider;
     List<Card> allBuyers = new();
-    List<Card> allEvents = new();
+    List<Card> allTrends = new();
 
     private void Awake()
     {
@@ -27,7 +27,7 @@ public class Encyclopedia : MonoBehaviour
         void Change(float value)
         {
             buyerView.gameObject.SetActive((int)value == 0);
-            eventView.gameObject.SetActive((int)value == 1);
+            trendView.gameObject.SetActive((int)value == 1);
         }
     }
 
@@ -41,13 +41,13 @@ public class Encyclopedia : MonoBehaviour
             allBuyers.Add(cardPV);
             cardPV.transform.SetParent(buyerGrid.transform);
         }
-        for (int i = 0; i < GameFiles.inst.eventFiles.Count; i++)
+        for (int i = 0; i < GameFiles.inst.trendFiles.Count; i++)
         {
-            GameObject nextCard = Instantiate(eventPrefab.gameObject);
+            GameObject nextCard = Instantiate(trendPrefab.gameObject);
             Card cardPV = nextCard.GetComponent<Card>();
-            cardPV.AssignCard(GameFiles.inst.eventFiles[i], 1f, false, Vector3.one);
-            allEvents.Add(cardPV);
-            cardPV.transform.SetParent(eventGrid.transform);
+            cardPV.AssignCard(GameFiles.inst.trendFiles[i], 1f, false, Vector3.one);
+            allTrends.Add(cardPV);
+            cardPV.transform.SetParent(trendGrid.transform);
         }
     }
 }

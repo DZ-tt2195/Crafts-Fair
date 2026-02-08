@@ -55,7 +55,7 @@ public class KeywordTooltip : MonoBehaviour
         listOfCardRC.Clear();
         foreach (CardData data in GameFiles.inst.buyerFiles)
             listOfCardRC[Translator.inst.Translate(data.cardName)] = (data, true);
-        foreach (CardData data in GameFiles.inst.eventFiles)
+        foreach (CardData data in GameFiles.inst.trendFiles)
             listOfCardRC[Translator.inst.Translate(data.cardName)] = (data, false);
     }
     public string EditText(string text)

@@ -36,7 +36,6 @@ public class Card : PhotonCompatible
         this.dataFile = dataFile;
         thisCard = (CardType)Activator.CreateInstance(Type.GetType(dataFile.cardName), dataFile);
         this.layout.FillInCards(dataFile, startingAlpha, vertical);
-        //KeywordTooltip.instance.NewCardRC(Translator.inst.Translate(dataFile.cardName), this.layout);
     }
 
     #endregion

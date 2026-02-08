@@ -679,7 +679,7 @@ GameObject:
   - component: {fileID: 489674816}
   - component: {fileID: 489674817}
   m_Layer: 5
-  m_Name: Event View
+  m_Name: Trend View
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1441,11 +1441,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Encyclopedia
   buyerPrefab: {fileID: 4752275793854564576, guid: d50eb448d0731474ebebdd3627d1ec5a, type: 3}
-  eventPrefab: {fileID: 4752275793854564576, guid: 4d0686b994da1445589ed656148a7cae, type: 3}
+  trendPrefab: {fileID: 4752275793854564576, guid: 4d0686b994da1445589ed656148a7cae, type: 3}
   buyerGrid: {fileID: 1515963459}
-  eventGrid: {fileID: 1926261712}
+  trendGrid: {fileID: 1926261712}
   buyerView: {fileID: 451277966}
-  eventView: {fileID: 489674816}
+  trendView: {fileID: 489674816}
   viewSlider: {fileID: 347830364}
 --- !u!4 &1189922528
 Transform:
@@ -2094,7 +2094,7 @@ GameObject:
   - component: {fileID: 1926261711}
   - component: {fileID: 1926261712}
   m_Layer: 5
-  m_Name: Event Grid
+  m_Name: Trend Grid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

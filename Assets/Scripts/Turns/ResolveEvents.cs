@@ -5,46 +5,46 @@ using UnityEngine;
 
 public class ResolveEvents : Turn
 {
-    (List<TokenType>, List<Card>) EventsNoCounter()
+    (List<TokenType>, List<Card>) TrendsNoCounter()
     {
         List<TokenType> typesToResolve = new();
-        List<Card> eventsToResolve = new();
+        List<Card> trendsToResolve = new();
         foreach (TokenType type in Enum.GetValues(typeof(TokenType)))
         {
             string tokencounter = ConstantStrings.TokenCounter(type);
             if (TurnManager.inst.GetInt(tokencounter) <= 0)
             {
                 typesToResolve.Add(type);
-                eventsToResolve.Add(CreateGame.inst.GetEvent(type).card);
+                trendsToResolve.Add(CreateGame.inst.GetEvent(type).card);
             }
         }
-        return (typesToResolve, eventsToResolve);        
+        return (typesToResolve, trendsToResolve);        
     }
 
     public override void MasterStart()
     {
-        List<Card> eventsToResolve = EventsNoCounter().Item2;
+        List<Card> trendsToResolve = TrendsNoCounter().Item2;
         Log.inst.MasterText(true, AutoTranslate.Blank());
-        Log.inst.MasterText(true, OnlineTranslate.Online_Events_To_Resolve(eventsToResolve.Count.ToString()));
+        Log.inst.MasterText(true, OnlineTranslate.Online_Trends_To_Resolve(trendsToResolve.Count.ToString()));
     }
 
     public override void ForPlayer(Player player)
     {
-        List<Card> eventsToResolve = EventsNoCounter().Item2;
-        player.DrawBuyerRPC(2*eventsToResolve.Count);
-        Log.inst.NewDecisionContainer(() => ChooseTwist(player, eventsToResolve));
+        List<Card> trendsToResolve = TrendsNoCounter().Item2;
+        player.DrawBuyerRPC(2*trendsToResolve.Count);
+        Log.inst.NewDecisionContainer(() => ChooseTwist(player, trendsToResolve));
     }
 
-    void ChooseTwist(Player player, List<Card> eventsToResolve)
+    void ChooseTwist(Player player, List<Card> trendsToResolve)
     {
-        MakeDecision.inst.ChooseCardOnScreen(eventsToResolve, AutoTranslate.Ask_Resolve(), DoTwist);
+        MakeDecision.inst.ChooseCardOnScreen(trendsToResolve, AutoTranslate.Ask_Resolve(), DoTwist);
 
         void DoTwist(Card card)
         {
             Log.inst.AddMyText(false, OnlineTranslate.Online_Resolve_Card(player.name, card.name));
             Log.inst.NewDecisionContainer(() => card.thisCard.EventEffect(player, 1));
 
-            List<Card> newList = eventsToResolve;
+            List<Card> newList = trendsToResolve;
             newList.Remove(card);
             if (newList.Count > 0)
                 Log.inst.NewDecisionContainer(() => ChooseTwist(player, newList));
@@ -53,7 +53,7 @@ public class ResolveEvents : Turn
 
     public override void MasterEnd()
     {
-        List<TokenType> tokenEventsToAdd = EventsNoCounter().Item1;
+        List<TokenType> tokenEventsToAdd = TrendsNoCounter().Item1;
         foreach (TokenType type in tokenEventsToAdd)
         {
             string tokencounter = ConstantStrings.TokenCounter(type);
