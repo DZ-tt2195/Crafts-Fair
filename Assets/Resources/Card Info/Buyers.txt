@@ -1,28 +1,28 @@
 cardName	textBox	coinAmount	artCredit	notes
-Bare_Minimum	Sell exactly 2 TokenIcon.	1		
-Chose_Art	You chose to remove a counter from ArtIcon this turn.	1		CareArt
-Chose_House	You chose to remove a counter from HouseIcon this turn.	1		CareHouse
-Chose_Sword	You chose to remove a counter from SwordIcon this turn.	1		CareSword
-Chose_Tech	You chose to remove a counter from TechIcon this turn.	1		CareTech
+Backer	You chose to remove a counter from TechIcon this turn.	1	Brian Brinlee \nDominion: Menagerie \n (Invest)	CareTech
+Lender	You chose to remove a counter from HouseIcon this turn.	1	Matthias Catrein \nDominion \n(Moneylender)	CareHouse
+Miser	Sell exactly 2 TokenIcon.	1	Marco Primo \nDominion: Adventures \n(Miser)	
+Patron	You chose to remove a counter from ArtIcon this turn.	1	Claus Stephan \nDominion: Renaissance \n(Patron)	CareArt
 Perfect_Fit	You have exactly 0 TokenIcon left after selling.	1		
+Squire	You chose to remove a counter from SwordIcon this turn.	1	Anthony Palumbo \nMTG: Ixalan \n(Seekers' Squire)	CareSword
 Unnecessary_Surplus	You have at least 5 TokenIcon left after selling.	1		
+Collector	Sell at least 1 ArtIcon, 1 HouseIcon, 1 SwordIcon, and 1 TechIcon.	2	Hans Krill \nDominion: Allies \n(Herb Gatherer)	CareArt, CareHouse, CareSword, CareTech
 Many_Ones	Sell at least 4 TokenIcon at 1 LevelIcon.	2		Care1
-Menagerie	Sell at least 1 ArtIcon, 1 HouseIcon, 1 SwordIcon, and 1 TechIcon.	2		CareArt, CareHouse, CareSword, CareTech
-Rise_Of_Villages	Sell at least 2 TokenIcon at 2 LevelIcon.	2		Care2
 Total_Four	The LevelIcon of all sold TokenIcon total to exactly 4.	2		
-Above_And_Beyond	Sell at least 6 TokenIcon.	3		
-Art_Sword_Tech	Sell 1 ArtIcon, 1 SwordIcon with a higher LevelIcon, and 1 TechIcon with an even higher LevelIcon.	3		CareArt, CareSword, CareTech
-House_Tech_Art	Sell 1 HouseIcon, 1 TechIcon with a higher LevelIcon, and 1 ArtIcon with an even higher LevelIcon.	3		CareHouse, CareTech, CareArt
-Sword_Art_House	Sell 1 SwordIcon, 1 ArtIcon with a higher LevelIcon, and 1 HouseIcon with an even higher LevelIcon.	3		CareSword, CareArt, CareHouse
-Tech_House_Sword	Sell 1 TechIcon, 1 HouseIcon with a higher LevelIcon, and 1 SwordIcon with an even higher LevelIcon.	3		CareTech, CareHouse, CareSword
+Villager	Sell at least 2 TokenIcon at 2 LevelIcon.	2	Julien Delval \nDominion: Allies \n(Miller)	Care2
+Artificer	Sell 1 ArtIcon, 1 SwordIcon with a higher LevelIcon, and 1 TechIcon with an even higher LevelIcon.	3	Lynell Ingram \nDominion: Adventures \n(Artificer)	CareArt, CareSword, CareTech
+Artisan	Sell 1 HouseIcon, 1 TechIcon with a higher LevelIcon, and 1 ArtIcon with an even higher LevelIcon.	3	Harald Lieske \nDominion \n(Artisan)	CareHouse, CareTech, CareArt
+Bishop	Sell 1 SwordIcon, 1 ArtIcon with a higher LevelIcon, and 1 HouseIcon with an even higher LevelIcon.	3	Tommy Arnold \nMTG: Ixalan \n(Bishop of Rebirth)	CareSword, CareArt, CareHouse
+Bulk_Buyer	Sell at least 6 TokenIcon.	3	Eric J. Carter \nDominion: Cornucopia and Guilds \n(Shop)	
+Sentry	Sell 1 TechIcon, 1 HouseIcon with a higher LevelIcon, and 1 SwordIcon with an even higher LevelIcon.	3	Eric J. Carter \nDominion \n(Sentry)	CareTech, CareHouse, CareSword
 Total_Six	The LevelIcon of all sold TokenIcon total to exactly 6.	3		
+Aristocrat	Sell at least 2 TokenIcon at 4 LevelIcon.	4	Yusume Mamada \nDominion: Rising Sun \n(Aristocrat)	Care4
 Many_Twos	Sell at least 4 TokenIcon at 2 LevelIcon.	4		Care2
-Rise_Of_Kingdoms	Sell at least 2 TokenIcon at 4 LevelIcon.	4		Care4
 Total_Eight	The LevelIcon of all sold TokenIcon total to exactly 8.	4		
-Sequential_Art	Sell at least 4 ArtIcon with consecutively ordered LevelIcon.	5		CareArt
-Sequential_House	Sell at least 4 HouseIcon with consecutively ordered LevelIcon.	5		CareHouse
-Sequential_Sword	Sell at least 4 SwordIcon with consecutively ordered LevelIcon.	5		CareSword
-Sequential_Tech	Sell at least 4 TechIcon with consecutively ordered LevelIcon.	5		CareTech
+Engineer	Sell at least 4 HouseIcon with consecutively ordered LevelIcon.	5	Elisa Cella \nDominion: Empires \n(Engineer)	CareHouse
+Historian	Sell at least 4 SwordIcon with consecutively ordered LevelIcon.	5	Joshua Stewart \nDominion: Renaissance \n(Seer)	CareSword
+Inventor	Sell at least 4 TechIcon with consecutively ordered LevelIcon.	5	Julien Delval \nDominion: Renaissance \n(Inventor)	CareTech
+Sculptor	Sell at least 4 ArtIcon with consecutively ordered LevelIcon.	5	Jessi J \nDominion: Renaissance \n(Sculptor)	CareArt
 Total_Ten	The LevelIcon of all sold TokenIcon total to exactly 10.	5		
 Many_Threes	Sell at least 4 TokenIcon at 3 LevelIcon.	6		Care3
-Rise_Of_Empires	Sell at least 2 TokenIcon at 6 LevelIcon.	6		Care6
+Royalty	Sell at least 2 TokenIcon at 6 LevelIcon.	6	Kieran Yanner \nMTG: Throne of Eldraine \n(Kenrith, the Returned King)	Care6
