@@ -1,14 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class Total_Ten : CardType
+public class Family : CardType
 {
-    public Total_Ten(CardData dataFile) : base(dataFile)
+    public Family(CardData dataFile) : base(dataFile)
     {
     }
 
     public override bool CanSell(Player player, Dictionary<TokenType, int[]> soldTokens)
     {
-        return SumOfLevels(soldTokens, FindNumber.Exact, 10);
+        return WithLevel(soldTokens, FindNumber.Minimum, 3, 4);
     }
 }

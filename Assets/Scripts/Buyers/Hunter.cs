@@ -1,14 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class Many_Threes : CardType
+public class Hunter : CardType
 {
-    public Many_Threes(CardData dataFile) : base(dataFile)
+    public Hunter(CardData dataFile) : base(dataFile)
     {
     }
 
     public override bool CanSell(Player player, Dictionary<TokenType, int[]> soldTokens)
     {
-        return WithLevel(soldTokens, FindNumber.Minimum, 3, 4);
+        return SumOfLevels(soldTokens, FindNumber.Exact, 6);
     }
 }

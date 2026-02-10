@@ -1,9 +1,9 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class Many_Twos : CardType
+public class Coven : CardType
 {
-    public Many_Twos(CardData dataFile) : base(dataFile)
+    public Coven(CardData dataFile) : base(dataFile)
     {
     }
 

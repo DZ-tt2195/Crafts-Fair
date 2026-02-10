@@ -1,14 +1,14 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class Total_Eight : CardType
+public class Magnate : CardType
 {
-    public Total_Eight(CardData dataFile) : base(dataFile)
+    public Magnate(CardData dataFile) : base(dataFile)
     {
     }
 
     public override bool CanSell(Player player, Dictionary<TokenType, int[]> soldTokens)
     {
-        return SumOfLevels(soldTokens, FindNumber.Exact, 8);
+        return SumOfLevels(soldTokens, FindNumber.Exact, 10);
     }
 }

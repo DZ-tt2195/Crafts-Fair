@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Perfect_Fit : CardType
+public class Crowds : CardType
 {
-    public Perfect_Fit(CardData dataFile) : base(dataFile)
+    public Crowds(CardData dataFile) : base(dataFile)
     {
     }
 

@@ -100,10 +100,10 @@ Close	Close
 Any	Any
 Buyer	Buyer
 Trend	Trend
-Perfect_Fit	Perfect Fit
-Perfect_Fit_Text	You have exactly 0 TokenIcon left after selling.
-Unnecessary_Surplus	Unnecessary Surplus
-Unnecessary_Surplus_Text	You have at least 5 TokenIcon left after selling.
+Crowds	Crowds
+Crowds_Text	You have exactly 0 TokenIcon left after selling.
+Blacksmith	Blacksmith
+Blacksmith_Text	You have at least 5 TokenIcon left after selling.
 Miser	Miser
 Miser_Text	Sell exactly 2 TokenIcon.
 Bulk_Buyer	Bulk Buyer
@@ -120,14 +120,14 @@ Stocks	Stocks
 Stocks_Text	 +1 CoinIcon per 2 CardIcon you sold this turn (round down).
 Quantity	Quantity
 Quantity_Text	 +1 ArtIcon, +1 HouseIcon, +1 SwordIcon, and +1 TechIcon, all at 1 LevelIcon.
-Total_Four	Total Four
-Total_Four_Text	The LevelIcon of all sold TokenIcon total to exactly 4.
-Total_Six	Total Six
-Total_Six_Text	The LevelIcon of all sold TokenIcon total to exactly 6.
-Total_Eight	Total Eight
-Total_Eight_Text	The LevelIcon of all sold TokenIcon total to exactly 8.
-Total_Ten	Total Ten
-Total_Ten_Text	The LevelIcon of all sold TokenIcon total to exactly 10.
+Scavenger	Scavenger
+Scavenger_Text	The LevelIcon of all sold TokenIcon total to exactly 4.
+Hunter	Hunter
+Hunter_Text	The LevelIcon of all sold TokenIcon total to exactly 6.
+Driver	Driver
+Driver_Text	The LevelIcon of all sold TokenIcon total to exactly 8.
+Magnate	Magnate
+Magnate_Text	The LevelIcon of all sold TokenIcon total to exactly 10.
 Sculptor	Sculptor
 Sculptor_Text	Sell at least 4 ArtIcon with consecutively ordered LevelIcon.
 Engineer	Engineer
@@ -138,8 +138,8 @@ Inventor	Inventor
 Inventor_Text	Sell at least 4 TechIcon with consecutively ordered LevelIcon.
 Collector	Collector
 Collector_Text	Sell at least 1 ArtIcon, 1 HouseIcon, 1 SwordIcon, and 1 TechIcon.
-Many_Ones	Many Ones
-Many_Ones_Text	Sell at least 4 TokenIcon at 1 LevelIcon.
+Piper	Piper
+Piper_Text	Sell at least 4 TokenIcon at 1 LevelIcon.
 Patron	Patron
 Patron_Text	You chose to remove a counter from ArtIcon this turn.
 Lender	Lender
@@ -174,9 +174,9 @@ Homage	Homage
 Homage_Text	 +1 SwordIcon, where its LevelIcon is equal to the number of ArtIcon you have (you can't create at 0 LevelIcon; max LevelIcon is 6).
 Reallocate	Reallocate
 Reallocate_Text	 +1 TechIcon at 6 LevelIcon. Then downgrade 2 TokenIcon that are at 2 LevelIcon or higher.
-Many_Twos	Many Twos
-Many_Twos_Text	Sell at least 4 TokenIcon at 2 LevelIcon.
-Many_Threes	Many Threes
-Many_Threes_Text	Sell at least 4 TokenIcon at 3 LevelIcon.
+Coven	Coven
+Coven_Text	Sell at least 4 TokenIcon at 2 LevelIcon.
+Family	Family
+Family_Text	Sell at least 4 TokenIcon at 3 LevelIcon.
 Quality	Quality
 Quality_Text	 +1 of any TokenIcon, at 4 LevelIcon.

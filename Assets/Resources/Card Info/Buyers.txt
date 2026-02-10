@@ -1,28 +1,28 @@
 cardName	textBox	coinAmount	artCredit	notes
 Backer	You chose to remove a counter from TechIcon this turn.	1	Brian Brinlee \nDominion: Menagerie \n (Invest)	CareTech
+Blacksmith	You have at least 5 TokenIcon left after selling.	1	Julien Delval \nDominion: Allies \n(Blacksmith)	
+Crowds	You have exactly 0 TokenIcon left after selling.	1	Lorraine Fajardo \nDominion: Cornucopia \n(Followers)	
 Lender	You chose to remove a counter from HouseIcon this turn.	1	Matthias Catrein \nDominion \n(Moneylender)	CareHouse
 Miser	Sell exactly 2 TokenIcon.	1	Marco Primo \nDominion: Adventures \n(Miser)	
 Patron	You chose to remove a counter from ArtIcon this turn.	1	Claus Stephan \nDominion: Renaissance \n(Patron)	CareArt
-Perfect_Fit	You have exactly 0 TokenIcon left after selling.	1		
 Squire	You chose to remove a counter from SwordIcon this turn.	1	Anthony Palumbo \nMTG: Ixalan \n(Seekers' Squire)	CareSword
-Unnecessary_Surplus	You have at least 5 TokenIcon left after selling.	1		
 Collector	Sell at least 1 ArtIcon, 1 HouseIcon, 1 SwordIcon, and 1 TechIcon.	2	Hans Krill \nDominion: Allies \n(Herb Gatherer)	CareArt, CareHouse, CareSword, CareTech
-Many_Ones	Sell at least 4 TokenIcon at 1 LevelIcon.	2		Care1
-Total_Four	The LevelIcon of all sold TokenIcon total to exactly 4.	2		
+Piper	Sell at least 4 TokenIcon at 1 LevelIcon.	2	Irina Nordsol \nMTG: Throne of Eldraine \n(Piper of the Swarm)	Care1
+Scavenger	The LevelIcon of all sold TokenIcon total to exactly 4.	2	Franz Vohwinkel \nDominion: Dark Ages \n(Scavenger)	
 Villager	Sell at least 2 TokenIcon at 2 LevelIcon.	2	Julien Delval \nDominion: Allies \n(Miller)	Care2
 Artificer	Sell 1 ArtIcon, 1 SwordIcon with a higher LevelIcon, and 1 TechIcon with an even higher LevelIcon.	3	Lynell Ingram \nDominion: Adventures \n(Artificer)	CareArt, CareSword, CareTech
 Artisan	Sell 1 HouseIcon, 1 TechIcon with a higher LevelIcon, and 1 ArtIcon with an even higher LevelIcon.	3	Harald Lieske \nDominion \n(Artisan)	CareHouse, CareTech, CareArt
 Bishop	Sell 1 SwordIcon, 1 ArtIcon with a higher LevelIcon, and 1 HouseIcon with an even higher LevelIcon.	3	Tommy Arnold \nMTG: Ixalan \n(Bishop of Rebirth)	CareSword, CareArt, CareHouse
 Bulk_Buyer	Sell at least 6 TokenIcon.	3	Eric J. Carter \nDominion: Cornucopia and Guilds \n(Shop)	
+Hunter	The LevelIcon of all sold TokenIcon total to exactly 6.	3	Julien Delval \nDominion: Allies \n(Hunter)	
 Sentry	Sell 1 TechIcon, 1 HouseIcon with a higher LevelIcon, and 1 SwordIcon with an even higher LevelIcon.	3	Eric J. Carter \nDominion \n(Sentry)	CareTech, CareHouse, CareSword
-Total_Six	The LevelIcon of all sold TokenIcon total to exactly 6.	3		
 Aristocrat	Sell at least 2 TokenIcon at 4 LevelIcon.	4	Yusume Mamada \nDominion: Rising Sun \n(Aristocrat)	Care4
-Many_Twos	Sell at least 4 TokenIcon at 2 LevelIcon.	4		Care2
-Total_Eight	The LevelIcon of all sold TokenIcon total to exactly 8.	4		
+Coven	Sell at least 4 TokenIcon at 2 LevelIcon.	4	Claus Stephan \nDominion: Menagerie \n(Coven)	Care2
+Driver	The LevelIcon of all sold TokenIcon total to exactly 8.	4	Dennis Lohausen \nDominion: Dark Ages \n(Ironmonger)	
 Engineer	Sell at least 4 HouseIcon with consecutively ordered LevelIcon.	5	Elisa Cella \nDominion: Empires \n(Engineer)	CareHouse
 Historian	Sell at least 4 SwordIcon with consecutively ordered LevelIcon.	5	Joshua Stewart \nDominion: Renaissance \n(Seer)	CareSword
 Inventor	Sell at least 4 TechIcon with consecutively ordered LevelIcon.	5	Julien Delval \nDominion: Renaissance \n(Inventor)	CareTech
+Magnate	The LevelIcon of all sold TokenIcon total to exactly 10.	5	Harald Lieske \nDominion: Prosperity \n(Magnate)	
 Sculptor	Sell at least 4 ArtIcon with consecutively ordered LevelIcon.	5	Jessi J \nDominion: Renaissance \n(Sculptor)	CareArt
-Total_Ten	The LevelIcon of all sold TokenIcon total to exactly 10.	5		
-Many_Threes	Sell at least 4 TokenIcon at 3 LevelIcon.	6		Care3
+Family	Sell at least 4 TokenIcon at 3 LevelIcon.	6	Mizutametori \nMTG: Wizards Play Network 2025\n(Gran-Gran)	Care3
 Royalty	Sell at least 2 TokenIcon at 6 LevelIcon.	6	Kieran Yanner \nMTG: Throne of Eldraine \n(Kenrith, the Returned King)	Care6
