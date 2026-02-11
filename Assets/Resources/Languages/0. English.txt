@@ -29,10 +29,10 @@ Type_in_username	You have to type in a username.
 Attempt_to_reconnect	Attempting to reconnect to $Room$'s room...
 Failed_to_reconnect	Failed to reconnect to $Room$'s room.
 Choose_Trends	Choose Trends for this game
-Custom_Trend_1	Trend ArtIcon
-Custom_Trend_2	Trend HouseIcon
-Custom_Trend_3	Trend SwordIcon
-Custom_Trend_4	Trend TechIcon
+Custom_Art_Trend	Trend ArtIcon
+Custom_House_Trend	Trend HouseIcon
+Custom_Sword_Trend	Trend SwordIcon
+Custom_Tech_Trend	Trend TechIcon
 Choose	Choose
 Random	Random
 Message_All	Type into chat (message all)
@@ -52,26 +52,27 @@ HouseIcon	HouseIcon
 SwordIcon	SwordIcon
 TechIcon	TechIcon
 CoinIcon	CoinIcon
+CoinIcon_Text	CoinIcon: get 20 CoinIcon or more to win
 Coin_Amount	$Num$ CoinIcon
 TokenIcon	TokenIcon
-LevelIcon	LevelIcon
-CoinIcon_Text	CoinIcon: get 20 CoinIcon or more to win
 TokenIcon_Text	TokenIcon: any type of token (ArtIcon, HouseIcon, SwordIcon, TechIcon)
+LevelIcon	LevelIcon
 LevelIcon_Text	LevelIcon: the level of a token, from 1 to 6
 Online_Next_Turn	Turn $Number$
-Ask_Token_Type	Choose a token type.
-Ask_Upgrade	Upgrade 1 $Token$ ($Num1$ / $Num2$).
-Ask_Downgrade	Downgrade $Token$ ($Num1$ / $Num2$).
-Ask_Lose	Lose $Token$ ($Num1$ / $Num2$).
-Online_Chose_Token	$Player$ chooses $Token$.
 Online_Add_Coin	$Player$ gets +$Num$ CoinIcon.
 Online_Lose_Coin	$Player$ loses $Num$ CoinIcon.
-Online_Add_Token	$Player$ adds $Amount$ $Token$ at $Level$ LevelIcon.
-Online_Lose_Token	$Player$ loses $Amount$ $Token$ at $Level$ LevelIcon.
-Online_Upgrade_Token	$Player$ upgrades $Amount$ $Token$ from $Level1$ LevelIcon to $Level2$ LevelIcon.
-Online_Downgrade_Token	$Player$ downgrades $Amount$ $Token$ from $Level1$ LevelIcon down to $Level2$ LevelIcon.
 Online_Draw_Buyer	$Player$ draws $Card$.
 Online_Draw_Buyer_Others	$Player$ draws 1 CardIcon.
+Ask_Token_Type	Choose a token type.
+Online_Chose_Token	$Player$ chooses $Token$.
+Online_Add_Token	$Player$ adds $Amount$ $Token$ at $Level$ LevelIcon.
+Ask_Upgrade	Upgrade 1 $Token$ ($Num1$ / $Num2$).
+Online_Upgrade_Token	$Player$ upgrades $Amount$ $Token$ from $Level1$ LevelIcon to $Level2$ LevelIcon.
+Ask_Downgrade	Downgrade $Token$ ($Num1$ / $Num2$).
+Online_Downgrade_Token	$Player$ downgrades $Amount$ $Token$ from $Level1$ LevelIcon down to $Level2$ LevelIcon.
+Ask_Lose	Lose $Token$ ($Num1$ / $Num2$).
+Online_Lose_Token	$Player$ loses $Amount$ $Token$ at $Level$ LevelIcon.
+Ask_Discard	Discard CardIcon ($Num1$ / $Num2$).
 Online_Discard_Buyer	$Player$ discards $Card$.
 Ask_Sell	You may sell 2+ TokenIcon, while meeting requirements for 2+ CardIcon.
 Online_Make_Sell	$Player$ sells $TokenNum$ TokenIcon and $CardNum$ CardIcon.
@@ -82,7 +83,6 @@ Ask_Resolve	Choose a Trend to resolve.
 Online_Resolve_Card	$Player$ resolves $Card$.
 Confirm	Confirm
 Decline	Decline
-Ask_Discard	Discard CardIcon ($Num1$ / $Num2$).
 Done	Done
 Pause_to_Read	A pause to let you read things.
 Pause_to_Undo	Last chance to undo anything.
@@ -94,7 +94,7 @@ Online_Player_Won	$Player$ has won.
 Resigned	(Resigned)
 Switch_Player	Switch Player
 Rules	Rules
-Rules_Summary	Each Turn: \n1. Choose any TokenIcon (token) and remove a counter from that token's Trend. \n2. Create 1 of that token at level 1, then upgrade 1 token of that type to the next LevelIcon. \n3. You may sell 2+ TokenIcon and 2+ CardIcon, all at once, to score CoinIcon. \n\nBetween Turns:\n4. For each Trend with 0 counters, each player draws 2 CardIcon and follows its instructions. \n5. Add the counters back onto those Trends (2 per player). \n6. The first player to reach 20+ CoinIcon wins.
+Rules_Summary	Each Turn: \n1. Choose any TokenIcon (token) and remove a counter from that token's Trend. \n2. Create 1 of that token at 1 LevelIcon, then upgrade 1 token of that type to the next LevelIcon. \n3. You may sell 2+ TokenIcon and 2+ CardIcon, all at once, to score CoinIcon. \n\nBetween Turns:\n4. For each Trend with 0 counters, each player draws 2 CardIcon and follows its instructions. \n5. Add the counters back onto those Trends (2 per player). \n6. The first player to reach 20+ CoinIcon wins.
 Encyclopedia	Encyclopedia
 Close	Close
 Any	Any

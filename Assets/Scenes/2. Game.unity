@@ -2297,6 +2297,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TurnManager
   endScreen: {fileID: 1951802729}
   summaryText: {fileID: 579865896}
+  gameOver: {fileID: 351484162}
+  leave: {fileID: 1107807990}
 --- !u!114 &241869885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4930,6 +4932,7 @@ MonoBehaviour:
   minimumText: {fileID: 8036832353591802597}
   maximumText: {fileID: 5802450517034057035}
   currentText: {fileID: 5261259768999478465}
+  confirmText: {fileID: 2075185610}
 --- !u!4 &652645231
 Transform:
   m_ObjectHideFlags: 0
@@ -6829,7 +6832,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5171458088357418665, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
       propertyPath: m_Name
-      value: Event 2
+      value: Trend 2
       objectReference: {fileID: 0}
     - target: {fileID: 6453452532442191667, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
       propertyPath: m_text
@@ -6940,6 +6943,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ab51fed9821542e092a3cc52c8498cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardSelect
+--- !u!114 &808057360 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6453452532442191667, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
+  m_PrefabInstance: {fileID: 808057357}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &808065485
 GameObject:
   m_ObjectHideFlags: 0
@@ -7637,7 +7651,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5171458088357418665, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
       propertyPath: m_Name
-      value: Event 1
+      value: Trend 1
       objectReference: {fileID: 0}
     - target: {fileID: 6453452532442191667, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
       propertyPath: m_text
@@ -7748,6 +7762,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ab51fed9821542e092a3cc52c8498cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardSelect
+--- !u!114 &905231729 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6453452532442191667, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
+  m_PrefabInstance: {fileID: 905231726}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &931843588
 GameObject:
   m_ObjectHideFlags: 0
@@ -9716,7 +9741,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5171458088357418665, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
       propertyPath: m_Name
-      value: Event 3
+      value: Trend 3
       objectReference: {fileID: 0}
     - target: {fileID: 6453452532442191667, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
       propertyPath: m_text
@@ -9827,6 +9852,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ab51fed9821542e092a3cc52c8498cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardSelect
+--- !u!114 &1211775729 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6453452532442191667, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
+  m_PrefabInstance: {fileID: 1211775726}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1212656734
 GameObject:
   m_ObjectHideFlags: 0
@@ -12698,6 +12734,9 @@ MonoBehaviour:
   - card: {fileID: 823909828}
     countText: {fileID: 792578934}
     token: 3
+  switchPlayer: {fileID: 613561510}
+  rules: {fileID: 1240597073}
+  rulesSummary: {fileID: 2097049516}
 --- !u!114 &1562350002
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13728,6 +13767,9 @@ MonoBehaviour:
   importantCurrent: {fileID: 1824907122}
   logTypeSlider: {fileID: 747164870}
   undoButton: {fileID: 36127192}
+  shortText: {fileID: 676410242}
+  longText: {fileID: 883113349}
+  undoText: {fileID: 195794212}
 --- !u!114 &1682965186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14196,6 +14238,12 @@ MonoBehaviour:
   - {fileID: 808057359}
   - {fileID: 1211775728}
   - {fileID: 2117434097}
+  chooseTrends: {fileID: 1044513777}
+  trendArt: {fileID: 905231729}
+  trendHouse: {fileID: 808057360}
+  trendSword: {fileID: 1211775729}
+  trendTech: {fileID: 2117434098}
+  confirm: {fileID: 2073950441}
 --- !u!114 &1771995098
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15884,7 +15932,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -817, y: 615}
+  m_AnchoredPosition: {x: -850, y: 615}
   m_SizeDelta: {x: 300, y: 75}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1970410456
@@ -16762,7 +16810,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5171458088357418665, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
       propertyPath: m_Name
-      value: Event 4
+      value: Trend 4
       objectReference: {fileID: 0}
     - target: {fileID: 6453452532442191667, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
       propertyPath: m_text
@@ -16873,6 +16921,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ab51fed9821542e092a3cc52c8498cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardSelect
+--- !u!114 &2117434098 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6453452532442191667, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
+  m_PrefabInstance: {fileID: 2117434095}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2137235014
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17798,6 +17857,6 @@ SceneRoots:
   - {fileID: 849367365}
   - {fileID: 1586345563}
   - {fileID: 1122488765}
-  - {fileID: 241869886}
   - {fileID: 1562350003}
+  - {fileID: 241869886}
   - {fileID: 652645231}

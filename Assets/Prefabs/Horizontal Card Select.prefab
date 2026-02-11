@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 135673357588841531}
   - component: {fileID: 8149424500928214768}
   - component: {fileID: 7228983216492032450}
-  - component: {fileID: 8609361070614640430}
   m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -138,19 +137,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &8609361070614640430
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1128802382836913906}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 159b66c071ced43f499eb58b9b7c8b01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SetText
-  key: 32
 --- !u!1 &2148436261469935661
 GameObject:
   m_ObjectHideFlags: 0
@@ -290,7 +276,6 @@ GameObject:
   - component: {fileID: 3941234995143703114}
   - component: {fileID: 4736024514179735433}
   - component: {fileID: 6453452532442191667}
-  - component: {fileID: 7445504911319871984}
   m_Layer: 0
   m_Name: Header
   m_TagString: Untagged
@@ -417,19 +402,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &7445504911319871984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3569301414723111945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 159b66c071ced43f499eb58b9b7c8b01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SetText
-  key: 82
 --- !u!1 &4334339016384719130
 GameObject:
   m_ObjectHideFlags: 0
@@ -798,10 +770,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1ab51fed9821542e092a3cc52c8498cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CardSelect
-  rectTrans: {fileID: 6601185372570472947}
   layout: {fileID: 3845987442020433998}
   randomButton: {fileID: 2927203152165459076}
   chooseButton: {fileID: 1660004653051377708}
+  randomText: {fileID: 8894743095627277585}
+  chooseText: {fileID: 7228983216492032450}
 --- !u!1 &5505387875060309150
 GameObject:
   m_ObjectHideFlags: 0
@@ -1009,7 +982,6 @@ GameObject:
   - component: {fileID: 6758308446390400880}
   - component: {fileID: 559196437420215583}
   - component: {fileID: 8894743095627277585}
-  - component: {fileID: 376418897596341043}
   m_Layer: 0
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -1136,19 +1108,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &376418897596341043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6921549052758673099}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 159b66c071ced43f499eb58b9b7c8b01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SetText
-  key: 33
 --- !u!1 &7210373590614926660
 GameObject:
   m_ObjectHideFlags: 0

@@ -17,6 +17,8 @@ public class TurnManager : PhotonCompatible
     Dictionary<string, Turn> storedTurns = new();
     [SerializeField] Transform endScreen;
     [SerializeField] TMP_Text summaryText;
+    [SerializeField] TMP_Text gameOver;
+    [SerializeField] TMP_Text leave;
 
     protected override void Awake()
     {
@@ -26,6 +28,8 @@ public class TurnManager : PhotonCompatible
         endScreen.gameObject.SetActive(false);
         playerPropertyToChange = new();
         masterPropertyToChange = new();
+        leave.text = AutoTranslate.Leave();
+        gameOver.text = AutoTranslate.Game_Over();
     }
 
     #endregion

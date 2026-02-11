@@ -48,7 +48,6 @@ public class DecisionContainer
         parentContainer?.listOfDCs.Add(this);
     }
 }
-
 public class RollBack
 {
     public Expression<Action> action { get; private set; }
@@ -61,7 +60,6 @@ public class RollBack
         parentContainer?.listOfRBs.Add(this);
     }
 }
-
 public class LogText
 {
     public string packagedText { get; private set; }
@@ -94,26 +92,26 @@ public class Log : PhotonCompatible
     [SerializeField] Scrollbar scroll;
     [SerializeField] TMP_Text allPast;
     [SerializeField] TMP_Text importantPast;
-
     List<LogText> currentLogTexts = new();
     [SerializeField] TMP_Text allCurrent;
     [SerializeField] TMP_Text importantCurrent;
-
     [Foldout("Current step", true)]
     public List<Action> inReaction = new();
     public DecisionContainer currentContainer { get; private set; }
     public CoroutineGroup groupToWait;
-
     [Foldout("Decisions", true)]
     public List<DecisionContainer> completedDecisions = new();
     List<DecisionContainer> initialContainers = new();
     [ReadOnly] public List<LogText> undosInLog = new();
     bool storeUndoPoint = false;
     public bool forward { get; private set; }
-
     [Foldout("UI", true)]
     [SerializeField] Slider logTypeSlider;
     [SerializeField] Button undoButton;
+    [Foldout("Translate", true)]
+    [SerializeField] TMP_Text shortText;
+    [SerializeField] TMP_Text longText;
+    [SerializeField] TMP_Text undoText;
 
     protected override void Awake()
     {
@@ -132,6 +130,10 @@ public class Log : PhotonCompatible
             ChangeScrolling();
         }
         logTypeSlider.value = 1;
+
+        shortText.text = AutoTranslate.Short();
+        longText.text = AutoTranslate.Long();
+        undoText.text = AutoTranslate.Undo();
     }
 
     #endregion

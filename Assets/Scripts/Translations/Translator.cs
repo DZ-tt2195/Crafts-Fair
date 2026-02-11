@@ -78,16 +78,7 @@ public class Translator : PhotonCompatible
 
 #region Helpers
 
-    public bool TranslationExists(string key)
-    {
-        return keyTranslate["English"].ContainsKey(key);
-    }
-
-    public string Translate(ToTranslate key)
-    {
-        return Translate(key.ToString());
-    }
-
+    public bool TranslationExists(string key) => keyTranslate["English"].ContainsKey(key);
     public string Translate(string key, List<(string, string)> toReplace = null)
     {
         string answer;
@@ -116,12 +107,10 @@ public class Translator : PhotonCompatible
         }
         return answer;
     }
-
     public Dictionary<string, Dictionary<string, string>> GetTranslations()
     {
         return keyTranslate;
     }
-
     public void ChangeLanguage(string newLanguage, Dictionary<string, string> addedTranslation)
     {
         if (addedTranslation != null)
@@ -135,7 +124,6 @@ public class Translator : PhotonCompatible
             SceneManager.LoadScene(toLoad);
         }
     }
-
     public string UnPackage(string toSplit, int owner = -1)
     {
         string targetText;

@@ -59,12 +59,14 @@ public class MakeDecision : PhotonCompatible
     [SerializeField] TMP_Text minimumText;
     [SerializeField] TMP_Text maximumText;
     [SerializeField] TMP_Text currentText;
+    [SerializeField] TMP_Text confirmText;
 
     protected override void Awake()
     {
         base.Awake();
         inst = this;
         this.bottomType = this.GetType();
+        confirmText.text = AutoTranslate.Confirm();
         slider.onValueChanged.AddListener(UpdateText);
 
         foreach (Transform child in findTextButtons)

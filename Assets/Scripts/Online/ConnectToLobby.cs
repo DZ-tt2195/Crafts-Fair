@@ -31,9 +31,25 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
     List<JoinRoomButton> listOfJoinButtons = new();
     [SerializeField] Slider playerSlider;
     [SerializeField] TMP_Text currentText;
+    [Foldout("Texts", true)]
+    [SerializeField] TMP_Text enterUsename;
+    [SerializeField] TMP_Text singlePlayer;
+    [SerializeField] TMP_Text encyclopedia;
+    [SerializeField] TMP_Text reconnect;
+    [SerializeField] TMP_Text connect;
+    [SerializeField] TMP_Text lastUpdate;
+    [SerializeField] TMP_Text selectRegion;
+    [SerializeField] TMP_Text author;
+    [SerializeField] TMP_Text tutorial1;
+    [SerializeField] TMP_Text tutorial2;
+    [SerializeField] TMP_Text disconnect;
+    [SerializeField] TMP_Text createRoomWithPlayers;
+    [SerializeField] TMP_Text enterHostname;
+    [SerializeField] TMP_Text join;
 
     private void Start()
     {
+        Translations();
         part2.gameObject.SetActive(true);
         joinManually.onClick.AddListener(() => JoinRoom(joinInput.text));
         disconnectButton.onClick.AddListener(() => PhotonNetwork.Disconnect());
@@ -64,6 +80,23 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
         };
         foreach ((string, string) var in regionAndCode)
             regionDropdown.AddOptions(new List<string>() { var.Item1 });
+    }
+    void Translations()
+    {
+        enterUsename.text = AutoTranslate.Enter_username();
+        singlePlayer.text = AutoTranslate.Single_Player();
+        encyclopedia.text = AutoTranslate.Encyclopedia();
+        reconnect.text = AutoTranslate.Reconnect();
+        connect.text = AutoTranslate.Connect();
+        lastUpdate.text = AutoTranslate.Last_Update();
+        selectRegion.text = AutoTranslate.Select_Region();
+        author.text = AutoTranslate.Game_Designer();
+        tutorial1.text = AutoTranslate.Tutorial_1();
+        tutorial2.text = AutoTranslate.Tutorial_2();
+        disconnect.text = AutoTranslate.Disconnect();
+        createRoomWithPlayers.text = AutoTranslate.Create_Room_with_players();
+        enterHostname.text = AutoTranslate.Enter_hostname();
+        join.text = AutoTranslate.Join();
     }
 
     IEnumerator ErrorMessage(string text)

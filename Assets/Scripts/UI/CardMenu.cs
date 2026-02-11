@@ -5,23 +5,32 @@ using System.Linq;
 using System.Collections.Generic;
 using Photon.Pun;
 using System.Text.RegularExpressions;
+using TMPro;
 
 public class CardMenu : PhotonCompatible
 {
     public static CardMenu instance;
+    [Foldout("UI", true)]
     int step = 0;
     [SerializeField] Button confirmButton;
     [SerializeField] GridLayoutGroup storeButtons;
     CardSelect mostRecentClick;
     List<(CardLayout, Button)> blankButtons = new();
     [SerializeField] List<CardSelect> eventSelect = new();
+    [Foldout("Text", true)]
+    [SerializeField] TMP_Text chooseTrends;
+    [SerializeField] TMP_Text trendArt;
+    [SerializeField] TMP_Text trendHouse;
+    [SerializeField] TMP_Text trendSword;
+    [SerializeField] TMP_Text trendTech;
+    [SerializeField] TMP_Text confirm;
+
     protected override void Awake()
     {
         base.Awake();
         this.bottomType = this.GetType();
         instance = this;
     }
-
     private void Start()
     {
         string currentPhase = (string)GetRoomProperty(ConstantStrings.CurrentPhase);
@@ -37,7 +46,6 @@ public class CardMenu : PhotonCompatible
             confirmButton.onClick.AddListener(Advance);
         }
     }
-
     public void ChooseFromList(CardSelect clicked, List<CardData> allData, bool vertical)
     {
         mostRecentClick = clicked;
@@ -55,7 +63,6 @@ public class CardMenu : PhotonCompatible
             }
         }
     }
-
     void SendName(int number)
     {
         mostRecentClick.SetCardImage(number);
@@ -63,7 +70,6 @@ public class CardMenu : PhotonCompatible
         foreach (var thing in blankButtons)
             thing.Item1.gameObject.SetActive(false);
     }
-
     void Advance()
     {
         if (step == 0)
@@ -78,6 +84,7 @@ public class CardMenu : PhotonCompatible
                 nextButton.onClick.AddListener(() => SendName(number));
                 nextButton.gameObject.SetActive(false);
             }
+            Translations();
         }
         else
         {
@@ -85,5 +92,14 @@ public class CardMenu : PhotonCompatible
             this.gameObject.SetActive(false);
         }
         step++;
+    }
+    void Translations()
+    {
+        chooseTrends.text = AutoTranslate.Choose_Trends();
+        trendArt.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_Art_Trend());
+        trendHouse.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_House_Trend());
+        trendSword.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_Sword_Trend());
+        trendTech.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_Tech_Trend());
+        confirm.text = AutoTranslate.Confirm();
     }
 }

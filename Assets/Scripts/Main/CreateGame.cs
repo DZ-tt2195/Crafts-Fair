@@ -35,12 +35,16 @@ public class CreateGame : PhotonCompatible
     bool decrease = true;
     public Canvas canvas { get; private set; }
     [SerializeField] List<EventVisual> eventInfo = new();
-
+    [Foldout("Texts", true)]
+    [SerializeField] TMP_Text switchPlayer;
+    [SerializeField] TMP_Text rules;
+    [SerializeField] TMP_Text rulesSummary;
     protected override void Awake()
     {
         base.Awake();
         this.bottomType = this.GetType();
         inst = this;
+        Translations();
         PhotonNetwork.AutomaticallySyncScene = true;
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
         VisualCards((int[])GetRoomProperty(ConstantStrings.EventList));
@@ -112,7 +116,12 @@ public class CreateGame : PhotonCompatible
             MakeObject(playerPrefab.gameObject);
         }
     }
-
+    void Translations()
+    {
+        switchPlayer.text = AutoTranslate.Switch_Player();
+        rules.text = AutoTranslate.Rules();
+        rulesSummary.text = KeywordTooltip.instance.EditText(AutoTranslate.Rules_Summary());
+    }
     #endregion
 
 #region Online
@@ -208,7 +217,7 @@ public class CreateGame : PhotonCompatible
         int forcedEvents = 4;
         for (int i = 1; i<=forcedEvents; i++)
         {
-            int chosenNumber = PlayerPrefs.GetInt($"Event {i}");
+            int chosenNumber = PlayerPrefs.GetInt($"Trend {i}");
             if (chosenNumber >= 0 && EventIDs.Remove(chosenNumber))
                 EventIDs.Insert(0, chosenNumber);
         }

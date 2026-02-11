@@ -42,8 +42,7 @@ public static class FileManager
         TextAsset englishFile = Resources.Load<TextAsset>("Languages/0. English");
         Dictionary<string, string> newDictionary = Translator.ReadLanguageFile(englishFile.text);
         
-        List<string> noConvert = new();
-        List<(string, List<string>)> needConvert = new();
+        List<(string, List<string>)> normal = new();
         List<(string, List<string>)> online = new();
 
         foreach (var KVP in newDictionary)
@@ -66,10 +65,7 @@ public static class FileManager
             }
             else
             {
-                if (allMatches.Count == 0)
-                    noConvert.Add(key);
-                else
-                    needConvert.Add((key, allMatches));
+                normal.Add((key, allMatches));
             }
         }
 
@@ -78,11 +74,11 @@ public static class FileManager
             writer.WriteLine("public static class AutoTranslate \n{");
 
             string needSubEnum = "";
-            for (int i = 0; i < needConvert.Count; i++)
+            for (int i = 0; i < normal.Count; i++)
             {
-                (string key, List<string> replace) = needConvert[i];
+                (string key, List<string> replace) = normal[i];
                 needSubEnum += key;
-                if (i < noConvert.Count - 1)
+                if (i < normal.Count - 1)
                     needSubEnum += ",";
 
                 string nextCode = $"public static string {key} (";
@@ -105,20 +101,7 @@ public static class FileManager
                 nextCode += "});";
                 writer.WriteLine(nextCode);
             }
-
-            string toTranslateEnum = "";
-            for (int i = 0; i < noConvert.Count; i++)
-            {
-                string toAdd = noConvert[i];
-                writer.WriteLine($"public static string {toAdd}() => Translator.inst.Translate(\"{toAdd}\");");
-                toTranslateEnum += toAdd;
-                if (i < noConvert.Count - 1)
-                    toTranslateEnum += ",";
-            }
             writer.WriteLine("}");
-            
-            writer.WriteLine("public enum ToTranslate {" + toTranslateEnum + "}");
-            //writer.WriteLine("public enum NeedSub {" + needSubEnum + "}");
         }
 
         using (StreamWriter writer = new StreamWriter("Assets/Scripts/Translations/OnlineTranslate.cs"))
@@ -155,7 +138,7 @@ public static class FileManager
             //writer.WriteLine("public enum OnlinePackage {" + onlineEnum + "}");
         }
 
-        Debug.Log($"{noConvert.Count} enum lines, {needConvert.Count} converted lines, {online.Count} online lines");
+        Debug.Log($"{normal.Count} lines, {online.Count} online lines");
         AssetDatabase.Refresh();
     }
 }

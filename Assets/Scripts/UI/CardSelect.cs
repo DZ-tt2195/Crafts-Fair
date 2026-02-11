@@ -3,13 +3,15 @@ using UnityEngine.UI;
 using MyBox;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using TMPro;
 
 public class CardSelect : MonoBehaviour
 {
-    [SerializeField] RectTransform rectTrans;
     [SerializeField]CardLayout layout;
     [SerializeField]Button randomButton;
     [SerializeField]Button chooseButton;
+    [SerializeField] TMP_Text randomText;
+    [SerializeField] TMP_Text chooseText;
     List<CardData> allData;
     bool vertical;
 
@@ -17,6 +19,8 @@ public class CardSelect : MonoBehaviour
     {
         vertical = false;
         allData = GameFiles.inst.trendFiles;
+        randomText.text = AutoTranslate.Random();
+        chooseText.text = AutoTranslate.Choose();
         randomButton.onClick.AddListener(() => SetCardImage(-1));
         chooseButton.onClick.AddListener(() => CardMenu.instance.ChooseFromList(this, allData, vertical));
     }

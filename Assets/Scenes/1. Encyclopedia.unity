@@ -1447,6 +1447,9 @@ MonoBehaviour:
   buyerView: {fileID: 451277966}
   trendView: {fileID: 489674816}
   viewSlider: {fileID: 347830364}
+  buyer: {fileID: 1550909540}
+  trend: {fileID: 224632699}
+  close: {fileID: 971116838}
 --- !u!4 &1189922528
 Transform:
   m_ObjectHideFlags: 0

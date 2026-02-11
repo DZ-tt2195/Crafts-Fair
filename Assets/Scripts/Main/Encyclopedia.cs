@@ -8,6 +8,7 @@ using Photon.Pun;
 public class Encyclopedia : MonoBehaviour
 {
     public static Encyclopedia inst;
+    [Foldout("UI", true)]
     [SerializeField] Card buyerPrefab;
     [SerializeField] Card trendPrefab;
     [SerializeField] GridLayoutGroup buyerGrid;
@@ -17,6 +18,10 @@ public class Encyclopedia : MonoBehaviour
     [SerializeField] Slider viewSlider;
     List<Card> allBuyers = new();
     List<Card> allTrends = new();
+    [Foldout("Texts", true)]
+    [SerializeField] TMP_Text buyer;
+    [SerializeField] TMP_Text trend;
+    [SerializeField] TMP_Text close;
 
     private void Awake()
     {
@@ -30,9 +35,9 @@ public class Encyclopedia : MonoBehaviour
             trendView.gameObject.SetActive((int)value == 1);
         }
     }
-
     private void Start()
     {
+        Translations();
         for (int i = 0; i < GameFiles.inst.buyerFiles.Count; i++)
         {
             GameObject nextCard = Instantiate(buyerPrefab.gameObject);
@@ -49,5 +54,11 @@ public class Encyclopedia : MonoBehaviour
             allTrends.Add(cardPV);
             cardPV.transform.SetParent(trendGrid.transform);
         }
+    }
+    void Translations()
+    {
+        buyer.text = AutoTranslate.Buyer();
+        trend.text = AutoTranslate.Trend();
+        close.text = AutoTranslate.Close();
     }
 }
