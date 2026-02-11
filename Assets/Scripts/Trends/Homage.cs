@@ -8,9 +8,10 @@ public class Homage : CardType
     {
     }
 
-    public override void EventEffect(Player player, int logged)
+    public override void TrendEffect(Player player, int logged)
     {
-        int numArt = MyExtensions.SumOfArray(player.GetTokenDict()[TokenType.ArtIcon]);
-        player.AddLoseToken(1, (numArt, TokenType.SwordIcon), logged);
+        int numArt = player.GetTokenDict()[TokenType.ArtIcon][1];
+        player.AddLoseToken(1, (1, TokenType.SwordIcon), logged);
+        player.UpDowngradeToken(1, (1, TokenType.SwordIcon), (numArt+1, TokenType.SwordIcon), logged);
     }
 }

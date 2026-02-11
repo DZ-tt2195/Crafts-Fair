@@ -1,14 +1,15 @@
 cardName	textBox	artCredit	notes
-Homage	 +1 SwordIcon, where its LevelIcon is equal to the number of ArtIcon you have (you can't create at 0 LevelIcon; max LevelIcon is 6).	Lynell Ingram \nDominion: Plunder \n(Sword)	AddSword, CareArt
+Homage	 +1 SwordIcon at 1 LevelIcon. Then upgrade it once per ArtIcon you have at 1 LevelIcon.	Lynell Ingram \nDominion: Plunder \n(Sword)	AddSword, CareArt, UpgradeSword, Care1
 Innovation	If you have no TechIcon, +4 TechIcon at 1 LevelIcon.	Ryan Laukat \nDominion: Renaissance \n(Innovation)	TokenOrLess, CareTech, AddTech, Add1
-Merging	 +1 HouseIcon at 6 LevelIcon. Then lose 2 HouseIcon.	Harald Lieske \nDominion: Empires \n(Villa)	AddHouse, LoseHouse, Add6
-Museums	 +1 ArtIcon, where its LevelIcon is equal to your HouseIcon with the highest LevelIcon (you can't create at 0 LevelIcon).	Julien Delval \nDominion: Empires \n(Museum)	AddArt, CareHouse
-Pageants	If you have at least 5 CoinIcon, +4 ArtIcon at 1 LevelIcon.	Ryan Laukat \nDominion: Renaissance \n(Pageant)	CoinOrMore, AddArt, Add1
-Polish	Upgrade each of your TokenIcon at 3 LevelIcon to 4 LevelIcon.	Ryan Laukat \nDominion: Prosperity \n(Platinum)	Care3, UpgradeAny
-Progress	Upgrade 1 ArtIcon, 1 HouseIcon, 1 SwordIcon, and 1 TechIcon, each by 1 LevelIcon.	Eric J. Carter \nDominion: Plunder \n(Wealthy Village)	UpgradeArt, UpgradeHouse, UpgradeSword, UpgradeTech
+Merge	 +1 HouseIcon at 6 LevelIcon. Then lose 2 HouseIcon.	Harald Lieske \nDominion: Empires \n(Villa)	AddHouse, LoseHouse, Add6
+Museums	 +1 ArtIcon at 1 LevelIcon. Then upgrade it to the same LevelIcon as your highest HouseIcon (if any).	Julien Delval \nDominion: Empires \n(Museum)	AddArt, CareHouse, UpgradeArt
+Pageants	If you have at least 5 CoinIcon, +4 ArtIcon at 1 LevelIcon.	Ryan Laukat \nDominion: Renaissance \n(Pageant)	CareCoin, AddArt, Add1
+Polish	Upgrade each of your TokenIcon at 3 LevelIcon.	Ryan Laukat \nDominion: Prosperity \n(Platinum)	Care3, UpgradeAny
+Progress	Upgrade 1 ArtIcon, 1 HouseIcon, 1 SwordIcon, and 1 TechIcon.	Eric J. Carter \nDominion: Plunder \n(Wealthy Village)	UpgradeArt, UpgradeHouse, UpgradeSword, UpgradeTech
 Quality	 +1 of any TokenIcon, at 4 LevelIcon.	Harald Lieske \nDominion: Plunder \n(Insignia)	AddAny, Add4
 Quantity	 +1 ArtIcon, +1 HouseIcon, +1 SwordIcon, and +1 TechIcon, all at 1 LevelIcon.	Garret DeChellis \nDominion: Plunder \n(Jewels)	AddArt, AddHouse, AddSword, AddTech, Add1
 Reallocate	 +1 TechIcon at 6 LevelIcon. Then downgrade 2 TokenIcon that are at 2 LevelIcon or higher.	Claus Stephan \nDominion: Renaissance \n(Treasurer)	AddTech, Downgrade, Add6
 Security	If you have at least 1 TokenIcon at 6 LevelIcon, +4 SwordIcon at 1 LevelIcon.	Harald Lieske \nDominion: Renaissance \n(Citadel)	TokenOrMore, Care6, AddSword, Add1
+Smelt	 +1 SwordIcon at 6 LevelIcon. Then lose 1 ArtIcon, 1 HouseIcon, and 1 TechIcon.	Elisa Cella \nDominion: Menagerie \n(Kiln)	AddSword, Add6, LoseArt, LoseHouse, LoseTech
 Stocks	 +1 CoinIcon per 2 CardIcon you sold this turn (round down).	Grant Hansen \nDominion: Plunder \n(Doubloons)	GainCoin
 Tourism	If you have at least 3 TokenIcon at exactly 2 LevelIcon, +4 HouseIcon at 1 LevelIcon.	Marcel-Andre Casasola Merkle \nPacific \n(Tourist Season)	TokenOrMore, Care2, AddHouse, Add1

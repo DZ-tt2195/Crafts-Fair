@@ -6,16 +6,19 @@ public class Museums : CardType
     {
     }
 
-    public override void EventEffect(Player player, int logged)
+    public override void TrendEffect(Player player, int logged)
     {
+        int highestHouse = 0;
         int[] allHouses = player.GetTokenDict()[TokenType.HouseIcon];
         for (int i = allHouses.Length-1; i >= 0; i--)
         {
             if (allHouses[i] >= 1)
             {
-                player.AddLoseToken(1, (i, TokenType.ArtIcon), logged);
+                highestHouse = i;
                 break;
             }
         }
+        player.AddLoseToken(1, (1, TokenType.ArtIcon), logged);
+        player.UpDowngradeToken(1, (1, TokenType.ArtIcon), (highestHouse, TokenType.ArtIcon), logged);
     }
 }

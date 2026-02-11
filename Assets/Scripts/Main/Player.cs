@@ -157,11 +157,14 @@ public class Player : PhotonCompatible
     {
         if (num == 0)
             return;
-        if (num > 0)
-            Log.inst.AddMyText(important, OnlineTranslate.Online_Add_Coin(this.name, num.ToString()), logged);
+
+        int actualAmount = (myCoins + num < 0) ? -1*myCoins : num;
+
+        if (actualAmount > 0)
+            Log.inst.AddMyText(important, OnlineTranslate.Online_Add_Coin(this.name, actualAmount.ToString()), logged);
         else
-            Log.inst.AddMyText(important, OnlineTranslate.Online_Lose_Coin(this.name, Mathf.Abs(num).ToString()), logged);
-        Log.inst.NewRollback(() => ChangeCoin(num));
+            Log.inst.AddMyText(important, OnlineTranslate.Online_Lose_Coin(this.name, Mathf.Abs(actualAmount).ToString()), logged);
+        Log.inst.NewRollback(() => ChangeCoin(actualAmount));
     }
     void ChangeCoin(int num)
     {
@@ -171,26 +174,35 @@ public class Player : PhotonCompatible
     public Dictionary<TokenType, int[]> GetTokenDict() => myTokens;
     public void UpDowngradeToken(int num, (int level, TokenType token) first, (int level, TokenType token) second, int logged = 0, bool important = false)
     {
-        if (first.level == second.level || num == 0 || second.level <= 0)
+        if (num == 0 || first.level == second.level || second.level <= 0)
             return;
 
+        int actualLevel = ActualLevel(second.level);
+        int currentTokens = myTokens[first.token][first.level];
+        int actualAmount = (currentTokens + num < 0) ? -1*currentTokens : num;
+
         if (first.level < second.level)
-            Log.inst.AddMyText(important, OnlineTranslate.Online_Upgrade_Token(this.name, num.ToString(), first.token.ToString(), first.level.ToString(), ActualLevel(second.level).ToString()), logged);
+            Log.inst.AddMyText(important, OnlineTranslate.Online_Upgrade_Token(this.name, actualAmount.ToString(), first.token.ToString(), first.level.ToString(), actualLevel.ToString()), logged);
         else
-            Log.inst.AddMyText(important, OnlineTranslate.Online_Downgrade_Token(this.name, num.ToString(), first.token.ToString(), first.level.ToString(), ActualLevel(second.level).ToString()), logged);
+            Log.inst.AddMyText(important, OnlineTranslate.Online_Downgrade_Token(this.name, actualAmount.ToString(), first.token.ToString(), first.level.ToString(), actualLevel.ToString()), logged);
         
-        Log.inst.NewRollback(() => ChangeToken(-num, first));
-        Log.inst.NewRollback(() => ChangeToken(num, second));
+        Log.inst.NewRollback(() => ChangeToken(-actualAmount, first));
+        Log.inst.NewRollback(() => ChangeToken(actualAmount, second));
     }    
     public void AddLoseToken(int num, (int level, TokenType token) info, int logged = 0, bool important = false)
     {
         if (num == 0 || info.level <= 0)
             return;
-        if (num > 0)
-            Log.inst.AddMyText(important, OnlineTranslate.Online_Add_Token(this.name, num.ToString(), info.token.ToString(), ActualLevel(info.level).ToString()), logged);
+
+        int actualLevel = ActualLevel(info.level);
+        int currentTokens = myTokens[info.token][actualLevel];
+        int actualAmount = (currentTokens + num < 0) ? -1*currentTokens : num;
+
+        if (actualAmount > 0)
+            Log.inst.AddMyText(important, OnlineTranslate.Online_Add_Token(this.name, actualAmount.ToString(), info.token.ToString(), actualLevel.ToString()), logged);
         else
-            Log.inst.AddMyText(important, OnlineTranslate.Online_Lose_Token(this.name, Mathf.Abs(num).ToString(), info.token.ToString(), ActualLevel(info.level).ToString()), logged);
-        Log.inst.NewRollback(() => ChangeToken(num, info));
+            Log.inst.AddMyText(important, OnlineTranslate.Online_Lose_Token(this.name, Mathf.Abs(actualAmount).ToString(), info.token.ToString(), actualLevel.ToString()), logged);
+        Log.inst.NewRollback(() => ChangeToken(actualAmount, info));
     }
     void ChangeToken(int num, (int level, TokenType token) info)
     {
@@ -198,10 +210,7 @@ public class Player : PhotonCompatible
         tokenArray[ActualLevel(info.level)] += Log.inst.forward ? num : -num;
         TurnManager.inst.WillChangePlayerProperty(this, info.token.ToString(), tokenArray); uiDictionary[info.token.ToString()] = true;
     }
-    int ActualLevel(int level)
-    {
-        return Mathf.Min(level, TurnManager.inst.GetInt(ConstantStrings.MaxLevel));        
-    }
+    int ActualLevel(int level) => Mathf.Min(level, TurnManager.inst.GetInt(ConstantStrings.MaxLevel));       
     #endregion
 
 #region Turns

@@ -7,7 +7,7 @@ public class Polish : CardType
     {
     }
 
-    public override void EventEffect(Player player, int logged)
+    public override void TrendEffect(Player player, int logged)
     {
         Dictionary<TokenType, int[]> playerTokens = player.GetTokenDict();
         foreach (TokenType token in Enum.GetValues(typeof(TokenType)))

@@ -6,7 +6,7 @@ public class Stocks : CardType
     {
     }
 
-    public override void EventEffect(Player player, int logged)
+    public override void TrendEffect(Player player, int logged)
     {
         int getPlacards = TurnManager.inst.GetInt(ConstantStrings.BuyersSold, player);
         player.CoinRPC(Mathf.FloorToInt(getPlacards/2f), logged);

@@ -12,9 +12,8 @@ public class CardType
         this.dataFile = dataFile;
     }
 
-#region Event
-
-    public virtual void EventEffect(Player player, int logged)
+#region Trend
+    public virtual void TrendEffect(Player player, int logged)
     {
     }
 
@@ -88,14 +87,14 @@ public class CardType
         }
         return false;        
     }
-    protected bool TypesOrNot(Dictionary<TokenType, int[]> soldTokens, HashSet<TokenType> required, HashSet<TokenType> banned)
+    protected bool TypesOrNot(Dictionary<TokenType, int[]> soldTokens, int minimum, HashSet<TokenType> requiredTypes, HashSet<TokenType> bannedTypes)
     {
         foreach (TokenType token in Enum.GetValues(typeof(TokenType)))
         {
             int sum = MyExtensions.SumOfArray(soldTokens[token]);
-            if (required.Contains(token) && sum == 0)
+            if (requiredTypes.Contains(token) && sum < minimum)
                 return false;
-            else if (banned.Contains(token) && sum >= 0)
+            else if (bannedTypes.Contains(token) && sum != 0)
                 return false;
         }
         return true;

@@ -8,16 +8,17 @@ public class Reallocate : CardType
     {
     }
 
-    public override void EventEffect(Player player, int logged)
+    public override void TrendEffect(Player player, int logged)
     {
         player.AddLoseToken(1, (6, TokenType.TechIcon), logged);
-        for (int i = 0; i<2; i++)
-            Log.inst.NewDecisionContainer(() => Downgrade(player, logged));
+        int max = 2;
+        for (int i = 1; i<=max; i++)
+            Log.inst.NewDecisionContainer(() => Downgrade(player, i, max, logged));
     }
-    void Downgrade(Player player, int logged)
+    void Downgrade(Player player, int num, int max, int logged)
     {
         List<TokenDisplay> canLose = player.OfNumber(FindNumber.Minimum, Player.AllTokens(), Player.AllLevelsBut(1), 1);
-        MakeDecision.inst.ChooseDisplayOnScreen(canLose, AutoTranslate.Ask_Downgrade(AutoTranslate.TokenIcon()), DowngradeToken);
+        MakeDecision.inst.ChooseDisplayOnScreen(canLose, AutoTranslate.Ask_Downgrade(AutoTranslate.TokenIcon(), num.ToString(), max.ToString()), DowngradeToken);
 
         void DowngradeToken((int level, TokenType type) info)
         {

@@ -13,16 +13,16 @@ public class TakeTurn : Turn
     }
     public override void ForPlayer(Player player)
     {
-        Log.inst.NewDecisionContainer(() => ChooseToken(player));
+        Log.inst.NewDecisionContainer(() => ChooseToken(player, 0));
         Dictionary<TokenType, int[]> newDictionary = new();
         foreach (TokenType token in Enum.GetValues(typeof(TokenType)))
         {
             int arrayLength = player.GetTokenDict()[token].Length;
             newDictionary.Add(token, new int[arrayLength]);
         }
-        Log.inst.NewDecisionContainer(() => DoSelling(player, newDictionary, null));
+        Log.inst.NewDecisionContainer(() => DoSelling(player, newDictionary, null, 0));
     }
-    void ChooseToken(Player player)
+    void ChooseToken(Player player, int logged)
     {
         List<TextButtonInfo> addTokens = new()
         {
@@ -36,23 +36,23 @@ public class TakeTurn : Turn
         void AddThis(TokenType type)
         {
             TurnManager.inst.WillChangePlayerProperty(player, ConstantStrings.ChosenToken, type.ToString());
-            Log.inst.AddMyText(true, OnlineTranslate.Online_Chose_Token(player.name, type.ToString()));
-            player.AddLoseToken(1, (1, type), 1);
-            Log.inst.NewDecisionContainer(() => AdvanceToken(player, type));
+            Log.inst.AddMyText(true, OnlineTranslate.Online_Chose_Token(player.name, type.ToString()), logged);
+            player.AddLoseToken(1, (1, type), logged+1);
+            Log.inst.NewDecisionContainer(() => AdvanceToken(player, type, logged+1));
         }
     }
-    void AdvanceToken(Player player, TokenType token)
+    void AdvanceToken(Player player, TokenType token, int logged)
     {
         List<int> levelsToAdvance = Player.AllLevelsBut(TurnManager.inst.GetInt(ConstantStrings.MaxLevel));
         List<TokenDisplay> canAdvance = player.OfNumber(FindNumber.Minimum, new() {token}, levelsToAdvance, 1);
-        MakeDecision.inst.ChooseDisplayOnScreen(canAdvance, AutoTranslate.Ask_Upgrade(Translator.inst.Translate(token.ToString())), AdvanceThis);
+        MakeDecision.inst.ChooseDisplayOnScreen(canAdvance, AutoTranslate.Ask_Upgrade(Translator.inst.Translate(token.ToString()), "1", "1"), AdvanceThis);
 
         void AdvanceThis((int level, TokenType type) info)
         {
-            player.UpDowngradeToken(1, info, (info.level+1, info.type), 1);
+            player.UpDowngradeToken(1, info, (info.level+1, info.type), logged);
         }
     }
-    void DoSelling(Player player, Dictionary<TokenType, int[]> soldTokens, DecisionContainer rewind)
+    void DoSelling(Player player, Dictionary<TokenType, int[]> soldTokens, DecisionContainer rewind, int logged)
     {
         int minimum = 2;
         List<Card> playerPlacards = player.GetHand();
@@ -105,7 +105,7 @@ public class TakeTurn : Turn
         void NoSelling()
         {
             TurnManager.inst.WillChangePlayerProperty(player, ConstantStrings.BuyersSold, 0);
-            Log.inst.AddMyText(false, OnlineTranslate.Online_No_Sell(player.name));            
+            Log.inst.AddMyText(false, OnlineTranslate.Online_No_Sell(player.name), logged);            
         }
 
         void UndoAll()
@@ -115,24 +115,24 @@ public class TakeTurn : Turn
 
         void CompleteSell()
         {
-            Log.inst.AddMyText(true, OnlineTranslate.Online_Make_Sell(player.name, totalTokens.ToString(), buyersHappy.Count.ToString()));
+            Log.inst.AddMyText(true, OnlineTranslate.Online_Make_Sell(player.name, totalTokens.ToString(), buyersHappy.Count.ToString()), logged);
             TurnManager.inst.WillChangePlayerProperty(player, ConstantStrings.BuyersSold, buyersHappy.Count);
             int totalScore = 0;
             foreach (Card card in buyersHappy)
             {
                 totalScore += card.dataFile.coinAmount;
-                player.DiscardBuyerRPC(card, 1);
+                player.DiscardBuyerRPC(card, logged+1);
                 card.selectMe.SetBorder(false);
             }
-            player.CoinRPC(totalScore, 0, true);
+            player.CoinRPC(totalScore, logged, true);
         }
 
         void SellToken((int value, TokenType token) info)
         {
-            player.AddLoseToken(-1, info);
+            player.AddLoseToken(-1, info, logged);
             Dictionary<TokenType, int[]> newDictionary = soldTokens;
             newDictionary[info.token][info.value]++;
-            Log.inst.NewDecisionContainer(() => DoSelling(player, newDictionary, restartContainer));
+            Log.inst.NewDecisionContainer(() => DoSelling(player, newDictionary, restartContainer, logged));
         }
     }
     public override void MasterEnd()

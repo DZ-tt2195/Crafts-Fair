@@ -6,7 +6,7 @@ public class Security : CardType
     {
     }
 
-    public override void EventEffect(Player player, int logged)
+    public override void TrendEffect(Player player, int logged)
     {
         if (WithLevel(player.GetTokenDict(), FindNumber.Minimum, 6, 1))
             player.AddLoseToken(4, (1, TokenType.SwordIcon), logged);

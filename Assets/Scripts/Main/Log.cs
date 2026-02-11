@@ -367,8 +367,7 @@ public class Log : PhotonCompatible
     public DecisionContainer NewDecisionContainer(Expression<Action> action, int logged = 0)
     {
         DecisionContainer next = new(currentContainer, logged, action);
-        if (currentContainer == null)
-            initialContainers.Add(next);
+        if (currentContainer == null) initialContainers.Add(next);
         return next;
     }
 

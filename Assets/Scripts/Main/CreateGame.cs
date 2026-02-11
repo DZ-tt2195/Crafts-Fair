@@ -155,10 +155,20 @@ public class CreateGame : PhotonCompatible
     public void SwitchToPlayer(Player player) => playerDropdown.value = listOfPlayers.IndexOf(player);
     public void SwitchToPlayer(int value)
     {
-        Debug.Log($"switching to player {value}");
-        foreach (Player next in listOfPlayers)
-            next.transform.localPosition = new Vector3(-10000, -10000);
-        listOfPlayers[value].transform.localPosition = Vector3.zero;
+        for (int i = 0; i<listOfPlayers.Count; i++)
+        {
+            Player player = listOfPlayers[i];
+            if (i == value)
+            {
+                player.transform.SetParent(canvas.transform);
+                player.transform.SetAsFirstSibling();
+                player.transform.localPosition = Vector3.zero;
+            }
+            else
+            {
+                player.transform.SetParent(null);
+            }
+        }
     }
     public List<Player> GetPlayers() => listOfPlayers;
     public void AddPlayerRPC(Player player)
@@ -170,8 +180,6 @@ public class CreateGame : PhotonCompatible
     {
         Player player = PhotonView.Find(playerID).GetComponent<Player>();
         listOfPlayers.Add(player);
-        player.transform.SetParent(canvas.transform);
-        player.transform.SetAsFirstSibling();
 
         playerDropdown.AddOptions(new List<TMP_Dropdown.OptionData>() { new(player.name) });
         if (listOfPlayers.Count == (int)GetRoomProperty(ConstantStrings.CanPlay))
