@@ -22,7 +22,7 @@ public class Reallocate : CardType
 
         void DowngradeToken((int level, TokenType type) info)
         {
-            player.UpDowngradeToken(1, info, (info.level-1, info.type), logged);
+            player.UpDowngradeToken(1, info, -1, logged);
         }
     }
 }

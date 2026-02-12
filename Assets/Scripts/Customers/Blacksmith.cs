@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections.Generic;
 
 public class Blacksmith : CardType
@@ -9,6 +10,6 @@ public class Blacksmith : CardType
 
     public override bool CanSell(Player player, Dictionary<TokenType, int[]> soldTokens)
     {
-        return player.AllTotalTokens() >= 5;
+        return TypesInOrder(soldTokens, TokenType.TechIcon, TokenType.HouseIcon, TokenType.ToolIcon);
     }
 }

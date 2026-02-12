@@ -257,7 +257,7 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
             { ConstantStrings.EventList, new int[0]},
             { ConstantStrings.TokenCounter(TokenType.ArtIcon), 2*numPlayers},
             { ConstantStrings.TokenCounter(TokenType.HouseIcon), 2*numPlayers},
-            { ConstantStrings.TokenCounter(TokenType.SwordIcon), 2*numPlayers},
+            { ConstantStrings.TokenCounter(TokenType.ToolIcon), 2*numPlayers},
             { ConstantStrings.TokenCounter(TokenType.TechIcon), 2*numPlayers},
             { ConstantStrings.TurnNumber, 1 },
             { ConstantStrings.MaxLevel, 6}
@@ -278,7 +278,7 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
 
             [TokenType.ArtIcon.ToString()] = new int[numRanks],
             [TokenType.HouseIcon.ToString()] = new int[numRanks],
-            [TokenType.SwordIcon.ToString()] = new int[numRanks],
+            [TokenType.ToolIcon.ToString()] = new int[numRanks],
             [TokenType.TechIcon.ToString()] = new int[numRanks],
 
             [ConstantStrings.MyHand] = new int[0],

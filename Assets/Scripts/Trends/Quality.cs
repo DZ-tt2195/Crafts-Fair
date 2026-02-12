@@ -13,7 +13,7 @@ public class Quality : CardType
         {
             new(AutoTranslate.ArtIcon(), () => AddThis(TokenType.ArtIcon)),
             new(AutoTranslate.HouseIcon(), () => AddThis(TokenType.HouseIcon)),
-            new(AutoTranslate.SwordIcon(), () => AddThis(TokenType.SwordIcon)),
+            new(AutoTranslate.ToolIcon(), () => AddThis(TokenType.ToolIcon)),
             new(AutoTranslate.TechIcon(), () => AddThis(TokenType.TechIcon))
         };
         MakeDecision.inst.ChooseTextButton(addTokens, AutoTranslate.Ask_Token_Type());

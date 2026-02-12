@@ -30,7 +30,7 @@ public class Player : PhotonCompatible
         base.Awake();
         this.bottomType = this.GetType();
 
-        List<string> toAdd = new() { ConstantStrings.MyHand, ConstantStrings.MyDiscard, ConstantStrings.MyCoins, TokenType.ArtIcon.ToString(), TokenType.HouseIcon.ToString(), TokenType.SwordIcon.ToString(), TokenType.TechIcon.ToString() };
+        List<string> toAdd = new() { ConstantStrings.MyHand, ConstantStrings.MyDiscard, ConstantStrings.MyCoins, TokenType.ArtIcon.ToString(), TokenType.HouseIcon.ToString(), TokenType.ToolIcon.ToString(), TokenType.TechIcon.ToString() };
         foreach (string next in toAdd)
             uiDictionary.Add(next, true);
 
@@ -74,7 +74,7 @@ public class Player : PhotonCompatible
 
 #region Hand
     public List<Card> GetHand() => myHand;
-    public void DrawBuyerRPC(int amount, int logged = 0)
+    public void DrawCustomerRPC(int amount, int logged = 0)
     {
         if (amount <= 0)
             return;
@@ -92,12 +92,12 @@ public class Player : PhotonCompatible
         for (int i = 0; i < amount; i++)
         {
             Card card = myDeck[i];
-            Log.inst.AddMyText(false, OnlineTranslate.Online_Draw_Buyer(this.name, card.name), logged);
+            Log.inst.AddMyText(false, OnlineTranslate.Online_Draw_Customer(this.name, card.name), logged);
             toDraw.Add(card);
         }
-        Log.inst.NewRollback(() => DrawBuyer(toDraw));
+        Log.inst.NewRollback(() => DrawCustomer(toDraw));
     }
-    void DrawBuyer(List<Card> cardsToAdd)
+    void DrawCustomer(List<Card> cardsToAdd)
     {
         List<Card> myDeck = TurnManager.inst.GetCardList(ConstantStrings.MyDeck, this);
 
@@ -124,12 +124,12 @@ public class Player : PhotonCompatible
         TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyHand, TurnManager.inst.ConvertCardList(myHand)); uiDictionary[ConstantStrings.MyHand] = true;
         TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyDeck, TurnManager.inst.ConvertCardList(myDeck));
     }
-    public void DiscardBuyerRPC(Card card, int logged = 0)
+    public void DiscardCustomerRPC(Card card, int logged = 0)
     {
-        Log.inst.NewRollback(() => DiscardBuyer(card));
-        Log.inst.AddMyText(false, OnlineTranslate.Online_Discard_Buyer(this.name, card.name), logged);
+        Log.inst.NewRollback(() => DiscardCustomer(card));
+        Log.inst.AddMyText(false, OnlineTranslate.Online_Discard_Customer(this.name, card.name), logged);
     }
-    void DiscardBuyer(Card card)
+    void DiscardCustomer(Card card)
     {
         List<Card> myDiscard = TurnManager.inst.GetCardList(ConstantStrings.MyDiscard, this);
 
@@ -148,7 +148,6 @@ public class Player : PhotonCompatible
         TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyHand, TurnManager.inst.ConvertCardList(myHand)); uiDictionary[ConstantStrings.MyHand] = true;
         TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyDiscard, TurnManager.inst.ConvertCardList(myDiscard)); uiDictionary[ConstantStrings.MyDiscard] = true;
     }
-
     #endregion
 
 #region Resources
@@ -172,22 +171,23 @@ public class Player : PhotonCompatible
         TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyCoins, myCoins); uiDictionary[ConstantStrings.MyCoins] = true;
     }
     public Dictionary<TokenType, int[]> GetTokenDict() => myTokens;
-    public void UpDowngradeToken(int num, (int level, TokenType token) first, (int level, TokenType token) second, int logged = 0, bool important = false)
+    public void UpDowngradeToken(int num, (int level, TokenType token) first, int levelChange, int logged = 0, bool important = false)
     {
-        if (num == 0 || first.level == second.level || second.level <= 0)
+        if (num == 0 || levelChange == 0)
             return;
 
-        int actualLevel = ActualLevel(second.level);
+        int newLevel = ActualLevel(first.level + levelChange);
         int currentTokens = myTokens[first.token][first.level];
         int actualAmount = (currentTokens + num < 0) ? -1*currentTokens : num;
 
-        if (first.level < second.level)
-            Log.inst.AddMyText(important, OnlineTranslate.Online_Upgrade_Token(this.name, actualAmount.ToString(), first.token.ToString(), first.level.ToString(), actualLevel.ToString()), logged);
+        if (first.level < newLevel)
+            Log.inst.AddMyText(important, OnlineTranslate.Online_Upgrade_Token(this.name, actualAmount.ToString(), first.token.ToString(), first.level.ToString(), newLevel.ToString()), logged);
         else
-            Log.inst.AddMyText(important, OnlineTranslate.Online_Downgrade_Token(this.name, actualAmount.ToString(), first.token.ToString(), first.level.ToString(), actualLevel.ToString()), logged);
+            Log.inst.AddMyText(important, OnlineTranslate.Online_Downgrade_Token(this.name, actualAmount.ToString(), first.token.ToString(), first.level.ToString(), newLevel.ToString()), logged);
         
         Log.inst.NewRollback(() => ChangeToken(-actualAmount, first));
-        Log.inst.NewRollback(() => ChangeToken(actualAmount, second));
+        (int, TokenType) newTuple = (newLevel, first.token);
+        Log.inst.NewRollback(() => ChangeToken(actualAmount, newTuple));
     }    
     public void AddLoseToken(int num, (int level, TokenType token) info, int logged = 0, bool important = false)
     {
@@ -210,7 +210,16 @@ public class Player : PhotonCompatible
         tokenArray[ActualLevel(info.level)] += Log.inst.forward ? num : -num;
         TurnManager.inst.WillChangePlayerProperty(this, info.token.ToString(), tokenArray); uiDictionary[info.token.ToString()] = true;
     }
-    int ActualLevel(int level) => Mathf.Min(level, TurnManager.inst.GetInt(ConstantStrings.MaxLevel));       
+    int ActualLevel(int level)
+    {
+        int lowestLevel = 1;
+        int maxLevel = TurnManager.inst.GetInt(ConstantStrings.MaxLevel);
+        if (level <= lowestLevel)
+            return lowestLevel;
+        else if (level >= maxLevel)
+            return maxLevel;
+        return maxLevel;
+    }   
     #endregion
 
 #region Turns
@@ -302,8 +311,8 @@ public class Player : PhotonCompatible
             ApplyToken(TokenType.ArtIcon, allArtDisplays);
         if (uiDictionary[TokenType.HouseIcon.ToString()])
             ApplyToken(TokenType.HouseIcon, allHouseDisplays);
-        if (uiDictionary[TokenType.SwordIcon.ToString()])
-            ApplyToken(TokenType.SwordIcon, allSwordDisplays);
+        if (uiDictionary[TokenType.ToolIcon.ToString()])
+            ApplyToken(TokenType.ToolIcon, allSwordDisplays);
         if (uiDictionary[TokenType.TechIcon.ToString()])
             ApplyToken(TokenType.TechIcon, allTechDisplays);
 
@@ -352,8 +361,8 @@ public class Player : PhotonCompatible
             ApplyToken(myTokens[TokenType.ArtIcon], allArtDisplays);
         if (tokensToFind.Contains(TokenType.HouseIcon))
             ApplyToken(myTokens[TokenType.HouseIcon], allHouseDisplays);
-        if (tokensToFind.Contains(TokenType.SwordIcon))
-            ApplyToken(myTokens[TokenType.SwordIcon], allSwordDisplays);
+        if (tokensToFind.Contains(TokenType.ToolIcon))
+            ApplyToken(myTokens[TokenType.ToolIcon], allSwordDisplays);
         if (tokensToFind.Contains(TokenType.TechIcon))
             ApplyToken(myTokens[TokenType.TechIcon], allTechDisplays);
 

@@ -1,14 +1,14 @@
 using UnityEngine;
 
-public class Security : CardType
+public class Production : CardType
 {
-    public Security(CardData dataFile) : base(dataFile)
+    public Production(CardData dataFile) : base(dataFile)
     {
     }
 
     public override void TrendEffect(Player player, int logged)
     {
         if (WithLevel(player.GetTokenDict(), FindNumber.Minimum, 6, 1))
-            player.AddLoseToken(4, (1, TokenType.SwordIcon), logged);
+            player.AddLoseToken(4, (1, TokenType.ToolIcon), logged);
     }
 }

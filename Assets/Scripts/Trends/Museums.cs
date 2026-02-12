@@ -14,11 +14,11 @@ public class Museums : CardType
         {
             if (allHouses[i] >= 1)
             {
-                highestHouse = i;
+                highestHouse = i-1;
                 break;
             }
         }
         player.AddLoseToken(1, (1, TokenType.ArtIcon), logged);
-        player.UpDowngradeToken(1, (1, TokenType.ArtIcon), (highestHouse, TokenType.ArtIcon), logged);
+        player.UpDowngradeToken(1, (1, TokenType.ArtIcon), highestHouse, logged);
     }
 }

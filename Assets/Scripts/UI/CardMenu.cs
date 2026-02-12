@@ -98,7 +98,7 @@ public class CardMenu : PhotonCompatible
         chooseTrends.text = AutoTranslate.Choose_Trends();
         trendArt.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_Art_Trend());
         trendHouse.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_House_Trend());
-        trendSword.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_Sword_Trend());
+        trendSword.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_Tool_Trend());
         trendTech.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_Tech_Trend());
         confirm.text = AutoTranslate.Confirm();
     }

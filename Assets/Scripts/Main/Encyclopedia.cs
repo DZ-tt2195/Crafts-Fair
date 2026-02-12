@@ -38,11 +38,11 @@ public class Encyclopedia : MonoBehaviour
     private void Start()
     {
         Translations();
-        for (int i = 0; i < GameFiles.inst.buyerFiles.Count; i++)
+        for (int i = 0; i < GameFiles.inst.customerFiles.Count; i++)
         {
             GameObject nextCard = Instantiate(buyerPrefab.gameObject);
             Card cardPV = nextCard.GetComponent<Card>();
-            cardPV.AssignCard(GameFiles.inst.buyerFiles[i], 1f, true, Vector3.one);
+            cardPV.AssignCard(GameFiles.inst.customerFiles[i], 1f, true, Vector3.one);
             allBuyers.Add(cardPV);
             cardPV.transform.SetParent(buyerGrid.transform);
         }
@@ -57,7 +57,7 @@ public class Encyclopedia : MonoBehaviour
     }
     void Translations()
     {
-        buyer.text = AutoTranslate.Buyer();
+        buyer.text = AutoTranslate.Customer();
         trend.text = AutoTranslate.Trend();
         close.text = AutoTranslate.Close();
     }

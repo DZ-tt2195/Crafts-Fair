@@ -10,6 +10,6 @@ public class Artificer : CardType
 
     public override bool CanSell(Player player, Dictionary<TokenType, int[]> soldTokens)
     {
-        return TypesInOrder(soldTokens, TokenType.ArtIcon, TokenType.SwordIcon, TokenType.TechIcon);
+        return TypesInOrder(soldTokens, TokenType.ArtIcon, TokenType.ToolIcon, TokenType.TechIcon);
     }
 }

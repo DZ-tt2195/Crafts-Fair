@@ -13,7 +13,7 @@ public class Polish : CardType
         foreach (TokenType token in Enum.GetValues(typeof(TokenType)))
         {
             int number = playerTokens[token][3];
-            player.UpDowngradeToken(number, (3, token), (4, token), logged);
+            player.UpDowngradeToken(number, (3, token), 1, logged);
         }
     }
 }

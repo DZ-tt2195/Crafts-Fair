@@ -102,7 +102,7 @@ public class CreateGame : PhotonCompatible
 
             List<int> startingPlacardDeck = new();
             List<int> placardIDs = new();
-            for (int i = 0; i<GameFiles.inst.buyerFiles.Count; i++)
+            for (int i = 0; i<GameFiles.inst.customerFiles.Count; i++)
             {
                 GameObject nextCard = MakeObject(cardPrefab.gameObject);
                 PhotonView cardPV = nextCard.GetComponent<PhotonView>();
@@ -240,7 +240,7 @@ public class CreateGame : PhotonCompatible
         }
         else if (typeToFind.Equals("Placard"))
         {
-            toFind = GameFiles.inst.buyerFiles;
+            toFind = GameFiles.inst.customerFiles;
             vertical = true;
         }
 

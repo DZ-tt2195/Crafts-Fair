@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 36883e0e6c41544cda0452d0e43482df
+guid: 73e59728af730409d8a4f08b4204929e
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3490566423909010356
-    second: WeaponIcon_0
+      213: 5034282583614132872
+    second: Focus_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,13 +113,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: WeaponIcon_0
+      name: Focus_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 955
-        height: 956
+        width: 1219
+        height: 1220
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c447ffdc4540f8fc0800000000000000
-      internalID: -3490566423909010356
+      spriteID: 8829147465d5dd540800000000000000
+      internalID: 5034282583614132872
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      WeaponIcon_0: -3490566423909010356
+      Focus_0: 5034282583614132872
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

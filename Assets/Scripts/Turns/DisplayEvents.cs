@@ -11,7 +11,7 @@ public class DisplayTwists : Turn
 
     public override void ForPlayer(Player player)
     {
-        player.DrawBuyerRPC(4);
+        player.DrawCustomerRPC(4);
         CreateGame.inst.AddPlayerRPC(player);
     }
 }

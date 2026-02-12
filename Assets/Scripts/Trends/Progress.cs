@@ -22,7 +22,7 @@ public class Progress : CardType
 
         void AdvanceThis((int level, TokenType type) info)
         {
-            player.UpDowngradeToken(1, info, (info.level+1, info.type), 1);
+            player.UpDowngradeToken(1, info, 1, 1);
         }
     }
 }

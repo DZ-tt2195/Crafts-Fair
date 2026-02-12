@@ -10,7 +10,7 @@ public class Quantity : CardType
     {
         player.AddLoseToken(1, (1, TokenType.ArtIcon), logged);
         player.AddLoseToken(1, (1, TokenType.HouseIcon), logged);
-        player.AddLoseToken(1, (1, TokenType.SwordIcon), logged);
+        player.AddLoseToken(1, (1, TokenType.ToolIcon), logged);
         player.AddLoseToken(1, (1, TokenType.TechIcon), logged);
     }
 }

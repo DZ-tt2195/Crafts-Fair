@@ -31,7 +31,7 @@ public class ResolveEvents : Turn
     public override void ForPlayer(Player player)
     {
         List<Card> trendsToResolve = TrendsNoCounter().Item2;
-        player.DrawBuyerRPC(2*trendsToResolve.Count);
+        player.DrawCustomerRPC(2*trendsToResolve.Count);
         Log.inst.NewDecisionContainer(() => ChooseTwist(player, trendsToResolve));
     }
 

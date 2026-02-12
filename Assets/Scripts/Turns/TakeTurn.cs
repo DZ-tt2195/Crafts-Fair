@@ -28,7 +28,7 @@ public class TakeTurn : Turn
         {
             new(AutoTranslate.ArtIcon(), () => AddThis(TokenType.ArtIcon)),
             new(AutoTranslate.HouseIcon(), () => AddThis(TokenType.HouseIcon)),
-            new(AutoTranslate.SwordIcon(), () => AddThis(TokenType.SwordIcon)),
+            new(AutoTranslate.ToolIcon(), () => AddThis(TokenType.ToolIcon)),
             new(AutoTranslate.TechIcon(), () => AddThis(TokenType.TechIcon))
         };
         MakeDecision.inst.ChooseTextButton(addTokens, AutoTranslate.Ask_Token_Type());
@@ -49,7 +49,7 @@ public class TakeTurn : Turn
 
         void AdvanceThis((int level, TokenType type) info)
         {
-            player.UpDowngradeToken(1, info, (info.level+1, info.type), logged);
+            player.UpDowngradeToken(1, info, 1, logged);
         }
     }
     void DoSelling(Player player, Dictionary<TokenType, int[]> soldTokens, DecisionContainer rewind, int logged)
@@ -121,7 +121,7 @@ public class TakeTurn : Turn
             foreach (Card card in buyersHappy)
             {
                 totalScore += card.dataFile.coinAmount;
-                player.DiscardBuyerRPC(card, logged+1);
+                player.DiscardCustomerRPC(card, logged+1);
                 card.selectMe.SetBorder(false);
             }
             player.CoinRPC(totalScore, logged, true);

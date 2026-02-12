@@ -436,7 +436,7 @@ GameObject:
   - component: {fileID: 7290307007326389802}
   - component: {fileID: 8659962310188987635}
   m_Layer: 5
-  m_Name: Sword
+  m_Name: Tool
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -489,7 +489,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 36883e0e6c41544cda0452d0e43482df, type: 3}
+  m_Sprite: {fileID: 21300000, guid: ab6d4415287e54fadba9d10ca2ef26fd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1715,7 +1715,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 844680881825469666, guid: eb59d1b47db69499cbe57e56de2034ef, type: 3}
       propertyPath: m_Name
-      value: Sword (1)
+      value: Tool (1)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1941,7 +1941,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 844680881825469666, guid: eb59d1b47db69499cbe57e56de2034ef, type: 3}
       propertyPath: m_Name
-      value: Sword (6)
+      value: Tool (6)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2732,7 +2732,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 844680881825469666, guid: eb59d1b47db69499cbe57e56de2034ef, type: 3}
       propertyPath: m_Name
-      value: Sword (5)
+      value: Tool (5)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2958,7 +2958,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 844680881825469666, guid: eb59d1b47db69499cbe57e56de2034ef, type: 3}
       propertyPath: m_Name
-      value: Sword (4)
+      value: Tool (4)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -3975,7 +3975,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 844680881825469666, guid: eb59d1b47db69499cbe57e56de2034ef, type: 3}
       propertyPath: m_Name
-      value: Sword (2)
+      value: Tool (2)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -4201,7 +4201,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 844680881825469666, guid: eb59d1b47db69499cbe57e56de2034ef, type: 3}
       propertyPath: m_Name
-      value: Sword (3)
+      value: Tool (3)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

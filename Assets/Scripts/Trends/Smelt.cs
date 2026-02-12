@@ -10,7 +10,7 @@ public class Smelt : CardType
 
     public override void TrendEffect(Player player, int logged)
     {
-        player.AddLoseToken(1, (6, TokenType.SwordIcon), logged);
+        player.AddLoseToken(1, (6, TokenType.ToolIcon), logged);
         Log.inst.NewDecisionContainer(() => RemoveToken(player, TokenType.ArtIcon, logged));
         Log.inst.NewDecisionContainer(() => RemoveToken(player, TokenType.HouseIcon, logged));
         Log.inst.NewDecisionContainer(() => RemoveToken(player, TokenType.TechIcon, logged));

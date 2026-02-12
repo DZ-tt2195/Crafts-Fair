@@ -1,5 +1,5 @@
 Game_Designer	by Thomas Tang (DZ)
-Last_Update	Last Updated: Feb 10, 2026
+Last_Update	Last Updated: Feb 11, 2026
 Blank	
 Translator_Credit	Original Language
 Language	Language
@@ -31,7 +31,7 @@ Failed_to_reconnect	Failed to reconnect to $Room$'s room.
 Choose_Trends	Choose Trends for this game
 Custom_Art_Trend	Trend ArtIcon
 Custom_House_Trend	Trend HouseIcon
-Custom_Sword_Trend	Trend SwordIcon
+Custom_Tool_Trend	Trend ToolIcon
 Custom_Tech_Trend	Trend TechIcon
 Choose	Choose
 Random	Random
@@ -49,20 +49,20 @@ Long	Long
 CardIcon	CardIcon
 ArtIcon	ArtIcon
 HouseIcon	HouseIcon
-SwordIcon	SwordIcon
+ToolIcon	ToolIcon
 TechIcon	TechIcon
 CoinIcon	CoinIcon
 CoinIcon_Text	CoinIcon: get 20 CoinIcon or more to win
 Coin_Amount	$Num$ CoinIcon
 TokenIcon	TokenIcon
-TokenIcon_Text	TokenIcon: any type of token (ArtIcon, HouseIcon, SwordIcon, TechIcon)
+TokenIcon_Text	TokenIcon: any type of token (ArtIcon, HouseIcon, ToolIcon, TechIcon)
 LevelIcon	LevelIcon
 LevelIcon_Text	LevelIcon: the level of a token, from 1 to 6
 Online_Next_Turn	Turn $Number$
 Online_Add_Coin	$Player$ gets +$Num$ CoinIcon.
 Online_Lose_Coin	$Player$ loses $Num$ CoinIcon.
-Online_Draw_Buyer	$Player$ draws $Card$.
-Online_Draw_Buyer_Others	$Player$ draws 1 CardIcon.
+Online_Draw_Customer	$Player$ draws $Card$.
+Online_Draw_Customer_Others	$Player$ draws 1 CardIcon.
 Ask_Token_Type	Choose a token type.
 Online_Chose_Token	$Player$ chooses $Token$.
 Online_Add_Token	$Player$ adds $Amount$ $Token$ at $Level$ LevelIcon.
@@ -73,7 +73,7 @@ Online_Downgrade_Token	$Player$ downgrades $Amount$ $Token$ from $Level1$ LevelI
 Ask_Lose	Lose $Token$ ($Num1$ / $Num2$).
 Online_Lose_Token	$Player$ loses $Amount$ $Token$ at $Level$ LevelIcon.
 Ask_Discard	Discard CardIcon ($Num1$ / $Num2$).
-Online_Discard_Buyer	$Player$ discards $Card$.
+Online_Discard_Customer	$Player$ discards $Card$.
 Ask_Sell	You may sell 2+ TokenIcon, while meeting requirements for 2+ CardIcon.
 Online_Make_Sell	$Player$ sells $TokenNum$ TokenIcon and $CardNum$ CardIcon.
 Online_No_Sell	$Player$ doesn't sell anything.
@@ -98,12 +98,12 @@ Rules_Summary	Each Turn: \n1. Choose any TokenIcon (token) and remove a counter 
 Encyclopedia	Encyclopedia
 Close	Close
 Any	Any
-Buyer	Buyer
+Customer	Customer
 Trend	Trend
 Crowds	Crowds
 Crowds_Text	You have exactly 0 TokenIcon left after selling.
-Blacksmith	Blacksmith
-Blacksmith_Text	You have at least 5 TokenIcon left after selling.
+Farmer	Farmer
+Farmer_Text	You have at least 5 TokenIcon left after selling.
 Miser	Miser
 Miser_Text	Sell exactly 2 TokenIcon.
 Bulk_Buyer	Bulk Buyer
@@ -119,7 +119,7 @@ Polish_Text	Upgrade each of your TokenIcon at 3 LevelIcon.
 Stocks	Stocks
 Stocks_Text	 +1 CoinIcon per 2 CardIcon you sold this turn (round down).
 Quantity	Quantity
-Quantity_Text	 +1 ArtIcon, +1 HouseIcon, +1 SwordIcon, and +1 TechIcon, all at 1 LevelIcon.
+Quantity_Text	 +1 ArtIcon, +1 HouseIcon, +1 ToolIcon, and +1 TechIcon, all at 1 LevelIcon.
 Scavenger	Scavenger
 Scavenger_Text	The LevelIcon of all sold TokenIcon total to exactly 4.
 Hunter	Hunter
@@ -133,45 +133,45 @@ Sculptor_Text	Sell at least 4 ArtIcon with consecutively ordered LevelIcon.
 Engineer	Engineer
 Engineer_Text	Sell at least 4 HouseIcon with consecutively ordered LevelIcon.
 Historian	Historian
-Historian_Text	Sell at least 4 SwordIcon with consecutively ordered LevelIcon.
+Historian_Text	Sell at least 4 ToolIcon with consecutively ordered LevelIcon.
 Inventor	Inventor
 Inventor_Text	Sell at least 4 TechIcon with consecutively ordered LevelIcon.
 Collector	Collector
-Collector_Text	Sell at least 1 ArtIcon, 1 HouseIcon, 1 SwordIcon, and 1 TechIcon.
+Collector_Text	Sell at least 1 ArtIcon, 1 HouseIcon, 1 ToolIcon, and 1 TechIcon.
 Piper	Piper
 Piper_Text	Sell at least 4 TokenIcon at 1 LevelIcon.
 Patron	Patron
 Patron_Text	You chose to remove a counter from ArtIcon this turn.
 Lender	Lender
 Lender_Text	You chose to remove a counter from HouseIcon this turn.
-Squire	Squire
-Squire_Text	You chose to remove a counter from SwordIcon this turn.
+Apprentice	Apprentice
+Apprentice_Text	You chose to remove a counter from ToolIcon this turn.
 Backer	Backer
 Backer_Text	You chose to remove a counter from TechIcon this turn.
 Pageants	Pageants
 Pageants_Text	If you have at least 5 CoinIcon, +4 ArtIcon at 1 LevelIcon.
 Tourism	Tourism
 Tourism_Text	If you have at least 3 TokenIcon at exactly 2 LevelIcon, +4 HouseIcon at 1 LevelIcon.
-Security	Security
-Security_Text	If you have at least 1 TokenIcon at 6 LevelIcon, +4 SwordIcon at 1 LevelIcon.
+Production	Production
+Production_Text	If you have at least 1 TokenIcon at 6 LevelIcon, +4 ToolIcon at 1 LevelIcon.
 Innovation	Innovation
 Innovation_Text	If you have no TechIcon, +4 TechIcon at 1 LevelIcon.
 Artificer	Artificer
-Artificer_Text	Sell 1 ArtIcon, 1 SwordIcon with a higher LevelIcon, and 1 TechIcon with an even higher LevelIcon.
+Artificer_Text	Sell 1 ArtIcon, 1 ToolIcon with a higher LevelIcon, and 1 TechIcon with an even higher LevelIcon.
 Artisan	Artisan
 Artisan_Text	Sell 1 HouseIcon, 1 TechIcon with a higher LevelIcon, and 1 ArtIcon with an even higher LevelIcon.
 Bishop	Bishop
-Bishop_Text	Sell 1 SwordIcon, 1 ArtIcon with a higher LevelIcon, and 1 HouseIcon with an even higher LevelIcon.
-Sentry	Sentry
-Sentry_Text	Sell 1 TechIcon, 1 HouseIcon with a higher LevelIcon, and 1 SwordIcon with an even higher LevelIcon.
+Bishop_Text	Sell 1 ToolIcon, 1 ArtIcon with a higher LevelIcon, and 1 HouseIcon with an even higher LevelIcon.
+Blacksmith	Blacksmith
+Blacksmith_Text	Sell 1 TechIcon, 1 HouseIcon with a higher LevelIcon, and 1 ToolIcon with an even higher LevelIcon.
 Progress	Progress
-Progress_Text	Upgrade 1 ArtIcon, 1 HouseIcon, 1 SwordIcon, and 1 TechIcon.
+Progress_Text	Upgrade 1 ArtIcon, 1 HouseIcon, 1 ToolIcon, and 1 TechIcon.
 Museums	Museums
 Museums_Text	 +1 ArtIcon at 1 LevelIcon. Then upgrade it to the same LevelIcon as your highest HouseIcon (if any).
 Merge	Merge
 Merge_Text	 +1 HouseIcon at 6 LevelIcon. Then lose 2 HouseIcon.
 Homage	Homage
-Homage_Text	 +1 SwordIcon at 1 LevelIcon. Then upgrade it once per ArtIcon you have at 1 LevelIcon.
+Homage_Text	 +1 ToolIcon at 1 LevelIcon. Then upgrade it once per ArtIcon you have at 1 LevelIcon.
 Reallocate	Reallocate
 Reallocate_Text	 +1 TechIcon at 6 LevelIcon. Then downgrade 2 TokenIcon that are at 2 LevelIcon or higher.
 Coven	Coven
@@ -184,9 +184,13 @@ Musician	Musician
 Musician_Text	Sell at least 1 ArtIcon at 6 LevelIcon.
 Mayor	Mayor
 Mayor_Text	Sell at least 1 HouseIcon at 6 LevelIcon.
-Knight	Knight
-Knight_Text	Sell at least 1 WeaponIcon at 6 LevelIcon.
+Craftsman	Craftsman
+Craftsman_Text	Sell at least 1 ToolIcon at 6 LevelIcon.
 Scientist	Scientist
 Scientist_Text	Sell at least 1 TechIcon at 6 LevelIcon.
 Smelt	Smelt
-Smelt_Text	 +1 SwordIcon at 6 LevelIcon. Then lose 1 ArtIcon, 1 HouseIcon, and 1 TechIcon.
+Smelt_Text	 +1 ToolIcon at 6 LevelIcon. Then lose 1 ArtIcon, 1 HouseIcon, and 1 TechIcon.
+Focus	Focus
+Focus_Text	 +1 ArtIcon at 6 LevelIcon. Then downgrade it once per 3 TokenIcon you have (round down) (don't downgrade below 1 LevelIcon)."
+Manors	Manors
+Manors_Text	 +1 HouseIcon at 1 LevelIcon. Then upgrade it once for each LevelIcon you have at least 1 TechIcon at.
