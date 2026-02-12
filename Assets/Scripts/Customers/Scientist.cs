@@ -10,6 +10,6 @@ public class Scientist : CardType
 
     public override bool CanSell(Player player, Dictionary<TokenType, int[]> soldTokens)
     {
-        return soldTokens[TokenType.TechIcon][6] >= 1;
+        return TypesInOrder(soldTokens, TokenType.BookIcon, TokenType.HouseIcon, TokenType.ToolIcon);
     }
 }

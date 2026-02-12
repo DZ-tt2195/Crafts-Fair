@@ -10,6 +10,6 @@ public class Bishop : CardType
 
     public override bool CanSell(Player player, Dictionary<TokenType, int[]> soldTokens)
     {
-        return TypesInOrder(soldTokens, TokenType.ToolIcon, TokenType.ArtIcon, TokenType.HouseIcon);
+        return TypesInOrder(soldTokens, TokenType.ArtIcon, TokenType.BookIcon, TokenType.HouseIcon);
     }
 }

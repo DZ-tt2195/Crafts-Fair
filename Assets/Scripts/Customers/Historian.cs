@@ -9,6 +9,6 @@ public class Historian : CardType
 
     public override bool CanSell(Player player, Dictionary<TokenType, int[]> soldTokens)
     {
-        return SequentialLevels(soldTokens, TokenType.ToolIcon, 4);
+        return SequentialLevels(soldTokens, TokenType.BookIcon, 4);
     }
 }

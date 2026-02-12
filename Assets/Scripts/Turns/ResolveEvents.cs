@@ -25,7 +25,7 @@ public class ResolveEvents : Turn
     {
         List<Card> trendsToResolve = TrendsNoCounter().Item2;
         Log.inst.MasterText(true, AutoTranslate.Blank());
-        Log.inst.MasterText(true, OnlineTranslate.Online_Trends_To_Resolve(trendsToResolve.Count.ToString()));
+        Log.inst.MasterText(true, OnlineTranslate.Online_Strategies_To_Resolve(trendsToResolve.Count.ToString()));
     }
 
     public override void ForPlayer(Player player)

@@ -1,0 +1,18 @@
+cardName	textBox	artCredit	notes
+BigArt	 +1 ArtIcon at 6 LevelIcon. Then downgrade it once per 3 TokenIcon you have (round down).		AddArt, Add6, Downgrade
+Prototype	 +1 ToolIcon at 1 LevelIcon. Then upgrade it once per ArtIcon you have at 1 LevelIcon.	Ryan Laukat \nDominion: Renaissance \n(Innovation)	AddTool, CareArt, UpgradeTool, Care1
+ManyBook	If you have no BookIcon, +4 BookIcon at 1 LevelIcon.		TokenOrLess, CareBook, AddBook, Add1
+UpgradeHouse	 +1 HouseIcon at 1 LevelIcon. Then upgrade it once for each LevelIcon you have at least 1 BookIcon at.		AddHouse, UpgradeHouse, CareBook
+Merge	 +1 HouseIcon at 6 LevelIcon. Then lose 2 HouseIcon.	Harald Lieske \nDominion: Empires \n(Villa)	AddHouse, LoseHouse, Add6
+UpgradeArt	 +1 ArtIcon at 1 LevelIcon. Then upgrade it to the same LevelIcon as your highest HouseIcon (if any).		AddArt, CareHouse, UpgradeArt
+Save_Up	If you have at least 5 CoinIcon, +4 ArtIcon at 1 LevelIcon.		CareCoin, AddArt, Add1
+Polish	Upgrade each of your TokenIcon at 3 LevelIcon.	Ryan Laukat \nDominion: Prosperity \n(Platinum)	Care3, UpgradeAny
+Produce	If you have at least 1 TokenIcon at 6 LevelIcon, +4 ToolIcon at 1 LevelIcon.	Martin Hoffmann \nDominion: Intrigue \n(Ironworks)	TokenOrMore, Care6, AddTool, Add1
+ManyUpgrade	Upgrade 1 ArtIcon, 1 HouseIcon, 1 ToolIcon, and 1 BookIcon.		UpgradeArt, UpgradeHouse, UpgradeTool, UpgradeBook
+Quality	 +1 of any TokenIcon, at 4 LevelIcon.	Harald Lieske \nDominion: Plunder \n(Insignia)	AddAny, Add4
+Quantity	 +1 ArtIcon, +1 HouseIcon, +1 ToolIcon, and +1 BookIcon, all at 1 LevelIcon.	Garret DeChellis \nDominion: Plunder \n(Jewels)	AddArt, AddHouse, AddTool, AddBook, Add1
+BigBook	 +1 BookIcon at 6 LevelIcon. Then downgrade 2 TokenIcon that are at 2 LevelIcon or higher.		AddBook, Downgrade, Add6
+BigTool	 +1 ToolIcon at 6 LevelIcon. Then lose 1 ArtIcon, 1 HouseIcon, and 1 BookIcon.		AddTool, Add6, LoseArt, LoseHouse, LoseBook
+Tipping	 +1 CoinIcon per 2 CardIcon you sold this turn (round down).	Marco Primo \nDominion: Empires \n(Capital)	GainCoin
+Accommodate	If you have at least 3 TokenIcon at exactly 2 LevelIcon, +4 HouseIcon at 1 LevelIcon.	Marcel-Andre Casasola Merkle \nPacific \n(Tourist Season)	TokenOrMore, Care2, AddHouse, Add1
+Duplicate	 +1 of a TokenIcon you have (at the same LevelIcon).		AddAny

@@ -29,7 +29,7 @@ public class TakeTurn : Turn
             new(AutoTranslate.ArtIcon(), () => AddThis(TokenType.ArtIcon)),
             new(AutoTranslate.HouseIcon(), () => AddThis(TokenType.HouseIcon)),
             new(AutoTranslate.ToolIcon(), () => AddThis(TokenType.ToolIcon)),
-            new(AutoTranslate.TechIcon(), () => AddThis(TokenType.TechIcon))
+            new(AutoTranslate.BookIcon(), () => AddThis(TokenType.BookIcon))
         };
         MakeDecision.inst.ChooseTextButton(addTokens, AutoTranslate.Ask_Token_Type());
 

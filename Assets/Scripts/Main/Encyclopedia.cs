@@ -45,20 +45,20 @@ public class Encyclopedia : MonoBehaviour
             cardPV.AssignCard(GameFiles.inst.customerFiles[i], 1f, true, Vector3.one);
             allBuyers.Add(cardPV);
             cardPV.transform.SetParent(buyerGrid.transform);
-        }
-        for (int i = 0; i < GameFiles.inst.trendFiles.Count; i++)
+        }/*
+        for (int i = 0; i < GameFiles.inst.strategyFiles.Count; i++)
         {
             GameObject nextCard = Instantiate(trendPrefab.gameObject);
             Card cardPV = nextCard.GetComponent<Card>();
-            cardPV.AssignCard(GameFiles.inst.trendFiles[i], 1f, false, Vector3.one);
+            cardPV.AssignCard(GameFiles.inst.strategyFiles[i], 1f, false, Vector3.one);
             allTrends.Add(cardPV);
             cardPV.transform.SetParent(trendGrid.transform);
-        }
+        }*/
     }
     void Translations()
     {
         buyer.text = AutoTranslate.Customer();
-        trend.text = AutoTranslate.Trend();
+        trend.text = AutoTranslate.Strategy();
         close.text = AutoTranslate.Close();
     }
 }

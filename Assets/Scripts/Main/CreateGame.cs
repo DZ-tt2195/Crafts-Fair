@@ -210,7 +210,7 @@ public class CreateGame : PhotonCompatible
     public void CreateEvents()
     {
         List<int> EventIDs = new();
-        for (int i = 0; i<GameFiles.inst.trendFiles.Count; i++)
+        for (int i = 0; i<GameFiles.inst.strategyFiles.Count; i++)
             EventIDs.Add(i);
         EventIDs = EventIDs.Shuffle();
 
@@ -235,7 +235,7 @@ public class CreateGame : PhotonCompatible
         bool vertical = false;
         if (typeToFind.Equals("Event"))
         {
-            toFind = GameFiles.inst.trendFiles;
+            toFind = GameFiles.inst.strategyFiles;
             vertical = false;
         }
         else if (typeToFind.Equals("Placard"))
@@ -255,7 +255,7 @@ public class CreateGame : PhotonCompatible
         for (int i = 0; i<cardIDs.Length; i++)
         {
             eventInfo[i].card.gameObject.SetActive(true);
-            CardData data = GameFiles.inst.trendFiles[cardIDs[i]];
+            CardData data = GameFiles.inst.strategyFiles[cardIDs[i]];
             eventInfo[i].card.AssignCard(data, 1, false, new(0.5f, 0.5f, 0.5f));
         }
         for (int i = cardIDs.Length; i<eventInfo.Count; i++)

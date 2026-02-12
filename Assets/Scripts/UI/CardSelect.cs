@@ -18,7 +18,7 @@ public class CardSelect : MonoBehaviour
     private void Awake()
     {
         vertical = false;
-        allData = GameFiles.inst.trendFiles;
+        allData = GameFiles.inst.strategyFiles;
         randomText.text = AutoTranslate.Random();
         chooseText.text = AutoTranslate.Choose();
         randomButton.onClick.AddListener(() => SetCardImage(-1));

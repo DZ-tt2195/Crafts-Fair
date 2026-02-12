@@ -1,14 +1,15 @@
 using UnityEngine;
+using System;
 using System.Collections.Generic;
 
-public class Inventor : CardType
+public class Storyteller : CardType
 {
-    public Inventor(CardData dataFile) : base(dataFile)
+    public Storyteller(CardData dataFile) : base(dataFile)
     {
     }
 
     public override bool CanSell(Player player, Dictionary<TokenType, int[]> soldTokens)
     {
-        return SequentialLevels(soldTokens, TokenType.ToolIcon, 4);
+        return soldTokens[TokenType.BookIcon][6] >= 1;
     }
 }

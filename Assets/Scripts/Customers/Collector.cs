@@ -10,7 +10,7 @@ public class Collector : CardType
 
     public override bool CanSell(Player player, Dictionary<TokenType, int[]> soldTokens)
     {
-        HashSet<TokenType> required = new() {TokenType.ArtIcon, TokenType.HouseIcon, TokenType.ToolIcon, TokenType.TechIcon};
+        HashSet<TokenType> required = new() {TokenType.ArtIcon, TokenType.HouseIcon, TokenType.ToolIcon, TokenType.BookIcon};
         return TypesOrNot(soldTokens, 1, required, new());
     }
 }

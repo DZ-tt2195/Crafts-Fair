@@ -30,7 +30,7 @@ public class Player : PhotonCompatible
         base.Awake();
         this.bottomType = this.GetType();
 
-        List<string> toAdd = new() { ConstantStrings.MyHand, ConstantStrings.MyDiscard, ConstantStrings.MyCoins, TokenType.ArtIcon.ToString(), TokenType.HouseIcon.ToString(), TokenType.ToolIcon.ToString(), TokenType.TechIcon.ToString() };
+        List<string> toAdd = new() { ConstantStrings.MyHand, ConstantStrings.MyDiscard, ConstantStrings.MyCoins, TokenType.ArtIcon.ToString(), TokenType.HouseIcon.ToString(), TokenType.ToolIcon.ToString(), TokenType.BookIcon.ToString() };
         foreach (string next in toAdd)
             uiDictionary.Add(next, true);
 
@@ -313,8 +313,8 @@ public class Player : PhotonCompatible
             ApplyToken(TokenType.HouseIcon, allHouseDisplays);
         if (uiDictionary[TokenType.ToolIcon.ToString()])
             ApplyToken(TokenType.ToolIcon, allSwordDisplays);
-        if (uiDictionary[TokenType.TechIcon.ToString()])
-            ApplyToken(TokenType.TechIcon, allTechDisplays);
+        if (uiDictionary[TokenType.BookIcon.ToString()])
+            ApplyToken(TokenType.BookIcon, allTechDisplays);
 
         void ApplyToken(TokenType type, List<TokenDisplay> list)
         {
@@ -363,8 +363,8 @@ public class Player : PhotonCompatible
             ApplyToken(myTokens[TokenType.HouseIcon], allHouseDisplays);
         if (tokensToFind.Contains(TokenType.ToolIcon))
             ApplyToken(myTokens[TokenType.ToolIcon], allSwordDisplays);
-        if (tokensToFind.Contains(TokenType.TechIcon))
-            ApplyToken(myTokens[TokenType.TechIcon], allTechDisplays);
+        if (tokensToFind.Contains(TokenType.BookIcon))
+            ApplyToken(myTokens[TokenType.BookIcon], allTechDisplays);
 
         void ApplyToken(int[] array, List<TokenDisplay> list)
         {

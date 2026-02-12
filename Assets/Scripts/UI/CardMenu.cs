@@ -95,11 +95,11 @@ public class CardMenu : PhotonCompatible
     }
     void Translations()
     {
-        chooseTrends.text = AutoTranslate.Choose_Trends();
-        trendArt.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_Art_Trend());
-        trendHouse.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_House_Trend());
-        trendSword.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_Tool_Trend());
-        trendTech.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_Tech_Trend());
+        chooseTrends.text = AutoTranslate.Choose_Strategies();
+        trendArt.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_Art_Strategy());
+        trendHouse.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_House_Strategy());
+        trendSword.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_Tool_Strategy());
+        trendTech.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_Book_Strategy());
         confirm.text = AutoTranslate.Confirm();
     }
 }

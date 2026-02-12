@@ -10,6 +10,6 @@ public class Artisan : CardType
 
     public override bool CanSell(Player player, Dictionary<TokenType, int[]> soldTokens)
     {
-        return TypesInOrder(soldTokens, TokenType.HouseIcon, TokenType.TechIcon, TokenType.ArtIcon);
+        return TypesInOrder(soldTokens, TokenType.HouseIcon, TokenType.ToolIcon, TokenType.ArtIcon);
     }
 }

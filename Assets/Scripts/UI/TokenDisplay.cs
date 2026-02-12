@@ -4,7 +4,7 @@ using UnityEngine.UI;
 using TMPro;
 using MyBox;
 
-public enum TokenType { ArtIcon, HouseIcon, ToolIcon, TechIcon}
+public enum TokenType { ArtIcon, HouseIcon, ToolIcon, BookIcon}
 public class TokenDisplay : MonoBehaviour
 {
     public ButtonSelect selectMe { get; private set; }
