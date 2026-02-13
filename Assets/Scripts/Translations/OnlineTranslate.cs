@@ -19,7 +19,7 @@ public static string Online_Lose_Token (string Player,string Amount,string Token
 public static string Online_Discard_Customer (string Player,string Card) => $"Online_Discard_Customer\tPlayer\t{Player}\tCard\t{Card}";
 public static string Online_Make_Sell (string Player,string TokenNum,string CardNum) => $"Online_Make_Sell\tPlayer\t{Player}\tTokenNum\t{TokenNum}\tCardNum\t{CardNum}";
 public static string Online_No_Sell (string Player) => $"Online_No_Sell\tPlayer\t{Player}";
-public static string Online_Strategies_To_Resolve (string Num) => $"Online_Strategies_To_Resolve\tNum\t{Num}";
+public static string Online_Twists_To_Resolve (string Num) => $"Online_Twists_To_Resolve\tNum\t{Num}";
 public static string Online_Resolve_Card (string Player,string Card) => $"Online_Resolve_Card\tPlayer\t{Player}\tCard\t{Card}";
 public static string Online_Tie_Game () => $"Online_Tie_Game";
 public static string Online_Player_Resigned (string Player) => $"Online_Player_Resigned\tPlayer\t{Player}";

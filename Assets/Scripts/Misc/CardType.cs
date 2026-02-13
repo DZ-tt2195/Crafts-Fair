@@ -12,14 +12,14 @@ public class CardType
         this.dataFile = dataFile;
     }
 
-#region Trend
-    public virtual void TrendEffect(Player player, int logged)
+#region Twist
+    public virtual void TwistEffect(Player player, int logged)
     {
     }
 
 #endregion
 
-#region  Buyer
+#region  Customer
     public virtual bool CanSell(Player player, Dictionary<TokenType, int[]> soldTokens)
     {
         return false;

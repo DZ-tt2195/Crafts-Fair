@@ -5853,7 +5853,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -65, y: -25}
+  m_AnchoredPosition: {x: -65, y: 25}
   m_SizeDelta: {x: 150, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &746152776
@@ -6466,7 +6466,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 2<link="Techicon"><sprite="Techicon" name="Techicon">
+  m_text: 2<link="BookIcon"><sprite="BookIcon" name="BookIcon">
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 31e79ddad7b2d41c395ada76a18cbcdd, type: 2}
   m_sharedMaterial: {fileID: -3852492252101762229, guid: 31e79ddad7b2d41c395ada76a18cbcdd, type: 2}
@@ -6493,7 +6493,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 119.1
+  m_fontSize: 119.25
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -6832,7 +6832,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5171458088357418665, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
       propertyPath: m_Name
-      value: Trend 2
+      value: Twist 2
       objectReference: {fileID: 0}
     - target: {fileID: 6453452532442191667, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
       propertyPath: m_text
@@ -7197,7 +7197,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1761235060413094877, guid: 4d0686b994da1445589ed656148a7cae, type: 3}
       propertyPath: m_Name
-      value: Tech Event
+      value: Book Event
       objectReference: {fileID: 0}
     - target: {fileID: 1761235060413094877, guid: 4d0686b994da1445589ed656148a7cae, type: 3}
       propertyPath: m_IsActive
@@ -7651,7 +7651,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5171458088357418665, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
       propertyPath: m_Name
-      value: Trend 1
+      value: Twist 1
       objectReference: {fileID: 0}
     - target: {fileID: 6453452532442191667, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
       propertyPath: m_text
@@ -9741,7 +9741,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5171458088357418665, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
       propertyPath: m_Name
-      value: Trend 3
+      value: Twist 3
       objectReference: {fileID: 0}
     - target: {fileID: 6453452532442191667, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
       propertyPath: m_text
@@ -10673,7 +10673,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -65, y: -25}
+  m_AnchoredPosition: {x: -65, y: 25}
   m_SizeDelta: {x: 150, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1253026462
@@ -12570,7 +12570,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -65, y: -25}
+  m_AnchoredPosition: {x: -65, y: 25}
   m_SizeDelta: {x: 150, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1511180221
@@ -16365,7 +16365,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -65, y: -25}
+  m_AnchoredPosition: {x: -65, y: 25}
   m_SizeDelta: {x: 150, y: 125}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2085171054
@@ -16810,7 +16810,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5171458088357418665, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
       propertyPath: m_Name
-      value: Trend 4
+      value: Twist 4
       objectReference: {fileID: 0}
     - target: {fileID: 6453452532442191667, guid: e884010cd5a024cf4aced5d5f9bf36d1, type: 3}
       propertyPath: m_text

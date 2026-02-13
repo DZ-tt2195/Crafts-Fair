@@ -1,12 +1,12 @@
 using UnityEngine;
 
-public class Hustle : CardType
+public class Mass_Market : CardType
 {
-    public Hustle(CardData dataFile) : base(dataFile)
+    public Mass_Market(CardData dataFile) : base(dataFile)
     {
     }
 
-    public override void TrendEffect(Player player, int logged)
+    public override void TwistEffect(Player player, int logged)
     {
         int getPlacards = TurnManager.inst.GetInt(ConstantStrings.BuyersSold, player);
         player.CoinRPC(Mathf.FloorToInt(getPlacards/2f), logged);

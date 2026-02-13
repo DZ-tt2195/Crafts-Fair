@@ -46,11 +46,11 @@ public class Encyclopedia : MonoBehaviour
             allcustomers.Add(cardPV);
             cardPV.transform.SetParent(customerGrid.transform);
         }
-        for (int i = 0; i < GameFiles.inst.strategyFiles.Count; i++)
+        for (int i = 0; i < GameFiles.inst.twistFiles.Count; i++)
         {
             GameObject nextCard = Instantiate(strategyPrefab.gameObject);
             Card cardPV = nextCard.GetComponent<Card>();
-            cardPV.AssignCard(GameFiles.inst.strategyFiles[i], 1f, false, Vector3.one);
+            cardPV.AssignCard(GameFiles.inst.twistFiles[i], 1f, false, Vector3.one);
             allStrategies.Add(cardPV);
             cardPV.transform.SetParent(strategyGrid.transform);
         }
@@ -58,7 +58,7 @@ public class Encyclopedia : MonoBehaviour
     void Translations()
     {
         customer.text = AutoTranslate.Customer();
-        strategy.text = AutoTranslate.Strategy();
+        strategy.text = AutoTranslate.Twist();
         close.text = AutoTranslate.Close();
     }
 }

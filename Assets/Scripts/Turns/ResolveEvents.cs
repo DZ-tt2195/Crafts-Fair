@@ -25,7 +25,7 @@ public class ResolveEvents : Turn
     {
         List<Card> trendsToResolve = TrendsNoCounter().Item2;
         Log.inst.MasterText(true, AutoTranslate.Blank());
-        Log.inst.MasterText(true, OnlineTranslate.Online_Strategies_To_Resolve(trendsToResolve.Count.ToString()));
+        Log.inst.MasterText(true, OnlineTranslate.Online_Twists_To_Resolve(trendsToResolve.Count.ToString()));
     }
 
     public override void ForPlayer(Player player)
@@ -42,7 +42,7 @@ public class ResolveEvents : Turn
         void DoTwist(Card card)
         {
             Log.inst.AddMyText(false, OnlineTranslate.Online_Resolve_Card(player.name, card.name));
-            Log.inst.NewDecisionContainer(() => card.thisCard.TrendEffect(player, 1));
+            Log.inst.NewDecisionContainer(() => card.thisCard.TwistEffect(player, 1));
 
             List<Card> newList = trendsToResolve;
             newList.Remove(card);

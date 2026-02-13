@@ -6,7 +6,7 @@ public class Quantity : CardType
     {
     }
 
-    public override void TrendEffect(Player player, int logged)
+    public override void TwistEffect(Player player, int logged)
     {
         player.AddLoseToken(1, (1, TokenType.ArtIcon), logged);
         player.AddLoseToken(1, (1, TokenType.HouseIcon), logged);

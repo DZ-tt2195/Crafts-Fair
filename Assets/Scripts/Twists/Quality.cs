@@ -7,7 +7,7 @@ public class Quality : CardType
     {
     }
 
-    public override void TrendEffect(Player player, int logged)
+    public override void TwistEffect(Player player, int logged)
     {
         List<TextButtonInfo> addTokens = new()
         {

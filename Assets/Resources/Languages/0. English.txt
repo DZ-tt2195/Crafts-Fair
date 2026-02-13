@@ -1,5 +1,5 @@
 Game_Designer	by Thomas Tang (DZ)
-Last_Update	Last Updated: Feb 11, 2026
+Last_Update	Last Updated: Feb 13, 2026
 Blank	
 Translator_Credit	Original Language
 Language	Language
@@ -28,11 +28,11 @@ Player_Count	$Current$ / $Max$ Players
 Type_in_username	You have to type in a username.
 Attempt_to_reconnect	Attempting to reconnect to $Room$'s room...
 Failed_to_reconnect	Failed to reconnect to $Room$'s room.
-Choose_Strategies	Choose Strategiess for this game
-Custom_Art_Strategy	Strategy ArtIcon
-Custom_House_Strategy	Strategy HouseIcon
-Custom_Tool_Strategy	Strategy ToolIcon
-Custom_Book_Strategy	Strategy BookIcon
+Choose_Twists	Choose Twistss for this game
+Custom_Art_Twist	Twist ArtIcon
+Custom_House_Twist	Twist HouseIcon
+Custom_Tool_Twist	Twist ToolIcon
+Custom_Book_Twist	Twist BookIcon
 Choose	Choose
 Random	Random
 Message_All	Type into chat (message all)
@@ -78,8 +78,8 @@ Ask_Sell	You may sell 2+ TokenIcon, while meeting requirements for 2+ CardIcon.
 Online_Make_Sell	$Player$ sells $TokenNum$ TokenIcon and $CardNum$ CardIcon.
 Online_No_Sell	$Player$ doesn't sell anything.
 Undo_All	Undo All
-Online_Strategies_To_Resolve	Strategies to resolve: $Num$
-Ask_Resolve	Choose Strategy to resolve.
+Online_Twists_To_Resolve	Twists to resolve: $Num$
+Ask_Resolve	Choose Twist to resolve.
 Online_Resolve_Card	$Player$ resolves $Card$.
 Confirm	Confirm
 Decline	Decline
@@ -94,12 +94,12 @@ Online_Player_Won	$Player$ has won.
 Resigned	(Resigned)
 Switch_Player	Switch Player
 Rules	Rules
-Rules_Summary	Each Turn: \n1. Choose any TokenIcon (token) and remove a counter from that token's Strategy. \n2. Create 1 of that token at 1 LevelIcon, then upgrade 1 token of that type to the next LevelIcon. \n3. You may sell 2+ TokenIcon and 2+ CardIcon, all at once, to score CoinIcon. \n\nBetween Turns:\n4. For each Strategy with 0 counters, each player draws 2 CardIcon and follows its instructions. \n5. Add the counters back onto those Strategies (2 per player). \n6. The first player to reach 20+ CoinIcon wins.
+Rules_Summary	Each Turn: \n1. Choose any TokenIcon (token) and remove a counter from that token's Twist. \n2. Create 1 of that token at 1 LevelIcon, then upgrade 1 token of that type to the next LevelIcon. \n3. You may sell 2+ TokenIcon and 2+ CardIcon, all at once, to score CoinIcon. \n\nBetween Turns:\n4. For each Twist with 0 counters, each player draws 2 CardIcon and follows its instructions. \n5. Add the counters back onto those Twists (2 per player). \n6. The first player to reach 20+ CoinIcon wins.
 Encyclopedia	Encyclopedia
 Close	Close
 Any	Any
 Customer	Customer
-Strategy	Strategy
+Twist	Twist
 Crowds	Crowds
 Crowds_Text	You have exactly 0 TokenIcon left after selling.
 Farmer	Farmer
@@ -114,10 +114,10 @@ Aristocrat	Aristocrat
 Aristocrat_Text	Sell at least 2 TokenIcon at 4 LevelIcon.
 Royalty	Royalty
 Royalty_Text	Sell at least 2 TokenIcon at 6 LevelIcon.
-Polish	Polish
-Polish_Text	Upgrade each of your TokenIcon at 3 LevelIcon.
-Hustle	Hustle
-Hustle_Text	 +1 CoinIcon per 2 CardIcon you sold this turn (round down).
+University	University
+University_Text	Upgrade each of your TokenIcon at 3 LevelIcon.
+Mass_Market	Mass Market
+Mass_Market_Text	 +1 CoinIcon per 2 CardIcon you sold this turn (round down).
 Quantity	Quantity
 Quantity_Text	 +1 ArtIcon, +1 HouseIcon, +1 ToolIcon, and +1 BookIcon, all at 1 LevelIcon.
 Scavenger	Scavenger
@@ -148,16 +148,16 @@ Apprentice	Apprentice
 Apprentice_Text	You chose to remove a counter from ToolIcon this turn.
 Reader	Reader
 Reader_Text	You chose to remove a counter from BookIcon this turn.
-Save_Up	Save_Up
+Save_Up	Save Up
 Save_Up_Text	If you have at least 5 CoinIcon, +4 ArtIcon at 1 LevelIcon.
-Accommodate	Accommodate
-Accommodate_Text	If you have at least 3 TokenIcon at exactly 2 LevelIcon, +4 HouseIcon at 1 LevelIcon.
+Tourists	Tourists
+Tourists_Text	If you have at least 3 TokenIcon at exactly 2 LevelIcon, +4 HouseIcon at 1 LevelIcon.
 Produce	Produce
 Produce_Text	If you have at least 1 TokenIcon at 6 LevelIcon, +4 ToolIcon at 1 LevelIcon.
-Reprint	Reprint
-Reprint_Text	If you have no BookIcon, +4 BookIcon at 1 LevelIcon.
-Consult	Consult
-Consult_Text	Upgrade 1 ArtIcon, 1 HouseIcon, 1 ToolIcon, and 1 BookIcon.
+Shipment	Shipment
+Shipment_Text	If you have no BookIcon, +4 BookIcon at 1 LevelIcon.
+Polish	Polish
+Polish_Text	Upgrade 1 ArtIcon, 1 HouseIcon, 1 ToolIcon, and 1 BookIcon.
 UpgradeArt	UpgradeArt
 UpgradeArt_Text	 +1 ArtIcon at 1 LevelIcon. Then upgrade it to the same LevelIcon as your highest HouseIcon (if any).
 Merge	Merge
@@ -194,5 +194,13 @@ Author	Author
 Author_Text	Sell 1 ToolIcon, 1 ArtIcon with a higher LevelIcon, and 1 BookIcon with an even higher LevelIcon.
 Scientist	Scientist
 Scientist_Text	Sell 1 BookIcon, 1 HouseIcon with a higher LevelIcon, and 1 ToolIcon with an even higher LevelIcon.
-Remake	Remake
-Remake_Text	 +1 of a TokenIcon you have (at the same LevelIcon).
+Duplicate	Duplicate
+Duplicate_Text	 +1 of a TokenIcon you have (at the same LevelIcon).
+Monument	Monument
+Monument_Text	 +1 ArtIcon at 1 LevelIcon. Then upgrade it once per ToolIcon you have at either 3 or 4 LevelIcon.
+Library	Library
+Library_Text	 +1 HouseIcon at 1 LevelIcon. Then upgrade it once for each LevelIcon you have at least 1 BookIcon at.
+Magnum_Opus	Magnum Opus
+Magnum_Opus_Text	 +1 BookIcon at 6 LevelIcon. Then downgrade it once per 3 TokenIcon you have (round down).
+Smelting	Smelting
+Smelting_Text	 +1 ArtIcon at 6 LevelIcon. Then lose 1 HouseIcon, 1 ToolIcon, and 1 BookIcon.

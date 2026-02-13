@@ -20,13 +20,13 @@ public class GameFiles : MonoBehaviour
 {
     public static GameFiles inst;
     public List<CardData> customerFiles { get; private set; }
-    public List<CardData> strategyFiles { get; private set; }
+    public List<CardData> twistFiles { get; private set; }
 
     void Awake()
     {
         inst = this;
         customerFiles = ReadTSVFile<CardData>(Resources.Load<TextAsset>("Card Info/Customers").text);
-        strategyFiles = ReadTSVFile<CardData>(Resources.Load<TextAsset>("Card Info/Strategies").text);
+        twistFiles = ReadTSVFile<CardData>(Resources.Load<TextAsset>("Card Info/Twists").text);
     }
 
     List<T> ReadTSVFile<T>(string textToConvert) where T : new()

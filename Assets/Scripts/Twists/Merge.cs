@@ -8,7 +8,7 @@ public class Merge : CardType
     {
     }
 
-    public override void TrendEffect(Player player, int logged)
+    public override void TwistEffect(Player player, int logged)
     {
         player.AddLoseToken(1, (6, TokenType.HouseIcon), logged);
         int max = 2;

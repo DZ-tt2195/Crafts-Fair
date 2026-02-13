@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: eed447fe5f36f49dd8b223c108b97950
+guid: 1eacfa6e2905f4c0999ca48c9ac54344
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1767193967560421882
-    second: Consult_0
+      213: -2720939267543038567
+    second: Smelting_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Consult_0
+      name: Smelting_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: af1f6adec85568810800000000000000
-      internalID: 1767193967560421882
+      spriteID: 9958faef6284d3ad0800000000000000
+      internalID: -2720939267543038567
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Consult_0: 1767193967560421882
+      Smelting_0: -2720939267543038567
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

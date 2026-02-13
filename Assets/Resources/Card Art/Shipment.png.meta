@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: a19e6e75ea27846489937d3216f65b0f
+guid: 2cfa57308b3aa477b8762b0349255c3c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 4597846143087157277
-    second: Remake_0
+      213: 4739910667844562281
+    second: Shipment_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -46,7 +46,7 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 2
+  spriteMode: 1
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -72,7 +72,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 2048
+    maxTextureSize: 512
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Remake_0
+      name: Shipment_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: d102c9ae4b4decf30800000000000000
-      internalID: 4597846143087157277
+      spriteID: 96da5f7a3ab87c140800000000000000
+      internalID: 4739910667844562281
       vertices: []
       indices: 
       edges: []
@@ -138,7 +138,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 5e97eb03825dee720800000000000000
     internalID: 0
     vertices: []
     indices: 
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Remake_0: 4597846143087157277
+      Shipment_0: 4739910667844562281
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

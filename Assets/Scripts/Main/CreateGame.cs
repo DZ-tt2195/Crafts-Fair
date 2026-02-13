@@ -210,14 +210,14 @@ public class CreateGame : PhotonCompatible
     public void CreateEvents()
     {
         List<int> EventIDs = new();
-        for (int i = 0; i<GameFiles.inst.strategyFiles.Count; i++)
+        for (int i = 0; i<GameFiles.inst.twistFiles.Count; i++)
             EventIDs.Add(i);
         EventIDs = EventIDs.Shuffle();
 
         int forcedEvents = 4;
         for (int i = 1; i<=forcedEvents; i++)
         {
-            int chosenNumber = PlayerPrefs.GetInt($"Trend {i}");
+            int chosenNumber = PlayerPrefs.GetInt($"Twist {i}");
             if (chosenNumber >= 0 && EventIDs.Remove(chosenNumber))
                 EventIDs.Insert(0, chosenNumber);
         }
@@ -235,7 +235,7 @@ public class CreateGame : PhotonCompatible
         bool vertical = false;
         if (typeToFind.Equals("Event"))
         {
-            toFind = GameFiles.inst.strategyFiles;
+            toFind = GameFiles.inst.twistFiles;
             vertical = false;
         }
         else if (typeToFind.Equals("Placard"))
@@ -255,7 +255,7 @@ public class CreateGame : PhotonCompatible
         for (int i = 0; i<cardIDs.Length; i++)
         {
             eventInfo[i].card.gameObject.SetActive(true);
-            CardData data = GameFiles.inst.strategyFiles[cardIDs[i]];
+            CardData data = GameFiles.inst.twistFiles[cardIDs[i]];
             eventInfo[i].card.AssignCard(data, 1, false, new(0.5f, 0.5f, 0.5f));
         }
         for (int i = cardIDs.Length; i<eventInfo.Count; i++)

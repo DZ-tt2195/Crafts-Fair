@@ -8,7 +8,7 @@ public class Prototype : CardType
     {
     }
 
-    public override void TrendEffect(Player player, int logged)
+    public override void TwistEffect(Player player, int logged)
     {
         int numArt = player.GetTokenDict()[TokenType.ArtIcon][1];
         player.AddLoseToken(1, (1, TokenType.ToolIcon), logged);

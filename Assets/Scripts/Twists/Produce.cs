@@ -6,7 +6,7 @@ public class Produce : CardType
     {
     }
 
-    public override void TrendEffect(Player player, int logged)
+    public override void TwistEffect(Player player, int logged)
     {
         if (WithLevel(player.GetTokenDict(), FindNumber.Minimum, 6, 1))
             player.AddLoseToken(4, (1, TokenType.ToolIcon), logged);

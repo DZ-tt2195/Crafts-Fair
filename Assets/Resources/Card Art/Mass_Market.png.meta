@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: eed447fe5f36f49dd8b223c108b97950
+guid: 1cd97641583d44b6f9b91c5dd716015c
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1767193967560421882
-    second: Consult_0
+      213: 3452266856116670953
+    second: Mass_Market_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Consult_0
+      name: Mass_Market_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: af1f6adec85568810800000000000000
-      internalID: 1767193967560421882
+      spriteID: 9e150bc2a6ae8ef20800000000000000
+      internalID: 3452266856116670953
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Consult_0: 1767193967560421882
+      Mass_Market_0: 3452266856116670953
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

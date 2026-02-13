@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using System;
 
-public class Polish : CardType
+public class University : CardType
 {
-    public Polish(CardData dataFile) : base(dataFile)
+    public University(CardData dataFile) : base(dataFile)
     {
     }
 
-    public override void TrendEffect(Player player, int logged)
+    public override void TwistEffect(Player player, int logged)
     {
         Dictionary<TokenType, int[]> playerTokens = player.GetTokenDict();
         foreach (TokenType token in Enum.GetValues(typeof(TokenType)))
