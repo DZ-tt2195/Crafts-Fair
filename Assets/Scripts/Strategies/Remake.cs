@@ -2,9 +2,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Duplicate : CardType
+public class Remake : CardType
 {
-    public Duplicate(CardData dataFile) : base(dataFile)
+    public Remake(CardData dataFile) : base(dataFile)
     {
     }
 

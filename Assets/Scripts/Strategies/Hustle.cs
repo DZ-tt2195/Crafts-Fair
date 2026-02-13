@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class Tipping : CardType
+public class Hustle : CardType
 {
-    public Tipping(CardData dataFile) : base(dataFile)
+    public Hustle(CardData dataFile) : base(dataFile)
     {
     }
 

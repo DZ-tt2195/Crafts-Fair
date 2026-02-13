@@ -9,18 +9,18 @@ public class Encyclopedia : MonoBehaviour
 {
     public static Encyclopedia inst;
     [Foldout("UI", true)]
-    [SerializeField] Card buyerPrefab;
-    [SerializeField] Card trendPrefab;
-    [SerializeField] GridLayoutGroup buyerGrid;
-    [SerializeField] GridLayoutGroup trendGrid;
-    [SerializeField] RectTransform buyerView;
-    [SerializeField] RectTransform trendView;
+    [SerializeField] Card customerPrefab;
+    [SerializeField] Card strategyPrefab;
+    [SerializeField] GridLayoutGroup customerGrid;
+    [SerializeField] GridLayoutGroup strategyGrid;
+    [SerializeField] RectTransform customerView;
+    [SerializeField] RectTransform strategyView;
     [SerializeField] Slider viewSlider;
-    List<Card> allBuyers = new();
-    List<Card> allTrends = new();
+    List<Card> allcustomers = new();
+    List<Card> allStrategies = new();
     [Foldout("Texts", true)]
-    [SerializeField] TMP_Text buyer;
-    [SerializeField] TMP_Text trend;
+    [SerializeField] TMP_Text customer;
+    [SerializeField] TMP_Text strategy;
     [SerializeField] TMP_Text close;
 
     private void Awake()
@@ -31,8 +31,8 @@ public class Encyclopedia : MonoBehaviour
 
         void Change(float value)
         {
-            buyerView.gameObject.SetActive((int)value == 0);
-            trendView.gameObject.SetActive((int)value == 1);
+            customerView.gameObject.SetActive((int)value == 0);
+            strategyView.gameObject.SetActive((int)value == 1);
         }
     }
     private void Start()
@@ -40,25 +40,25 @@ public class Encyclopedia : MonoBehaviour
         Translations();
         for (int i = 0; i < GameFiles.inst.customerFiles.Count; i++)
         {
-            GameObject nextCard = Instantiate(buyerPrefab.gameObject);
+            GameObject nextCard = Instantiate(customerPrefab.gameObject);
             Card cardPV = nextCard.GetComponent<Card>();
             cardPV.AssignCard(GameFiles.inst.customerFiles[i], 1f, true, Vector3.one);
-            allBuyers.Add(cardPV);
-            cardPV.transform.SetParent(buyerGrid.transform);
-        }/*
+            allcustomers.Add(cardPV);
+            cardPV.transform.SetParent(customerGrid.transform);
+        }
         for (int i = 0; i < GameFiles.inst.strategyFiles.Count; i++)
         {
-            GameObject nextCard = Instantiate(trendPrefab.gameObject);
+            GameObject nextCard = Instantiate(strategyPrefab.gameObject);
             Card cardPV = nextCard.GetComponent<Card>();
             cardPV.AssignCard(GameFiles.inst.strategyFiles[i], 1f, false, Vector3.one);
-            allTrends.Add(cardPV);
-            cardPV.transform.SetParent(trendGrid.transform);
-        }*/
+            allStrategies.Add(cardPV);
+            cardPV.transform.SetParent(strategyGrid.transform);
+        }
     }
     void Translations()
     {
-        buyer.text = AutoTranslate.Customer();
-        trend.text = AutoTranslate.Strategy();
+        customer.text = AutoTranslate.Customer();
+        strategy.text = AutoTranslate.Strategy();
         close.text = AutoTranslate.Close();
     }
 }

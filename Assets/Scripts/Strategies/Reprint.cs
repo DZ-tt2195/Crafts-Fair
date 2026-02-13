@@ -1,8 +1,8 @@
 using UnityEngine;
 
-public class Innovation : CardType
+public class Reprint : CardType
 {
-    public Innovation(CardData dataFile) : base(dataFile)
+    public Reprint(CardData dataFile) : base(dataFile)
     {
     }
 
