@@ -31,7 +31,7 @@ public class TakeTurn : Turn
             new(AutoTranslate.ToolIcon(), () => AddThis(TokenType.ToolIcon)),
             new(AutoTranslate.BookIcon(), () => AddThis(TokenType.BookIcon))
         };
-        MakeDecision.inst.ChooseTextButton(addTokens, AutoTranslate.Ask_Token_Type());
+        MakeDecision.inst.ChooseTextButton(addTokens, AutoTranslate.Ask_Add(AutoTranslate.TokenIcon(), "1", "1"));
 
         void AddThis(TokenType type)
         {

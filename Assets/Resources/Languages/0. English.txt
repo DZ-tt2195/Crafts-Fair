@@ -1,5 +1,5 @@
 Game_Designer	by Thomas Tang (DZ)
-Last_Update	Last Updated: Feb 13, 2026
+Last_Update	Last Updated: Feb 14, 2026
 Blank	
 Translator_Credit	Original Language
 Language	Language
@@ -59,11 +59,11 @@ TokenIcon_Text	TokenIcon: any type of token (ArtIcon, HouseIcon, ToolIcon, BookI
 LevelIcon	LevelIcon
 LevelIcon_Text	LevelIcon: the level of a token, from 1 to 6
 Online_Next_Turn	Turn $Number$
-Online_Add_Coin	$Player$ gets +$Num$ CoinIcon.
+Online_Add_Coin	$Player$ gains $Num$ CoinIcon.
 Online_Lose_Coin	$Player$ loses $Num$ CoinIcon.
 Online_Draw_Customer	$Player$ draws $Card$.
 Online_Draw_Customer_Others	$Player$ draws 1 CardIcon.
-Ask_Token_Type	Choose TokenIcon.
+Ask_Add	Add $Token$ ($Num1$ / $Num2$).
 Online_Chose_Token	$Player$ chooses $Token$.
 Online_Add_Token	$Player$ adds $Amount$ $Token$ at $Level$ LevelIcon.
 Ask_Upgrade	Upgrade 1 $Token$ ($Num1$ / $Num2$).
@@ -117,9 +117,9 @@ Royalty_Text	Sell at least 2 TokenIcon at 6 LevelIcon.
 University	University
 University_Text	Upgrade each of your TokenIcon at 3 LevelIcon.
 Mass_Market	Mass Market
-Mass_Market_Text	 +1 CoinIcon per 2 CardIcon you sold this turn (round down).
+Mass_Market_Text	Gain 1 CoinIcon per 2 CardIcon you sold this turn (round down).
 Quantity	Quantity
-Quantity_Text	 +1 ArtIcon, +1 HouseIcon, +1 ToolIcon, and +1 BookIcon, all at 1 LevelIcon.
+Quantity_Text	Create 1 ArtIcon, 1 HouseIcon, 1 ToolIcon, and 1 BookIcon, all at 1 LevelIcon.
 Scavenger	Scavenger
 Scavenger_Text	The LevelIcon of all sold TokenIcon total to exactly 4.
 Hunter	Hunter
@@ -149,29 +149,27 @@ Apprentice_Text	You chose to remove a counter from ToolIcon this turn.
 Reader	Reader
 Reader_Text	You chose to remove a counter from BookIcon this turn.
 Save_Up	Save Up
-Save_Up_Text	If you have at least 5 CoinIcon, +4 ArtIcon at 1 LevelIcon.
+Save_Up_Text	If you have at least 5 CoinIcon, create 4 ArtIcon at 1 LevelIcon.
 Tourists	Tourists
-Tourists_Text	If you have at least 3 TokenIcon at exactly 2 LevelIcon, +4 HouseIcon at 1 LevelIcon.
+Tourists_Text	If you have at least 3 TokenIcon at exactly 2 LevelIcon, create 4 HouseIcon at 1 LevelIcon.
 Produce	Produce
-Produce_Text	If you have at least 1 TokenIcon at 6 LevelIcon, +4 ToolIcon at 1 LevelIcon.
+Produce_Text	If you have at least 1 TokenIcon at 6 LevelIcon, create 4 ToolIcon at 1 LevelIcon.
 Shipment	Shipment
-Shipment_Text	If you have no BookIcon, +4 BookIcon at 1 LevelIcon.
+Shipment_Text	If you have no BookIcon, create 4 BookIcon at 1 LevelIcon.
 Polish	Polish
 Polish_Text	Upgrade 1 ArtIcon, 1 HouseIcon, 1 ToolIcon, and 1 BookIcon.
 UpgradeArt	UpgradeArt
-UpgradeArt_Text	 +1 ArtIcon at 1 LevelIcon. Then upgrade it to the same LevelIcon as your highest HouseIcon (if any).
+UpgradeArt_Text	Create 1 ArtIcon at 1 LevelIcon. Then upgrade it to the same LevelIcon as your highest HouseIcon (if any).
 Merge	Merge
-Merge_Text	 +1 HouseIcon at 6 LevelIcon. Then lose 2 HouseIcon.
+Merge_Text	Create 1 HouseIcon at 6 LevelIcon. Then lose 2 HouseIcon.
 Prototype	Prototype
-Prototype_Text	 +1 ToolIcon at 1 LevelIcon. Then upgrade it once per ArtIcon you have at 1 LevelIcon.
-BigBook	BigBook
-BigBook_Text	 +1 BookIcon at 6 LevelIcon. Then downgrade 2 TokenIcon that are at 2 LevelIcon or higher.
+Prototype_Text	Create 1 ToolIcon at 1 LevelIcon. Then upgrade it once per ArtIcon you have at 1 LevelIcon.
 Coven	Coven
 Coven_Text	Sell at least 4 TokenIcon at 2 LevelIcon.
 Family	Family
 Family_Text	Sell at least 4 TokenIcon at 3 LevelIcon.
 Quality	Quality
-Quality_Text	 +1 of any TokenIcon, at 4 LevelIcon.
+Quality_Text	Create 1 of any TokenIcon, at 4 LevelIcon.
 Musician	Musician
 Musician_Text	Sell at least 1 ArtIcon at 6 LevelIcon.
 Mayor	Mayor
@@ -180,12 +178,6 @@ Craftsman	Craftsman
 Craftsman_Text	Sell at least 1 ToolIcon at 6 LevelIcon.
 Storyteller	Storyteller
 Storyteller_Text	Sell at least 1 BookIcon at 6 LevelIcon.
-BigTool	BigTool
-BigTool_Text	 +1 ToolIcon at 6 LevelIcon. Then lose 1 ArtIcon, 1 HouseIcon, and 1 BookIcon.
-BigArt	BigArt
-BigArt_Text	 +1 ArtIcon at 6 LevelIcon. Then downgrade it once per 3 TokenIcon you have (round down).
-UpgradeHouse	UpgradeHouse
-UpgradeHouse_Text	 +1 HouseIcon at 1 LevelIcon. Then upgrade it once for each LevelIcon you have at least 1 BookIcon at.
 Artisan	Artisan
 Artisan_Text	Sell 1 HouseIcon, 1 ToolIcon with a higher LevelIcon, and 1 ArtIcon with an even higher LevelIcon.
 Bishop	Bishop
@@ -195,12 +187,18 @@ Author_Text	Sell 1 ToolIcon, 1 ArtIcon with a higher LevelIcon, and 1 BookIcon w
 Scientist	Scientist
 Scientist_Text	Sell 1 BookIcon, 1 HouseIcon with a higher LevelIcon, and 1 ToolIcon with an even higher LevelIcon.
 Duplicate	Duplicate
-Duplicate_Text	 +1 of a TokenIcon you have (at the same LevelIcon).
+Duplicate_Text	Create 1 of a TokenIcon you have (at the same LevelIcon).
 Monument	Monument
-Monument_Text	 +1 ArtIcon at 1 LevelIcon. Then upgrade it once per ToolIcon you have at either 3 or 4 LevelIcon.
+Monument_Text	Create 1 ArtIcon at 1 LevelIcon. Then upgrade it once per ToolIcon you have at either 3 or 4 LevelIcon.
 Library	Library
-Library_Text	 +1 HouseIcon at 1 LevelIcon. Then upgrade it once for each LevelIcon you have at least 1 BookIcon at.
+Library_Text	Create 1 HouseIcon at 1 LevelIcon. Then upgrade it once for each LevelIcon you have at least 1 BookIcon at.
 Magnum_Opus	Magnum Opus
-Magnum_Opus_Text	 +1 BookIcon at 6 LevelIcon. Then downgrade it once per 3 TokenIcon you have (round down).
+Magnum_Opus_Text	Create 1 BookIcon at 6 LevelIcon. Then downgrade it once per 3 TokenIcon you have (round down).
 Smelting	Smelting
-Smelting_Text	 +1 ArtIcon at 6 LevelIcon. Then lose 1 HouseIcon, 1 ToolIcon, and 1 BookIcon.
+Smelting_Text	Create 1 ArtIcon at 6 LevelIcon. Then lose 1 HouseIcon, 1 ToolIcon, and 1 BookIcon.
+Abundance	Abundance
+Abundance_Text	Once per 3 CoinIcon you have (round down): Create 1 of any TokenIcon at 1 LevelIcon.
+Prioritize	Prioritize
+Prioritize_Text	Create 1 ToolIcon at 6 LevelIcon. Then downgrade 2 TokenIcon that are at 2 LevelIcon or higher.
+Maps	Maps
+Maps_Text	Create 1 BookIcon at 1 LevelIcon. Then upgrade it to the same LevelIcon as your highest HouseIcon (if any).
