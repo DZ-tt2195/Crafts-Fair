@@ -27,6 +27,12 @@ Engineer	Sell at least 4 HouseIcon with consecutively ordered LevelIcon.	5	Elisa
 Historian	Sell at least 4 BookIcon with consecutively ordered LevelIcon.	5	Joshua Stewart \nDominion: Renaissance \n(Seer)	CareBook
 Inventor	Sell at least 4 ToolIcon with consecutively ordered LevelIcon.	5	Julien Delval \nDominion: Renaissance \n(Inventor)	CareTool
 Magnate	The LevelIcon of all sold TokenIcon total to exactly 10.	5	Harald Lieske \nDominion: Prosperity \n(Magnate)	
-Sculptor	Sell at least 4 ArtIcon with consecutively ordered LevelIcon.	5	Jessi J \nDominion: Renaissance \n(Sculptor)	CareArt
+Painter	Sell at least 4 ArtIcon with consecutively ordered LevelIcon.	5	Osamu Inoue \nDominion: Rising Sun \n(Artist)	CareArt
 Family	Sell at least 4 TokenIcon at 3 LevelIcon.	6	Mizutametori \nMTG: Wizards Play Network 2025\n(Gran-Gran)	Care3
 Royalty	Sell at least 2 TokenIcon at 6 LevelIcon.	6	Kieran Yanner \nMTG: Throne of Eldraine \n(Kenrith, the Returned King)	Care6
+JustArtHouse	Sell at least 2 ArtIcon and 2 HouseIcon, and no ToolIcon or BookIcon.	2		CareArt, CareHouse
+Sculptor	Sell at least 2 ArtIcon and 2 ToolIcon, and no HouseIcon or BookIcon.	2	Jessi J \nDominion: Renaissance \n(Sculptor)	CareArt, CareTool
+JustArtBook	Sell at least 2 ArtIcon and 2 BookIcon, and no HouseIcon or ToolIcon.	2		CareArt, CareBook
+Carpenter	Sell at least 2 HouseIcon and 2 ToolIcon, and no ArtIcon or BookIcon.	2	Claus Stephan \nDominion: Allies \n(Carpenter)	CareHouse, CareTool
+JustHouseBook	Sell at least 2 HouseIcon and 2 BookIcon, and no ArtIcon or ToolIcon.	2		CareHouse, CareBook
+JustToolBook	Sell at least 2 ToolIcon and 2 BookIcon, and no ArtIcon or HouseIcon.	2		CareTool, CareBook

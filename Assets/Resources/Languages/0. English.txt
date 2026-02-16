@@ -1,5 +1,5 @@
 Game_Designer	by Thomas Tang (DZ)
-Last_Update	Last Updated: Feb 14, 2026
+Last_Update	Last Updated: Feb 15, 2026
 Blank	
 Translator_Credit	Original Language
 Language	Language
@@ -128,8 +128,8 @@ Driver	Driver
 Driver_Text	The LevelIcon of all sold TokenIcon total to exactly 8.
 Magnate	Magnate
 Magnate_Text	The LevelIcon of all sold TokenIcon total to exactly 10.
-Sculptor	Sculptor
-Sculptor_Text	Sell at least 4 ArtIcon with consecutively ordered LevelIcon.
+Painter	Painter
+Painter_Text	Sell at least 4 ArtIcon with consecutively ordered LevelIcon.
 Engineer	Engineer
 Engineer_Text	Sell at least 4 HouseIcon with consecutively ordered LevelIcon.
 Inventor	Inventor
@@ -202,3 +202,15 @@ Prioritize	Prioritize
 Prioritize_Text	Create 1 ToolIcon at 6 LevelIcon. Then downgrade 2 TokenIcon that are at 2 LevelIcon or higher.
 Maps	Maps
 Maps_Text	Create 1 BookIcon at 1 LevelIcon. Then upgrade it to the same LevelIcon as your highest HouseIcon (if any).
+JustArtHouse	JustArtHouse
+JustArtHouse_Text	Sell at least 2 ArtIcon and 2 HouseIcon, and no ToolIcon or BookIcon.
+Sculptor	Sculptor
+Sculptor_Text	Sell at least 2 ArtIcon and 2 ToolIcon, and no HouseIcon or BookIcon.
+JustArtBook	JustArtBook
+JustArtBook_Text	Sell at least 2 ArtIcon and 2 BookIcon, and no HouseIcon or ToolIcon.
+Carpenter	Carpenter
+Carpenter_Text	Sell at least 2 HouseIcon and 2 ToolIcon, and no ArtIcon or BookIcon.
+JustHouseBook	JustHouseBook
+JustHouseBook_Text	Sell at least 2 HouseIcon and 2 BookIcon, and no ArtIcon or ToolIcon.
+JustToolBook	JustToolBook
+JustToolBook_Text	Sell at least 2 ToolIcon and 2 BookIcon, and no ArtIcon or HouseIcon.
