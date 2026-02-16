@@ -215,16 +215,19 @@ public class CreateGame : PhotonCompatible
         EventIDs = EventIDs.Shuffle();
 
         int forcedEvents = 4;
-        for (int i = 1; i<=forcedEvents; i++)
+        for (int i = 0; i<forcedEvents; i++)
         {
             int chosenNumber = PlayerPrefs.GetInt($"Twist {i}");
             if (chosenNumber >= 0 && EventIDs.Remove(chosenNumber))
-                EventIDs.Insert(0, chosenNumber);
+                EventIDs.Insert(i, chosenNumber);
         }
 
         int[] chosenEvents = new int[forcedEvents];
         for (int i = 0; i<forcedEvents; i++)
+        {
             chosenEvents[i] = EventIDs[i];
+            Debug.Log(EventIDs[i]);
+        }
         InstantChangeRoomProp(ConstantStrings.EventList, chosenEvents.ToArray());
     }
 
@@ -264,7 +267,6 @@ public class CreateGame : PhotonCompatible
         }
         UpdateTexts();
     }
-
     public EventVisual GetEvent(TokenType type)
     {
         foreach (EventVisual tv in eventInfo)
@@ -282,7 +284,6 @@ public class CreateGame : PhotonCompatible
             visual.countText.text = KeywordTooltip.instance.EditText($"{TurnManager.inst.GetInt(tokenText)}{Translator.inst.Translate(visual.token.ToString())}");
         }
     }
-
     public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
     {
         if (propertiesThatChanged.ContainsKey(ConstantStrings.EventList))

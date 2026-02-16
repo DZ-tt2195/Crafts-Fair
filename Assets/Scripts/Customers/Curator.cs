@@ -1,9 +1,9 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class JustArtHouse : CardType
+public class Curator : CardType
 {    
-    public JustArtHouse(CardData dataFile) : base(dataFile)
+    public Curator(CardData dataFile) : base(dataFile)
     {
     }
 

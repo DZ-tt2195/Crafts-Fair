@@ -1,9 +1,9 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-public class JustToolBook : CardType
+public class Scribe : CardType
 {    
-    public JustToolBook(CardData dataFile) : base(dataFile)
+    public Scribe(CardData dataFile) : base(dataFile)
     {
     }
 

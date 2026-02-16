@@ -9,6 +9,6 @@ public class Hunter : CardType
 
     public override bool CanSell(Player player, Dictionary<TokenType, int[]> soldTokens)
     {
-        return SumOfLevels(soldTokens, FindNumber.Exact, 6);
+        return SumOfLevels(soldTokens, FindNumber.Exact, 10);
     }
 }

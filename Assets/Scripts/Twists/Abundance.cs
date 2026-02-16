@@ -13,7 +13,10 @@ public class Abundance : CardType
     {
         int toMake = Mathf.FloorToInt(player.GetCoins() / 3f);
         for (int i = 1; i<=toMake; i++)
-            Log.inst.NewDecisionContainer(() => AddToken(player, i, toMake, logged));
+        {
+            int number = i;
+            Log.inst.NewDecisionContainer(() => AddToken(player, number, toMake, logged));
+        }
     }
     void AddToken(Player player, int num, int max, int logged)
     {

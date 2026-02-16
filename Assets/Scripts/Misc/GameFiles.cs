@@ -28,7 +28,6 @@ public class GameFiles : MonoBehaviour
         customerFiles = ReadTSVFile<CardData>(Resources.Load<TextAsset>("Card Info/Customers").text);
         twistFiles = ReadTSVFile<CardData>(Resources.Load<TextAsset>("Card Info/Twists").text);
     }
-
     List<T> ReadTSVFile<T>(string textToConvert) where T : new()
     {
         string[] splitUp = textToConvert.Split('\n');

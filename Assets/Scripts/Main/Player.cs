@@ -218,7 +218,7 @@ public class Player : PhotonCompatible
             return lowestLevel;
         else if (level >= maxLevel)
             return maxLevel;
-        return maxLevel;
+        return level;
     }   
     #endregion
 

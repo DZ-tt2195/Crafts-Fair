@@ -13,7 +13,10 @@ public class Merge : CardType
         player.AddLoseToken(1, (6, TokenType.HouseIcon), logged);
         int max = 2;
         for (int i = 1; i<=max; i++)
-            Log.inst.NewDecisionContainer(() => RemoveHouse(player, i, max, logged));
+        {
+            int number = i;
+            Log.inst.NewDecisionContainer(() => RemoveHouse(player, number, max, logged));
+        }
     }
     void RemoveHouse(Player player, int num, int max, int logged)
     {

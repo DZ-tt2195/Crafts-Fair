@@ -13,7 +13,10 @@ public class Prioritize : CardType
         player.AddLoseToken(1, (6, TokenType.ToolIcon), logged);
         int max = 2;
         for (int i = 1; i<= max; i++)
-            Log.inst.NewDecisionContainer(() => DowngradeToken(player, logged, i, max));
+        {
+            int number = i;
+            Log.inst.NewDecisionContainer(() => DowngradeToken(player, logged, number, max));
+        }
     }
     void DowngradeToken(Player player, int logged, int num, int max)
     {

@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 7f4c56a0e1903489e8875168e3162db7
+guid: 1bdd75a85d6d944caa33a1dc13a79b76
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 1107421863380195565
-    second: Hustle_0
+      213: -2377039443878655762
+    second: Carpenter_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -113,7 +113,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Hustle_0
+      name: Carpenter_0
       rect:
         serializedVersion: 2
         x: 0
@@ -128,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: de8174f315a5e5f00800000000000000
-      internalID: 1107421863380195565
+      spriteID: ee8458a483f030fd0800000000000000
+      internalID: -2377039443878655762
       vertices: []
       indices: 
       edges: []
@@ -148,7 +148,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Hustle_0: 1107421863380195565
+      Carpenter_0: -2377039443878655762
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
