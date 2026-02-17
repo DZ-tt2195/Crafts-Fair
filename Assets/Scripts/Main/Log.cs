@@ -119,7 +119,7 @@ public class Log : PhotonCompatible
         this.bottomType = this.GetType();
         inst = this;
 
-        undoButton.onClick.AddListener(() => InvokeUndo(undosInLog[0].undoToThis, true));
+        undoButton.onClick.AddListener(() => InvokeUndo(undosInLog[^1].undoToThis, true));
         undoButton.gameObject.SetActive(false);
         groupToWait = new(this);
         forward = true;
@@ -203,7 +203,7 @@ public class Log : PhotonCompatible
                 if (currentContainer.action != null)
                 {
                     saveText.AssignDecisionContainer(currentContainer);
-                    undosInLog.Insert(0, saveText);
+                    undosInLog.Add(saveText);
                 }
                 storeUndoPoint = false;
             }

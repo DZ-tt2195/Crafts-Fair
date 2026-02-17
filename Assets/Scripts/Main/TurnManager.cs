@@ -238,25 +238,18 @@ public class TurnManager : PhotonCompatible
     {
         endScreen.gameObject.SetActive(true);
         string text = "";
+        Player resigned = null;
 
-        foreach (Player player in CreateGame.inst.GetPlayers())
+        List<Player> scoresInOrder = CreateGame.inst.GetPlayers().OrderByDescending(player => player.GetCoins()).ToList();
+        foreach (Player player in scoresInOrder)
         {
-            text += $"{player.name}";
             if (GetThisPlayerPosition(player.photonView.Owner) == resignPosition)
-                text += AutoTranslate.Resigned();
-            text += "\n";
-/*
-            List<string> cardsPlayed = GetStringList(ConstantStrings.AllCardsPlayed, player);
-            for (int i = 0; i<cardsPlayed.Count; i++)
-            {
-                string[] splitUp = cardsPlayed[i].Split('-');
-
-                text += Translator.inst.Packaging("Played_Card_Info", "", splitUp[0], splitUp[1]);
-                text += ",";
-            }
-            text += "\n\n";
-            */
+                resigned = player;
+            else
+                text += $"{player.name} - {AutoTranslate.Coin_Amount(player.GetCoins().ToString())}\n";   
         }
+        if (resigned != null)
+            text += $"{resigned.name} - {AutoTranslate.Coin_Amount(resigned.GetCoins().ToString())} {AutoTranslate.Resigned()}";
         summaryText.text = KeywordTooltip.instance.EditText(text);
     }
 
