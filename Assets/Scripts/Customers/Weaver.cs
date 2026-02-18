@@ -2,9 +2,9 @@ using UnityEngine;
 using System;
 using System.Collections.Generic;
 
-public class Artisan : CardType
+public class Weaver : CardType
 {
-    public Artisan(CardData dataFile) : base(dataFile)
+    public Weaver(CardData dataFile) : base(dataFile)
     {
     }
 

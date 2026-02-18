@@ -1,6 +1,6 @@
 cardName	textBox	artCredit	notes
 Abundance	Once per 3 CoinIcon you have (round down): Create 1 of any TokenIcon at 1 LevelIcon.	Marcel-Andre Casasola Merkle \nDominion: Plunder \n(Abundance)	CareCoin, AddAny, Add1
-Duplicate	Create 1 of a TokenIcon you have (at the same LevelIcon).	Ryan Laukat \nDominion: Adventures \n(Duplicate)	AddAny
+Duplicate	Create 1 of a TokenIcon you already have (at the same LevelIcon).	Ryan Laukat \nDominion: Adventures \n(Duplicate)	AddAny
 Library	Create 1 HouseIcon at 1 LevelIcon. Then upgrade it once for each LevelIcon you have at least 1 BookIcon at.	Harald Lieske \nDominion \n(Library)	AddHouse, UpgradeHouse, CareBook, CareLevel
 Magnum_Opus	Create 1 BookIcon at 6 LevelIcon. Then downgrade it once per 3 TokenIcon you have (round down).	Randy Gallegos \nMTG: Ravnica Allegiance \n(Tome of the Guildpact)	AddBook, Add6, Downgrade
 Maps	Create 1 BookIcon at 1 LevelIcon. Then upgrade it to the same LevelIcon as your highest HouseIcon (if any).	Julien Delval \nDominion: Allies \n(Old Map)	AddBook, UpgradeBook, CareHouse, CareLevel

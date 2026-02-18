@@ -25,6 +25,7 @@ public class CardType
         return false;
     }
 #endregion
+
 #region  Checks
     protected bool SumOfLevels(Dictionary<TokenType, int[]> soldTokens, FindNumber toFind, int compare)
     {
@@ -98,6 +99,38 @@ public class CardType
                 return false;
         }
         return true;
+    }
+    protected bool HigherTypeVs(Dictionary<TokenType, int[]> soldTokens, int minimumTokens, TokenType highest)
+    {
+        int highestTargetToken = -1;
+        int othersTotalLevel = 0;
+        int totalTokens = 0;
+
+        foreach (TokenType token in Enum.GetValues(typeof(TokenType)))
+        {
+            int[] array = soldTokens[token];
+            int sum = MyExtensions.SumOfArray(soldTokens[token]);
+            totalTokens += sum;
+
+            if (token == highest)
+            {
+                if (sum != 1) return false;
+                for (int i = array.Length-1; i>= 0; i--)
+                {
+                    if (array[i] >= 1)
+                    {
+                        highestTargetToken = i;
+                        break;
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i<array.Length; i++)
+                    othersTotalLevel += array[i] * i;
+            }
+        } 
+        return totalTokens >= minimumTokens && highestTargetToken > othersTotalLevel;
     }
 #endregion
 

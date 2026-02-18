@@ -1,5 +1,5 @@
 Game_Designer	by Thomas Tang (DZ)
-Last_Update	Last Updated: Feb 16, 2026
+Last_Update	Last Updated: Feb 18, 2026
 Blank	
 Translator_Credit	Original Language
 Language	Language
@@ -104,8 +104,8 @@ Crowds	Crowds
 Crowds_Text	You have exactly 0 TokenIcon left after selling.
 Farmer	Farmer
 Farmer_Text	You have at least 5 TokenIcon left after selling.
-Miser	Miser
-Miser_Text	Sell exactly 2 TokenIcon.
+Twins	Twins
+Twins_Text	Sell at least 2 identical TokenIcon (same type and LevelIcon).
 Bulk_Buyer	Bulk Buyer
 Bulk_Buyer_Text	Sell at least 8 TokenIcon.
 Villager	Villager
@@ -174,8 +174,8 @@ Craftsman	Craftsman
 Craftsman_Text	Sell at least 1 ToolIcon at 6 LevelIcon.
 Storyteller	Storyteller
 Storyteller_Text	Sell at least 1 BookIcon at 6 LevelIcon.
-Artisan	Artisan
-Artisan_Text	Sell 1 HouseIcon, 1 ToolIcon with a higher LevelIcon, and 1 ArtIcon with an even higher LevelIcon.
+Weaver	Weaver
+Weaver_Text	Sell 1 HouseIcon, 1 ToolIcon with a higher LevelIcon, and 1 ArtIcon with an even higher LevelIcon.
 Bishop	Bishop
 Bishop_Text	Sell 1 ArtIcon, 1 BookIcon with a higher LevelIcon, and 1 HouseIcon with an even higher LevelIcon.
 Author	Author
@@ -183,7 +183,7 @@ Author_Text	Sell 1 ToolIcon, 1 ArtIcon with a higher LevelIcon, and 1 BookIcon w
 Scientist	Scientist
 Scientist_Text	Sell 1 BookIcon, 1 HouseIcon with a higher LevelIcon, and 1 ToolIcon with an even higher LevelIcon.
 Duplicate	Duplicate
-Duplicate_Text	Create 1 of a TokenIcon you have (at the same LevelIcon).
+Duplicate_Text	Create 1 of a TokenIcon you already have (at the same LevelIcon).
 Monument	Monument
 Monument_Text	Create 1 ArtIcon at 1 LevelIcon. Then upgrade it once per ToolIcon you have at either 3 or 4 LevelIcon.
 Library	Library
@@ -210,3 +210,11 @@ Archivist	Archivist
 Archivist_Text	Sell at least 2 HouseIcon and 2 BookIcon, and no ArtIcon or ToolIcon.
 Scribe	Scribe
 Scribe_Text	Sell at least 2 ToolIcon and 2 BookIcon, and no ArtIcon or HouseIcon.
+Ringmaster	Ringmaster
+Ringmaster_Text	Sell at least 4 TokenIcon, exactly one of which is ArtIcon, and it has a higher LevelIcon than all other TokenIcon combined.
+Shepherd	Shepherd
+Shepherd_Text	Sell at least 4 TokenIcon, exactly one of which is HouseIcon, and it has a higher LevelIcon than all other TokenIcon combined.
+Piper	Piper
+Piper_Text	Sell at least 4 TokenIcon, exactly one of which is ToolIcon, and it has a higher LevelIcon than all other TokenIcon combined.
+Teacher	Teacher
+Teacher_Text	Sell at least 4 TokenIcon, exactly one of which is BookIcon, and it has a higher LevelIcon than all other TokenIcon combined.
