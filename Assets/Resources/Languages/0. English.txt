@@ -1,5 +1,5 @@
 Game_Designer	by Thomas Tang (DZ)
-Last_Update	Last Updated: Feb 19, 2026
+Last_Update	Last Updated: Feb 20, 2026
 Blank	
 Translator_Credit	Original Language
 Language	Language
@@ -28,7 +28,7 @@ Player_Count	$Current$ / $Max$ Players
 Type_in_username	You have to type in a username.
 Attempt_to_reconnect	Attempting to reconnect to $Room$'s room...
 Failed_to_reconnect	Failed to reconnect to $Room$'s room.
-Choose_Twists	Choose Twistss for this game
+Choose_Twists	Choose Twists for this game
 Custom_Art_Twist	Twist ArtIcon
 Custom_House_Twist	Twist HouseIcon
 Custom_Tool_Twist	Twist ToolIcon

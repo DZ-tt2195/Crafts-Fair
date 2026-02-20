@@ -9,6 +9,6 @@ public class Reader : CardType
 
     public override bool CanSell(Player player, Dictionary<TokenType, int[]> soldTokens)
     {
-        return TurnManager.inst.GetString(ConstantStrings.ChosenToken, player).Equals(TokenType.BookIcon);
+        return TurnManager.inst.GetString(ConstantStrings.ChosenToken, player).Equals(TokenType.BookIcon.ToString());
     }
 }

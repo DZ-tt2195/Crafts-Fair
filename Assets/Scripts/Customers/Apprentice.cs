@@ -9,6 +9,6 @@ public class Apprentice : CardType
 
     public override bool CanSell(Player player, Dictionary<TokenType, int[]> soldTokens)
     {
-        return TurnManager.inst.GetString(ConstantStrings.ChosenToken, player).Equals(TokenType.ToolIcon);
+        return TurnManager.inst.GetString(ConstantStrings.ChosenToken, player).Equals(TokenType.ToolIcon.ToString());
     }
 }
