@@ -11,7 +11,7 @@ public class Prototype : CardType
     public override void TwistEffect(Player player, int logged)
     {
         int numArt = player.GetTokenDict()[TokenType.ArtIcon][1];
-        player.AddLoseToken(1, (1, TokenType.ToolIcon), logged);
+        player.CreateLoseToken(1, (1, TokenType.ToolIcon), logged);
         player.UpDowngradeToken(1, (1, TokenType.ToolIcon), numArt, logged);
     }
 }

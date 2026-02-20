@@ -8,9 +8,9 @@ public class Quantity : CardType
 
     public override void TwistEffect(Player player, int logged)
     {
-        player.AddLoseToken(1, (1, TokenType.ArtIcon), logged);
-        player.AddLoseToken(1, (1, TokenType.HouseIcon), logged);
-        player.AddLoseToken(1, (1, TokenType.ToolIcon), logged);
-        player.AddLoseToken(1, (1, TokenType.BookIcon), logged);
+        player.CreateLoseToken(1, (1, TokenType.ArtIcon), logged);
+        player.CreateLoseToken(1, (1, TokenType.HouseIcon), logged);
+        player.CreateLoseToken(1, (1, TokenType.ToolIcon), logged);
+        player.CreateLoseToken(1, (1, TokenType.BookIcon), logged);
     }
 }

@@ -10,7 +10,7 @@ public class Merge : CardType
 
     public override void TwistEffect(Player player, int logged)
     {
-        player.AddLoseToken(1, (6, TokenType.HouseIcon), logged);
+        player.CreateLoseToken(1, (6, TokenType.HouseIcon), logged);
         int max = 2;
         for (int i = 1; i<=max; i++)
         {
@@ -25,7 +25,7 @@ public class Merge : CardType
 
         void LoseToken((int level, TokenType type) info)
         {
-            player.AddLoseToken(-1, info, logged);
+            player.CreateLoseToken(-1, info, logged);
         }
     }
 }

@@ -10,6 +10,6 @@ public class Villager : CardType
 
     public override bool CanSell(Player player, Dictionary<TokenType, int[]> soldTokens)
     {
-        return WithLevel(soldTokens, FindNumber.Minimum, 2, 2);
+        return WithLevel(soldTokens, FindNumber.Minimum, 1, 4);
     }
 }

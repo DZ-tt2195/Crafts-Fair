@@ -10,7 +10,7 @@ public class Maps : CardType
 
     public override void TwistEffect(Player player, int logged)
     {
-        player.AddLoseToken(1, (1, TokenType.HouseIcon), logged);
+        player.CreateLoseToken(1, (1, TokenType.HouseIcon), logged);
         int[] houseArray = player.GetTokenDict()[TokenType.HouseIcon];
         for (int i = houseArray.Length-1; i>=0; i--)
         {

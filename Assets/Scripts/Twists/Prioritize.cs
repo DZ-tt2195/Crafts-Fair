@@ -10,7 +10,7 @@ public class Prioritize : CardType
 
     public override void TwistEffect(Player player, int logged)
     {
-        player.AddLoseToken(1, (6, TokenType.ToolIcon), logged);
+        player.CreateLoseToken(1, (6, TokenType.ToolIcon), logged);
         int max = 2;
         for (int i = 1; i<= max; i++)
         {

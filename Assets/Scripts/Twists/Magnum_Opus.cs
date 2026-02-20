@@ -10,7 +10,7 @@ public class Magnum_Opus : CardType
 
     public override void TwistEffect(Player player, int logged)
     {
-        player.AddLoseToken(1, (6, TokenType.BookIcon), logged);
+        player.CreateLoseToken(1, (6, TokenType.BookIcon), logged);
         int downgrade = Mathf.FloorToInt(player.AllTotalTokens() / 3f);
         player.UpDowngradeToken(1, (6, TokenType.BookIcon), -1*downgrade, logged);
     }

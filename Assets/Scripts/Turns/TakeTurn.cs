@@ -31,13 +31,13 @@ public class TakeTurn : Turn
             new(AutoTranslate.ToolIcon(), () => AddThis(TokenType.ToolIcon)),
             new(AutoTranslate.BookIcon(), () => AddThis(TokenType.BookIcon))
         };
-        MakeDecision.inst.ChooseTextButton(addTokens, AutoTranslate.Ask_Add(AutoTranslate.TokenIcon(), "1", "1"));
+        MakeDecision.inst.ChooseTextButton(addTokens, AutoTranslate.Ask_Create(AutoTranslate.TokenIcon(), "1", "1"));
 
         void AddThis(TokenType type)
         {
             TurnManager.inst.WillChangePlayerProperty(player, ConstantStrings.ChosenToken, type.ToString());
             Log.inst.AddMyText(true, OnlineTranslate.Online_Chose_Token(player.name, type.ToString()), logged);
-            player.AddLoseToken(1, (1, type), logged+1);
+            player.CreateLoseToken(1, (1, type), logged+1);
             Log.inst.NewDecisionContainer(() => AdvanceToken(player, type, logged+1));
         }
     }
@@ -129,7 +129,7 @@ public class TakeTurn : Turn
 
         void SellToken((int value, TokenType token) info)
         {
-            player.AddLoseToken(-1, info, logged);
+            player.CreateLoseToken(-1, info, logged);
             Dictionary<TokenType, int[]> newDictionary = soldTokens;
             newDictionary[info.token][info.value]++;
             Log.inst.NewDecisionContainer(() => DoSelling(player, newDictionary, restartContainer, logged));

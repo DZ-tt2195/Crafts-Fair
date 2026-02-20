@@ -189,7 +189,7 @@ public class Player : PhotonCompatible
         (int, TokenType) newTuple = (newLevel, first.token);
         Log.inst.NewRollback(() => ChangeToken(actualAmount, newTuple));
     }    
-    public void AddLoseToken(int num, (int level, TokenType token) info, int logged = 0, bool important = false)
+    public void CreateLoseToken(int num, (int level, TokenType token) info, int logged = 0, bool important = false)
     {
         if (num == 0 || info.level <= 0)
             return;
@@ -199,7 +199,7 @@ public class Player : PhotonCompatible
         int actualAmount = (currentTokens + num < 0) ? -1*currentTokens : num;
 
         if (actualAmount > 0)
-            Log.inst.AddMyText(important, OnlineTranslate.Online_Add_Token(this.name, actualAmount.ToString(), info.token.ToString(), actualLevel.ToString()), logged);
+            Log.inst.AddMyText(important, OnlineTranslate.Online_Create_Token(this.name, actualAmount.ToString(), info.token.ToString(), actualLevel.ToString()), logged);
         else
             Log.inst.AddMyText(important, OnlineTranslate.Online_Lose_Token(this.name, Mathf.Abs(actualAmount).ToString(), info.token.ToString(), actualLevel.ToString()), logged);
         Log.inst.NewRollback(() => ChangeToken(actualAmount, info));

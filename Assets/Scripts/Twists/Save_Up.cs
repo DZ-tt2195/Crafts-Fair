@@ -9,6 +9,6 @@ public class Save_Up : CardType
     public override void TwistEffect(Player player, int logged)
     {
         if (player.GetCoins() >= 5)
-            player.AddLoseToken(4, (1, TokenType.ArtIcon), logged);
+            player.CreateLoseToken(4, (1, TokenType.ArtIcon), logged);
     }
 }

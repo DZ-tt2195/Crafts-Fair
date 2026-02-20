@@ -16,11 +16,11 @@ public class Quality : CardType
             new(AutoTranslate.ToolIcon(), () => AddThis(TokenType.ToolIcon)),
             new(AutoTranslate.BookIcon(), () => AddThis(TokenType.BookIcon))
         };
-        MakeDecision.inst.ChooseTextButton(addTokens, AutoTranslate.Ask_Add(AutoTranslate.TokenIcon(), "1", "1"));
+        MakeDecision.inst.ChooseTextButton(addTokens, AutoTranslate.Ask_Create(AutoTranslate.TokenIcon(), "1", "1"));
 
         void AddThis(TokenType type)
         {
-            player.AddLoseToken(1, (4, type), logged);
+            player.CreateLoseToken(1, (4, type), logged);
         }
     }
 }

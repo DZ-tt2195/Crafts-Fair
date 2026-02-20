@@ -1,5 +1,5 @@
 Game_Designer	by Thomas Tang (DZ)
-Last_Update	Last Updated: Feb 18, 2026
+Last_Update	Last Updated: Feb 19, 2026
 Blank	
 Translator_Credit	Original Language
 Language	Language
@@ -63,9 +63,9 @@ Online_Add_Coin	$Player$ gains $Num$ CoinIcon.
 Online_Lose_Coin	$Player$ loses $Num$ CoinIcon.
 Online_Draw_Customer	$Player$ draws $Card$.
 Online_Draw_Customer_Others	$Player$ draws 1 CardIcon.
-Ask_Add	Add $Token$ ($Num1$ / $Num2$).
+Ask_Create	Create $Token$ ($Num1$ / $Num2$).
 Online_Chose_Token	$Player$ chooses $Token$.
-Online_Add_Token	$Player$ adds $Amount$ $Token$ at $Level$ LevelIcon.
+Online_Create_Token	$Player$ creates $Amount$ $Token$ at $Level$ LevelIcon.
 Ask_Upgrade	Upgrade 1 $Token$ ($Num1$ / $Num2$).
 Online_Upgrade_Token	$Player$ upgrades $Amount$ $Token$ from $Level1$ LevelIcon to $Level2$ LevelIcon.
 Ask_Downgrade	Downgrade $Token$ ($Num1$ / $Num2$).
@@ -108,10 +108,10 @@ Twins	Twins
 Twins_Text	Sell at least 2 identical TokenIcon (same type and LevelIcon).
 Bulk_Buyer	Bulk Buyer
 Bulk_Buyer_Text	Sell at least 8 TokenIcon.
-Villager	Villager
-Villager_Text	Sell at least 2 TokenIcon at 2 LevelIcon.
 Aristocrat	Aristocrat
 Aristocrat_Text	Sell at least 2 TokenIcon at 4 LevelIcon.
+Overlord	Overlord
+Overlord_Text	Sell at least 2 TokenIcon at 5 LevelIcon.
 Royalty	Royalty
 Royalty_Text	Sell at least 2 TokenIcon at 6 LevelIcon.
 University	University
@@ -121,11 +121,11 @@ Mass_Market_Text	Gain 1 CoinIcon per 2 CardIcon you sold this turn (round down).
 Quantity	Quantity
 Quantity_Text	Create 1 ArtIcon, 1 HouseIcon, 1 ToolIcon, and 1 BookIcon, all at 1 LevelIcon.
 Driver	Driver
-Driver_Text	The LevelIcon of all sold TokenIcon total to exactly 8.
+Driver_Text	Sell exactly 3 TokenIcon, and the total LevelIcon of those 3 TokenIcon is exactly 8.
 Hunter	Hunter
-Hunter_Text	The LevelIcon of all sold TokenIcon total to exactly 10.
+Hunter_Text	Sell exactly 3 TokenIcon, and the total LevelIcon of those 3 TokenIcon is exactly 10.
 Magnate	Magnate
-Magnate_Text	The LevelIcon of all sold TokenIcon total to exactly 12.
+Magnate_Text	Sell exactly 3 TokenIcon, and the total LevelIcon of those 3 TokenIcon total is exactly 12.
 Painter	Painter
 Painter_Text	Sell at least 4 ArtIcon with consecutively ordered LevelIcon.
 Engineer	Engineer
@@ -154,12 +154,12 @@ Shipment	Shipment
 Shipment_Text	If you have no BookIcon, create 4 BookIcon at 1 LevelIcon.
 Polish	Polish
 Polish_Text	Upgrade 1 ArtIcon, 1 HouseIcon, 1 ToolIcon, and 1 BookIcon.
-UpgradeArt	UpgradeArt
-UpgradeArt_Text	Create 1 ArtIcon at 1 LevelIcon. Then upgrade it to the same LevelIcon as your highest HouseIcon (if any).
 Merge	Merge
 Merge_Text	Create 1 HouseIcon at 6 LevelIcon. Then lose 2 HouseIcon.
 Prototype	Prototype
 Prototype_Text	Create 1 ToolIcon at 1 LevelIcon. Then upgrade it once per ArtIcon you have at 1 LevelIcon.
+Villager	Villager
+Villager_Text	Sell at least 4 TokenIcon at 1 LevelIcon.
 Coven	Coven
 Coven_Text	Sell at least 4 TokenIcon at 2 LevelIcon.
 Family	Family
@@ -211,10 +211,12 @@ Archivist_Text	Sell at least 2 HouseIcon and 2 BookIcon, and no ArtIcon or ToolI
 Scribe	Scribe
 Scribe_Text	Sell at least 2 ToolIcon and 2 BookIcon, and no ArtIcon or HouseIcon.
 Ringmaster	Ringmaster
-Ringmaster_Text	Sell at least 4 TokenIcon, exactly one of which is ArtIcon, and it has a higher LevelIcon than all other TokenIcon combined.
+Ringmaster_Text	Sell at least 4 TokenIcon, where exactly one is ArtIcon and it has a higher LevelIcon than all other TokenIcon combined.
 Shepherd	Shepherd
-Shepherd_Text	Sell at least 4 TokenIcon, exactly one of which is HouseIcon, and it has a higher LevelIcon than all other TokenIcon combined.
+Shepherd_Text	Sell at least 4 TokenIcon, where exactly one is HouseIcon and it has a higher LevelIcon than all other TokenIcon combined.
 Piper	Piper
-Piper_Text	Sell at least 4 TokenIcon, exactly one of which is ToolIcon, and it has a higher LevelIcon than all other TokenIcon combined.
+Piper_Text	Sell at least 4 TokenIcon, where exactly one is ToolIcon and it has a higher LevelIcon than all other TokenIcon combined.
 Teacher	Teacher
-Teacher_Text	Sell at least 4 TokenIcon, exactly one of which is BookIcon, and it has a higher LevelIcon than all other TokenIcon combined.
+Teacher_Text	Sell at least 4 TokenIcon, where exactly one is BookIcon and it has a higher LevelIcon than all other TokenIcon combined.
+Expertise	Expertise
+Expertise_Text	Upgrade 1 TokenIcon 4 times.

@@ -27,11 +27,11 @@ public class Abundance : CardType
             new(AutoTranslate.ToolIcon(), () => AddThis(TokenType.ToolIcon)),
             new(AutoTranslate.BookIcon(), () => AddThis(TokenType.BookIcon))
         };
-        MakeDecision.inst.ChooseTextButton(addTokens, AutoTranslate.Ask_Add(AutoTranslate.TokenIcon(), num.ToString(), max.ToString()));
+        MakeDecision.inst.ChooseTextButton(addTokens, AutoTranslate.Ask_Create(AutoTranslate.TokenIcon(), num.ToString(), max.ToString()));
 
         void AddThis(TokenType type)
         {
-            player.AddLoseToken(1, (1, type), logged);
+            player.CreateLoseToken(1, (1, type), logged);
         }
     }
 }

@@ -9,6 +9,6 @@ public class Magnate : CardType
 
     public override bool CanSell(Player player, Dictionary<TokenType, int[]> soldTokens)
     {
-        return SumOfLevels(soldTokens, FindNumber.Exact, 12);
+        return NumTokensSold(soldTokens, FindNumber.Exact, 3) && SumOfLevels(soldTokens, FindNumber.Exact, 12);
     }
 }

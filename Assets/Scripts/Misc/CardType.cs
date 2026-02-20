@@ -132,6 +132,13 @@ public class CardType
         } 
         return totalTokens >= minimumTokens && highestTargetToken > othersTotalLevel;
     }
+    protected bool NumTokensSold(Dictionary<TokenType, int[]> soldTokens, FindNumber toFind, int compare)
+    {
+        int totalTokens = 0;
+        foreach (TokenType token in Enum.GetValues(typeof(TokenType)))
+            totalTokens += MyExtensions.SumOfArray(soldTokens[token]);
+        return MyExtensions.Comparison(toFind, totalTokens, compare); 
+    }
 #endregion
 
 }

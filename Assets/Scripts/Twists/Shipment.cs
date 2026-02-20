@@ -9,6 +9,6 @@ public class Shipment : CardType
     public override void TwistEffect(Player player, int logged)
     {
         if (MyExtensions.SumOfArray(player.GetTokenDict()[TokenType.BookIcon]) == 0)
-            player.AddLoseToken(4, (1, TokenType.BookIcon), logged);
+            player.CreateLoseToken(4, (1, TokenType.BookIcon), logged);
     }
 }

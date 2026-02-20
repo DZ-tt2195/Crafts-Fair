@@ -10,7 +10,7 @@ public class Smelting : CardType
 
     public override void TwistEffect(Player player, int logged)
     {
-        player.AddLoseToken(1, (6, TokenType.ArtIcon), logged);
+        player.CreateLoseToken(1, (6, TokenType.ArtIcon), logged);
         Log.inst.NewDecisionContainer(() => LoseToken(player, logged, TokenType.HouseIcon));
         Log.inst.NewDecisionContainer(() => LoseToken(player, logged, TokenType.ToolIcon));
         Log.inst.NewDecisionContainer(() => LoseToken(player, logged, TokenType.BookIcon));
@@ -22,7 +22,7 @@ public class Smelting : CardType
 
         void LoseToken((int level, TokenType type) info)
         {
-            player.AddLoseToken(-1, info, logged);
+            player.CreateLoseToken(-1, info, logged);
         }        
     }
 }

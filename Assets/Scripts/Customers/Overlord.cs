@@ -1,15 +1,15 @@
 using UnityEngine;
-using System;
 using System.Collections.Generic;
+using System.Linq;
 
-public class Bulk_Buyer : CardType
+public class Overlord : CardType
 {
-    public Bulk_Buyer(CardData dataFile) : base(dataFile)
+    public Overlord(CardData dataFile) : base(dataFile)
     {
     }
 
     public override bool CanSell(Player player, Dictionary<TokenType, int[]> soldTokens)
     {
-        return NumTokensSold(soldTokens, FindNumber.Minimum, 8);
+        return WithLevel(soldTokens, FindNumber.Minimum, 5, 2);
     }
 }

@@ -11,6 +11,6 @@ public class Tourists : CardType
     public override void TwistEffect(Player player, int logged)
     {
         if (WithLevel(player.GetTokenDict(), FindNumber.Minimum, 2, 3))
-            player.AddLoseToken(4, (1, TokenType.HouseIcon), logged);
+            player.CreateLoseToken(4, (1, TokenType.HouseIcon), logged);
     }
 }

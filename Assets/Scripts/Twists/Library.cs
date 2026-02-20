@@ -10,7 +10,7 @@ public class Library : CardType
 
     public override void TwistEffect(Player player, int logged)
     {
-        player.AddLoseToken(1, (1, TokenType.HouseIcon), logged);
+        player.CreateLoseToken(1, (1, TokenType.HouseIcon), logged);
         int[] bookArray = player.GetTokenDict()[TokenType.BookIcon];
         int upgrade = 0;
         for (int i = 0; i<bookArray.Length; i++)
