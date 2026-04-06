@@ -15,6 +15,7 @@ public class Translator : PhotonCompatible
     public static Translator inst;
     Dictionary<string, Dictionary<string, string>> keyTranslate = new();
     [Scene][SerializeField] string toLoad;
+    [SerializeField] List<TextAsset> allLanguageFiles = new();
 
     protected override void Awake()
     {
@@ -32,8 +33,7 @@ public class Translator : PhotonCompatible
 
     private void Start()
     {
-        TextAsset[] languageFiles = Resources.LoadAll<TextAsset>("Languages");
-        foreach (TextAsset language in languageFiles)
+        foreach (TextAsset language in allLanguageFiles)
         {
             string fileName = ConvertName(language);
 

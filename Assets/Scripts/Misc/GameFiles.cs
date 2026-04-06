@@ -19,14 +19,21 @@ public class CardData
 public class GameFiles : MonoBehaviour
 {
     public static GameFiles inst;
+    [SerializeField] TextAsset customers;
+    [SerializeField] TextAsset twists;
+    [SerializeField] List<Sprite> cardArt;
+    Dictionary<string, Sprite> cardArtDictionary = new();
     public List<CardData> customerFiles { get; private set; }
     public List<CardData> twistFiles { get; private set; }
 
     void Awake()
     {
         inst = this;
-        customerFiles = ReadTSVFile<CardData>(Resources.Load<TextAsset>("Card Info/Customers").text);
-        twistFiles = ReadTSVFile<CardData>(Resources.Load<TextAsset>("Card Info/Twists").text);
+        foreach (Sprite sprite in cardArt)
+            cardArtDictionary.Add(sprite.name, sprite);
+
+        customerFiles = ReadTSVFile<CardData>(customers.text);
+        twistFiles = ReadTSVFile<CardData>(twists.text);
     }
     List<T> ReadTSVFile<T>(string textToConvert) where T : new()
     {
@@ -76,7 +83,7 @@ public class GameFiles : MonoBehaviour
                 else
                 {
                     if (field.FieldType == typeof(Sprite))
-                        field.SetValue(nextData, Resources.Load<Sprite>($"Card Art/{thisRow[columnIndex["cardName"]]}"));
+                        field.SetValue(nextData, cardArtDictionary[thisRow[columnIndex["cardName"]]]);
                 }
             }
 

@@ -71,19 +71,16 @@ public class KeywordTooltip : MonoBehaviour
         answer = text;
         foreach (KeywordHover link in linkedKeywords)
         {
-            string toReplace = link.translated;
-            answer = answer.Replace(toReplace, $"<link=\"{link.translated}\"><u>" +
+            answer = answer.Replace(link.translated, $"<link=\"{link.original}\"><u>" +
                 $"<color=#{ColorUtility.ToHtmlStringRGB(link.color)}>{link.translated}<color=#FFFFFF></u></link>");
         }
         foreach (KeywordHover link in spriteKeywords)
         {
-            string toReplace = link.translated;
-            answer = answer.Replace(toReplace, $"<link=\"{link.original}\"><sprite=\"{link.original}\" name=\"{link.original}\"></link>");
+            answer = answer.Replace(link.translated, $"<link=\"{link.original}\"><sprite=\"{link.original}\" name=\"{link.original}\"></link>");
         }
         foreach (var next in listOfCardRC)
         {
-            string toReplace = next.Key;
-            answer = answer.Replace(toReplace, $"<link=\"{toReplace}\"><i>{toReplace}</i></link>");
+            answer = answer.Replace(next.Key, $"<link=\"{next.Key}\"><i>{next.Key}</i></link>");
         }
         return answer;
     }
