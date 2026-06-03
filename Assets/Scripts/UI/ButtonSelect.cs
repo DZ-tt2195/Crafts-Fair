@@ -13,15 +13,18 @@ public class ButtonSelect : MonoBehaviour
         button = GetComponent<Button>();
         SetBorder(false);
     }
-    public void SetBorder(bool border) => SetBorder(border, Color.white);
-    public void SetBorder(bool border, Color color)
+    public void SetBorder(bool borderStatus) => SetBorder(borderStatus, Color.white);
+    public void SetBorder(bool borderStatus, Color color)
     {
-        this.border.gameObject.SetActive(border);
-        this.border.color = color;
+        if (border != null)
+        {
+            this.border.gameObject.SetActive(borderStatus);
+            this.border.color = color;
+        }
     }
-
     private void FixedUpdate()
     {
-        try { this.border.SetAlpha(CreateGame.inst.opacity); } catch { }
+        if (border != null && CreateGame.inst != null)
+            this.border.SetAlpha(CreateGame.inst.opacity);
     }
 }

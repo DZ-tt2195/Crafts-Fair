@@ -39,6 +39,7 @@ public class CreateGame : PhotonCompatible
     [SerializeField] TMP_Text switchPlayer;
     [SerializeField] TMP_Text rules;
     [SerializeField] TMP_Text rulesSummary;
+    [SerializeField] TMP_Text resignText;
     protected override void Awake()
     {
         base.Awake();
@@ -73,6 +74,7 @@ public class CreateGame : PhotonCompatible
             {
                 CommHub.inst.ShareMessageRPC(OnlineTranslate.Online_Player_Playing(playerName), true);
                 PlayerPrefs.SetString(ConstantStrings.LastRoom, PhotonNetwork.CurrentRoom.Name);
+                PlayerPrefs.Save();
                 StartCoroutine(MakePlayerAndCards());
                 
                 if (GetPlayers(false).Item1.Count == (int)GetRoomProperty(ConstantStrings.CanPlay))
@@ -118,6 +120,7 @@ public class CreateGame : PhotonCompatible
     }
     void Translations()
     {
+        resignText.text = AutoTranslate.Resign();
         switchPlayer.text = AutoTranslate.Switch_Player();
         rules.text = AutoTranslate.Rules();
         rulesSummary.text = KeywordTooltip.instance.EditText(AutoTranslate.Rules_Summary());
@@ -172,6 +175,7 @@ public class CreateGame : PhotonCompatible
                 player.transform.SetParent(canvas.transform);
                 player.transform.SetAsFirstSibling();
                 player.transform.localPosition = Vector3.zero;
+                AudioManager.instance.Menu();
             }
             else
             {

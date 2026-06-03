@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine.UI;
 using System.Linq;
+using System.Collections;
 
 public class Player : PhotonCompatible
 {
@@ -50,13 +51,14 @@ public class Player : PhotonCompatible
         this.name = username;
         SetToPlayerProps();
 
-        Button resignButton = GameObject.Find("Resign Button").GetComponent<Button>();
         if (photonView.AmOwner)
         {
             CreateGame.inst.mainPlayer = this;
+            Button resignButton = GameObject.Find("Resign").GetComponent<Button>();
             resignButton.onClick.AddListener(() => TurnManager.inst.TextForEnding(OnlineTranslate.Online_Player_Resigned(this.name), GetThisPlayerPosition(PhotonNetwork.LocalPlayer)));
             StartTurn();
         }
+        UpdateUI(true);
     }
     void SetToPlayerProps()
     {
@@ -121,8 +123,8 @@ public class Player : PhotonCompatible
             }
         }
         myHand = myHand.OrderBy(card => card.dataFile.coinAmount).ThenBy(card => card.dataFile.cardName).ToList();
-        TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyHand, TurnManager.inst.ConvertCardList(myHand)); uiDictionary[ConstantStrings.MyHand] = true;
-        TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyDeck, TurnManager.inst.ConvertCardList(myDeck));
+        TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyHand, TurnManager.ConvertCardList(myHand)); uiDictionary[ConstantStrings.MyHand] = true;
+        TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyDeck, TurnManager.ConvertCardList(myDeck));
     }
     public void DiscardCustomerRPC(Card card, int logged = 0)
     {
@@ -145,8 +147,8 @@ public class Player : PhotonCompatible
             card.transform.SetParent(null);
         }
         myHand = myHand.OrderBy(card => card.dataFile.coinAmount).ThenBy(card => card.dataFile.cardName).ToList();
-        TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyHand, TurnManager.inst.ConvertCardList(myHand)); uiDictionary[ConstantStrings.MyHand] = true;
-        TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyDiscard, TurnManager.inst.ConvertCardList(myDiscard)); uiDictionary[ConstantStrings.MyDiscard] = true;
+        TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyHand, TurnManager.ConvertCardList(myHand)); uiDictionary[ConstantStrings.MyHand] = true;
+        TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyDiscard, TurnManager.ConvertCardList(myDiscard)); uiDictionary[ConstantStrings.MyDiscard] = true;
     }
     #endregion
 
@@ -254,16 +256,28 @@ public class Player : PhotonCompatible
         Log.inst.inReaction.Add(Done);
         if (endPause)
         {
-            string instructions = (Log.inst.undosInLog.Count >= 1) ? AutoTranslate.Pause_to_Undo() : AutoTranslate.Pause_to_Read();
-            MakeDecision.inst.ChooseTextButton(new() { new(AutoTranslate.Done()) }, instructions,false);
+            if (Log.inst.undosInLog.Count >= 1)
+            {
+                if (PermaUI.inst.PauseToUndo())
+                    MakeDecision.inst.ChooseTextButton(new() { new(AutoTranslate.Done()) }, AutoTranslate.Pause_to_Undo(),false);
+            }
+            else
+            {
+                if (PermaUI.inst.PauseToRead())
+                    MakeDecision.inst.ChooseTextButton(new() { new(AutoTranslate.Done()) }, AutoTranslate.Pause_to_Read(),false);
+            }
         }
 
         void Done()
         {
-            Log.inst.DoneWithTurn();
-            InstantChangePlayerProp(this, ConstantStrings.Waiting, true);
-        }
-    }
+            StartCoroutine(SmallDelay());
+            IEnumerator SmallDelay()
+            {
+                yield return new WaitForSeconds(0.5f);
+                Log.inst.DoneWithTurn();
+                InstantChangePlayerProp(this, ConstantStrings.Waiting, true);
+            }
+        }    }
 
     #endregion
 
@@ -283,6 +297,7 @@ public class Player : PhotonCompatible
 
         if (uiDictionary[ConstantStrings.MyHand])
         {
+            if (this.transform.parent != null) AudioManager.instance.Card();
             List<Vector2> handPositions = ObjectPositions(myHand.Count, -1125, 475, 225, -550, true);
             for (int i = 0; i < myHand.Count; i++)
             {
@@ -318,6 +333,7 @@ public class Player : PhotonCompatible
 
         void ApplyToken(TokenType type, List<TokenDisplay> list)
         {
+            if (this.transform.parent != null) AudioManager.instance.Token();
             int[] array = myTokens[type];
             for (int i = 1; i<array.Length; i++)
                 list[i].ChangeInfo(i, type, array[i].ToString());

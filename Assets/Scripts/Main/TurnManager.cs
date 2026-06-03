@@ -150,7 +150,7 @@ public class TurnManager : PhotonCompatible
     }
     public List<Card> GetCardList(string property, Player player) => ConvertIntArray((int[])FindThisProperty(property, player));
     public List<Card> GetCardList(string property) => ConvertIntArray((int[])FindThisProperty(property, null));
-    List<Card> ConvertIntArray(int[] arrayOfPVs)
+    public static List<Card> ConvertIntArray(int[] arrayOfPVs)
     {
         if (arrayOfPVs == null)
             return new();
@@ -160,7 +160,7 @@ public class TurnManager : PhotonCompatible
             listOfCards.Add(PhotonView.Find(nextPV).GetComponent<Card>());
         return listOfCards;
     }
-    public int[] ConvertCardList(List<Card> listOfCards)
+    public static int[] ConvertCardList(List<Card> listOfCards)
     {
         int[] arrayOfCards = new int[listOfCards.Count];
         for (int i = 0; i < arrayOfCards.Length; i++)
@@ -236,6 +236,7 @@ public class TurnManager : PhotonCompatible
     [PunRPC]
     void ShowEnding(int resignPosition)
     {
+        AudioManager.instance.GameOver();
         endScreen.gameObject.SetActive(true);
         string text = "";
         Player resigned = null;

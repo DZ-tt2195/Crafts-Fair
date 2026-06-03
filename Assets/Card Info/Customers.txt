@@ -37,5 +37,5 @@ Inventor	Sell at least 4 ToolIcon with consecutively ordered LevelIcon.	5	Julien
 Overlord	Sell at least 2 TokenIcon at 5 LevelIcon.	5	Eric J. Carter \nDominion: Rising Sun \n(Daimyo)	Care5
 Painter	Sell at least 4 ArtIcon with consecutively ordered LevelIcon.	5	Osamu Inoue \nDominion: Rising Sun \n(Artist)	CareArt
 Family	Sell at least 4 TokenIcon at 3 LevelIcon.	6	Mizutametori \nMTG: Wizards Play Network 2025\n(Gran-Gran)	Care3
-Magnate	Sell exactly 3 TokenIcon, and the total LevelIcon of those 3 TokenIcon total is exactly 12.	6	Harald Lieske \nDominion: Prosperity \n(Magnate)	CareLevel
+Magnate	Sell exactly 3 TokenIcon, and the total LevelIcon of those 3 TokenIcon is exactly 12.	6	Harald Lieske \nDominion: Prosperity \n(Magnate)	CareLevel
 Royalty	Sell at least 2 TokenIcon at 6 LevelIcon.	6	Kieran Yanner \nMTG: Throne of Eldraine \n(Kenrith, the Returned King)	Care6

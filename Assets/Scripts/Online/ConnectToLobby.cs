@@ -20,6 +20,8 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
     [SerializeField] TMP_InputField username;
     [SerializeField] Button reconnectButton;
     [SerializeField] TMP_Dropdown regionDropdown;
+    [SerializeField] Button soundCreditsButton;
+    [SerializeField] Transform soundCreditsObject;
     List<(string, string)> regionAndCode = new();
 
     [Foldout("Part 2", true)]
@@ -46,6 +48,7 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
     [SerializeField] TMP_Text createRoomWithPlayers;
     [SerializeField] TMP_Text enterHostname;
     [SerializeField] TMP_Text join;
+    [SerializeField] TMP_Text soundCredits;
 
     private void Start()
     {
@@ -68,7 +71,6 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
         error.gameObject.SetActive(false);
         part1.gameObject.SetActive(true);
         part2.gameObject.SetActive(false);
-
         reconnectButton.gameObject.SetActive(PlayerPrefs.HasKey(ConstantStrings.LastRoom));
 
         regionAndCode = new()
@@ -80,6 +82,14 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
         };
         foreach ((string, string) var in regionAndCode)
             regionDropdown.AddOptions(new List<string>() { var.Item1 });
+
+        soundCreditsObject.gameObject.SetActive(false);
+        soundCreditsButton.onClick.AddListener(SoundCreditsButton);
+        void SoundCreditsButton()
+        {
+            AudioManager.instance.Menu();
+            soundCreditsObject.gameObject.SetActive(!soundCreditsObject.gameObject.activeSelf);
+        }
     }
     void Translations()
     {
@@ -97,10 +107,11 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
         createRoomWithPlayers.text = AutoTranslate.Create_Room_with_players();
         enterHostname.text = AutoTranslate.Enter_hostname();
         join.text = AutoTranslate.Join();
+        soundCredits.text = AutoTranslate.Sound_Credits();
     }
-
     IEnumerator ErrorMessage(string text)
     {
+        AudioManager.instance.Menu();
         error.text = text;
         float elapsedTime = 0f;
         while (elapsedTime < 3f)
@@ -142,6 +153,7 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
                 if (var.Item1.Equals(regionDropdown.options[regionDropdown.value].text))
                     PhotonNetwork.PhotonServerSettings.AppSettings.FixedRegion = var.Item2;
             }
+            AudioManager.instance.Menu();
             PhotonNetwork.ConnectUsingSettings();
         }
     }
@@ -161,7 +173,7 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
                 CustomRoomProperties = InitialRoomProps(1),
             };
             PhotonNetwork.CreateRoom(PlayerPrefs.GetString(ConstantStrings.MyUserName), options);
-            //PhotonNetwork.LoadLevel("2. Game");
+            AudioManager.instance.Menu();
         }
     }
 
@@ -182,6 +194,7 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
 
     public void Reconnect()
     {
+        AudioManager.instance.Menu();
         StartCoroutine(ErrorMessage(AutoTranslate.Attempt_to_reconnect(PlayerPrefs.GetString(ConstantStrings.LastRoom))));
         StartCoroutine(Delay());
 
@@ -232,6 +245,7 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
     public void CreateRoom()
     {
         PhotonNetwork.LocalPlayer.SetCustomProperties(InitialPlayerProps());
+        AudioManager.instance.Menu();
         RoomOptions options = new()
         {
             MaxPlayers = 10,
@@ -255,10 +269,10 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
             { ConstantStrings.JoinAsSpec, false },
             { ConstantStrings.GameOver, false },
             { ConstantStrings.EventList, new int[0]},
-            { ConstantStrings.TokenCounter(TokenType.ArtIcon), 2*numPlayers},
-            { ConstantStrings.TokenCounter(TokenType.HouseIcon), 2*numPlayers},
-            { ConstantStrings.TokenCounter(TokenType.ToolIcon), 2*numPlayers},
-            { ConstantStrings.TokenCounter(TokenType.BookIcon), 2*numPlayers},
+            { ConstantStrings.TokenCounter(TokenType.ArtIcon), 2},
+            { ConstantStrings.TokenCounter(TokenType.HouseIcon), 2},
+            { ConstantStrings.TokenCounter(TokenType.ToolIcon), 2},
+            { ConstantStrings.TokenCounter(TokenType.BookIcon), 2},
             { ConstantStrings.TurnNumber, 1 },
             { ConstantStrings.MaxLevel, 6}
         };
@@ -274,8 +288,8 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
         {
             [ConstantStrings.Playing] = true,
             [ConstantStrings.Waiting] = false,
-            [ConstantStrings.MyCoins] = 0,
 
+            [ConstantStrings.MyCoins] = 0,
             [TokenType.ArtIcon.ToString()] = new int[numRanks],
             [TokenType.HouseIcon.ToString()] = new int[numRanks],
             [TokenType.ToolIcon.ToString()] = new int[numRanks],

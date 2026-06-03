@@ -5,11 +5,11 @@ public class OnOff : MonoBehaviour
 {
     [SerializeField] List<GameObject> forceOn = new();
     [SerializeField] List<GameObject> forceOff = new();
-    private void Start() 
+    private void Awake()
     {
         foreach (GameObject next in forceOn)
-            next.SetActive(true);
+            if (next != null) next.SetActive(true);
         foreach (GameObject next in forceOff)
-            next.SetActive(false);
+            if (next != null) next.SetActive(false);
     }
 }

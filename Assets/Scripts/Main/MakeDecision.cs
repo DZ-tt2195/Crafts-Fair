@@ -27,6 +27,7 @@ public class TextButtonInfo
 {
     public string myText{get; private set;}
     public Color buttonColor{get; private set;}
+    public Color textColor{get; private set;}
     public Action action{get; private set;}
 
     public TextButtonInfo(string myText, Action action = null)
@@ -34,13 +35,15 @@ public class TextButtonInfo
         this.myText = myText;
         this.buttonColor = Color.white;
         this.action = action;
+        this.textColor = Color.black;
     }
 
-    public TextButtonInfo(string myText, Color color, Action action = null)
+    public TextButtonInfo(string myText, Color buttonColor, Color textColor, Action action = null)
     {
         this.myText = myText;
         this.action = action;
-        this.buttonColor = color;
+        this.buttonColor = buttonColor;
+        this.textColor = textColor;
     }
 }
 
@@ -52,7 +55,9 @@ public class MakeDecision : PhotonCompatible
     public static MakeDecision inst;
     [SerializeField] TMP_Text instructionsText;
     [SerializeField] Transform findTextButtons;
-    List<Button> textButtons = new();
+    [SerializeField] Transform findCardButtons;
+    List<(ButtonSelect, TMP_Text)> textButtons = new();
+    List<(ButtonSelect, CardLayout)> cardButtons = new();
     HashSet<ButtonSelect> availableUI = new();
     [SerializeField] Button sliderConfirm;
     [SerializeField] Slider slider;
@@ -66,15 +71,21 @@ public class MakeDecision : PhotonCompatible
         base.Awake();
         inst = this;
         this.bottomType = this.GetType();
+        instructionsText.text = "";
         confirmText.text = AutoTranslate.Confirm();
         slider.onValueChanged.AddListener(UpdateText);
 
         foreach (Transform child in findTextButtons)
         {
-            Button button = child.GetComponent<Button>();
-            textButtons.Add(button);
-            button.gameObject.SetActive(false);
+            textButtons.Add((child.GetComponent<ButtonSelect>(), child.transform.GetComponentInChildren<TMP_Text>()));
+            child.gameObject.SetActive(false);
         }
+        /*
+        foreach (Transform child in findCardButtons)
+        {
+            cardButtons.Add((child.GetComponent<ButtonSelect>(), child.GetComponent<CardLayout>()));
+            child.gameObject.SetActive(false);
+        }*/
 
         void UpdateText(float value)
         {
@@ -88,56 +99,53 @@ public class MakeDecision : PhotonCompatible
 
     public void ChooseTextButton(List<TextButtonInfo> possibleChoices, string instructions, bool autoResolve = true)
     {
-        if (possibleChoices.Count == 0)
-        {
-            return;
-        }
-        else if (possibleChoices.Count == 1 && autoResolve)
+        if (possibleChoices.Count == 1 && autoResolve && !PermaUI.inst.NeedClick())
         {
             Log.inst.inReaction.Add(() => possibleChoices[0].action?.Invoke());
         }
-        else
+        else if (possibleChoices.Count >= 1)
         {
             Log.inst.SetUndoPoint(true);
             instructionsText.text = KeywordTooltip.instance.EditText(instructions);
 
             for (int i = 0; i<textButtons.Count; i++)
             {
-                Button nextButton = textButtons[i];
+                (ButtonSelect, TMP_Text) nextButton = textButtons[i];
                 if (i < possibleChoices.Count)
                 {
                     TextButtonInfo info = possibleChoices[i];
-                    nextButton.gameObject.SetActive(true);
-                    nextButton.name = info.myText;
+                    availableUI.Add(nextButton.Item1);
+                    nextButton.Item1.gameObject.SetActive(true);
+                    
+                    nextButton.Item1.button.interactable = true;
+                    nextButton.Item1.name = info.myText;
+                    nextButton.Item1.button.onClick.AddListener(Resolve);
+                    nextButton.Item1.button.image.color = info.buttonColor;
 
-                    nextButton.transform.GetChild(0).GetComponent<TMP_Text>().text = KeywordTooltip.instance.EditText(info.myText);
-                    nextButton.image.color = info.buttonColor;
-                    nextButton.onClick.AddListener(Resolve);
+                    nextButton.Item2.text = KeywordTooltip.instance.EditText(info.myText);
+                    nextButton.Item2.color = info.textColor;
 
                     void Resolve()
                     {
+                        AudioManager.instance.Menu();
                         Log.inst.inReaction.Add(() => info.action?.Invoke());
                         Log.inst.PopStack();
                     }
                 }
                 else
                 {
-                    nextButton.gameObject.SetActive(false);
+                    nextButton.Item1.gameObject.SetActive(false);
                 }
             }
         }
     }
     public void ChooseCardOnScreen(List<Card> listOfCards, string instructions, Action<Card> action = null, bool autoResolve = true)
     {
-        if (listOfCards.Count == 0)
-        {
-            return;
-        }
-        else if (listOfCards.Count == 1 && autoResolve)
+        if (listOfCards.Count == 1 && autoResolve && !PermaUI.inst.NeedClick())
         {
             Log.inst.inReaction.Add(() => action?.Invoke(listOfCards[0]));
         }
-        else
+        else if (listOfCards.Count >= 1)
         {
             Log.inst.SetUndoPoint(true);
             instructionsText.text = KeywordTooltip.instance.EditText(instructions);
@@ -154,45 +162,42 @@ public class MakeDecision : PhotonCompatible
 
                 void ClickedThis()
                 {
+                    AudioManager.instance.Menu();
                     Log.inst.inReaction.Add(() => action?.Invoke(nextCard));
                     Log.inst.PopStack();
                 }
             }
         }
     }
-    public void ChooseDisplayOnScreen(List<TokenDisplay> listOfDisplays, string instructions, Action<(int, TokenType)> action = null, bool autoResolve = true)
+    public void ChooseDisplayOnScreen(List<TokenDisplay> listOfDisplays, string instructions, Action<(int level, TokenType type)> action = null, bool autoResolve = true)
     {
-        if (listOfDisplays.Count == 0)
-        {
-            return;
-        }
-        else if (listOfDisplays.Count == 1 && autoResolve)
+        if (listOfDisplays.Count == 1 && autoResolve && !PermaUI.inst.NeedClick())
         {
             Log.inst.inReaction.Add(() => action?.Invoke(listOfDisplays[0].info));
         }
-        else
+        else if (listOfDisplays.Count >= 1)
         {
             Log.inst.SetUndoPoint(true);
             instructionsText.text = KeywordTooltip.instance.EditText(instructions);
 
             for (int j = 0; j < listOfDisplays.Count; j++)
             {
-                TokenDisplay nextDisplay = listOfDisplays[j];
-                availableUI.Add(nextDisplay.selectMe);
-                Button cardButton = nextDisplay.selectMe.button;
+                TokenDisplay nextCard = listOfDisplays[j];
+                availableUI.Add(nextCard.selectMe);
+                Button cardButton = nextCard.selectMe.button;
 
                 cardButton.interactable = true;
-                nextDisplay.selectMe.SetBorder(true);
+                nextCard.selectMe.SetBorder(true);
                 cardButton.onClick.AddListener(ClickedThis);
 
                 void ClickedThis()
                 {
-                    Log.inst.inReaction.Add(() => action?.Invoke(nextDisplay.info));
+                    AudioManager.instance.Menu();
+                    Log.inst.inReaction.Add(() => action?.Invoke(nextCard.info));
                     Log.inst.PopStack();
                 }
             }
         }
-
     }
     public void ChooseFromSlider(int min, int max, string instructions, Action<int> action = null, bool autoResolve = true)
     {
@@ -216,59 +221,59 @@ public class MakeDecision : PhotonCompatible
             slider.value = min;
             void DecisionMade()
             {
+                AudioManager.instance.Menu();
                 Log.inst.inReaction.Add(() => action?.Invoke((int)slider.value));
                 Log.inst.PopStack();
             }
         }
     }
-    /*
     public void ChooseCardInPopup(List<CardButtonInfo> possibleCards, string instructions, bool autoResolve = true)
     {
-        if (possibleCards.Count == 1 && autoResolve)
+        if (possibleCards.Count == 1 && autoResolve && !PermaUI.inst.NeedClick())
         {
             CardButtonInfo onlyOne = possibleCards[0];
             Log.inst.inReaction.Add(() => onlyOne.action?.Invoke(onlyOne.card));
         }
-        else if (possibleCards.Count >= 1 || !autoResolve)
+        else if (possibleCards.Count >= 1)
         {
             Log.inst.SetUndoPoint(true);
-                      Instructions(instructions);
-  for (int i = 0; i < textButtons.Count; i++)
+            instructionsText.text = KeywordTooltip.instance.EditText(instructions);
+            
+            for (int i = 0; i < cardButtons.Count; i++)
             {
-                Button nextButton = textButtons[i];
+                (ButtonSelect, CardLayout) nextButton = cardButtons[i];
                 if (i < possibleCards.Count)
                 {
                     CardButtonInfo info = possibleCards[i];
-                    nextButton.gameObject.SetActive(true);
-                    nextButton.name = possibleCards[i].card.name;
+                    availableUI.Add(nextButton.Item1);
+                    nextButton.Item1.gameObject.SetActive(true);
+                    nextButton.Item1.SetBorder(true);
 
-                    nextButton.onClick.AddListener(Resolve);
+                    nextButton.Item1.name = possibleCards[i].card.name;
+                    nextButton.Item1.button.onClick.AddListener(Resolve);
+                    nextButton.Item1.button.interactable = true;
+                    nextButton.Item2.FillInCards(info.card.dataFile, info.alpha, info.card.vertical);
 
                     void Resolve()
                     {
+                        AudioManager.instance.Menu();
                         Log.inst.inReaction.Add(() => info.action?.Invoke(info.card));
                         Log.inst.PopStack();
                     }
                 }
                 else
                 {
-                    nextButton.gameObject.SetActive(false);
+                    nextButton.Item1.gameObject.SetActive(false);
                 }
             }
         }
     }
-    */
     #endregion
 
 #region Misc
 
     public void ClearDecisions()
     {
-        foreach (Button button in textButtons)
-        {
-            button.gameObject.SetActive(false);
-            button.onClick.RemoveAllListeners();
-        }
         foreach (ButtonSelect select in availableUI)
         {
             select.button.onClick.RemoveAllListeners();
@@ -277,6 +282,8 @@ public class MakeDecision : PhotonCompatible
         }
         availableUI.Clear();
         slider.gameObject.SetActive(false);
+        foreach (var next in cardButtons) next.Item1.gameObject.SetActive(false);
+        foreach (var next in textButtons) next.Item1.gameObject.SetActive(false);
         instructionsText.text = "";
     }
 

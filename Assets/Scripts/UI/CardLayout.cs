@@ -7,7 +7,7 @@ public class CardLayout : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField] CanvasGroup cg;
     [SerializeField] Image cardArt;
-    [SerializeField] Image background;
+    [SerializeField] Image cardBackground;
     [SerializeField] TMP_Text cardName;
     [SerializeField] TMP_Text textBox;
     CardData storedData;

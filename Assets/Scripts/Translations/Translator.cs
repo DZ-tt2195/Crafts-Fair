@@ -6,6 +6,7 @@ using MyBox;
 using System;
 using System.Reflection;
 using Photon.Pun;
+using TMPro;
 
 public class Translator : PhotonCompatible
 {
@@ -16,6 +17,10 @@ public class Translator : PhotonCompatible
     Dictionary<string, Dictionary<string, string>> keyTranslate = new();
     [Scene][SerializeField] string toLoad;
     [SerializeField] List<TextAsset> allLanguageFiles = new();
+    [SerializeField] TMP_Text volume;
+    [SerializeField] TMP_Text pauseSetting;
+    [SerializeField] TMP_Text undoSetting;
+    [SerializeField] TMP_Text clickSetting;
 
     protected override void Awake()
     {
@@ -54,9 +59,7 @@ public class Translator : PhotonCompatible
 
         if (!PlayerPrefs.HasKey("English") || !keyTranslate.ContainsKey(PlayerPrefs.GetString("Language")))
             PlayerPrefs.SetString("Language", "English");
-
-        KeywordTooltip.instance.SwitchLanguage();
-        SceneManager.LoadScene(toLoad);
+        TranslateScreen();
     }
 
     public static Dictionary<string, string> ReadLanguageFile(string textToConvert)
@@ -120,9 +123,17 @@ public class Translator : PhotonCompatible
         if (!PlayerPrefs.GetString("Language").Equals(newLanguage))
         {
             PlayerPrefs.SetString("Language", newLanguage);
-            KeywordTooltip.instance.SwitchLanguage();
-            SceneManager.LoadScene(toLoad);
+            TranslateScreen();
         }
+    }
+    void TranslateScreen()
+    {
+        KeywordTooltip.instance.SwitchLanguage();
+        volume.text = AutoTranslate.Volume();
+        pauseSetting.text = AutoTranslate.Pause_Setting();
+        undoSetting.text = AutoTranslate.Undo_Setting();
+        clickSetting.text = AutoTranslate.Click_Setting();
+        SceneManager.LoadScene(toLoad);        
     }
     public string UnPackage(string toSplit, int owner = -1)
     {

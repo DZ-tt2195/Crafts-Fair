@@ -1,5 +1,5 @@
 Game_Designer	by Thomas Tang (DZ)
-Last_Update	Last Updated: Feb 20, 2026
+Last_Update	Last Updated: June 04, 2026
 Blank	
 Translator_Credit	Original Language
 Language	Language
@@ -94,7 +94,7 @@ Online_Player_Won	$Player$ has won.
 Resigned	(Resigned)
 Switch_Player	Switch Player
 Rules	Rules
-Rules_Summary	Each Turn: \n1. Choose any TokenIcon (token) and remove a counter from that token's Twist. \n2. Create 1 of that token at 1 LevelIcon, then upgrade 1 token of that type to the next LevelIcon. \n3. You may sell 2+ TokenIcon and 2+ CardIcon, all at once, to score CoinIcon. \n\nBetween Turns:\n4. For each Twist with 0 counters, each player draws 2 CardIcon and follows its instructions. \n5. Add the counters back onto those Twists (2 per player). \n6. The first player to reach 20+ CoinIcon wins.
+Rules_Summary	Each Round: \n1. Choose any TokenIcon (token); create 1 of that token at 1 LevelIcon, then upgrade 1 token of that type to the next LevelIcon. \n2. You may sell 2+ TokenIcon and 2+ CardIcon, all at once, to score CoinIcon. \n\nBetween Rounds:\n3. Remove 1 counter from each token's Twist, if a player chose it. \n4. For each Twist with 0 counters, each player draws 2 CardIcon and follows its instructions. \n5. Add 2 counters back onto those Twists. \n6. First player to reach 20+ CoinIcon wins.
 Encyclopedia	Encyclopedia
 Close	Close
 Any	Any
@@ -125,7 +125,7 @@ Driver_Text	Sell exactly 3 TokenIcon, and the total LevelIcon of those 3 TokenIc
 Hunter	Hunter
 Hunter_Text	Sell exactly 3 TokenIcon, and the total LevelIcon of those 3 TokenIcon is exactly 10.
 Magnate	Magnate
-Magnate_Text	Sell exactly 3 TokenIcon, and the total LevelIcon of those 3 TokenIcon total is exactly 12.
+Magnate_Text	Sell exactly 3 TokenIcon, and the total LevelIcon of those 3 TokenIcon is exactly 12.
 Painter	Painter
 Painter_Text	Sell at least 4 ArtIcon with consecutively ordered LevelIcon.
 Engineer	Engineer
@@ -220,3 +220,11 @@ Teacher	Teacher
 Teacher_Text	Sell at least 4 TokenIcon, where exactly one is BookIcon and it has a higher LevelIcon than all other TokenIcon combined.
 Expertise	Expertise
 Expertise_Text	Upgrade 1 TokenIcon 4 times.
+Resign	Resign
+Volume	Volume
+Pause_Setting	Enable pauses for reading
+Undo_Setting	Ask at end of turn if you want to undo anything
+Click_Setting	Ask when there's only one option to choose
+Sound_Credits	Sound Credits
+Update_0	June 4, 2026
+Update_0_Text	Added sound effects and settings, and bug fixes for online \nSmall simplification to the rules for removing counters from twists

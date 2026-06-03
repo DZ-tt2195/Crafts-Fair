@@ -13,7 +13,7 @@ public class Card : PhotonCompatible
 
     public CardLayout layout { get; private set; }
     bool flipping;
-    bool vertical;
+    public bool vertical {get; private set;}
     public CardType thisCard { get; private set; }
     public ButtonSelect selectMe { get; private set; }
     public CardData dataFile {get; private set;}

@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using UnityEngine;
-
 public enum FindNumber {Exact, Minimum, Maximum, Not}
 public static class MyExtensions
 {
@@ -13,14 +12,12 @@ public static class MyExtensions
         string seconds = time.Seconds < 10 ? $"0{time.Seconds}" : $"{time.Seconds}";
         return $"{(int)time.TotalMinutes}:{seconds}.{time.Milliseconds}";
     }
-
     public static void SetAlpha(SpriteRenderer target, float alpha)
     {
         Color newColor = target.color;
         newColor.a = alpha;
         target.color = newColor;
     }
-
     public static void Shuffle(this Transform originalTransform)
     {
         List<int> indexes = new();
@@ -38,21 +35,17 @@ public static class MyExtensions
             next.SetSiblingIndex(indexes[randomNumber]);
         }
     }
-
     public static List<T> Shuffle<T>(this List<T> originalList)
     {
-        List<T> newList = new();
+        List<T> newList = new(originalList);
 
-        while (originalList.Count > 0)
+        for (int i = 0; i < newList.Count; i++)
         {
-            int randomNumber = UnityEngine.Random.Range(0, originalList.Count);
-            newList.Add(originalList[randomNumber]);
-            originalList.RemoveAt(randomNumber);
+            int rand = UnityEngine.Random.Range(i, newList.Count);
+            (newList[i], newList[rand]) = (newList[rand], newList[i]);
         }
-
         return newList;
     }
-
     public static bool Comparison(FindNumber toFind, int firstNum, int secondNum)
     {
         return toFind switch
@@ -64,7 +57,6 @@ public static class MyExtensions
             _ => false,
         };
     }
-
     public static int SumOfArray(int[] array)
     {
         int total = 0;

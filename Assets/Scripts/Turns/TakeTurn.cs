@@ -146,12 +146,7 @@ public class TakeTurn : Turn
             Debug.Log($"{player.name}, {selectedToken}");
 
             string targetString = ConstantStrings.TokenCounter(selectedToken);
-            if (toChange.ContainsKey(targetString))
-            {
-                int currentValue = (int)toChange[targetString];
-                toChange[targetString] = currentValue-1;
-            }
-            else
+            if (!toChange.ContainsKey(targetString))
             {
                 int currentCounter = TurnManager.inst.GetInt(targetString);
                 toChange[targetString] = currentCounter - 1;

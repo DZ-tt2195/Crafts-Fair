@@ -14,6 +14,7 @@ public class CommHub : PhotonCompatible
     [SerializeField] TMP_Text placeholder;
     [SerializeField] TMP_InputField inputMessage;
     [SerializeField] Button uploadMessage;
+    [SerializeField] AudioClip textSound;
     int myPosition;
 
     protected override void Awake()
@@ -36,7 +37,7 @@ public class CommHub : PhotonCompatible
         {
             inputMessage.text = "";
             if (myPosition == -1)
-                MessageSpectators(textToSend);
+                MessageSpectators($"{PhotonNetwork.LocalPlayer.NickName}: {textToSend}");
             else
                 ShareMessageRPC($"{PhotonNetwork.LocalPlayer.NickName}: {textToSend}", false);
         }
@@ -55,6 +56,7 @@ public class CommHub : PhotonCompatible
     {
         string targetText = (translate) ? Translator.inst.UnPackage(text) : text;
         allTexts.text += $"{targetText}\n";
+        AudioManager.instance.PlaySound(textSound);
         ChangeScrolling();
     }
     void ChangeScrolling()

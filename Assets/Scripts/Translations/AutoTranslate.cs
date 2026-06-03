@@ -198,4 +198,12 @@ public static string Teacher () => Translator.inst.Translate("Teacher", new() {}
 public static string Teacher_Text () => Translator.inst.Translate("Teacher_Text", new() {});
 public static string Expertise () => Translator.inst.Translate("Expertise", new() {});
 public static string Expertise_Text () => Translator.inst.Translate("Expertise_Text", new() {});
+public static string Resign () => Translator.inst.Translate("Resign", new() {});
+public static string Volume () => Translator.inst.Translate("Volume", new() {});
+public static string Pause_Setting () => Translator.inst.Translate("Pause_Setting", new() {});
+public static string Undo_Setting () => Translator.inst.Translate("Undo_Setting", new() {});
+public static string Click_Setting () => Translator.inst.Translate("Click_Setting", new() {});
+public static string Sound_Credits () => Translator.inst.Translate("Sound_Credits", new() {});
+public static string Update_0 () => Translator.inst.Translate("Update_0", new() {});
+public static string Update_0_Text () => Translator.inst.Translate("Update_0_Text", new() {});
 }
