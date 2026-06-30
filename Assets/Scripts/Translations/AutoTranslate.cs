@@ -206,4 +206,6 @@ public static string Click_Setting () => Translator.inst.Translate("Click_Settin
 public static string Sound_Credits () => Translator.inst.Translate("Sound_Credits", new() {});
 public static string Update_0 () => Translator.inst.Translate("Update_0", new() {});
 public static string Update_0_Text () => Translator.inst.Translate("Update_0_Text", new() {});
+public static string Update_1 () => Translator.inst.Translate("Update_1", new() {});
+public static string Update_1_Text () => Translator.inst.Translate("Update_1_Text", new() {});
 }

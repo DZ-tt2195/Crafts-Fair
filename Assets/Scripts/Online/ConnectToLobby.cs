@@ -268,7 +268,7 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
             { ConstantStrings.CanPlay, numPlayers },
             { ConstantStrings.JoinAsSpec, false },
             { ConstantStrings.GameOver, false },
-            { ConstantStrings.EventList, new int[0]},
+            { ConstantStrings.TwistList, new int[0]},
             { ConstantStrings.TokenCounter(TokenType.ArtIcon), 2},
             { ConstantStrings.TokenCounter(TokenType.HouseIcon), 2},
             { ConstantStrings.TokenCounter(TokenType.ToolIcon), 2},
@@ -299,7 +299,7 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
             [ConstantStrings.MyDeck] = new int[0],
             [ConstantStrings.MyDiscard] = new int[0],
             [ConstantStrings.ChosenToken] = "",
-            [ConstantStrings.BuyersSold] = 0,
+            [ConstantStrings.CustomersSold] = 0,
         };
         return playerProps;
     }

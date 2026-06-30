@@ -18,11 +18,11 @@ public class CardMenu : PhotonCompatible
     List<(CardLayout, Button)> blankButtons = new();
     [SerializeField] List<CardSelect> eventSelect = new();
     [Foldout("Text", true)]
-    [SerializeField] TMP_Text chooseTrends;
-    [SerializeField] TMP_Text trendArt;
-    [SerializeField] TMP_Text trendHouse;
-    [SerializeField] TMP_Text trendSword;
-    [SerializeField] TMP_Text trendTech;
+    [SerializeField] TMP_Text choosetwists;
+    [SerializeField] TMP_Text twistArt;
+    [SerializeField] TMP_Text twistHouse;
+    [SerializeField] TMP_Text twistTool;
+    [SerializeField] TMP_Text twistBook;
     [SerializeField] TMP_Text confirm;
 
     protected override void Awake()
@@ -95,11 +95,11 @@ public class CardMenu : PhotonCompatible
     }
     void Translations()
     {
-        chooseTrends.text = AutoTranslate.Choose_Twists();
-        trendArt.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_Art_Twist());
-        trendHouse.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_House_Twist());
-        trendSword.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_Tool_Twist());
-        trendTech.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_Book_Twist());
+        choosetwists.text = AutoTranslate.Choose_Twists();
+        twistArt.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_Art_Twist());
+        twistHouse.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_House_Twist());
+        twistTool.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_Tool_Twist());
+        twistBook.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_Book_Twist());
         confirm.text = AutoTranslate.Confirm();
     }
 }

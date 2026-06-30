@@ -55,14 +55,14 @@ public class TakeTurn : Turn
     void DoSelling(Player player, Dictionary<TokenType, int[]> soldTokens, DecisionContainer rewind, int logged)
     {
         int minimum = 2;
-        List<Card> playerPlacards = player.GetHand();
+        List<Card> customersInHand = player.GetHand();
         List<TokenDisplay> tokensToSubmit = player.OfNumber(FindNumber.Minimum, Player.AllTokens(), Player.AllLevels(), 1);
         DecisionContainer restartContainer = rewind;
 
         if (rewind == null)
         {
             restartContainer = Log.inst.currentContainer;
-            if (player.AllTotalTokens() < minimum || playerPlacards.Count < minimum)
+            if (player.AllTotalTokens() < minimum || customersInHand.Count < minimum)
             {
                 NoSelling();
                 return;
@@ -77,12 +77,12 @@ public class TakeTurn : Turn
             return answer;        
         }
         int totalTokens = CountTotal();
-        List<Card> buyersHappy = new();
-        foreach (Card card in playerPlacards)
+        List<Card> customersHappy = new();
+        foreach (Card card in customersInHand)
         {
             if (totalTokens >= 2 && card.thisCard.CanSell(player, soldTokens))
             {
-                buyersHappy.Add(card);
+                customersHappy.Add(card);
                 card.selectMe.SetBorder(true, Color.yellow);
             }
             else
@@ -92,7 +92,7 @@ public class TakeTurn : Turn
         }
 
         List<TextButtonInfo> textOptions = new();
-        if (totalTokens >= minimum && buyersHappy.Count >= minimum)
+        if (totalTokens >= minimum && customersHappy.Count >= minimum)
             textOptions.Add(new(AutoTranslate.Confirm(), CompleteSell));
         if (totalTokens == 0)
             textOptions.Add(new(AutoTranslate.Decline(), NoSelling));
@@ -104,7 +104,7 @@ public class TakeTurn : Turn
 
         void NoSelling()
         {
-            TurnManager.inst.WillChangePlayerProperty(player, ConstantStrings.BuyersSold, 0);
+            TurnManager.inst.WillChangePlayerProperty(player, ConstantStrings.CustomersSold, 0);
             Log.inst.AddMyText(false, OnlineTranslate.Online_No_Sell(player.name), logged);            
         }
 
@@ -115,10 +115,10 @@ public class TakeTurn : Turn
 
         void CompleteSell()
         {
-            Log.inst.AddMyText(true, OnlineTranslate.Online_Make_Sell(player.name, totalTokens.ToString(), buyersHappy.Count.ToString()), logged);
-            TurnManager.inst.WillChangePlayerProperty(player, ConstantStrings.BuyersSold, buyersHappy.Count);
+            Log.inst.AddMyText(true, OnlineTranslate.Online_Make_Sell(player.name, totalTokens.ToString(), customersHappy.Count.ToString()), logged);
+            TurnManager.inst.WillChangePlayerProperty(player, ConstantStrings.CustomersSold, customersHappy.Count);
             int totalScore = 0;
-            foreach (Card card in buyersHappy)
+            foreach (Card card in customersHappy)
             {
                 totalScore += card.dataFile.coinAmount;
                 player.DiscardCustomerRPC(card, logged+1);
@@ -138,7 +138,7 @@ public class TakeTurn : Turn
     public override void MasterEnd()
     {
         ExitGames.Client.Photon.Hashtable toChange = new();
-        bool triggeredEvent = false;
+        bool triggeredTwist = false;
 
         foreach (Player player in CreateGame.inst.GetPlayers())
         {
@@ -152,12 +152,12 @@ public class TakeTurn : Turn
                 toChange[targetString] = currentCounter - 1;
             }
             if ((int)toChange[targetString] <= 0)
-                triggeredEvent = true;
+                triggeredTwist = true;
         }
 
         PhotonNetwork.CurrentRoom.SetCustomProperties(toChange);
         PhotonCompatible.InstantChangeRoomProp(ConstantStrings.TurnNumber, TurnManager.inst.GetInt(ConstantStrings.TurnNumber)+1);
-        if (triggeredEvent)
-            PhotonCompatible.InstantChangeRoomProp(ConstantStrings.NextPhase, nameof(ResolveEvents));
+        if (triggeredTwist)
+            PhotonCompatible.InstantChangeRoomProp(ConstantStrings.NextPhase, nameof(ResolveTwists));
     }
 }

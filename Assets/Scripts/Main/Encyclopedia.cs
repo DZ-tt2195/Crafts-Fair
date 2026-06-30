@@ -10,17 +10,17 @@ public class Encyclopedia : MonoBehaviour
     public static Encyclopedia inst;
     [Foldout("UI", true)]
     [SerializeField] Card customerPrefab;
-    [SerializeField] Card strategyPrefab;
-    [SerializeField] GridLayoutGroup customerGrid;
-    [SerializeField] GridLayoutGroup strategyGrid;
+    [SerializeField] Card twistPrefab;
     [SerializeField] RectTransform customerView;
-    [SerializeField] RectTransform strategyView;
+    [SerializeField] GridLayoutGroup customerGrid;
+    [SerializeField] RectTransform twistView;
+    [SerializeField] GridLayoutGroup twistGrid;
     [SerializeField] Slider viewSlider;
-    List<Card> allcustomers = new();
-    List<Card> allStrategies = new();
+    List<Card> allCustomers = new();
+    List<Card> allTwists = new();
     [Foldout("Texts", true)]
     [SerializeField] TMP_Text customer;
-    [SerializeField] TMP_Text strategy;
+    [SerializeField] TMP_Text twist;
     [SerializeField] TMP_Text close;
 
     private void Awake()
@@ -32,7 +32,7 @@ public class Encyclopedia : MonoBehaviour
         void Change(float value)
         {
             customerView.gameObject.SetActive((int)value == 0);
-            strategyView.gameObject.SetActive((int)value == 1);
+            twistView.gameObject.SetActive((int)value == 1);
         }
     }
     private void Start()
@@ -43,22 +43,22 @@ public class Encyclopedia : MonoBehaviour
             GameObject nextCard = Instantiate(customerPrefab.gameObject);
             Card cardPV = nextCard.GetComponent<Card>();
             cardPV.AssignCard(GameFiles.inst.customerFiles[i], 1f, true, Vector3.one);
-            allcustomers.Add(cardPV);
+            allCustomers.Add(cardPV);
             cardPV.transform.SetParent(customerGrid.transform);
         }
         for (int i = 0; i < GameFiles.inst.twistFiles.Count; i++)
         {
-            GameObject nextCard = Instantiate(strategyPrefab.gameObject);
+            GameObject nextCard = Instantiate(twistPrefab.gameObject);
             Card cardPV = nextCard.GetComponent<Card>();
             cardPV.AssignCard(GameFiles.inst.twistFiles[i], 1f, false, Vector3.one);
-            allStrategies.Add(cardPV);
-            cardPV.transform.SetParent(strategyGrid.transform);
+            allTwists.Add(cardPV);
+            cardPV.transform.SetParent(twistGrid.transform);
         }
     }
     void Translations()
     {
         customer.text = AutoTranslate.Customer();
-        strategy.text = AutoTranslate.Twist();
+        twist.text = AutoTranslate.Twist();
         close.text = AutoTranslate.Close();
     }
 }

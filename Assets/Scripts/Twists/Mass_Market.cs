@@ -8,7 +8,7 @@ public class Mass_Market : CardType
 
     public override void TwistEffect(Player player, int logged)
     {
-        int getPlacards = TurnManager.inst.GetInt(ConstantStrings.BuyersSold, player);
-        player.CoinRPC(Mathf.FloorToInt(getPlacards/2f), logged);
+        int getCustomersSold = TurnManager.inst.GetInt(ConstantStrings.CustomersSold, player);
+        player.CoinRPC(Mathf.FloorToInt(getCustomersSold/2f), logged);
     }
 }

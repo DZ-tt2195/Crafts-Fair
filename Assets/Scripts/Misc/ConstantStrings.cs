@@ -14,7 +14,7 @@ public static class ConstantStrings
     public const string MyDeck = nameof(MyDeck);
     public const string MyDiscard = nameof(MyDiscard);
     public const string ChosenToken = nameof(ChosenToken);
-    public const string BuyersSold = nameof(BuyersSold);
+    public const string CustomersSold = nameof(CustomersSold);
 
     //room properties
     public const string GameName = nameof(GameName);
@@ -23,7 +23,7 @@ public static class ConstantStrings
     public const string JoinAsSpec = nameof(JoinAsSpec);
     public const string CurrentPhase = nameof(CurrentPhase);
     public const string NextPhase = nameof(NextPhase);
-    public const string EventList = nameof(EventList);
+    public const string TwistList = nameof(TwistList);
     public const string TurnNumber = nameof(TurnNumber);
     public static string TokenCounter(TokenType type) => TokenCounter(type.ToString());
     public static string TokenCounter(string type) => $"TokenCounter{type}";
