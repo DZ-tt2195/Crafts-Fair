@@ -80,22 +80,15 @@ public class Player : PhotonCompatible
     public List<Card> GetHand() => myHand;
     public void DrawCustomerRPC(int amount, int logged = 0)
     {
-        if (amount <= 0)
-            return;
+        if (amount <= 0) return;
         Log.inst.groupToWait.StartCoroutine(WaitForCards());
 
         IEnumerator WaitForCards()
         {
-            MainDeck.inst.NeedDrawRPC(this, amount - myDeck.Count);
+            InstantChangePlayerProp(this, ConstantStrings.NeedDraw, amount - myDeck.Count);
             while (myDeck.Count < amount)
             {
                 yield return null;
-                /*
-                myDiscard = myDiscard.Shuffle();
-                myDeck.AddRange(myDiscard);
-                myDiscard.Clear();
-                TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyDiscard, myDiscard);
-                */
             }
 
             List<Card> toDraw = new();
@@ -164,7 +157,14 @@ public class Player : PhotonCompatible
     {
         List<Card> newCardList = TurnManager.ConvertIntArray(newCards);
         myDeck.AddRange(newCardList);
+        InstantChangePlayerProp(this, ConstantStrings.NeedDraw, 0);
+
+        int[] array = (int[])GetPlayerProperty(this, ConstantStrings.DrewThisTurn);
+        List<Card> drewThisTurn = TurnManager.ConvertIntArray(array);
+        drewThisTurn.AddRange(newCardList);
+        InstantChangePlayerProp(this, ConstantStrings.DrewThisTurn, TurnManager.ConvertCardList(drewThisTurn));
     }
+   
     #endregion
 
 #region Resources
@@ -253,18 +253,17 @@ public class Player : PhotonCompatible
     }
     public void StartTurn()
     {
-        //this.DoFunction(() => this.ChangeButtonColor(false));
         CreateGame.inst.SwitchToPlayer(this);
         InstantChangePlayerProp(this, ConstantStrings.Waiting, false);
         endPause = true;
 
-        MainDeck.inst.ReceiveDiscardRPC(myDiscard);
-        myDiscard.Clear();
-        InstantChangePlayerProp(this, ConstantStrings.MyDiscard, new int[0]);
+        int[] array = (int[])GetPlayerProperty(this, ConstantStrings.DrewThisTurn);
+        List<Card> drewThisTurn = TurnManager.ConvertIntArray(array);
+        myDeck.AddRange(drewThisTurn);
 
         (string phase, Action action) = TurnManager.inst.GetTurnAction(this);
         if (phase != nameof(WaitForJoiners) && phase != nameof(DisplayTwists))
-            Log.inst.AddMyText(true, AutoTranslate.Blank());
+            Log.inst.AddMyText(false, AutoTranslate.Blank());
 
         Log.inst.NewDecisionContainer(() => action(), 0);
         Log.inst.NewDecisionContainer(() => EndTurn(), -1);
@@ -296,8 +295,26 @@ public class Player : PhotonCompatible
                 Log.inst.DoneWithTurn();
                 InstantChangePlayerProp(this, ConstantStrings.Waiting, true);
             }
-        }    }
+        }    
+    }
+    public void ClearCards()
+    {
+        InstantChangePlayerProp(this, ConstantStrings.DrewThisTurn, new int[0]);
 
+        int[] discardedArray = (int[])GetPlayerProperty(this, ConstantStrings.MyDiscard);
+        if (discardedArray.Length > 0)
+        {
+            DoFunction(() => MakeCardsNull(discardedArray), RpcTarget.All);
+            MainDeck.inst.ReceiveDiscardRPC(TurnManager.ConvertIntArray(discardedArray));
+            InstantChangePlayerProp(this, ConstantStrings.MyDiscard, new int[0]);
+        }        
+    }
+    [PunRPC]
+    void MakeCardsNull(int[] removed)
+    {
+        foreach (int next in removed)
+            PhotonView.Find(next).transform.SetParent(null);
+    }
     #endregion
 
 #region UI

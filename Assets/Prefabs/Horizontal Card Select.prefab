@@ -755,7 +755,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::CardLayout
   cg: {fileID: 287014264303864676}
   cardArt: {fileID: 3216939091649916735}
-  background: {fileID: 7950325696111562017}
+  cardBackground: {fileID: 109484247401498244}
   cardName: {fileID: 3716988399354573182}
   textBox: {fileID: 3276475967862699921}
 --- !u!114 &3894427510489038633
@@ -775,6 +775,7 @@ MonoBehaviour:
   chooseButton: {fileID: 1660004653051377708}
   randomText: {fileID: 8894743095627277585}
   chooseText: {fileID: 7228983216492032450}
+  myType: 0
 --- !u!1 &5505387875060309150
 GameObject:
   m_ObjectHideFlags: 0
@@ -1120,7 +1121,7 @@ GameObject:
   - component: {fileID: 2846978968129904184}
   - component: {fileID: 109484247401498244}
   m_Layer: 0
-  m_Name: Big Image
+  m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

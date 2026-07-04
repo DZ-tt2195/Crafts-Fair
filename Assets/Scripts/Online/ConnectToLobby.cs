@@ -241,7 +241,6 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
             }
         }
     }
-
     public void CreateRoom()
     {
         PhotonNetwork.LocalPlayer.SetCustomProperties(InitialPlayerProps());
@@ -256,7 +255,6 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
         };
         PhotonNetwork.CreateRoom(PlayerPrefs.GetString(ConstantStrings.MyUserName), options);
     }
-
     ExitGames.Client.Photon.Hashtable InitialRoomProps(int numPlayers)
     {
         Debug.Log("assigned room props");
@@ -280,7 +278,6 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
         };
         return roomProps;
     }
-
     ExitGames.Client.Photon.Hashtable InitialPlayerProps()
     {
         Debug.Log("assigned player props");
@@ -300,6 +297,9 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
             [ConstantStrings.MyHand] = new int[0],
             [ConstantStrings.MyDeck] = new int[0],
             [ConstantStrings.MyDiscard] = new int[0],
+            [ConstantStrings.NeedDraw] = 0,
+            [ConstantStrings.DrewThisTurn] = new int[0],
+     
             [ConstantStrings.ChosenToken] = "",
             [ConstantStrings.CustomersSold] = 0,
         };

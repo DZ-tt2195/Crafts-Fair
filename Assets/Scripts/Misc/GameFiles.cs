@@ -6,7 +6,7 @@ using MyBox;
 using System;
 using System.Reflection;
 using Photon.Pun;
-
+public enum TypesOfCards {Customer, Twist}
 [Serializable]
 public class CardData
 {

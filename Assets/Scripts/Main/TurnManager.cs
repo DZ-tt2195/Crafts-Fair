@@ -81,7 +81,7 @@ public class TurnManager : PhotonCompatible
             if (PhotonNetwork.IsMasterClient && WaitingOnPlayers() == 0 && !(bool)GetRoomProperty(ConstantStrings.GameOver))
             {
                 foreach (Photon.Realtime.Player nextPlayer in players)
-                    DoFunction(() => SharePropertyChanges(), nextPlayer);
+                    DoFunction(() => LockInPropertyChanges(), nextPlayer);
 
                 UpdateWaitingText(spectators, players.Count);
                 Invoke(nameof(EndPhase), 0.25f);
@@ -164,23 +164,6 @@ public class TurnManager : PhotonCompatible
     }
     public List<Card> GetCardList(string property, Player player) => ConvertIntArray((int[])FindThisProperty(property, player));
     public List<Card> GetCardList(string property) => ConvertIntArray((int[])FindThisProperty(property, null));
-    public static List<Card> ConvertIntArray(int[] arrayOfPVs)
-    {
-        if (arrayOfPVs == null)
-            return new();
-
-        List<Card> listOfCards = new();
-        foreach (int nextPV in arrayOfPVs)
-            listOfCards.Add(PhotonView.Find(nextPV).GetComponent<Card>());
-        return listOfCards;
-    }
-    public static int[] ConvertCardList(List<Card> listOfCards)
-    {
-        int[] arrayOfCards = new int[listOfCards.Count];
-        for (int i = 0; i < arrayOfCards.Length; i++)
-            arrayOfCards[i] = listOfCards[i].photonView.ViewID;
-        return arrayOfCards;
-    }
     public string GetString(string property, Player player) => (string)FindThisProperty(property, player);
     #endregion
 
@@ -222,7 +205,7 @@ public class TurnManager : PhotonCompatible
             masterPropertyToChange.Add(masterProperty, changeInto);
     }
     [PunRPC]
-    void SharePropertyChanges()
+    void LockInPropertyChanges()
     {
         Log.inst.ShareTexts();
         foreach (var KVP in playerPropertyToChange)
@@ -232,6 +215,7 @@ public class TurnManager : PhotonCompatible
         }
         PhotonNetwork.CurrentRoom.SetCustomProperties(masterPropertyToChange);
         masterPropertyToChange.Clear();
+        CreateGame.inst.mainPlayer.ClearCards();
     }
 
     #endregion

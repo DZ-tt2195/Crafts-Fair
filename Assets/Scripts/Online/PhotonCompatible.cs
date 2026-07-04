@@ -233,7 +233,23 @@ public class PhotonCompatible : MonoBehaviourPunCallbacks
     {
         return !PhotonNetwork.IsConnected || PhotonNetwork.IsMasterClient;
     }
+    public static List<Card> ConvertIntArray(int[] arrayOfPVs)
+    {
+        if (arrayOfPVs == null)
+            return new();
 
+        List<Card> listOfCards = new();
+        foreach (int nextPV in arrayOfPVs)
+            listOfCards.Add(PhotonView.Find(nextPV).GetComponent<Card>());
+        return listOfCards;
+    }
+    public static int[] ConvertCardList(List<Card> listOfCards)
+    {
+        int[] arrayOfCards = new int[listOfCards.Count];
+        for (int i = 0; i < arrayOfCards.Length; i++)
+            arrayOfCards[i] = listOfCards[i].photonView.ViewID;
+        return arrayOfCards;
+    }
     #endregion
 
 }

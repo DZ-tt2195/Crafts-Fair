@@ -48,9 +48,16 @@ public class CreateGame : PhotonCompatible
         Translations();
         PhotonNetwork.AutomaticallySyncScene = true;
         canvas = GameObject.Find("Canvas").GetComponent<Canvas>();
-        VisualCards((int[])GetRoomProperty(ConstantStrings.TwistList));
-        playerDropdown.onValueChanged.AddListener(SwitchToPlayer);
-
+    }
+    void Translations()
+    {
+        resignText.text = AutoTranslate.Resign();
+        switchPlayer.text = AutoTranslate.Switch_Player();
+        rules.text = AutoTranslate.Rules();
+        rulesSummary.text = KeywordTooltip.instance.EditText(AutoTranslate.Rules_Summary());
+    }
+    void Start()
+    {
         if (!PhotonNetwork.OfflineMode)
         {
             string playerName = PlayerPrefs.GetString(ConstantStrings.MyUserName);
@@ -103,13 +110,8 @@ public class CreateGame : PhotonCompatible
             }
             MakeObject(playerPrefab.gameObject);
         }
-    }
-    void Translations()
-    {
-        resignText.text = AutoTranslate.Resign();
-        switchPlayer.text = AutoTranslate.Switch_Player();
-        rules.text = AutoTranslate.Rules();
-        rulesSummary.text = KeywordTooltip.instance.EditText(AutoTranslate.Rules_Summary());
+        VisualCards((int[])GetRoomProperty(ConstantStrings.TwistList));
+        playerDropdown.onValueChanged.AddListener(SwitchToPlayer);        
     }
     #endregion
 
@@ -255,7 +257,7 @@ public class CreateGame : PhotonCompatible
     public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)
     {
         if (propertiesThatChanged.ContainsKey(ConstantStrings.TwistList))
-        {    
+        {
             VisualCards((int[])propertiesThatChanged[ConstantStrings.TwistList]);
         }
         else

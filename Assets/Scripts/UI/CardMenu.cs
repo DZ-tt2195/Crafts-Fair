@@ -1,10 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using MyBox;
-using System.Linq;
 using System.Collections.Generic;
-using Photon.Pun;
-using System.Text.RegularExpressions;
 using TMPro;
 
 public class CardMenu : PhotonCompatible
@@ -13,12 +10,14 @@ public class CardMenu : PhotonCompatible
     [Foldout("UI", true)]
     int step = 0;
     [SerializeField] Button confirmButton;
-    [SerializeField] GridLayoutGroup storeButtons;
+    [SerializeField] GridLayoutGroup storeVerticalButtons;
+    [SerializeField] GridLayoutGroup storeHorizontalButtons;
     CardSelect mostRecentClick;
-    List<(CardLayout, Button)> blankButtons = new();
-    [SerializeField] List<CardSelect> eventSelect = new();
+    List<(CardLayout, Button)> blankVerticalButtons = new();
+    List<(CardLayout, Button)> blankHorizontalButtons = new();
+    [SerializeField] List<CardSelect> cardSelectors = new();
     [Foldout("Text", true)]
-    [SerializeField] TMP_Text choosetwists;
+    [SerializeField] TMP_Text chooseCards;
     [SerializeField] TMP_Text twistArt;
     [SerializeField] TMP_Text twistHouse;
     [SerializeField] TMP_Text twistTool;
@@ -36,7 +35,7 @@ public class CardMenu : PhotonCompatible
         string currentPhase = (string)GetRoomProperty(ConstantStrings.CurrentPhase);
         if (!(AmMaster() && currentPhase.Equals(nameof(WaitForJoiners))))
         {
-            foreach (CardSelect select in eventSelect)
+            foreach (CardSelect select in cardSelectors)
                 select.SetCardImage(-1);
             this.gameObject.SetActive(false);
         }
@@ -49,40 +48,73 @@ public class CardMenu : PhotonCompatible
     public void ChooseFromList(CardSelect clicked, List<CardData> allData, bool vertical)
     {
         mostRecentClick = clicked;
-        for (int i = 0; i < blankButtons.Count; i++)
+        storeHorizontalButtons.transform.parent.gameObject.SetActive(!vertical);
+        storeVerticalButtons.transform.parent.gameObject.SetActive(vertical);
+
+        if (vertical)
         {
-            (CardLayout layout, Button button) = blankButtons[i];
-            try
+            for (int i = 0; i < blankVerticalButtons.Count; i++)
             {
-                layout.FillInCards(allData[i], 1, vertical);
-                button.gameObject.SetActive(true);
+                (CardLayout layout, Button button) = blankVerticalButtons[i];
+                try
+                {
+                    layout.FillInCards(allData[i], 1, vertical);
+                    button.gameObject.SetActive(true);
+                }
+                catch
+                {
+                    button.gameObject.SetActive(false);
+                }
             }
-            catch
+        }
+        else
+        {
+            for (int i = 0; i < blankHorizontalButtons.Count; i++)
             {
-                button.gameObject.SetActive(false);
+                (CardLayout layout, Button button) = blankHorizontalButtons[i];
+                try
+                {
+                    layout.FillInCards(allData[i], 1, vertical);
+                    button.gameObject.SetActive(true);
+                }
+                catch
+                {
+                    button.gameObject.SetActive(false);
+                }
             }
+            
         }
     }
     void SendName(int number)
     {
         mostRecentClick.SetCardImage(number);
         mostRecentClick = null;
-        foreach (var thing in blankButtons)
-            thing.Item1.gameObject.SetActive(false);
+        storeVerticalButtons.transform.parent.gameObject.SetActive(false);
+        storeHorizontalButtons.transform.parent.gameObject.SetActive(false);
     }
     void Advance()
     {
         if (step == 0)
         {
-            for (int i = 0; i < storeButtons.transform.childCount; i++)
+            storeVerticalButtons.transform.parent.gameObject.SetActive(false);
+            storeHorizontalButtons.transform.parent.gameObject.SetActive(false);
+            for (int i = 0; i < storeHorizontalButtons.transform.childCount; i++)
             {
-                Button nextButton = storeButtons.transform.GetChild(i).gameObject.GetComponent<Button>();
-                blankButtons.Add((nextButton.GetComponent<CardLayout>(), nextButton));
+                Button nextButton = storeHorizontalButtons.transform.GetChild(i).gameObject.GetComponent<Button>();
+                blankHorizontalButtons.Add((nextButton.GetComponent<CardLayout>(), nextButton));
                 nextButton.interactable = true;
                 nextButton.onClick.RemoveAllListeners();
                 int number = i;
                 nextButton.onClick.AddListener(() => SendName(number));
-                nextButton.gameObject.SetActive(false);
+            }
+            for (int i = 0; i < storeVerticalButtons.transform.childCount; i++)
+            {
+                Button nextButton = storeVerticalButtons.transform.GetChild(i).gameObject.GetComponent<Button>();
+                blankVerticalButtons.Add((nextButton.GetComponent<CardLayout>(), nextButton));
+                nextButton.interactable = true;
+                nextButton.onClick.RemoveAllListeners();
+                int number = i;
+                nextButton.onClick.AddListener(() => SendName(number));
             }
             Translations();
         }
@@ -95,7 +127,7 @@ public class CardMenu : PhotonCompatible
     }
     void Translations()
     {
-        choosetwists.text = AutoTranslate.Choose_Twists();
+        chooseCards.text = AutoTranslate.Choose_Twists();
         twistArt.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_Art_Twist());
         twistHouse.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_House_Twist());
         twistTool.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_Tool_Twist());

@@ -229,4 +229,4 @@ Sound_Credits	Sound Credits
 Update_0	June 4, 2026
 Update_0_Text	Added sound effects and settings, and bug fixes for online \nSmall simplification to the rules for removing counters from twists
 Update_1	July 04, 2026
-Update_1_Text	Fixed ui and gameplay bugs \nAll players draw CardIcon from the same deck, with 2 copies each
+Update_1_Text	Fixed bugs with UI, gameplay, and reconnecting \nAll players draw CardIcon from the same deck, with 2 copies each

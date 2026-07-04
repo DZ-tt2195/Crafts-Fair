@@ -4,19 +4,15 @@ using Photon.Pun;
 
 public class MainDeck : PhotonCompatible
 {
-#region Setup
     public static MainDeck inst;
     [SerializeField] Card cardPrefab;
-    Dictionary<Player, int> playerDraws = new();
-
     protected override void Awake()
     {
         base.Awake();
         inst = this;
         this.bottomType = this.GetType();
-        if (((int[])GetRoomProperty(ConstantStrings.MasterDeck)).Length == 0)
-            CreateDeck();
-        InvokeRepeating(nameof(HandOutDraws), 0, 0.25f);
+        if (((int[])GetRoomProperty(ConstantStrings.MasterDeck)).Length == 0) CreateDeck();
+        InvokeRepeating(nameof(HandOutDraws), 0, 0.3f);
     }
     void CreateDeck()
     {
@@ -58,45 +54,26 @@ public class MainDeck : PhotonCompatible
             obj.GetComponent<Card>().AssignCard(toFind[cardNames[i]], 0f, vertical, Vector3.one);
         }
     }
-#endregion
-
-#region Draws
-    public void NeedDrawRPC(Player player, int num)
-    {
-        Debug.Log($"{player.name}, {num} to draw");
-        if (num > 0)
-            DoFunction(() => NeedDraw(player.photonView.ViewID, num), RpcTarget.MasterClient);
-    }
-    [PunRPC]
-    void NeedDraw(int playerID, int num)
-    {
-        Player player = PhotonView.Find(playerID).GetComponent<Player>();
-        if (playerDraws.ContainsKey(player))
-            playerDraws[player]+=num;
-        else
-            playerDraws.Add(player, num);
-    }
     void HandOutDraws()
     {
         if (PhotonNetwork.IsMasterClient)
         {
             List<Card> masterDeck = TurnManager.inst.GetCardList(ConstantStrings.MasterDeck);
-            foreach (Player player in playerDraws.Keys)
+            foreach (Player player in CreateGame.inst.GetPlayers())
             {
-                int numToDraw = playerDraws[player];
+                int numToDraw = (int)GetPlayerProperty(player, ConstantStrings.NeedDraw);
                 if (numToDraw > 0)
                 {
                     List<Card> toGiveOut = new();
-                    if (numToDraw > masterDeck.Count)
+                    if (numToDraw+5 > masterDeck.Count) 
                         masterDeck.AddRange(ShuffleDiscard());
 
-                    for (int i = 0; i<numToDraw; i++)
+                    for (int i = 0; i<numToDraw+5; i++)
                     {
                         Card nextCard = masterDeck[0];
                         masterDeck.RemoveAt(0);
                         toGiveOut.Add(nextCard);
                     }
-                    playerDraws[player] = 0;
                      
                     InstantChangeRoomProp(ConstantStrings.MasterDeck, TurnManager.ConvertCardList(masterDeck));
                     player.ReceiveCardsRPC(toGiveOut);
@@ -105,10 +82,6 @@ public class MainDeck : PhotonCompatible
             }
         }
     }
-#endregion
-
-#region Discards
-
     public void ReceiveDiscardRPC(List<Card> discarded)
     {
         if (discarded.Count > 1)
@@ -128,6 +101,4 @@ public class MainDeck : PhotonCompatible
         InstantChangeRoomProp(ConstantStrings.MasterDiscard, new int[0]);
         return masterDiscard;
     }
-
-#endregion
 }

@@ -15,6 +15,8 @@ public static class ConstantStrings
     public const string MyDiscard = nameof(MyDiscard);
     public const string ChosenToken = nameof(ChosenToken);
     public const string CustomersSold = nameof(CustomersSold);
+    public const string NeedDraw = nameof(NeedDraw);
+    public const string DrewThisTurn = nameof(DrewThisTurn);
 
     //room properties
     public const string GameName = nameof(GameName);
