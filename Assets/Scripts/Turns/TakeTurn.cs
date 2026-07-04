@@ -143,16 +143,16 @@ public class TakeTurn : Turn
         foreach (Player player in CreateGame.inst.GetPlayers())
         {
             string selectedToken = TurnManager.inst.GetString(ConstantStrings.ChosenToken, player);
-            Debug.Log($"{player.name}, {selectedToken}");
+            //Debug.Log($"{player.name}, {selectedToken}");
 
             string targetString = ConstantStrings.TokenCounter(selectedToken);
             if (!toChange.ContainsKey(targetString))
             {
                 int currentCounter = TurnManager.inst.GetInt(targetString);
                 toChange[targetString] = currentCounter - 1;
+                if (currentCounter - 1 <= 0)
+                    triggeredTwist = true;
             }
-            if ((int)toChange[targetString] <= 0)
-                triggeredTwist = true;
         }
 
         PhotonNetwork.CurrentRoom.SetCustomProperties(toChange);

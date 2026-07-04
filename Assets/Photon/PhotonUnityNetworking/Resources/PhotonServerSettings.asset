@@ -181,6 +181,9 @@ MonoBehaviour:
   - CreateStartings
   - CreateTwists
   - PackagedInstructions
+  - NeedDraw
+  - ReceiveCards
+  - ReceiveDiscard
   DisableAutoOpenWizard: 1
   ShowSettings: 0
   DevRegionSetOnce: 0

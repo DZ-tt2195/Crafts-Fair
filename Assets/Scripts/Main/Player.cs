@@ -155,7 +155,7 @@ public class Player : PhotonCompatible
         TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyHand, TurnManager.ConvertCardList(myHand)); uiDictionary[ConstantStrings.MyHand] = true;
         TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyDiscard, TurnManager.ConvertCardList(myDiscard)); uiDictionary[ConstantStrings.MyDiscard] = true;
     }
-    public void ReceiveDeckCards(List<Card> newCards)
+    public void ReceiveCardsRPC(List<Card> newCards)
     {
         DoFunction(() => ReceiveCards(TurnManager.ConvertCardList(newCards)), this.photonView.Owner);
     }
@@ -257,6 +257,10 @@ public class Player : PhotonCompatible
         CreateGame.inst.SwitchToPlayer(this);
         InstantChangePlayerProp(this, ConstantStrings.Waiting, false);
         endPause = true;
+
+        MainDeck.inst.ReceiveDiscardRPC(myDiscard);
+        myDiscard.Clear();
+        InstantChangePlayerProp(this, ConstantStrings.MyDiscard, new int[0]);
 
         (string phase, Action action) = TurnManager.inst.GetTurnAction(this);
         if (phase != nameof(WaitForJoiners) && phase != nameof(DisplayTwists))
@@ -390,7 +394,7 @@ public class Player : PhotonCompatible
 
 #endregion
 
-#region  Helpers
+#region Helpers
     public List<TokenDisplay> OfNumber(FindNumber toFind, List<TokenType> tokensToFind, List<int> levelsToFind, int number)
     {
         List<TokenDisplay> toReturn = new();

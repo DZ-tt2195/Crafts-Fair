@@ -77,21 +77,26 @@ public class TurnManager : PhotonCompatible
                 UpdateWaitingText(isWaiting, playersWaiting);
                 return playersWaiting;
             }
-            //all players finish their turn
+            //all players have finished their turn
             if (PhotonNetwork.IsMasterClient && WaitingOnPlayers() == 0 && !(bool)GetRoomProperty(ConstantStrings.GameOver))
             {
                 foreach (Photon.Realtime.Player nextPlayer in players)
                     DoFunction(() => SharePropertyChanges(), nextPlayer);
 
                 UpdateWaitingText(spectators, players.Count);
-                Invoke(nameof(NextPhase), 0.5f);
+                Invoke(nameof(EndPhase), 0.25f);
             }
         }
     }
-    void NextPhase() //switch phases
+    void EndPhase() //phase end
     {
         storedTurns[GetCurrentPhase()].MasterEnd();
+        Invoke(nameof(NextPhase), 0.25f);
+    }
+    void NextPhase() //switch phases
+    {
         string nextPhase = (string)GetRoomProperty(ConstantStrings.NextPhase);
+        //Debug.Log($"move to {nextPhase}");
 
         (Player, int) highestScore = (null, 0);
         foreach (Player player in CreateGame.inst.GetPlayers())
@@ -119,7 +124,7 @@ public class TurnManager : PhotonCompatible
         //players start a new turn
         if (propertiesThatChanged.ContainsKey(ConstantStrings.CurrentPhase))
         {
-            Debug.Log($"switched to {GetCurrentPhase()}");
+            //Debug.Log($"switched to {GetCurrentPhase()}");
             if (PhotonNetwork.IsMasterClient)
                 storedTurns[GetCurrentPhase()].MasterStart();
 

@@ -1,5 +1,5 @@
 Game_Designer	by Thomas Tang (DZ)
-Last_Update	Last Updated: July 02, 2026
+Last_Update	Last Updated: July 04, 2026
 Blank	
 Translator_Credit	Original Language
 Language	Language
@@ -228,5 +228,5 @@ Click_Setting	Ask when there's only one option to choose
 Sound_Credits	Sound Credits
 Update_0	June 4, 2026
 Update_0_Text	Added sound effects and settings, and bug fixes for online \nSmall simplification to the rules for removing counters from twists
-Update_1	July 02, 2026
-Update_1_Text	Fixed a few ui bugs \nFixed another online bug
+Update_1	July 04, 2026
+Update_1_Text	Fixed ui and gameplay bugs \nAll players draw CardIcon from the same deck, with 2 copies each

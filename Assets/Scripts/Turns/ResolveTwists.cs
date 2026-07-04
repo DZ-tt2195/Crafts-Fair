@@ -57,7 +57,7 @@ public class ResolveTwists : Turn
         foreach (TokenType type in twistsToAdd)
         {
             string tokencounter = ConstantStrings.TokenCounter(type);
-            PhotonCompatible.InstantChangeRoomProp(tokencounter, 2*CreateGame.inst.GetPlayers().Count);
+            PhotonCompatible.InstantChangeRoomProp(tokencounter, 2);
         }
     }
 }

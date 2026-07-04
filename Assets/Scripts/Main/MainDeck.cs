@@ -4,6 +4,7 @@ using Photon.Pun;
 
 public class MainDeck : PhotonCompatible
 {
+#region Setup
     public static MainDeck inst;
     [SerializeField] Card cardPrefab;
     Dictionary<Player, int> playerDraws = new();
@@ -57,6 +58,9 @@ public class MainDeck : PhotonCompatible
             obj.GetComponent<Card>().AssignCard(toFind[cardNames[i]], 0f, vertical, Vector3.one);
         }
     }
+#endregion
+
+#region Draws
     public void NeedDrawRPC(Player player, int num)
     {
         Debug.Log($"{player.name}, {num} to draw");
@@ -79,22 +83,51 @@ public class MainDeck : PhotonCompatible
             List<Card> masterDeck = TurnManager.inst.GetCardList(ConstantStrings.MasterDeck);
             foreach (Player player in playerDraws.Keys)
             {
-                if (playerDraws[player] > 0)
+                int numToDraw = playerDraws[player];
+                if (numToDraw > 0)
                 {
                     List<Card> toGiveOut = new();
-                    for (int i = 0; i<playerDraws[player]; i++)
+                    if (numToDraw > masterDeck.Count)
+                        masterDeck.AddRange(ShuffleDiscard());
+
+                    for (int i = 0; i<numToDraw; i++)
                     {
                         Card nextCard = masterDeck[0];
                         masterDeck.RemoveAt(0);
                         toGiveOut.Add(nextCard);
                     }
                     playerDraws[player] = 0;
-                    
+                     
                     InstantChangeRoomProp(ConstantStrings.MasterDeck, TurnManager.ConvertCardList(masterDeck));
-                    player.ReceiveDeckCards(toGiveOut);
+                    player.ReceiveCardsRPC(toGiveOut);
                     break;
                 }
             }
         }
     }
+#endregion
+
+#region Discards
+
+    public void ReceiveDiscardRPC(List<Card> discarded)
+    {
+        if (discarded.Count > 1)
+            DoFunction(() => ReceiveDiscard(TurnManager.ConvertCardList(discarded)), RpcTarget.MasterClient);
+    }
+    [PunRPC]
+    void ReceiveDiscard(int[] discarded)
+    {
+        List<Card> masterDiscard = TurnManager.inst.GetCardList(ConstantStrings.MasterDiscard);
+        masterDiscard.AddRange(TurnManager.ConvertIntArray(discarded));
+        InstantChangeRoomProp(ConstantStrings.MasterDiscard, TurnManager.ConvertCardList(masterDiscard));
+    }
+    List<Card> ShuffleDiscard()
+    {
+        List<Card> masterDiscard = TurnManager.inst.GetCardList(ConstantStrings.MasterDiscard);
+        masterDiscard = masterDiscard.Shuffle();
+        InstantChangeRoomProp(ConstantStrings.MasterDiscard, new int[0]);
+        return masterDiscard;
+    }
+
+#endregion
 }
