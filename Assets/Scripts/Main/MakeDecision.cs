@@ -59,12 +59,13 @@ public class MakeDecision : PhotonCompatible
     List<(ButtonSelect, TMP_Text)> textButtons = new();
     List<(ButtonSelect, CardLayout)> cardButtons = new();
     HashSet<ButtonSelect> availableUI = new();
-    [SerializeField] Button sliderConfirm;
+    [SerializeField] ButtonSelect sliderConfirm;
     [SerializeField] Slider slider;
     [SerializeField] TMP_Text minimumText;
     [SerializeField] TMP_Text maximumText;
     [SerializeField] TMP_Text currentText;
     [SerializeField] TMP_Text confirmText;
+    List<int> sliderNumbers = new();
 
     protected override void Awake()
     {
@@ -73,8 +74,9 @@ public class MakeDecision : PhotonCompatible
         this.bottomType = this.GetType();
         instructionsText.text = "";
         confirmText.text = AutoTranslate.Confirm();
-        slider.onValueChanged.AddListener(UpdateText);
+        slider.onValueChanged.AddListener(UpdateSliderText);
 
+        slider.gameObject.SetActive(false);
         foreach (Transform child in findTextButtons)
         {
             textButtons.Add((child.GetComponent<ButtonSelect>(), child.transform.GetComponentInChildren<TMP_Text>()));
@@ -87,10 +89,10 @@ public class MakeDecision : PhotonCompatible
             child.gameObject.SetActive(false);
         }*/
 
-        void UpdateText(float value)
-        {
-            currentText.text = KeywordTooltip.instance.EditText($"{(int)value}");
-        }
+    }
+    void UpdateSliderText(float value)
+    {
+        currentText.text = sliderNumbers[(int)value].ToString();
     }
 
     #endregion
@@ -199,26 +201,30 @@ public class MakeDecision : PhotonCompatible
             }
         }
     }
-    public void ChooseFromSlider(int min, int max, string instructions, Action<int> action = null, bool autoResolve = true)
+    public void ChooseFromSlider(List<int> numbersInOrder, string instructions, Action<int> action = null, bool autoResolve = true)
     {
-        if (min == max && autoResolve)
+        if (numbersInOrder.Count == 1 && autoResolve)
         {
-            Log.inst.inReaction.Add(() => action?.Invoke(min));
+            Log.inst.inReaction.Add(() => action?.Invoke(numbersInOrder[0]));
         }
-        else
+        else if (numbersInOrder.Count >= 1)
         {
             Log.inst.SetUndoPoint(true);
             instructionsText.text = KeywordTooltip.instance.EditText(instructions);
+            sliderNumbers = numbersInOrder;
 
             slider.gameObject.SetActive(true);
-            sliderConfirm.onClick.AddListener(DecisionMade);
+            availableUI.Add(sliderConfirm);
+            sliderConfirm.button.onClick.AddListener(DecisionMade);
 
-            minimumText.text = min.ToString();
-            slider.minValue = min;
-            maximumText.text = max.ToString();
-            slider.maxValue = max;
+            slider.minValue = 0;
+            slider.maxValue = sliderNumbers.Count-1;
+            slider.value = 0;
+            UpdateSliderText(0);
+        
+            minimumText.text = sliderNumbers[0].ToString();
+            maximumText.text = sliderNumbers[^1].ToString();
 
-            slider.value = min;
             void DecisionMade()
             {
                 AudioManager.instance.Menu();
@@ -268,12 +274,14 @@ public class MakeDecision : PhotonCompatible
             }
         }
     }
+
     #endregion
 
 #region Misc
 
     public void ClearDecisions()
     {
+        instructionsText.text = "";
         foreach (ButtonSelect select in availableUI)
         {
             select.button.onClick.RemoveAllListeners();
@@ -281,12 +289,19 @@ public class MakeDecision : PhotonCompatible
             select.SetBorder(false);
         }
         availableUI.Clear();
+
         slider.gameObject.SetActive(false);
+
         foreach (var next in cardButtons) next.Item1.gameObject.SetActive(false);
         foreach (var next in textButtons) next.Item1.gameObject.SetActive(false);
-        instructionsText.text = "";
     }
-
+    public static List<int> NumbersInOrder(int minimum, int maximum)
+    {
+        List<int> toReturn = new();
+        for (int i = minimum; i<=maximum; i++)
+            toReturn.Add(i);
+        return toReturn;        
+    }
     [PunRPC]
     public string PackagedInstructions(string packagedText)
     {

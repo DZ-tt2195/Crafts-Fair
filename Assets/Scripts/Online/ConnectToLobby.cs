@@ -274,7 +274,9 @@ public class ConnectToLobby : MonoBehaviourPunCallbacks
             { ConstantStrings.TokenCounter(TokenType.ToolIcon), 2},
             { ConstantStrings.TokenCounter(TokenType.BookIcon), 2},
             { ConstantStrings.TurnNumber, 1 },
-            { ConstantStrings.MaxLevel, 6}
+            { ConstantStrings.MaxLevel, 6},
+            { ConstantStrings.MasterDeck, new int[0]},
+            { ConstantStrings.MasterDiscard, new int[0]}
         };
         return roomProps;
     }

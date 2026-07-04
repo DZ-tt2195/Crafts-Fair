@@ -27,5 +27,7 @@ public static class ConstantStrings
     public const string TurnNumber = nameof(TurnNumber);
     public static string TokenCounter(TokenType type) => TokenCounter(type.ToString());
     public static string TokenCounter(string type) => $"TokenCounter{type}";
-    public static string MaxLevel => nameof(MaxLevel);
+    public const string MaxLevel = nameof(MaxLevel);
+    public const string MasterDeck = nameof(MasterDeck);
+    public const string MasterDiscard = nameof(MasterDiscard);
 }

@@ -75,7 +75,7 @@ public class CreateGame : PhotonCompatible
                 CommHub.inst.ShareMessageRPC(OnlineTranslate.Online_Player_Playing(playerName), true);
                 PlayerPrefs.SetString(ConstantStrings.LastRoom, PhotonNetwork.CurrentRoom.Name);
                 PlayerPrefs.Save();
-                StartCoroutine(MakePlayerAndCards());
+                StartCoroutine(MakePlayer());
                 
                 if (GetPlayers(false).Item1.Count == (int)GetRoomProperty(ConstantStrings.CanPlay))
                     InstantChangeRoomProp(ConstantStrings.JoinAsSpec, true, false);
@@ -85,7 +85,7 @@ public class CreateGame : PhotonCompatible
         {
             PlayerPrefs.DeleteKey(ConstantStrings.LastRoom);
             InstantChangeRoomProp(ConstantStrings.CanPlay, 1);
-            StartCoroutine(MakePlayerAndCards());
+            StartCoroutine(MakePlayer());
         }
 
         IEnumerator Wait()
@@ -94,27 +94,13 @@ public class CreateGame : PhotonCompatible
             RefreshUI(true);
         }
 
-        IEnumerator MakePlayerAndCards()
+        IEnumerator MakePlayer()
         {
             yield return new WaitForSeconds(1f);
             while (CardMenu.instance.gameObject.activeSelf)
             {
                 yield return null;
             }
-
-            List<int> startingcustomerDeck = new();
-            List<int> customerIDs = new();
-            for (int i = 0; i<GameFiles.inst.customerFiles.Count; i++)
-            {
-                GameObject nextCard = MakeObject(cardPrefab.gameObject);
-                PhotonView cardPV = nextCard.GetComponent<PhotonView>();
-                startingcustomerDeck.Add(cardPV.ViewID);
-                customerIDs.Add(i);
-            }
-            customerIDs = customerIDs.Shuffle();
-
-            DoFunction(() => CreateCards("Customer", startingcustomerDeck.ToArray(), customerIDs.ToArray()));
-            InstantChangePlayerProp(PhotonNetwork.LocalPlayer, ConstantStrings.MyDeck, startingcustomerDeck.ToArray());
             MakeObject(playerPrefab.gameObject);
         }
     }
@@ -231,32 +217,9 @@ public class CreateGame : PhotonCompatible
         for (int i = 0; i<forcedTwists; i++)
         {
             chosenTwists[i] = TwistIDs[i];
-            Debug.Log(TwistIDs[i]);
+            //Debug.Log(TwistIDs[i]);
         }
         InstantChangeRoomProp(ConstantStrings.TwistList, chosenTwists.ToArray());
-    }
-
-    [PunRPC]
-    void CreateCards(string typeToFind, int[] arrayOfPVs, int[] cardNames)
-    {
-        List<CardData> toFind = new();
-        bool vertical = false;
-        if (typeToFind.Equals("Twist"))
-        {
-            toFind = GameFiles.inst.twistFiles;
-            vertical = false;
-        }
-        else if (typeToFind.Equals("Customer"))
-        {
-            toFind = GameFiles.inst.customerFiles;
-            vertical = true;
-        }
-
-        for (int i = 0; i<arrayOfPVs.Length; i++)
-        {
-            GameObject obj = PhotonView.Find(arrayOfPVs[i]).gameObject;
-            obj.GetComponent<Card>().AssignCard(toFind[cardNames[i]], 0f, vertical, Vector3.one);
-        }
     }
     void VisualCards(int[] cardIDs)
     {
@@ -308,6 +271,6 @@ public class CreateGame : PhotonCompatible
             }   
         }
     }
-    #endregion
 
+    #endregion
 }

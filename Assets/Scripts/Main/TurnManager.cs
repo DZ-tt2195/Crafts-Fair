@@ -39,7 +39,16 @@ public class TurnManager : PhotonCompatible
     void UpdateWaitingText(List<Photon.Realtime.Player> toSend, int playersWaiting)
     {
         foreach (Photon.Realtime.Player player in toSend)
-            MakeDecision.inst.DoFunction(() => MakeDecision.inst.PackagedInstructions(OnlineTranslate.Online_Waiting_on_Players(playersWaiting.ToString())), player);
+        {
+            if (playersWaiting == 0)
+            {
+                MakeDecision.inst.DoFunction(() => MakeDecision.inst.PackagedInstructions(AutoTranslate.Blank()), player);                            
+            }
+            else
+            {
+                MakeDecision.inst.DoFunction(() => MakeDecision.inst.PackagedInstructions(OnlineTranslate.Online_Waiting_on_Players(playersWaiting.ToString())), player);            
+            }
+        }
     }
     public override void OnPlayerPropertiesUpdate(Photon.Realtime.Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
     {
@@ -200,7 +209,6 @@ public class TurnManager : PhotonCompatible
         else
             playerPropertyToChange[player].Add(playerProperty.ToString(), changeInto);
     }
-
     public void WillChangeMasterProperty(string masterProperty, object changeInto)
     {
         if (masterPropertyToChange.ContainsKey(masterProperty))
@@ -208,7 +216,6 @@ public class TurnManager : PhotonCompatible
         else
             masterPropertyToChange.Add(masterProperty, changeInto);
     }
-
     [PunRPC]
     void SharePropertyChanges()
     {
@@ -232,7 +239,6 @@ public class TurnManager : PhotonCompatible
         InstantChangeRoomProp(ConstantStrings.GameOver, true);
         DoFunction(() => ShowEnding(resignPosition), RpcTarget.All);
     }
-
     [PunRPC]
     void ShowEnding(int resignPosition)
     {

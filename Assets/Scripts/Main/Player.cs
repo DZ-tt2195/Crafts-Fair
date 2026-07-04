@@ -22,6 +22,8 @@ public class Player : PhotonCompatible
     [SerializeField] List<TokenDisplay> allHouseDisplays = new();
     [SerializeField] List<TokenDisplay> allSwordDisplays = new();
     [SerializeField] List<TokenDisplay> allTechDisplays = new();
+    List<Card> myDeck;
+    List<Card> myDiscard;
     List<Card> myHand;
     int myCoins;
     Dictionary<TokenType, int[]> myTokens;
@@ -31,19 +33,17 @@ public class Player : PhotonCompatible
         base.Awake();
         this.bottomType = this.GetType();
 
-        List<string> toAdd = new() { ConstantStrings.MyHand, ConstantStrings.MyDiscard, ConstantStrings.MyCoins, TokenType.ArtIcon.ToString(), TokenType.HouseIcon.ToString(), TokenType.ToolIcon.ToString(), TokenType.BookIcon.ToString() };
+        List<string> toAdd = new() { ConstantStrings.MyHand, ConstantStrings.MyDeck, ConstantStrings.MyDiscard, ConstantStrings.MyCoins, TokenType.ArtIcon.ToString(), TokenType.HouseIcon.ToString(), TokenType.ToolIcon.ToString(), TokenType.BookIcon.ToString() };
         foreach (string next in toAdd)
             uiDictionary.Add(next, true);
 
         Invoke(nameof(Beginning), 1f);
     }
-
     void Beginning()
     {
         if (photonView.AmOwner && !initialized)
             DoFunction(() => SendName(PlayerPrefs.GetString(ConstantStrings.MyUserName)), RpcTarget.AllBuffered);
     }
-
     [PunRPC]
     void SendName(string username)
     {
@@ -63,6 +63,8 @@ public class Player : PhotonCompatible
     void SetToPlayerProps()
     {
         myCoins = TurnManager.inst.GetInt(ConstantStrings.MyCoins, this);
+        myDeck = TurnManager.inst.GetCardList(ConstantStrings.MyDeck, this);
+        myDiscard = TurnManager.inst.GetCardList(ConstantStrings.MyDiscard, this);
         myHand = TurnManager.inst.GetCardList(ConstantStrings.MyHand, this);
         myTokens = new Dictionary<TokenType, int[]>();
         foreach (TokenType token in Enum.GetValues(typeof(TokenType)))
@@ -74,35 +76,40 @@ public class Player : PhotonCompatible
 
     #endregion
 
-#region Hand
+#region Cards
     public List<Card> GetHand() => myHand;
     public void DrawCustomerRPC(int amount, int logged = 0)
     {
         if (amount <= 0)
             return;
+        Log.inst.groupToWait.StartCoroutine(WaitForCards());
 
-        List<Card> myDeck = TurnManager.inst.GetCardList(ConstantStrings.MyDeck, this);
-        while (myDeck.Count < amount)
+        IEnumerator WaitForCards()
         {
-            List<Card> myDiscard = TurnManager.inst.GetCardList(ConstantStrings.MyDiscard);
-            myDiscard = myDiscard.Shuffle();
-            myDeck.AddRange(myDiscard);
-            TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyDiscard, new int[0]);
-        }
+            MainDeck.inst.NeedDrawRPC(this, amount - myDeck.Count);
+            while (myDeck.Count < amount)
+            {
+                yield return null;
+                /*
+                myDiscard = myDiscard.Shuffle();
+                myDeck.AddRange(myDiscard);
+                myDiscard.Clear();
+                TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyDiscard, myDiscard);
+                */
+            }
 
-        List<Card> toDraw = new();
-        for (int i = 0; i < amount; i++)
-        {
-            Card card = myDeck[i];
-            Log.inst.AddMyText(false, OnlineTranslate.Online_Draw_Customer(this.name, card.name), logged);
-            toDraw.Add(card);
+            List<Card> toDraw = new();
+            for (int i = 0; i < amount; i++)
+            {
+                Card card = myDeck[i];
+                Log.inst.AddMyText(false, OnlineTranslate.Online_Draw_Customer(this.name, card.name), logged);
+                toDraw.Add(card);
+            }
+            Log.inst.NewRollback(() => DrawCustomer(toDraw));            
         }
-        Log.inst.NewRollback(() => DrawCustomer(toDraw));
     }
     void DrawCustomer(List<Card> cardsToAdd)
     {
-        List<Card> myDeck = TurnManager.inst.GetCardList(ConstantStrings.MyDeck, this);
-
         if (!Log.inst.forward)
         {
             for (int i = cardsToAdd.Count-1; i>= 0; i--)
@@ -124,7 +131,7 @@ public class Player : PhotonCompatible
         }
         myHand = myHand.OrderBy(card => card.dataFile.coinAmount).ThenBy(card => card.dataFile.cardName).ToList();
         TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyHand, TurnManager.ConvertCardList(myHand)); uiDictionary[ConstantStrings.MyHand] = true;
-        TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyDeck, TurnManager.ConvertCardList(myDeck));
+        TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyDeck, TurnManager.ConvertCardList(myDeck)); uiDictionary[ConstantStrings.MyDeck] = true;
     }
     public void DiscardCustomerRPC(Card card, int logged = 0)
     {
@@ -133,8 +140,6 @@ public class Player : PhotonCompatible
     }
     void DiscardCustomer(Card card)
     {
-        List<Card> myDiscard = TurnManager.inst.GetCardList(ConstantStrings.MyDiscard, this);
-
         if (!Log.inst.forward)
         {
             myHand.Add(card);
@@ -149,6 +154,16 @@ public class Player : PhotonCompatible
         myHand = myHand.OrderBy(card => card.dataFile.coinAmount).ThenBy(card => card.dataFile.cardName).ToList();
         TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyHand, TurnManager.ConvertCardList(myHand)); uiDictionary[ConstantStrings.MyHand] = true;
         TurnManager.inst.WillChangePlayerProperty(this, ConstantStrings.MyDiscard, TurnManager.ConvertCardList(myDiscard)); uiDictionary[ConstantStrings.MyDiscard] = true;
+    }
+    public void ReceiveDeckCards(List<Card> newCards)
+    {
+        DoFunction(() => ReceiveCards(TurnManager.ConvertCardList(newCards)), this.photonView.Owner);
+    }
+    [PunRPC]
+    void ReceiveCards(int[] newCards)
+    {
+        List<Card> newCardList = TurnManager.ConvertIntArray(newCards);
+        myDeck.AddRange(newCardList);
     }
     #endregion
 
@@ -316,9 +331,15 @@ public class Player : PhotonCompatible
             }
         }
 
+        if (uiDictionary[ConstantStrings.MyDeck])
+        {
+            foreach (Card card in myDeck)
+                card.transform.SetParent(null);
+        }
+
         if (uiDictionary[ConstantStrings.MyDiscard])
         {
-            foreach (Card card in TurnManager.inst.GetCardList(ConstantStrings.MyDiscard, this))
+            foreach (Card card in myDiscard)
                 card.transform.SetParent(null);
         }
 
