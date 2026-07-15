@@ -184,18 +184,19 @@ public class MakeDecision : PhotonCompatible
 
             for (int j = 0; j < listOfDisplays.Count; j++)
             {
-                TokenDisplay nextCard = listOfDisplays[j];
-                availableUI.Add(nextCard.selectMe);
-                Button cardButton = nextCard.selectMe.button;
+                TokenDisplay nextDisplay = listOfDisplays[j];
+                if (nextDisplay == null) continue;
+                availableUI.Add(nextDisplay.selectMe);
+                Button cardButton = nextDisplay.selectMe.button;
 
                 cardButton.interactable = true;
-                nextCard.selectMe.SetBorder(true);
+                nextDisplay.selectMe.SetBorder(true);
                 cardButton.onClick.AddListener(ClickedThis);
 
                 void ClickedThis()
                 {
                     AudioManager.instance.Menu();
-                    Log.inst.inReaction.Add(() => action?.Invoke(nextCard.info));
+                    Log.inst.inReaction.Add(() => action?.Invoke(nextDisplay.info));
                     Log.inst.PopStack();
                 }
             }

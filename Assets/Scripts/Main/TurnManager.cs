@@ -111,7 +111,6 @@ public class TurnManager : PhotonCompatible
         if (nextPhase.Equals(nameof(TakeTurn)) && highestScore.Item2 >= 20 && highestScore.Item1 != null)
         {
             TextForEnding(OnlineTranslate.Online_Player_Won(highestScore.Item1.name), -1);
-            InstantChangeRoomProp(ConstantStrings.CurrentPhase, nameof(Ending));
         }
         else
         {
@@ -242,10 +241,10 @@ public class TurnManager : PhotonCompatible
             if (GetThisPlayerPosition(player.photonView.Owner) == resignPosition)
                 resigned = player;
             else
-                text += $"{player.name} - {AutoTranslate.Coin_Amount(player.GetCoins().ToString())}\n";   
+                text += $"{AutoTranslate.Player_Score(player.name, player.GetCoins().ToString())}\n";   
         }
         if (resigned != null)
-            text += $"{resigned.name} - {AutoTranslate.Coin_Amount(resigned.GetCoins().ToString())} {AutoTranslate.Resigned()}";
+            text += $"{AutoTranslate.Player_Resigned(resigned.name, resigned.GetCoins().ToString())}";
         summaryText.text = KeywordTooltip.instance.EditText(text);
     }
 

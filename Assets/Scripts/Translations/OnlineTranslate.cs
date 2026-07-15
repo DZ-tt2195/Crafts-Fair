@@ -21,7 +21,7 @@ public static string Online_Make_Sell (string Player,string TokenNum,string Card
 public static string Online_No_Sell (string Player) => $"Online_No_Sell\tPlayer\t{Player}";
 public static string Online_Twists_To_Resolve (string Num) => $"Online_Twists_To_Resolve\tNum\t{Num}";
 public static string Online_Resolve_Card (string Player,string Card) => $"Online_Resolve_Card\tPlayer\t{Player}\tCard\t{Card}";
+public static string Online_Player_Won (string Player) => $"Online_Player_Won\tPlayer\t{Player}";
 public static string Online_Tie_Game () => $"Online_Tie_Game";
 public static string Online_Player_Resigned (string Player) => $"Online_Player_Resigned\tPlayer\t{Player}";
-public static string Online_Player_Won (string Player) => $"Online_Player_Won\tPlayer\t{Player}";
 }

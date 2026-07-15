@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using System.Linq;
 using System.Collections;
 
+public enum ThisTurn {}
 public class Player : PhotonCompatible
 {
 
@@ -27,6 +28,7 @@ public class Player : PhotonCompatible
     List<Card> myHand;
     int myCoins;
     Dictionary<TokenType, int[]> myTokens;
+    Dictionary<ThisTurn, int> didThisTurn = new();
 
     protected override void Awake()
     {
@@ -36,6 +38,8 @@ public class Player : PhotonCompatible
         List<string> toAdd = new() { ConstantStrings.MyHand, ConstantStrings.MyDeck, ConstantStrings.MyDiscard, ConstantStrings.MyCoins, TokenType.ArtIcon.ToString(), TokenType.HouseIcon.ToString(), TokenType.ToolIcon.ToString(), TokenType.BookIcon.ToString() };
         foreach (string next in toAdd)
             uiDictionary.Add(next, true);
+        foreach (ThisTurn type in Enum.GetValues(typeof(ThisTurn)))
+            didThisTurn.Add(type, 0);
 
         Invoke(nameof(Beginning), 1f);
     }
@@ -241,6 +245,7 @@ public class Player : PhotonCompatible
 
 #region Turns
 
+    public int GetDoneThisTurn(ThisTurn type) => didThisTurn[type]; 
     void Update()
     {
         if (photonView.AmOwner && Application.isEditor)
@@ -258,8 +263,11 @@ public class Player : PhotonCompatible
         endPause = true;
 
         int[] array = (int[])GetPlayerProperty(this, ConstantStrings.DrewThisTurn);
-        List<Card> drewThisTurn = TurnManager.ConvertIntArray(array);
+        List<Card> drewThisTurn = ConvertIntArray(array);
         myDeck.AddRange(drewThisTurn);
+
+        foreach (ThisTurn type in Enum.GetValues(typeof(ThisTurn)))
+            didThisTurn[type] = 0;
 
         (string phase, Action action) = TurnManager.inst.GetTurnAction(this);
         if (phase != nameof(WaitForJoiners) && phase != nameof(DisplayTwists))

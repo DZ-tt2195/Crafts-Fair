@@ -169,6 +169,8 @@ public class Log : PhotonCompatible
             int count = currentLogTexts.Count - 1;
             LogText nextText = currentLogTexts[count];
             currentLogTexts.RemoveAt(count);
+            if (nextText.undoToThis != null)
+                undosInLog.RemoveAt(undosInLog.Count-1);
 
             RemoveText(allCurrent);
             if (nextText.important)
@@ -300,6 +302,7 @@ public class Log : PhotonCompatible
     private void Update()
     {
         undoButton.gameObject.SetActive(undosInLog.Count > 0);
+        Debug.Log(undosInLog.Count);
     }
 
     void ClearCurrentDecision()

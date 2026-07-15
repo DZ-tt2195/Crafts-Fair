@@ -1,5 +1,5 @@
 Game_Designer	by Thomas Tang (DZ)
-Last_Update	Last Updated: July 04, 2026
+Last_Update	Last Updated: July 15, 2026
 Blank	
 Translator_Credit	Original Language
 Language	Language
@@ -46,6 +46,9 @@ Online_Waiting_on_Players	Waiting on players ($Num$ more)
 Undo	Undo
 Short	Short
 Long	Long
+Switch_Player	Switch Player
+Rules	Rules
+Rules_Summary	Each Round: \n1. Choose any TokenIcon (token); create 1 of that token at 1 LevelIcon, then upgrade 1 token of that type to the next LevelIcon. \n2. You may sell 2+ TokenIcon and 2+ CardIcon, all at once, to score CoinIcon. \n\nBetween Rounds:\n3. Remove 1 counter from each token's Twist, if a player chose it. \n4. For each Twist with 0 counters, each player draws 2 CardIcon and follows its instructions. \n5. Add 2 counters back onto those Twists. \n6. First player to reach 20+ CoinIcon wins.
 CardIcon	CardIcon
 ArtIcon	ArtIcon
 HouseIcon	HouseIcon
@@ -88,13 +91,11 @@ Pause_to_Read	A pause to let you read things.
 Pause_to_Undo	Last chance to undo anything.
 Game_Over	Game Over
 Leave	Leave
+Online_Player_Won	$Player$ has won.
 Online_Tie_Game	The game is a tie.
 Online_Player_Resigned	$Player$ has resigned.
-Online_Player_Won	$Player$ has won.
-Resigned	(Resigned)
-Switch_Player	Switch Player
-Rules	Rules
-Rules_Summary	Each Round: \n1. Choose any TokenIcon (token); create 1 of that token at 1 LevelIcon, then upgrade 1 token of that type to the next LevelIcon. \n2. You may sell 2+ TokenIcon and 2+ CardIcon, all at once, to score CoinIcon. \n\nBetween Rounds:\n3. Remove 1 counter from each token's Twist, if a player chose it. \n4. For each Twist with 0 counters, each player draws 2 CardIcon and follows its instructions. \n5. Add 2 counters back onto those Twists. \n6. First player to reach 20+ CoinIcon wins.
+Player_Score	$Player$ - $Num$ CoinIcon
+Player_Resigned	$Player$ - $Num$ CoinIcon [Resigned]
 Encyclopedia	Encyclopedia
 Close	Close
 Any	Any
@@ -228,5 +229,5 @@ Click_Setting	Ask when there's only one option to choose
 Sound_Credits	Sound Credits
 Update_0	June 4, 2026
 Update_0_Text	Added sound effects and settings, and bug fixes for online \nSmall simplification to the rules for removing counters from twists
-Update_1	July 04, 2026
-Update_1_Text	Fixed bugs with UI, gameplay, and reconnecting \nAll players draw CardIcon from the same deck, with 2 copies each
+Update_1	July 15, 2026
+Update_1_Text	Fixed bugs with UI, gameplay, undos, and reconnecting \nAll players draw CardIcon from the same deck, with 2 copies each

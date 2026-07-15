@@ -5,6 +5,7 @@ using Photon.Pun;
 using System;
 public class TakeTurn : Turn
 {
+    Dictionary<TokenType, int[]> soldTokens = new();
     public override void MasterStart()
     {
         int currentTurn = TurnManager.inst.GetInt(ConstantStrings.TurnNumber);
@@ -14,13 +15,13 @@ public class TakeTurn : Turn
     public override void ForPlayer(Player player)
     {
         Log.inst.NewDecisionContainer(() => ChooseToken(player, 0));
-        Dictionary<TokenType, int[]> newDictionary = new();
+        soldTokens.Clear();
         foreach (TokenType token in Enum.GetValues(typeof(TokenType)))
         {
             int arrayLength = player.GetTokenDict()[token].Length;
-            newDictionary.Add(token, new int[arrayLength]);
+            soldTokens.Add(token, new int[arrayLength]);
         }
-        Log.inst.NewDecisionContainer(() => DoSelling(player, newDictionary, null, 0));
+        Log.inst.NewDecisionContainer(() => DoSelling(player, null, 0));
     }
     void ChooseToken(Player player, int logged)
     {
@@ -52,7 +53,7 @@ public class TakeTurn : Turn
             player.UpDowngradeToken(1, info, 1, logged);
         }
     }
-    void DoSelling(Player player, Dictionary<TokenType, int[]> soldTokens, DecisionContainer rewind, int logged)
+    void DoSelling(Player player, DecisionContainer rewind, int logged)
     {
         int minimum = 2;
         List<Card> customersInHand = player.GetHand();
@@ -69,14 +70,22 @@ public class TakeTurn : Turn
             }
         }
 
-        int CountTotal()
+        int CountTotal(Dictionary<TokenType, int[]> toSearch)
         {
             int answer = 0;
             foreach (TokenType token in Enum.GetValues(typeof(TokenType)))
-                answer += MyExtensions.SumOfArray(soldTokens[token]);
-            return answer;        
+            {
+                string tokenCount = $"{token}";
+                for (int i = 0; i<toSearch[token].Length; i++)
+                {
+                    tokenCount += $" {toSearch[token][i]} ";
+                    answer += toSearch[token][i];
+                }
+            }
+            return answer;
         }
-        int totalTokens = CountTotal();
+
+        int totalTokens = CountTotal(soldTokens);
         List<Card> customersHappy = new();
         foreach (Card card in customersInHand)
         {
@@ -130,10 +139,13 @@ public class TakeTurn : Turn
         void SellToken((int value, TokenType token) info)
         {
             player.CreateLoseToken(-1, info, logged);
-            Dictionary<TokenType, int[]> newDictionary = soldTokens;
-            newDictionary[info.token][info.value]++;
-            Log.inst.NewDecisionContainer(() => DoSelling(player, newDictionary, restartContainer, logged));
+            Log.inst.NewRollback(() => AddToSold(info));
+            Log.inst.NewDecisionContainer(() => DoSelling(player, restartContainer, logged));
         }
+    }
+    void AddToSold((int value, TokenType token) info)
+    {
+        soldTokens[info.token][info.value] += (Log.inst.forward ? 1 : -1);
     }
     public override void MasterEnd()
     {
