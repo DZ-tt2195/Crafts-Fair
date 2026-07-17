@@ -15,23 +15,22 @@ public class Abundance : CardType
         for (int i = 1; i<=toMake; i++)
         {
             int number = i;
-            Log.inst.NewDecisionContainer(() => AddToken(player, number, toMake, logged));
+            Log.inst.NewDecisionContainer(() => AddToken(number));
         }
-    }
-    void AddToken(Player player, int num, int max, int logged)
-    {
-        List<TextButtonInfo> addTokens = new()
+        void AddToken(int num)
         {
-            new(AutoTranslate.ArtIcon(), () => AddThis(TokenType.ArtIcon)),
-            new(AutoTranslate.HouseIcon(), () => AddThis(TokenType.HouseIcon)),
-            new(AutoTranslate.ToolIcon(), () => AddThis(TokenType.ToolIcon)),
-            new(AutoTranslate.BookIcon(), () => AddThis(TokenType.BookIcon))
-        };
-        MakeDecision.inst.ChooseTextButton(addTokens, AutoTranslate.Ask_Create(AutoTranslate.TokenIcon(), num.ToString(), max.ToString()));
-
-        void AddThis(TokenType type)
-        {
-            player.CreateLoseToken(1, (1, type), logged);
+            List<TextButtonInfo> addTokens = new()
+            {
+                new(AutoTranslate.ArtIcon(), () => AddThis(TokenType.ArtIcon)),
+                new(AutoTranslate.HouseIcon(), () => AddThis(TokenType.HouseIcon)),
+                new(AutoTranslate.ToolIcon(), () => AddThis(TokenType.ToolIcon)),
+                new(AutoTranslate.BookIcon(), () => AddThis(TokenType.BookIcon))
+            };
+            MakeDecision.inst.ChooseTextButton(addTokens, AutoTranslate.Ask_Create(AutoTranslate.TokenIcon(), num.ToString(), toMake.ToString()));
+            void AddThis(TokenType type)
+            {
+                player.CreateLoseToken(1, (1, type), logged);
+            }
         }
     }
 }

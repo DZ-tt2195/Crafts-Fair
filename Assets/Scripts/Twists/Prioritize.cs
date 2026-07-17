@@ -15,17 +15,18 @@ public class Prioritize : CardType
         for (int i = 1; i<= max; i++)
         {
             int number = i;
-            Log.inst.NewDecisionContainer(() => DowngradeToken(player, logged, number, max));
+            Log.inst.NewDecisionContainer(() => DowngradeToken(number));
         }
-    }
-    void DowngradeToken(Player player, int logged, int num, int max)
-    {
-        List<TokenDisplay> canDowngrade = player.OfNumber(FindNumber.Minimum, Player.AllTokens(), Player.AllLevelsBut(1), 1);
-        MakeDecision.inst.ChooseDisplayOnScreen(canDowngrade, AutoTranslate.Ask_Downgrade(AutoTranslate.TokenIcon(), num.ToString(), max.ToString()), DowngradeThis);
-
-        void DowngradeThis((int level, TokenType type) info)
+        
+        void DowngradeToken(int num)
         {
-            player.UpDowngradeToken(1, info, -1, logged);
+            List<TokenDisplay> canDowngrade = player.OfNumber(FindNumber.Minimum, Player.AllTokens(), Player.AllLevelsBut(1), 1);
+            MakeDecision.inst.ChooseDisplayOnScreen(canDowngrade, AutoTranslate.Ask_Downgrade(AutoTranslate.TokenIcon(), num.ToString(), max.ToString()), DowngradeThis);
+
+            void DowngradeThis((int level, TokenType type) info)
+            {
+                player.UpDowngradeToken(1, info, -1, logged);
+            }
         }
     }
 }

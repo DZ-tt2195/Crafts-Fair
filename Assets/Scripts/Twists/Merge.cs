@@ -15,17 +15,17 @@ public class Merge : CardType
         for (int i = 1; i<=max; i++)
         {
             int number = i;
-            Log.inst.NewDecisionContainer(() => RemoveHouse(player, number, max, logged));
+            Log.inst.NewDecisionContainer(() => RemoveHouse(number));
         }
-    }
-    void RemoveHouse(Player player, int num, int max, int logged)
-    {
-        List<TokenDisplay> canLose = player.OfNumber(FindNumber.Minimum, new() {TokenType.HouseIcon}, Player.AllLevels(), 1);
-        MakeDecision.inst.ChooseDisplayOnScreen(canLose, AutoTranslate.Ask_Lose(AutoTranslate.HouseIcon(), num.ToString(), max.ToString()), LoseToken);
-
-        void LoseToken((int level, TokenType type) info)
+        void RemoveHouse(int num)
         {
-            player.CreateLoseToken(-1, info, logged);
+            List<TokenDisplay> canLose = player.OfNumber(FindNumber.Minimum, new() {TokenType.HouseIcon}, Player.AllLevels(), 1);
+            MakeDecision.inst.ChooseDisplayOnScreen(canLose, AutoTranslate.Ask_Lose(AutoTranslate.HouseIcon(), num.ToString(), max.ToString()), LoseToken);
+
+            void LoseToken((int level, TokenType type) info)
+            {
+                player.CreateLoseToken(-1, info, logged);
+            }
         }
     }
 }
