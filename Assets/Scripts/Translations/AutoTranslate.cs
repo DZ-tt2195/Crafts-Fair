@@ -209,4 +209,6 @@ public static string Update_0 () => Translator.inst.Translate("Update_0", new() 
 public static string Update_0_Text () => Translator.inst.Translate("Update_0_Text", new() {});
 public static string Update_1 () => Translator.inst.Translate("Update_1", new() {});
 public static string Update_1_Text () => Translator.inst.Translate("Update_1_Text", new() {});
+public static string Update_2 () => Translator.inst.Translate("Update_2", new() {});
+public static string Update_2_Text () => Translator.inst.Translate("Update_2_Text", new() {});
 }

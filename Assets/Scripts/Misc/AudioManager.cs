@@ -16,6 +16,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] AudioClip cardSound; public void Card(float volume = 0.3f) => PlaySound(cardSound, volume);
     [SerializeField] AudioClip tokenSound; public void Token(float volume = 0.3f) => PlaySound(tokenSound, volume);
     [SerializeField] AudioClip gameOverSound; public void GameOver(float volume = 0.3f) => PlaySound(gameOverSound, volume);
+    [SerializeField] AudioClip newTurnSound; public void NewTurn(float volume = 0.3f) => PlaySound(newTurnSound, volume);
     private void Awake()
     {
         if (instance == null)

@@ -1,5 +1,5 @@
 Game_Designer	by Thomas Tang (DZ)
-Last_Update	Last Updated: July 15, 2026
+Last_Update	Last Updated: July 22, 2026
 Blank	
 Translator_Credit	Original Language
 Language	Language
@@ -231,3 +231,5 @@ Update_0	June 4, 2026
 Update_0_Text	Added sound effects and settings, and bug fixes for online \nSmall simplification to the rules for removing counters from twists
 Update_1	July 15, 2026
 Update_1_Text	Fixed bugs with UI, gameplay, undos, and reconnecting \nAll players draw CardIcon from the same deck, with 2 copies each
+Update_2	July 22, 2026
+Update_2_Text	New sound effect when you start a turn \nFixed a bug that prevented you from choosing twists \nPlayer dropdown is hidden in single player \nUpdated rulebook pdf

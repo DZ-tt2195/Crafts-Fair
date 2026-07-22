@@ -264,6 +264,7 @@ public class Player : PhotonCompatible
         CreateGame.inst.SwitchToPlayer(this);
         InstantChangePlayerProp(this, ConstantStrings.Waiting, false);
         endPause = true;
+        AudioManager.instance.NewTurn();
 
         int[] array = (int[])GetPlayerProperty(this, ConstantStrings.DrewThisTurn);
         List<Card> drewThisTurn = ConvertIntArray(array);
@@ -344,7 +345,7 @@ public class Player : PhotonCompatible
 
         if (uiDictionary[ConstantStrings.MyHand])
         {
-            if (this.transform.parent != null) AudioManager.instance.Card();
+            if (this.transform.parent != null && !forcedUpdate) AudioManager.instance.Card();
             List<Vector2> handPositions = ObjectPositions(myHand.Count, -1125, 475, 225, -550, true);
             for (int i = 0; i < myHand.Count; i++)
             {
@@ -386,7 +387,7 @@ public class Player : PhotonCompatible
 
         void ApplyToken(TokenType type, List<TokenDisplay> list)
         {
-            if (this.transform.parent != null) AudioManager.instance.Token();
+            if (this.transform.parent != null && !forcedUpdate) AudioManager.instance.Token();
             int[] array = myTokens[type];
             for (int i = 1; i<array.Length; i++)
                 list[i].ChangeInfo(i, type, array[i].ToString());

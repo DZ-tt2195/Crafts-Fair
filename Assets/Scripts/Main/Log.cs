@@ -316,6 +316,7 @@ public class Log : PhotonCompatible
 
     public void InvokeUndo(DecisionContainer toThisPoint, bool pop)
     {
+        AudioManager.instance.Menu();
         ClearCurrentDecision();
         ClearParents(currentContainer);
         currentContainer = null;

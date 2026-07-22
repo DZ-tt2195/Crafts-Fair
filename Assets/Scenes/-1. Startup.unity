@@ -701,6 +701,7 @@ MonoBehaviour:
   cardSound: {fileID: 8300000, guid: 78b4475a0f7d0435e8daec6996c54d33, type: 3}
   tokenSound: {fileID: 8300000, guid: 22fd7c5ac3ba747dbbd94e89b55082b2, type: 3}
   gameOverSound: {fileID: 8300000, guid: 10ecb72f7cb594c378637e18bb61f52c, type: 3}
+  newTurnSound: {fileID: 8300000, guid: d49e447f43d674408ae856b616e1a787, type: 3}
 --- !u!82 &300021391
 AudioSource:
   m_ObjectHideFlags: 0

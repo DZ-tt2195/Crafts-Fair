@@ -2839,7 +2839,10 @@ MonoBehaviour:
     Game over: "win" - David819 (freesounds.org)
 
     Text
-    message: "Itemize" - Scrampunk_ (freesounds.org)'
+    message: "Itemize" - Scrampunk_ (freesounds.org)
+
+    New turn: "Video game treasure"
+    (mixkit.co)'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 31e79ddad7b2d41c395ada76a18cbcdd, type: 2}
   m_sharedMaterial: {fileID: -3852492252101762229, guid: 31e79ddad7b2d41c395ada76a18cbcdd, type: 2}
