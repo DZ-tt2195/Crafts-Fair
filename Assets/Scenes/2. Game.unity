@@ -151,8 +151,8 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 593920748}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.2717908}
-  m_AnchorMax: {x: 1, y: 0.7282092}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -4272,7 +4272,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &495590935
 RectTransform:
   m_ObjectHideFlags: 0
@@ -4820,7 +4820,7 @@ RectTransform:
   m_Father: {fileID: 1634582741}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -19088,12 +19088,17 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Each Turn: \n1. Either add a token at rank 1, or advance 1 token on your
-    grid. \n2. Remove a counter from that token''s Twist. \n3. Submit 2+ tokens and
-    2+ placards at once to score crowns. \n\nBetween Turns:\n4. For each Twist with
-    0 counters, each player draws 2 placards and follows its instructions. \n5. Add
-    the counters back onto those Twists (2 per player). \n6. The first player to
-    reach 20+ crowns wins.'
+  m_text: 'Each Round: \n1. Choose any <link="TokenIcon"><sprite="TokenIcon" name="TokenIcon">
+    (token); create 1 of that token at 1 <link="LevelIcon"><sprite="LevelIcon" name="LevelIcon">,
+    then upgrade 1 token of that type to the next <link="LevelIcon"><sprite="LevelIcon"
+    name="LevelIcon">. \n2. You may sell 2+ <link="TokenIcon"><sprite="TokenIcon"
+    name="TokenIcon"> and 2+ <link="CardIcon"><sprite="CardIcon" name="CardIcon">,
+    all at once, to score <link="CoinIcon"><sprite="CoinIcon" name="CoinIcon">. \n\nBetween
+    Rounds:\n3. Remove 1 counter from each token''s Twist, if a player chose it.
+    \n4. For each Twist with 0 counters, each player draws 2 <link="CardIcon"><sprite="CardIcon"
+    name="CardIcon"> and follows its instructions. \n5. Add 2 counters back onto
+    those Twists. \n6. First player to reach 20+ <link="CoinIcon"><sprite="CoinIcon"
+    name="CoinIcon"> wins.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 31e79ddad7b2d41c395ada76a18cbcdd, type: 2}
   m_sharedMaterial: {fileID: -3852492252101762229, guid: 31e79ddad7b2d41c395ada76a18cbcdd, type: 2}
@@ -19120,7 +19125,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 66.4
+  m_fontSize: 64.85
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1

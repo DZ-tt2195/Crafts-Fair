@@ -18,7 +18,7 @@ public class Smelting : CardType
         void LoseToken(TokenType type)
         {
             List<TokenDisplay> canLose = player.OfNumber(FindNumber.Minimum, new() {type}, Player.AllLevels(), 1);
-            MakeDecision.inst.ChooseDisplayOnScreen(canLose, AutoTranslate.Ask_Lose(Translator.inst.Translate(type.ToString()), "1", "1"), LoseToken);
+            MakeDecision.inst.ChooseDisplayOnScreen(canLose, AutoTranslate.Ask_Lose(Translator.inst.Translate(this.dataFile.cardName), Translator.inst.Translate(type.ToString()), "1", "1"), LoseToken);
 
             void LoseToken((int level, TokenType type) info)
             {

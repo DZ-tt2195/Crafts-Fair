@@ -21,7 +21,7 @@ public class Player : PhotonCompatible
     public Dictionary<string, bool> uiDictionary = new();
     [SerializeField] List<TokenDisplay> allArtDisplays = new();
     [SerializeField] List<TokenDisplay> allHouseDisplays = new();
-    [SerializeField] List<TokenDisplay> allSwordDisplays = new();
+    [SerializeField] List<TokenDisplay> allToolDisplays = new();
     [SerializeField] List<TokenDisplay> allTechDisplays = new();
     List<Card> myDeck;
     List<Card> myDiscard;
@@ -345,7 +345,6 @@ public class Player : PhotonCompatible
 
         if (uiDictionary[ConstantStrings.MyHand])
         {
-            if (this.transform.parent != null && !forcedUpdate) AudioManager.instance.Card();
             List<Vector2> handPositions = ObjectPositions(myHand.Count, -1125, 475, 225, -550, true);
             for (int i = 0; i < myHand.Count; i++)
             {
@@ -381,13 +380,12 @@ public class Player : PhotonCompatible
         if (uiDictionary[TokenType.HouseIcon.ToString()])
             ApplyToken(TokenType.HouseIcon, allHouseDisplays);
         if (uiDictionary[TokenType.ToolIcon.ToString()])
-            ApplyToken(TokenType.ToolIcon, allSwordDisplays);
+            ApplyToken(TokenType.ToolIcon, allToolDisplays);
         if (uiDictionary[TokenType.BookIcon.ToString()])
             ApplyToken(TokenType.BookIcon, allTechDisplays);
 
         void ApplyToken(TokenType type, List<TokenDisplay> list)
         {
-            if (this.transform.parent != null && !forcedUpdate) AudioManager.instance.Token();
             int[] array = myTokens[type];
             for (int i = 1; i<array.Length; i++)
                 list[i].ChangeInfo(i, type, array[i].ToString());
@@ -396,6 +394,14 @@ public class Player : PhotonCompatible
         if (uiDictionary[ConstantStrings.MyCoins])
         {
             coinText.text = KeywordTooltip.instance.EditText(AutoTranslate.Coin_Amount(GetCoins().ToString()));
+        }
+
+        if (this.transform.parent != null && !forcedUpdate)
+        {
+            if (uiDictionary[ConstantStrings.MyHand])
+                AudioManager.instance.Card();
+            if (uiDictionary[TokenType.ArtIcon.ToString()] || uiDictionary[TokenType.HouseIcon.ToString()] || uiDictionary[TokenType.ToolIcon.ToString()] || uiDictionary[TokenType.BookIcon.ToString()])
+                AudioManager.instance.Token();
         }
 
         foreach (var key in uiKeys)
@@ -432,7 +438,7 @@ public class Player : PhotonCompatible
         if (tokensToFind.Contains(TokenType.HouseIcon))
             ApplyToken(myTokens[TokenType.HouseIcon], allHouseDisplays);
         if (tokensToFind.Contains(TokenType.ToolIcon))
-            ApplyToken(myTokens[TokenType.ToolIcon], allSwordDisplays);
+            ApplyToken(myTokens[TokenType.ToolIcon], allToolDisplays);
         if (tokensToFind.Contains(TokenType.BookIcon))
             ApplyToken(myTokens[TokenType.BookIcon], allTechDisplays);
 

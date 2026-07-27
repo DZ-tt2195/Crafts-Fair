@@ -1,5 +1,5 @@
 Game_Designer	by Thomas Tang (DZ)
-Last_Update	Last Updated: July 22, 2026
+Last_Update	Last Updated: July 26, 2026
 Blank	
 Translator_Credit	Original Language
 Language	Language
@@ -66,16 +66,17 @@ Online_Add_Coin	$Player$ gains $Num$ CoinIcon.
 Online_Lose_Coin	$Player$ loses $Num$ CoinIcon.
 Online_Draw_Customer	$Player$ draws $Card$.
 Online_Draw_Customer_Others	$Player$ draws 1 CardIcon.
-Ask_Create	Create $Token$ ($Num1$ / $Num2$).
+Ask_Choose	Choose TokenIcon for this turn.
 Online_Chose_Token	$Player$ chooses $Token$.
+Ask_Create	$Card$: Create $Token$ ($Num1$ / $Num2$).
 Online_Create_Token	$Player$ creates $Amount$ $Token$ at $Level$ LevelIcon.
-Ask_Upgrade	Upgrade 1 $Token$ ($Num1$ / $Num2$).
+Ask_Upgrade	$Card$: Upgrade 1 $Token$ ($Num1$ / $Num2$).
 Online_Upgrade_Token	$Player$ upgrades $Amount$ $Token$ from $Level1$ LevelIcon to $Level2$ LevelIcon.
-Ask_Downgrade	Downgrade $Token$ ($Num1$ / $Num2$).
+Ask_Downgrade	$Card$: Downgrade $Token$ ($Num1$ / $Num2$).
 Online_Downgrade_Token	$Player$ downgrades $Amount$ $Token$ from $Level1$ LevelIcon down to $Level2$ LevelIcon.
-Ask_Lose	Lose $Token$ ($Num1$ / $Num2$).
+Ask_Lose	$Card$: Lose $Token$ ($Num1$ / $Num2$).
 Online_Lose_Token	$Player$ loses $Amount$ $Token$ at $Level$ LevelIcon.
-Ask_Discard	Discard CardIcon ($Num1$ / $Num2$).
+Ask_Discard	$Card$: Discard CardIcon ($Num1$ / $Num2$).
 Online_Discard_Customer	$Player$ discards $Card$.
 Ask_Sell	You may sell 2+ TokenIcon, while meeting requirements for 2+ CardIcon.
 Online_Make_Sell	$Player$ sells $TokenNum$ TokenIcon and $CardNum$ CardIcon.
@@ -231,5 +232,5 @@ Update_0	June 4, 2026
 Update_0_Text	Added sound effects and settings, and bug fixes for online \nSmall simplification to the rules for removing counters from twists
 Update_1	July 15, 2026
 Update_1_Text	Fixed bugs with UI, gameplay, undos, and reconnecting \nAll players draw CardIcon from the same deck, with 2 copies each
-Update_2	July 22, 2026
-Update_2_Text	New sound effect when you start a turn \nFixed a bug that prevented you from choosing twists \nPlayer dropdown is hidden in single player \nUpdated rulebook pdf
+Update_2	July 26, 2026
+Update_2_Text	New sound effect when you start a turn \nFixed a bug that prevented you from choosing twists \nPlayer dropdown is hidden in single player \nClearer instructions text \nUpdated rulebook pdf

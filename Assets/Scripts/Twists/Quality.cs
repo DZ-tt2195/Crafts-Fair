@@ -16,7 +16,7 @@ public class Quality : CardType
             new(AutoTranslate.ToolIcon(), () => AddThis(TokenType.ToolIcon)),
             new(AutoTranslate.BookIcon(), () => AddThis(TokenType.BookIcon))
         };
-        MakeDecision.inst.ChooseTextButton(addTokens, AutoTranslate.Ask_Create(AutoTranslate.TokenIcon(), "1", "1"));
+        MakeDecision.inst.ChooseTextButton(addTokens, AutoTranslate.Ask_Create(Translator.inst.Translate(this.dataFile.cardName), AutoTranslate.TokenIcon(), "1", "1"));
 
         void AddThis(TokenType type)
         {

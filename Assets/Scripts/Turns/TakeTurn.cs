@@ -32,7 +32,7 @@ public class TakeTurn : Turn
             new(AutoTranslate.ToolIcon(), () => AddThis(TokenType.ToolIcon)),
             new(AutoTranslate.BookIcon(), () => AddThis(TokenType.BookIcon))
         };
-        MakeDecision.inst.ChooseTextButton(addTokens, AutoTranslate.Ask_Create(AutoTranslate.TokenIcon(), "1", "1"));
+        MakeDecision.inst.ChooseTextButton(addTokens, AutoTranslate.Ask_Choose());
 
         void AddThis(TokenType type)
         {
@@ -46,7 +46,7 @@ public class TakeTurn : Turn
     {
         List<int> levelsToAdvance = Player.AllLevelsBut(TurnManager.inst.GetInt(ConstantStrings.MaxLevel));
         List<TokenDisplay> canAdvance = player.OfNumber(FindNumber.Minimum, new() {token}, levelsToAdvance, 1);
-        MakeDecision.inst.ChooseDisplayOnScreen(canAdvance, AutoTranslate.Ask_Upgrade(Translator.inst.Translate(token.ToString()), "1", "1"), AdvanceThis);
+        MakeDecision.inst.ChooseDisplayOnScreen(canAdvance, AutoTranslate.Ask_Upgrade(Translator.inst.Translate(token.ToString()), Translator.inst.Translate(token.ToString()), "1", "1"), AdvanceThis);
 
         void AdvanceThis((int level, TokenType type) info)
         {

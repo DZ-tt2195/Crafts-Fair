@@ -20,7 +20,7 @@ public class Merge : CardType
         void RemoveHouse(int num)
         {
             List<TokenDisplay> canLose = player.OfNumber(FindNumber.Minimum, new() {TokenType.HouseIcon}, Player.AllLevels(), 1);
-            MakeDecision.inst.ChooseDisplayOnScreen(canLose, AutoTranslate.Ask_Lose(AutoTranslate.HouseIcon(), num.ToString(), max.ToString()), LoseToken);
+            MakeDecision.inst.ChooseDisplayOnScreen(canLose, AutoTranslate.Ask_Lose(Translator.inst.Translate(this.dataFile.cardName), AutoTranslate.HouseIcon(), num.ToString(), max.ToString()), LoseToken);
 
             void LoseToken((int level, TokenType type) info)
             {

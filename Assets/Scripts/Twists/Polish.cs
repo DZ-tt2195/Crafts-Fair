@@ -17,7 +17,7 @@ public class Polish : CardType
         void UpgradeToken(TokenType token)
         {
             List<TokenDisplay> canUpgrade = player.OfNumber(FindNumber.Minimum, new(){token}, Player.AllLevelsBut(TurnManager.inst.GetInt(ConstantStrings.MaxLevel)), 1);
-            MakeDecision.inst.ChooseDisplayOnScreen(canUpgrade, AutoTranslate.Ask_Upgrade(token.ToString(), "1", "1"), UpgradeThis);
+            MakeDecision.inst.ChooseDisplayOnScreen(canUpgrade, AutoTranslate.Ask_Upgrade(Translator.inst.Translate(this.dataFile.cardName), token.ToString(), "1", "1"), UpgradeThis);
 
             void UpgradeThis((int level, TokenType type) info)
             {

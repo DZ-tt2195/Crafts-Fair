@@ -21,7 +21,7 @@ public class Prioritize : CardType
         void DowngradeToken(int num)
         {
             List<TokenDisplay> canDowngrade = player.OfNumber(FindNumber.Minimum, Player.AllTokens(), Player.AllLevelsBut(1), 1);
-            MakeDecision.inst.ChooseDisplayOnScreen(canDowngrade, AutoTranslate.Ask_Downgrade(AutoTranslate.TokenIcon(), num.ToString(), max.ToString()), DowngradeThis);
+            MakeDecision.inst.ChooseDisplayOnScreen(canDowngrade, AutoTranslate.Ask_Downgrade(Translator.inst.Translate(this.dataFile.cardName), AutoTranslate.TokenIcon(), num.ToString(), max.ToString()), DowngradeThis);
 
             void DowngradeThis((int level, TokenType type) info)
             {

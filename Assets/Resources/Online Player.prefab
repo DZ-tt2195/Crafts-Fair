@@ -913,7 +913,7 @@ MonoBehaviour:
   - {fileID: 3501159552248643639}
   - {fileID: 3972216398101491953}
   - {fileID: 1376535231788570036}
-  allSwordDisplays:
+  allToolDisplays:
   - {fileID: 0}
   - {fileID: 2308901019108946999}
   - {fileID: 5054687529894357844}
