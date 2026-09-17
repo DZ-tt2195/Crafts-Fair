@@ -1,5 +1,5 @@
 Game_Designer	by Thomas Tang (DZ)
-Last_Update	Last Updated: July 26, 2026
+Last_Update	Last Updated: September 18, 2026
 Blank	
 Translator_Credit	Original Language
 Language	Language
@@ -12,6 +12,7 @@ US_West_Coast	US West Coast
 US_East_Coast	US East Coast
 Europe	Europe
 Asia	Asia
+Extras	Extras
 Single_Player	Single Player
 Connect	Connect
 Enter_username	Enter username
@@ -28,11 +29,12 @@ Player_Count	$Current$ / $Max$ Players
 Type_in_username	You have to type in a username.
 Attempt_to_reconnect	Attempting to reconnect to $Room$'s room...
 Failed_to_reconnect	Failed to reconnect to $Room$'s room.
-Choose_Twists	Choose Twists for this game
-Custom_Art_Twist	Twist ArtIcon
-Custom_House_Twist	Twist HouseIcon
-Custom_Tool_Twist	Twist ToolIcon
-Custom_Book_Twist	Twist BookIcon
+Customize_Twists	Choose up to 4 Twists (only the host's cards are used)
+Open_Customizer	Open Customizer
+Art_Twist	Twist ArtIcon
+House_Twist	Twist HouseIcon
+Tool_Twist	Twist ToolIcon
+Book_Twist	Twist BookIcon
 Choose	Choose
 Random	Random
 Message_All	Type into chat (message all)
@@ -234,3 +236,5 @@ Update_1	July 15, 2026
 Update_1_Text	Fixed bugs with UI, gameplay, undos, and reconnecting \nAll players draw CardIcon from the same deck, with 2 copies each
 Update_2	July 26, 2026
 Update_2_Text	New sound effect when you start a turn \nFixed a bug that prevented you from choosing twists \nPlayer dropdown is hidden in single player \nClearer instructions text \nUpdated rulebook pdf
+Update_3	Sep 18, 2026
+Update_3_Text	Moved UI and customizer behind an Extras button

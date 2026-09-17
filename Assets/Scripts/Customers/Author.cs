@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Author : CardType
 {
-    public Author(CardData dataFile) : base(dataFile)
+    public Author(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

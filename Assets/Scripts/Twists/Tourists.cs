@@ -4,7 +4,7 @@ using System;
 
 public class Tourists : CardType
 {
-    public Tourists(CardData dataFile) : base(dataFile)
+    public Tourists(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

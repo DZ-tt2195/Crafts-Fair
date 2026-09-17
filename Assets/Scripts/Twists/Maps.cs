@@ -4,7 +4,7 @@ using System.Linq;
 
 public class Maps : CardType
 {
-    public Maps(CardData dataFile) : base(dataFile)
+    public Maps(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

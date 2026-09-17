@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Ringmaster : CardType
 {
-    public Ringmaster(CardData dataFile) : base(dataFile)
+    public Ringmaster(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

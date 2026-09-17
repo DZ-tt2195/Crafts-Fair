@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Quantity : CardType
 {
-    public Quantity(CardData dataFile) : base(dataFile)
+    public Quantity(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

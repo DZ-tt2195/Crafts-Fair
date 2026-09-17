@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Shepherd : CardType
 {
-    public Shepherd(CardData dataFile) : base(dataFile)
+    public Shepherd(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

@@ -4,7 +4,7 @@ using System;
 
 public class Expertise : CardType
 {
-    public Expertise(CardData dataFile) : base(dataFile)
+    public Expertise(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

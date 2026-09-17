@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Produce : CardType
 {
-    public Produce(CardData dataFile) : base(dataFile)
+    public Produce(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

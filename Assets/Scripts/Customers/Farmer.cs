@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Farmer : CardType
 {
-    public Farmer(CardData dataFile) : base(dataFile)
+    public Farmer(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

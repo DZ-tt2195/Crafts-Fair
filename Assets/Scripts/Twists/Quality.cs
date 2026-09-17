@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Quality : CardType
 {
-    public Quality(CardData dataFile) : base(dataFile)
+    public Quality(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

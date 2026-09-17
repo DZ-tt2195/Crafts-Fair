@@ -1479,12 +1479,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7aa289d6908584edf984d9d972f90c6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Encyclopedia
-  customerPrefab: {fileID: 4752275793854564576, guid: d50eb448d0731474ebebdd3627d1ec5a, type: 3}
-  twistPrefab: {fileID: 4752275793854564576, guid: 4d0686b994da1445589ed656148a7cae, type: 3}
-  customerView: {fileID: 451277966}
-  customerGrid: {fileID: 1515963459}
-  twistView: {fileID: 428183266}
-  twistGrid: {fileID: 1734515443}
+  customerList:
+    mainThing: {fileID: 451277965}
+    prefab: {fileID: 3197849793019336440, guid: d50eb448d0731474ebebdd3627d1ec5a, type: 3}
+    storePrefabs: {fileID: 1515963459}
+  twistList:
+    mainThing: {fileID: 428183265}
+    prefab: {fileID: 3197849793019336440, guid: 4d0686b994da1445589ed656148a7cae, type: 3}
+    storePrefabs: {fileID: 1734515443}
   viewSlider: {fileID: 347830364}
   customer: {fileID: 1550909540}
   twist: {fileID: 224632699}

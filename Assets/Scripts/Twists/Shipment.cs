@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Shipment : CardType
 {
-    public Shipment(CardData dataFile) : base(dataFile)
+    public Shipment(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

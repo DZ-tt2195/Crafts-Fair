@@ -6,7 +6,13 @@ using System.Collections;
 using TMPro;
 using MyBox;
 using Photon.Pun;
-
+[Serializable]
+public class ListUI
+{
+    public GameObject mainThing;
+    public ButtonSelect prefab;
+    public GridLayoutGroup storePrefabs;
+}
 public class CardButtonInfo
 {
     public Card card {get; private set;}
@@ -22,7 +28,6 @@ public class CardButtonInfo
         this.clickable = clickable;
     }
 }
-
 public class TextButtonInfo
 {
     public string myText{get; private set;}
@@ -54,11 +59,11 @@ public class MakeDecision : PhotonCompatible
 
     public static MakeDecision inst;
     [SerializeField] TMP_Text instructionsText;
-    [SerializeField] Transform findTextButtons;
-    [SerializeField] Transform findCardButtons;
-    List<(ButtonSelect, TMP_Text)> textButtons = new();
-    List<(ButtonSelect, CardLayout)> cardButtons = new();
     HashSet<ButtonSelect> availableUI = new();
+    [SerializeField] ListUI textButtonUI;
+    List<(ButtonSelect, TMP_Text)> allTextButtons = new();
+    [SerializeField] ListUI cardButtonUI;
+    List<(ButtonSelect, CardLayout)> allCardButtons = new();
     [SerializeField] ButtonSelect sliderConfirm;
     [SerializeField] Slider slider;
     [SerializeField] TMP_Text minimumText;
@@ -75,20 +80,7 @@ public class MakeDecision : PhotonCompatible
         instructionsText.text = "";
         confirmText.text = AutoTranslate.Confirm();
         slider.onValueChanged.AddListener(UpdateSliderText);
-
-        slider.gameObject.SetActive(false);
-        foreach (Transform child in findTextButtons)
-        {
-            textButtons.Add((child.GetComponent<ButtonSelect>(), child.transform.GetComponentInChildren<TMP_Text>()));
-            child.gameObject.SetActive(false);
-        }
-        /*
-        foreach (Transform child in findCardButtons)
-        {
-            cardButtons.Add((child.GetComponent<ButtonSelect>(), child.GetComponent<CardLayout>()));
-            child.gameObject.SetActive(false);
-        }*/
-
+        ClearDecisions();
     }
     void UpdateSliderText(float value)
     {
@@ -109,10 +101,19 @@ public class MakeDecision : PhotonCompatible
         {
             Log.inst.SetUndoPoint(true);
             instructionsText.text = KeywordTooltip.instance.EditText(instructions);
+            textButtonUI.mainThing.gameObject.SetActive(true);
 
-            for (int i = 0; i<textButtons.Count; i++)
+            while (allTextButtons.Count < possibleChoices.Count)
             {
-                (ButtonSelect, TMP_Text) nextButton = textButtons[i];
+                ButtonSelect nextButton = Instantiate(textButtonUI.prefab);
+                allTextButtons.Add((nextButton, nextButton.GetComponentInChildren<TMP_Text>()));
+                nextButton.transform.SetParent(textButtonUI.storePrefabs.transform);
+                nextButton.gameObject.SetActive(false);
+            }
+
+            for (int i = 0; i<allTextButtons.Count; i++)
+            {
+                (ButtonSelect, TMP_Text) nextButton = allTextButtons[i];
                 if (i < possibleChoices.Count)
                 {
                     TextButtonInfo info = possibleChoices[i];
@@ -245,10 +246,19 @@ public class MakeDecision : PhotonCompatible
         {
             Log.inst.SetUndoPoint(true);
             instructionsText.text = KeywordTooltip.instance.EditText(instructions);
-            
-            for (int i = 0; i < cardButtons.Count; i++)
+            cardButtonUI.mainThing.gameObject.SetActive(true);
+
+            while (allCardButtons.Count < possibleCards.Count)
             {
-                (ButtonSelect, CardLayout) nextButton = cardButtons[i];
+                ButtonSelect nextButton = Instantiate(cardButtonUI.prefab);
+                allCardButtons.Add((nextButton, nextButton.GetComponent<CardLayout>()));
+                nextButton.transform.SetParent(cardButtonUI.storePrefabs.transform);
+                nextButton.gameObject.SetActive(false);
+            }
+
+            for (int i = 0; i < allCardButtons.Count; i++)
+            {
+                (ButtonSelect, CardLayout) nextButton = allCardButtons[i];
                 if (i < possibleCards.Count)
                 {
                     CardButtonInfo info = possibleCards[i];
@@ -292,9 +302,8 @@ public class MakeDecision : PhotonCompatible
         availableUI.Clear();
 
         slider.gameObject.SetActive(false);
-
-        foreach (var next in cardButtons) next.Item1.gameObject.SetActive(false);
-        foreach (var next in textButtons) next.Item1.gameObject.SetActive(false);
+        cardButtonUI.mainThing.gameObject.SetActive(false);
+        textButtonUI.mainThing.gameObject.SetActive(false);
     }
     public static List<int> NumbersInOrder(int minimum, int maximum)
     {

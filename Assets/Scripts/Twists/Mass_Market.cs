@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Mass_Market : CardType
 {
-    public Mass_Market(CardData dataFile) : base(dataFile)
+    public Mass_Market(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

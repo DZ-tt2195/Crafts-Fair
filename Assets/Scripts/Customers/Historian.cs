@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Historian : CardType
 {
-    public Historian(CardData dataFile) : base(dataFile)
+    public Historian(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

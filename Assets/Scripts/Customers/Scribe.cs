@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Scribe : CardType
 {    
-    public Scribe(CardData dataFile) : base(dataFile)
+    public Scribe(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

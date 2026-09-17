@@ -4,7 +4,7 @@ using System.Linq;
 
 public class Aristocrat : CardType
 {
-    public Aristocrat(CardData dataFile) : base(dataFile)
+    public Aristocrat(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

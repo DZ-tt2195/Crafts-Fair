@@ -3,7 +3,7 @@ using System;
 
 public class University : CardType
 {
-    public University(CardData dataFile) : base(dataFile)
+    public University(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

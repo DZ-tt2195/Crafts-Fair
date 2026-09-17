@@ -4,7 +4,7 @@ using System.Linq;
 
 public class Royalty : CardType
 {
-    public Royalty(CardData dataFile) : base(dataFile)
+    public Royalty(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

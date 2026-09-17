@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Storyteller : CardType
 {
-    public Storyteller(CardData dataFile) : base(dataFile)
+    public Storyteller(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

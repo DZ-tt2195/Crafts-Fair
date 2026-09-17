@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Reader : CardType
 {
-    public Reader(CardData dataFile) : base(dataFile)
+    public Reader(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Collector : CardType
 {
-    public Collector(CardData dataFile) : base(dataFile)
+    public Collector(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

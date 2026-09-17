@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Bulk_Buyer : CardType
 {
-    public Bulk_Buyer(CardData dataFile) : base(dataFile)
+    public Bulk_Buyer(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

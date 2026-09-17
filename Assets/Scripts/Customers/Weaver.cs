@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Weaver : CardType
 {
-    public Weaver(CardData dataFile) : base(dataFile)
+    public Weaver(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

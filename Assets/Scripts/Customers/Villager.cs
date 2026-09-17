@@ -4,7 +4,7 @@ using System.Linq;
 
 public class Villager : CardType
 {
-    public Villager(CardData dataFile) : base(dataFile)
+    public Villager(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

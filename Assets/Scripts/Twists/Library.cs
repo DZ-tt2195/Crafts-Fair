@@ -4,7 +4,7 @@ using System.Linq;
 
 public class Library : CardType
 {
-    public Library(CardData dataFile) : base(dataFile)
+    public Library(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

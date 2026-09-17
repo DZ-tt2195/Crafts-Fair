@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Curator : CardType
 {    
-    public Curator(CardData dataFile) : base(dataFile)
+    public Curator(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

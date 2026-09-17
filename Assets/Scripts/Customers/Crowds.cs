@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Crowds : CardType
 {
-    public Crowds(CardData dataFile) : base(dataFile)
+    public Crowds(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

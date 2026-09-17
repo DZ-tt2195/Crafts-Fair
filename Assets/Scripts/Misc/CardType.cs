@@ -5,10 +5,12 @@ using System;
 
 public class CardType : GeneralEffects
 {
+    public Card cardObject {get; private set;}
     public CardData dataFile { get; private set; }
 
-    public CardType(CardData dataFile)
+    public CardType(Card card, CardData dataFile)
     {
+        this.cardObject = card;
         this.dataFile = dataFile;
     }
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Craftsman : CardType
 {
-    public Craftsman(CardData dataFile) : base(dataFile)
+    public Craftsman(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

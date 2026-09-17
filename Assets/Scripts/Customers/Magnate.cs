@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Magnate : CardType
 {
-    public Magnate(CardData dataFile) : base(dataFile)
+    public Magnate(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

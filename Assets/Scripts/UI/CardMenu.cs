@@ -4,11 +4,12 @@ using MyBox;
 using System.Collections.Generic;
 using TMPro;
 
-public class CardMenu : PhotonCompatible
+public class CardMenu : MonoBehaviour
 {
     public static CardMenu instance;
     [Foldout("UI", true)]
-    int step = 0;
+    [SerializeField] Button openCustomizer;
+    [SerializeField] Transform customizerScreen;
     [SerializeField] Button confirmButton;
     [SerializeField] GridLayoutGroup storeVerticalButtons;
     [SerializeField] GridLayoutGroup storeHorizontalButtons;
@@ -23,27 +24,50 @@ public class CardMenu : PhotonCompatible
     [SerializeField] TMP_Text twistTool;
     [SerializeField] TMP_Text twistBook;
     [SerializeField] TMP_Text confirm;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        this.bottomType = this.GetType();
-        instance = this;
-    }
     private void Start()
     {
-        string currentPhase = (string)GetRoomProperty(ConstantStrings.CurrentPhase);
-        if (!(AmMaster() && currentPhase.Equals(nameof(WaitForJoiners))))
+        instance = this;
+        storeVerticalButtons.gameObject.SetActive(false);
+        storeHorizontalButtons.gameObject.SetActive(false);
+
+        openCustomizer.onClick.AddListener(() => 
         {
-            foreach (CardSelect select in cardSelectors)
-                select.SetCardImage(-1);
-            this.gameObject.SetActive(false);
-        }
-        else
+            customizerScreen.gameObject.SetActive(true);
+            AudioManager.instance.Menu();
+        });
+        confirmButton.onClick.AddListener(() => 
         {
-            Advance();
-            confirmButton.onClick.AddListener(Advance);
+            customizerScreen.gameObject.SetActive(false);
+            AudioManager.instance.Menu();
+            PlayerPrefs.Save();
+        });
+
+        for (int i = 0; i < storeHorizontalButtons.transform.childCount; i++)
+        {
+            Button nextButton = storeHorizontalButtons.transform.GetChild(i).gameObject.GetComponent<Button>();
+            blankHorizontalButtons.Add((nextButton.GetComponent<CardLayout>(), nextButton));
+            nextButton.interactable = true;
+            nextButton.onClick.RemoveAllListeners();
+            int number = i;
+            nextButton.onClick.AddListener(() => SendName(number));
         }
+        for (int i = 0; i < storeVerticalButtons.transform.childCount; i++)
+        {
+            Button nextButton = storeVerticalButtons.transform.GetChild(i).gameObject.GetComponent<Button>();
+            blankVerticalButtons.Add((nextButton.GetComponent<CardLayout>(), nextButton));
+            nextButton.interactable = true;
+            nextButton.onClick.RemoveAllListeners();
+            int number = i;
+            nextButton.onClick.AddListener(() => SendName(number));
+        }
+        
+        openCustomizer.GetComponentInChildren<TMP_Text>().text = AutoTranslate.Open_Customizer();
+        chooseCards.text = AutoTranslate.Customize_Twists();
+        twistArt.text = KeywordTooltip.instance.EditText(AutoTranslate.Art_Twist());
+        twistHouse.text = KeywordTooltip.instance.EditText(AutoTranslate.House_Twist());
+        twistTool.text = KeywordTooltip.instance.EditText(AutoTranslate.Tool_Twist());
+        twistBook.text = KeywordTooltip.instance.EditText(AutoTranslate.Book_Twist());
+        confirm.text = AutoTranslate.Confirm();
     }
     public void ChooseFromList(CardSelect clicked, List<CardData> allData, bool vertical)
     {
@@ -87,51 +111,15 @@ public class CardMenu : PhotonCompatible
     }
     void SendName(int number)
     {
-        mostRecentClick.SetCardImage(number);
+        CardData data = mostRecentClick.SetCardImage(number);
+        foreach (CardSelect select in cardSelectors)
+        {
+            if (select != mostRecentClick && data != null && select.myData == data)
+                select.SetCardImage(-1);
+        }
+
         mostRecentClick = null;
         storeVerticalButtons.gameObject.SetActive(false);
-        storeHorizontalButtons.gameObject.SetActive(false);
-    }
-    void Advance()
-    {
-        if (step == 0)
-        {
-            storeVerticalButtons.gameObject.SetActive(false);
-            storeHorizontalButtons.gameObject.SetActive(false);
-            for (int i = 0; i < storeHorizontalButtons.transform.childCount; i++)
-            {
-                Button nextButton = storeHorizontalButtons.transform.GetChild(i).gameObject.GetComponent<Button>();
-                blankHorizontalButtons.Add((nextButton.GetComponent<CardLayout>(), nextButton));
-                nextButton.interactable = true;
-                nextButton.onClick.RemoveAllListeners();
-                int number = i;
-                nextButton.onClick.AddListener(() => SendName(number));
-            }
-            for (int i = 0; i < storeVerticalButtons.transform.childCount; i++)
-            {
-                Button nextButton = storeVerticalButtons.transform.GetChild(i).gameObject.GetComponent<Button>();
-                blankVerticalButtons.Add((nextButton.GetComponent<CardLayout>(), nextButton));
-                nextButton.interactable = true;
-                nextButton.onClick.RemoveAllListeners();
-                int number = i;
-                nextButton.onClick.AddListener(() => SendName(number));
-            }
-            Translations();
-        }
-        else
-        {
-            PlayerPrefs.Save();
-            this.gameObject.SetActive(false);
-        }
-        step++;
-    }
-    void Translations()
-    {
-        chooseCards.text = AutoTranslate.Choose_Twists();
-        twistArt.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_Art_Twist());
-        twistHouse.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_House_Twist());
-        twistTool.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_Tool_Twist());
-        twistBook.text = KeywordTooltip.instance.EditText(AutoTranslate.Custom_Book_Twist());
-        confirm.text = AutoTranslate.Confirm();
+        storeHorizontalButtons.gameObject.SetActive(false);        
     }
 }

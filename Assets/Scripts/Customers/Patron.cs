@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Patron : CardType
 {
-    public Patron(CardData dataFile) : base(dataFile)
+    public Patron(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

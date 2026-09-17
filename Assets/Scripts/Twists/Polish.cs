@@ -4,7 +4,7 @@ using System.Linq;
 
 public class Polish : CardType
 {
-    public Polish(CardData dataFile) : base(dataFile)
+    public Polish(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

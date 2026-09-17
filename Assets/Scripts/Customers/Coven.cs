@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Coven : CardType
 {
-    public Coven(CardData dataFile) : base(dataFile)
+    public Coven(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Bishop : CardType
 {
-    public Bishop(CardData dataFile) : base(dataFile)
+    public Bishop(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

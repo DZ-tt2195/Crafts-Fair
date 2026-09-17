@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Engineer : CardType
 {
-    public Engineer(CardData dataFile) : base(dataFile)
+    public Engineer(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

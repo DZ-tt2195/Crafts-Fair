@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Save_Up : CardType
 {
-    public Save_Up(CardData dataFile) : base(dataFile)
+    public Save_Up(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

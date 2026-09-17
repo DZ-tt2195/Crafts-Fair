@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Painter : CardType
 {
-    public Painter(CardData dataFile) : base(dataFile)
+    public Painter(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

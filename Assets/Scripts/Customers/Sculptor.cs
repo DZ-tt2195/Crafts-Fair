@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Sculptor : CardType
 {    
-    public Sculptor(CardData dataFile) : base(dataFile)
+    public Sculptor(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

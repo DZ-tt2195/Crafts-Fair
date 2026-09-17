@@ -4,7 +4,7 @@ using System.Linq;
 
 public class Prioritize : CardType
 {
-    public Prioritize(CardData dataFile) : base(dataFile)
+    public Prioritize(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

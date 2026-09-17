@@ -4,7 +4,7 @@ using System;
 
 public class Duplicate : CardType
 {
-    public Duplicate(CardData dataFile) : base(dataFile)
+    public Duplicate(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

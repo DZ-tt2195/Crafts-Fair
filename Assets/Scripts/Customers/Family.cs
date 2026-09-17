@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Family : CardType
 {
-    public Family(CardData dataFile) : base(dataFile)
+    public Family(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

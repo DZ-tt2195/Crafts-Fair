@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Hunter : CardType
 {
-    public Hunter(CardData dataFile) : base(dataFile)
+    public Hunter(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

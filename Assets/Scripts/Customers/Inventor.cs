@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Inventor : CardType
 {
-    public Inventor(CardData dataFile) : base(dataFile)
+    public Inventor(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

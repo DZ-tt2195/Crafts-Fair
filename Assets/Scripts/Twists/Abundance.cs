@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Abundance : CardType
 {
-    public Abundance(CardData dataFile) : base(dataFile)
+    public Abundance(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

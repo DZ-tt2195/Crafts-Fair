@@ -5,6 +5,9 @@ using UnityEngine;
 using TMPro;
 using System.Text.RegularExpressions;
 using MyBox;
+using UnityEngine.UI;
+using System.Text;
+using System.Linq;
 
 [Serializable]
 public class KeywordHover
@@ -14,7 +17,12 @@ public class KeywordHover
     [ReadOnly] public string description;
     public Color color = Color.white;
 }
-
+public class FoundMatch
+{
+    public int start;
+    public int length;
+    public string replacement;
+}
 public class KeywordTooltip : MonoBehaviour
 {
     public static KeywordTooltip instance;
@@ -58,31 +66,57 @@ public class KeywordTooltip : MonoBehaviour
         foreach (CardData data in GameFiles.inst.twistFiles)
             listOfCardRC[Translator.inst.Translate(data.cardName)] = (data, false);
     }
-    public string EditText(string text)
+    public string EditText(string textToEdit)
     {
-        if (text.Length == 0)
+        if (textToEdit.Length == 0)
             return "";
 
-        string answer = Regex.Replace(text, "(?<=[a-z])(?=[A-Z])", " ");
-        answer = Regex.Replace(answer, @",(\s*(\n|$))", "$1");
-        answer = Regex.Replace(answer, @"-(\s*(\n|$))", "$1");
-        answer = answer.Replace("-u003e", "->");
-
-        answer = text;
+        List<FoundMatch> matches = new();
         foreach (KeywordHover link in linkedKeywords)
-        {
-            answer = answer.Replace(link.translated, $"<link=\"{link.original}\"><u>" +
-                $"<color=#{ColorUtility.ToHtmlStringRGB(link.color)}>{link.translated}<color=#FFFFFF></u></link>");
-        }
+            FindMatch(link.translated, $"<link=\"{link.original}\"><u><color=#{ColorUtility.ToHtmlStringRGB(link.color)}>{link.translated}<color=#FFFFFF></u></link>");
         foreach (KeywordHover link in spriteKeywords)
-        {
-            answer = answer.Replace(link.translated, $"<link=\"{link.original}\"><sprite=\"{link.original}\" name=\"{link.original}\"></link>");
-        }
+            FindMatch(link.translated, $"<link=\"{link.original}\"><sprite=\"{link.original}\" name=\"{link.original}\"></link>");
         foreach (var next in listOfCardRC)
+            FindMatch(next.Key, $"<link=\"{next.Key}\"><i>{next.Key}</i></link>");
+
+        void FindMatch(string search, string replacement)
         {
-            answer = answer.Replace(next.Key, $"<link=\"{next.Key}\"><i>{next.Key}</i></link>");
+            string pattern = $@"(?<![\p{{L}}\p{{N}}]){Regex.Escape(search)}(?![\p{{L}}\p{{N}}])";
+
+            foreach (Match match in Regex.Matches(textToEdit, pattern))
+            {
+                matches.Add(new FoundMatch
+                {
+                    start = match.Index, length = match.Length,
+                    replacement = replacement
+                });
+            }            
         }
-        return answer;
+
+        matches = matches.OrderByDescending(x => x.length).ToList();
+
+        List<FoundMatch> accepted = new();
+        foreach (FoundMatch match in matches)
+        {
+            bool overlaps = accepted.Any(other =>
+                match.start < other.start + other.length &&
+                match.start + match.length > other.start
+            );
+            if (!overlaps)accepted.Add(match);
+        }
+        accepted = accepted.OrderBy(x => x.start).ToList();
+
+        StringBuilder result = new();
+        int position = 0;
+
+        foreach (FoundMatch match in accepted)
+        {
+            result.Append(textToEdit.Substring(position,match.start - position));
+            result.Append(match.replacement);
+            position = match.start + match.length;
+        }
+        result.Append(textToEdit.Substring(position));
+        return result.ToString();
     }
     public KeywordHover SearchForKeyword(string target)
     {

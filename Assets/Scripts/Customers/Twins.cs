@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class Twins : CardType
 {
-    public Twins(CardData dataFile) : base(dataFile)
+    public Twins(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Archivist : CardType
 {    
-    public Archivist(CardData dataFile) : base(dataFile)
+    public Archivist(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Carpenter : CardType
 {    
-    public Carpenter(CardData dataFile) : base(dataFile)
+    public Carpenter(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

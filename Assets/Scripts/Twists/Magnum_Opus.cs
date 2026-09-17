@@ -4,7 +4,7 @@ using System.Linq;
 
 public class Magnum_Opus : CardType
 {
-    public Magnum_Opus(CardData dataFile) : base(dataFile)
+    public Magnum_Opus(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

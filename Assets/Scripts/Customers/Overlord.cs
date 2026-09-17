@@ -4,7 +4,7 @@ using System.Linq;
 
 public class Overlord : CardType
 {
-    public Overlord(CardData dataFile) : base(dataFile)
+    public Overlord(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

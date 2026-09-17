@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Poet : CardType
 {    
-    public Poet(CardData dataFile) : base(dataFile)
+    public Poet(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

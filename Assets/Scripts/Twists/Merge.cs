@@ -4,7 +4,7 @@ using System.Linq;
 
 public class Merge : CardType
 {
-    public Merge(CardData dataFile) : base(dataFile)
+    public Merge(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

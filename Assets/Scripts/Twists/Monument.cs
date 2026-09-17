@@ -4,7 +4,7 @@ using System.Linq;
 
 public class Monument : CardType
 {
-    public Monument(CardData dataFile) : base(dataFile)
+    public Monument(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

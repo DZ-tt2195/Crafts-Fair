@@ -4,7 +4,7 @@ using System.Linq;
 
 public class Smelting : CardType
 {
-    public Smelting(CardData dataFile) : base(dataFile)
+    public Smelting(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

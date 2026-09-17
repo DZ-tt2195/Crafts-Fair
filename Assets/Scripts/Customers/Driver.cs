@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class Driver : CardType
 {
-    public Driver(CardData dataFile) : base(dataFile)
+    public Driver(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 

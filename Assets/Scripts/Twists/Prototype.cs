@@ -4,7 +4,7 @@ using System.Linq;
 
 public class Prototype : CardType
 {
-    public Prototype(CardData dataFile) : base(dataFile)
+    public Prototype(Card card, CardData dataFile) : base(card, dataFile)
     {
     }
 
