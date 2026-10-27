@@ -1,5 +1,5 @@
 Game_Designer	by Thomas Tang (DZ)
-Last_Update	Last Updated: September 18, 2026
+Last_Update	Last Updated: Oct 27th, 2026
 Blank	
 Translator_Credit	Original Language
 Language	Language
@@ -50,7 +50,7 @@ Short	Short
 Long	Long
 Switch_Player	Switch Player
 Rules	Rules
-Rules_Summary	Each Round: \n1. Choose any TokenIcon (token); create 1 of that token at 1 LevelIcon, then upgrade 1 token of that type to the next LevelIcon. \n2. You may sell 2+ TokenIcon and 2+ CardIcon, all at once, to score CoinIcon. \n\nBetween Rounds:\n3. Remove 1 counter from each token's Twist, if a player chose it. \n4. For each Twist with 0 counters, each player draws 2 CardIcon and follows its instructions. \n5. Add 2 counters back onto those Twists. \n6. First player to reach 20+ CoinIcon wins.
+Rules_Summary	Each Round: \n1. Choose any TokenIcon (token). \n 2. Choose twice: either create 1 of that token at 1 LevelIcon, or upgrade 1 token of that type to the next LevelIcon. \n3. You may sell 2+ TokenIcon and 2+ CardIcon, all at once, to score CoinIcon. \n\nBetween Rounds:\n4. Remove 1 counter from each token's Twist, if any player chose it. \n5. For each Twist with 0 counters, each player draws 2 CardIcon and follows its instructions. \n6. Add 2 counters back onto those Twists. \n7. First player to reach 20+ CoinIcon wins.
 CardIcon	CardIcon
 ArtIcon	ArtIcon
 HouseIcon	HouseIcon
@@ -70,6 +70,7 @@ Online_Draw_Customer	$Player$ draws $Card$.
 Online_Draw_Customer_Others	$Player$ draws 1 CardIcon.
 Ask_Choose	Choose TokenIcon for this turn.
 Online_Chose_Token	$Player$ chooses $Token$.
+Ask_Token	Either create 1 $Token$ at 1 LevelIcon, or upgrade 1 $Token$.
 Ask_Create	$Card$: Create $Token$ ($Num1$ / $Num2$).
 Online_Create_Token	$Player$ creates $Amount$ $Token$ at $Level$ LevelIcon.
 Ask_Upgrade	$Card$: Upgrade 1 $Token$ ($Num1$ / $Num2$).
@@ -238,3 +239,5 @@ Update_2	July 26, 2026
 Update_2_Text	New sound effect when you start a turn \nFixed a bug that prevented you from choosing twists \nPlayer dropdown is hidden in single player \nClearer instructions text \nUpdated rulebook pdf
 Update_3	Sep 18, 2026
 Update_3_Text	Moved UI and customizer behind an Extras button
+Update_4	Oct 27, 2026
+Update_4_Text	On your turn, you now choose twice if you want to create a token or upgrade one \nFixed minor mistakes

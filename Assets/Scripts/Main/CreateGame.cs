@@ -248,7 +248,7 @@ public class CreateGame : PhotonCompatible
         foreach (TwistVisual visual in twistInfo)
         {
             string tokenText = ConstantStrings.TokenCounter(visual.token);
-            visual.countText.text = KeywordTooltip.instance.EditText($"{TurnManager.inst.GetInt(tokenText)}{Translator.inst.Translate(visual.token.ToString())}");
+            visual.countText.text = KeywordTooltip.instance.EditText($"{TurnManager.inst.GetInt(tokenText)} {Translator.inst.Translate(visual.token.ToString())}");
         }
     }
     public override void OnRoomPropertiesUpdate(ExitGames.Client.Photon.Hashtable propertiesThatChanged)

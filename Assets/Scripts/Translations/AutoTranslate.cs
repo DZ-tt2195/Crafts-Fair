@@ -60,6 +60,7 @@ public static string TokenIcon_Text () => Translator.inst.Translate("TokenIcon_T
 public static string LevelIcon () => Translator.inst.Translate("LevelIcon", new() {});
 public static string LevelIcon_Text () => Translator.inst.Translate("LevelIcon_Text", new() {});
 public static string Ask_Choose () => Translator.inst.Translate("Ask_Choose", new() {});
+public static string Ask_Token (string Token) => Translator.inst.Translate("Ask_Token", new() {("Token", Token)});
 public static string Ask_Create (string Card,string Token,string Num1,string Num2) => Translator.inst.Translate("Ask_Create", new() {("Card", Card),("Token", Token),("Num1", Num1),("Num2", Num2)});
 public static string Ask_Upgrade (string Card,string Token,string Num1,string Num2) => Translator.inst.Translate("Ask_Upgrade", new() {("Card", Card),("Token", Token),("Num1", Num1),("Num2", Num2)});
 public static string Ask_Downgrade (string Card,string Token,string Num1,string Num2) => Translator.inst.Translate("Ask_Downgrade", new() {("Card", Card),("Token", Token),("Num1", Num1),("Num2", Num2)});
@@ -216,4 +217,6 @@ public static string Update_2 () => Translator.inst.Translate("Update_2", new() 
 public static string Update_2_Text () => Translator.inst.Translate("Update_2_Text", new() {});
 public static string Update_3 () => Translator.inst.Translate("Update_3", new() {});
 public static string Update_3_Text () => Translator.inst.Translate("Update_3_Text", new() {});
+public static string Update_4 () => Translator.inst.Translate("Update_4", new() {});
+public static string Update_4_Text () => Translator.inst.Translate("Update_4_Text", new() {});
 }

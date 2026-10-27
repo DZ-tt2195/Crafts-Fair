@@ -38,19 +38,26 @@ public class TakeTurn : Turn
         {
             TurnManager.inst.WillChangePlayerProperty(player, ConstantStrings.ChosenToken, type.ToString());
             Log.inst.AddMyText(true, OnlineTranslate.Online_Chose_Token(player.name, type.ToString()), logged);
-            player.CreateLoseToken(1, (1, type), logged+1);
-            Log.inst.NewDecisionContainer(() => AdvanceToken(player, type, logged+1));
+            for (int i = 0; i<2; i++)
+                Log.inst.NewDecisionContainer(() => TokenDecision(player, type, logged+1));
         }
     }
-    void AdvanceToken(Player player, TokenType token, int logged)
+    void TokenDecision(Player player, TokenType token, int logged)
     {
         List<int> levelsToAdvance = Player.AllLevelsBut(TurnManager.inst.GetInt(ConstantStrings.MaxLevel));
         List<TokenDisplay> canAdvance = player.OfNumber(FindNumber.Minimum, new() {token}, levelsToAdvance, 1);
-        MakeDecision.inst.ChooseDisplayOnScreen(canAdvance, AutoTranslate.Ask_Upgrade(Translator.inst.Translate(token.ToString()), Translator.inst.Translate(token.ToString()), "1", "1"), AdvanceThis);
+        MakeDecision.inst.ChooseDisplayOnScreen(canAdvance, AutoTranslate.Ask_Token(Translator.inst.Translate(token.ToString())), AdvanceThis, false);
 
         void AdvanceThis((int level, TokenType type) info)
         {
             player.UpDowngradeToken(1, info, 1, logged);
+        }
+
+        MakeDecision.inst.ChooseTextButton(new() {new TextButtonInfo($"1 {Translator.inst.Translate(token.ToString())}", NewOne)}, AutoTranslate.Ask_Token(Translator.inst.Translate(token.ToString())), false);
+
+        void NewOne()
+        {
+            player.CreateLoseToken(1, (1, token), logged);
         }
     }
     void DoSelling(Player player, DecisionContainer rewind, int logged)
